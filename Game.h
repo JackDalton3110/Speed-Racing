@@ -49,7 +49,8 @@ private:
 
 	void render();
 
-	sf::Font m_Impact;
+	sf::Font m_HARLOW;
+	sf::Font m_Motor;
 	sf::Text m_textMessage[4];
 	sf::RenderWindow m_window;
 

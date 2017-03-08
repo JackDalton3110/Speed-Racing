@@ -33,6 +33,7 @@ struct GamePadState
 /// to mimic the cotroller states like XNA
 /// </summary>
 
+
 class Xbox360Controller
 {
 private:

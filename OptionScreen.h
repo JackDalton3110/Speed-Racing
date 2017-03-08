@@ -4,9 +4,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "Controller.h"
-#include "TextButton.h"
-#include "Slider.h"
-#include "ToggleButton.h"
 #include "Game.h"
 
 class Game;

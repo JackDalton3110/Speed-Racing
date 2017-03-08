@@ -2,26 +2,27 @@
 #include <iostream>
 
 
-Licence::Licence(Game &game, sf::Font font) :
+Licence::Licence(Game &game, sf::Font font, sf::Font font1) :
 	m_game(&game),
-	m_Impact(font),
-	m_textMessage("Noob", m_Impact, 80),
-	m_textMessage1("isoft,inc.", m_Impact, 80)
+	m_HARLOW(font),
+	m_Motor(font1),
+	m_textMessage("Team A", m_Motor, 100),
+	m_textMessage1("presents", m_HARLOW, 80)
 {
-	m_textMessage.setPosition(-300.0f, 240.0f);//set position
-	m_textMessage.setColor(sf::Color(255, 0, 0));//set colour
-
-	m_textMessage1.setPosition(800.0f, 240.0f);//set position
-	m_textMessage1.setColor(sf::Color(255, 255, 255));//set colour
-
-	if (!m_Texture.loadFromFile("G:/HCI/button-game-jack-jamie-1/ButtonGame/images/tube.jpg"))
+	if (!m_Texture.loadFromFile("G:/jp-team-a/images/lambo.png"))
 	{
 		std::string s("error loading texture from file");
 		throw std::exception(s.c_str());
 	}
 	m_Sprite.setTexture(m_Texture);
-	m_Sprite.setOrigin(400, 400);//set origin of image
-	m_Sprite.setPosition(350, 325);//set image position in relation to origin
+	m_Sprite.setPosition(-500, 250);
+	m_Sprite.setScale(0.4, 0.4);
+	m_textMessage.setPosition(270.0f, 275.0f);//set position
+	m_textMessage.setColor(sf::Color(255, 0, 0, 0));//set colour
+
+	m_textMessage1.setPosition(370.0f, 375.0f);//set position
+	m_textMessage1.setColor(sf::Color(255, 255, 255, 0));//set colour
+	m_textMessage1.setCharacterSize(32);
 
 }
 
@@ -39,29 +40,30 @@ void Licence::update(sf::Time deltaTime)
 		m_game->SetGameState(GameState::splash);//load next gamestate after 4 seconds
 	}
 
-	if (m_textMessage.getPosition().x <= 120)
+	if (m_Sprite.getPosition().x < 200)
 	{
-		m_textMessage.move(10, 0);//move text 
+		m_Sprite.move(10,0);
 	}
 
-	if (m_textMessage1.getPosition().x >= 300)
+	if (m_cumulativeTime.asSeconds() > 2)
 	{
-		m_textMessage1.move(-10, 0);//move text 
+		if (alpha <= 255)
+		{
+			alpha= alpha+2;
+		}
+		
+		m_textMessage.setColor(sf::Color(255, 0, 0, alpha));//set colour
+		m_textMessage1.setColor(sf::Color(255, 255, 255, alpha));//set colour
 	}
 
-	if (m_cumulativeTime.asSeconds() > 3)
-	{
-		m_textMessage.move(0, 10);
-		m_textMessage1.move(0, 10);//after 3 seconds move all text to bottom of screen 
-	}
 
 }
 
 void Licence::render(sf::RenderWindow &window)
 {
 	window.clear(sf::Color(0, 0, 0));//set background colour
+	window.draw(m_Sprite);
 	window.draw(m_textMessage);
 	window.draw(m_textMessage1);//draw text
-	window.draw(m_Sprite);
 	window.display();
 }
