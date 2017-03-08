@@ -33,6 +33,9 @@
     <ClCompile Include="Credits.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OptionScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">

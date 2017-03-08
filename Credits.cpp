@@ -8,7 +8,7 @@ Credits::Credits(Game & game, sf::Font font) :
 	m_credits()
 {
 	std::ifstream creditsFile;
-	creditsFile.open("G:/HCI/button-game-jack-jamie-1/ButtonGameCredits.txt");
+	creditsFile.open("G:/Credits.txt");
 	m_credits.setPosition(100.0f, 350.0f);
 	m_credits.setFont(m_impact);
 
