@@ -1,11 +1,24 @@
-#include <iostream>
+#ifdef _DEBUG
+#pragma comment (lib, "sfml-graphics-d.lib")
+#pragma comment (lib, "sfml-audio-d.lib")
+#pragma comment (lib, "sfml-system-d.lib")
+#pragma comment (lib, "sfml-window-d.lib")
+#pragma comment (lib, "sfml-main-d.lib")
+#pragma comment (lib, "sfml-network-d.lib")
+#else
+#pragma comment (lib, "sfml-graphics-d.lib")
+#pragma comment (lib, "sfml-audio-d.lib")
+#pragma comment (lib, "sfml-system-d.lib")
+#pragma comment (lib, "sfml-window-d.lib")
+#pragma comment (lib, "sfml-main-d.lib")
+#pragma comment (lib, "sfml-network-d.lib")
+#endif
+
+#include "game.h"
+
 int main()
 {
-
-	std::cout << "HELLO, from team lead(edited)" << std::endl;
-	std::cout << "HELLO, Jamie" << std::endl;
-	std::cout << "hello from Conor" << std::endl;
-
-
-	system("Pause");
+	Game Game;
+	Game.run();
+	return 1;
 }

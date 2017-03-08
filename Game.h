@@ -1,0 +1,77 @@
+#pragma once
+#ifndef GAME_H
+#define GAME_H
+
+#include<iostream>
+#include <SFML\Graphics.hpp>
+#include "Licence.h"
+#include "Splash.h"
+#include "Credits.h"
+#include "Controller.h"
+#include "OptionScreen.h"
+#include "Game.h"
+
+class Licence;
+class Splash;
+class Game;
+class Credits;
+class Option;
+
+enum class
+	GameState
+{
+	none,
+	licence,
+	splash,
+	option,
+	credits
+};
+
+class Game
+{
+public:
+	Game();
+	~Game();
+
+	void run();
+	GameState m_currentGameState;
+	void SetGameState(GameState gamestate);
+	bool A;
+	bool B;
+	bool X;
+	bool Y;
+	int score = 0;
+
+
+private:
+	void processEvents();
+	void update(sf::Time, Xbox360Controller &controller);
+
+	void render();
+
+	sf::Font m_Impact;
+	sf::Text m_textMessage[4];
+	sf::RenderWindow m_window;
+
+	Xbox360Controller m_controller;
+
+	Splash *m_splashscreen;
+	Licence *m_licence;
+	Credits *m_credits;
+	Option *m_option;
+
+	sf::Texture m_Texture1;
+	sf::Texture m_Texture2;
+	sf::Texture m_Texture3;
+	sf::Texture m_Texture4;
+	sf::Texture m_Texture5;
+	sf::Sprite m_Sprite1;
+	sf::Sprite m_Sprite3;
+	sf::Sprite m_Sprite2;
+	sf::Sprite m_Sprite4;
+	sf::Sprite m_Sprite5;
+
+
+};
+
+#endif // !GAME_H
