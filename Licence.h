@@ -15,6 +15,7 @@ public:
 
 	void update(sf::Time deltaTime);
 	void render(sf::RenderWindow& window);
+	int alpha = 0;
 
 private:
 	Game *m_game;

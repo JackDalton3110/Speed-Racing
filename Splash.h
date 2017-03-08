@@ -3,6 +3,7 @@
 #define SPLASH
 #include <SFML\Graphics.hpp>
 #include "Game.h"
+#include "Controller.h"
 
 class Game;
 
@@ -14,8 +15,9 @@ public:
 	//methods for Splash
 	void update(sf::Time deltaTime);
 	void render(sf::RenderWindow& window);
-	void rollCredits();//starts credits 
 	void changeScreen();
+	bool change = false;
+	int alpha = 255;
 
 private:
 	Game *m_game;
@@ -29,6 +31,7 @@ private:
 	sf::Texture m_Texture;//background texture
 	sf::Sprite m_Sprite;//sprite for texture
 	sf::Event event;
+	
 
 };
 #endif // !SPLASH

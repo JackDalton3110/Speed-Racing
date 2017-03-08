@@ -2,25 +2,25 @@
 #include "Controller.h"
 
 Game::Game() :
-	m_window(sf::VideoMode(650, 650), "Mash 'Em"),
+	m_window(sf::VideoMode(1000, 800), "Mash 'Em"),
 	m_currentGameState(GameState::licence)
 {
 	if (m_HARLOW.loadFromFile("C:/Windows/Fonts/HARLOWSI.TTF"))
 	{
-		std::cout << "Impact has loaded" << std::endl;
+		std::cout << "Harlow has loaded" << std::endl;
 	}
 	else
 	{
-		std::cout << "Impact not found" << std::endl;
+		std::cout << "Harlow not found" << std::endl;
 	}
 
 	if (m_Motor.loadFromFile("C:/Windows/Fonts/MotorwerkOblique.ttf"))
 	{
-		std::cout << "Impact has loaded" << std::endl;
+		std::cout << "Motor has loaded" << std::endl;
 	}
 	else
 	{
-		std::cout << "Impact not found" << std::endl;
+		std::cout << "Motor not found" << std::endl;
 	}
 	m_licence = new Licence(*this, m_HARLOW, m_Motor);
 	m_splashscreen = new Splash(*this, m_HARLOW, m_Motor);
@@ -97,30 +97,6 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		break;
 	}
 
-	if (m_controller.m_currentState.B && score == 0)//any key accepted to change screen to credits
-	{
-		m_Sprite5.setPosition(350, 310);
-		m_Sprite5.setRotation(270);
-		score++;
-	}
-	if (m_controller.m_currentState.Y && score == 1)//any key accepted to change screen to credits
-	{
-		m_Sprite5.setPosition(300, 340);
-		m_Sprite5.setRotation(90);
-		score++;
-	}
-	if (m_controller.m_currentState.X && score == 2)//any key accepted to change screen to credits
-	{
-		m_Sprite5.setPosition(300, 300);
-		m_Sprite5.setRotation(180);
-		score++;
-	}
-	if (m_controller.m_currentState.A && score == 3)
-	{
-		m_currentGameState = GameState::credits;
-	}
-
-
 	m_controller.update();
 	processEvents();
 }
@@ -130,7 +106,7 @@ void Game::processEvents()
 	sf::Event event;
 	while (m_window.pollEvent(event))
 	{
-		if (m_controller.m_currentState.Y && m_currentGameState == GameState::splash)//any key accepted to change screen to credits
+		if (m_controller.m_currentState.Start && m_currentGameState == GameState::splash)//any key accepted to change screen to credits
 		{
 			m_splashscreen->changeScreen();
 

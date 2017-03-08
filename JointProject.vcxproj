@@ -149,6 +149,9 @@
     <ClInclude Include="OptionScreen.h" />
     <ClInclude Include="Splash.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\lambo.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
