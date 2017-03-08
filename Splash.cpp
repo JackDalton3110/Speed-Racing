@@ -4,7 +4,7 @@
 Splash::Splash(Game & game, sf::Font font) :
 	m_game(&game),
 	m_Impact(font),
-	m_textMessage("Press Y Button", m_Impact, 30)
+	m_textMessage("Press Start Button", m_Impact, 30)
 {
 
 	if (!m_Texture.loadFromFile("G:/HCI/button-game-jack-jamie-1/ButtonGame/images/Mash'Em.png"))
