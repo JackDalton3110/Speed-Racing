@@ -74,6 +74,12 @@ void Game::SetGameState(GameState gamestate)
 
 void Game::update(sf::Time time, Xbox360Controller &controller)
 {
+
+	if (controller.m_currentState.Back)
+	{
+		m_window.close();
+	}
+
 	switch (m_currentGameState)
 	{
 	case GameState::licence:

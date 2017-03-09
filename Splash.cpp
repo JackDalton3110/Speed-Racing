@@ -9,7 +9,7 @@ Splash::Splash(Game & game, sf::Font font, sf::Font font1) :
 	m_textMessage("Speed", m_Motor, 100),
 	m_textMessage1("Press the start button", m_HARLOW, 32)
 {
-	if (!m_Texture.loadFromFile("G:/jp-team-a/images/lambo.png"))
+	if (!m_Texture.loadFromFile("images/lambo.png"))
 	{
 		std::string s("error loading texture from file");
 		throw std::exception(s.c_str());
