@@ -6,17 +6,17 @@ Option::Option(Game & game, sf::Font font) :
 	m_Impact(font)
 {
 
-	m_textMessage[0].setPosition(850, 100);//set position
+	m_textMessage[0].setPosition(830, 100);//set position
 	m_textMessage[0].setString("Start Game");//set text
 	m_textMessage[0].setFont(m_Impact);//set font 
 	m_textMessage[0].setColor(sf::Color::Yellow);//set colour
 
-	m_textMessage[1].setPosition(850, 175);//set position
+	m_textMessage[1].setPosition(830, 175);//set position
 	m_textMessage[1].setString("Settings");//set text
 	m_textMessage[1].setFont(m_Impact);//set font 
 	m_textMessage[1].setColor(sf::Color::Yellow);//set colour
 
-	m_textMessage[2].setPosition(850, 250);//set position
+	m_textMessage[2].setPosition(830, 250);//set position
 	m_textMessage[2].setString("Quit");//set text
 	m_textMessage[2].setFont(m_Impact);//set font 
 	m_textMessage[2].setColor(sf::Color::Yellow);//set colour
@@ -28,36 +28,36 @@ Option::Option(Game & game, sf::Font font) :
 	}
 	settingButton[0].setPosition(250, 150);//positioning settings 
 	settingButton[1].setPosition(250, 250);
-	settingButton[2].setSize(sf::Vector2f(800, 500));
+	settingButton[2].setSize(sf::Vector2f(780, 500));
 	settingButton[2].setPosition(100, 100);
 	settingButton[2].setFillColor(sf::Color(96, 96, 96));
 
-	if (!m_Texture[0].loadFromFile("G:/jp-team-a/resource/images/selector.png"))
+	if (!m_Texture[0].loadFromFile("images/selector.png"))
 	{
 		std::string s("error loading texture from file");
 		throw std::exception(s.c_str());
 	}
 
-	if (!m_Texture[2].loadFromFile("G:/HCI/button-game-jack-jamie-1/ButtonGame/images/circlemover.png"))
+	if (!m_Texture[2].loadFromFile("images/circlemover.png"))
 	{
 		std::string s("error loading texture from file");
 		throw std::exception(s.c_str());
 	}
 
-	if (!m_Texture[1].loadFromFile("G:/HCI/button-game-jack-jamie-1/ButtonGame/images/Bar.png"))
+	if (!m_Texture[1].loadFromFile("images/Bar.png"))
 	{
 		std::string s("error loading texture from file");
 		throw std::exception(s.c_str());
 	}
 
-	if (!m_Texture[3].loadFromFile("G:/jp-team-a/resource/images/OptionScreen.jpg"))
+	if (!m_Texture[3].loadFromFile("images/OptionScreen.jpg"))
 	{
 		std::string s("error loading texture from file");
 		throw std::exception(s.c_str());
 	}
 
 	m_Sprite[0].setTexture(m_Texture[0]);
-	m_Sprite[0].setPosition(800, 100);//set image position in relation to origin
+	m_Sprite[0].setPosition(780, 100);//set image position in relation to origin
 	m_Sprite[1].setTexture(m_Texture[1]);
 	m_Sprite[1].setPosition(270, 400);
 	m_Sprite[2].setTexture(m_Texture[2]);
@@ -123,7 +123,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 	if (settings == true)
 	{
-		if (controller.m_currentState.DPadUp && !controller.m_previousState.DPadUp)
+		if (controller.m_currentState.DPadDown && !controller.m_previousState.DPadDown)
 		{
 			if (button_ID < 2)
 			{
@@ -136,7 +136,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		}
 
 
-		if (controller.m_currentState.DPadDown && !controller.m_previousState.DPadDown)
+		if (controller.m_currentState.DPadUp && !controller.m_previousState.DPadUp)
 		{
 			if (button_ID > 0)
 			{
@@ -159,7 +159,10 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	if (options == true && controller.m_currentState.A)
 	{
 		settings = true;//draw settings
-		button_ID = 0;
+		if (settings == true)
+		{
+			button_ID = 2;
+		}
 	}
 	if (controller.m_currentState.B && settings == true)
 	{
@@ -184,7 +187,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 	if (button_ID == 0)
 	{
-		m_Sprite[0].setPosition(800, 100);
+		m_Sprite[0].setPosition(780, 100);
 		controller.m_previousState = controller.m_currentState;
 		strtgame = true;
 		options = false;
@@ -192,7 +195,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	}
 	else if (button_ID == 1)
 	{
-		m_Sprite[0].setPosition(800, 175);
+		m_Sprite[0].setPosition(780, 175);
 		controller.m_previousState = controller.m_currentState;
 		options = true;
 		strtgame = false;
@@ -200,7 +203,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	}
 	else if (button_ID == 2)
 	{
-		m_Sprite[0].setPosition(800, 250);
+		m_Sprite[0].setPosition(780, 250);
 		controller.m_previousState = controller.m_currentState;
 		quitGame = true;
 		options = false;
@@ -210,7 +213,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	if (settings == true)
 	{
 
-		if (button_ID == 0)
+		if (button_ID == 2)
 		{
 			m_Sprite[0].setPosition(100, 140);
 			controller.m_previousState = controller.m_currentState;
@@ -221,7 +224,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			m_Sprite[0].setPosition(100, 240);
 			controller.m_previousState = controller.m_currentState;
 		}
-		else if (button_ID == 2)
+		else if (button_ID == 0)
 		{
 			m_Sprite[0].setPosition(100, 340);
 			controller.m_previousState = controller.m_currentState;
