@@ -24,8 +24,6 @@ private:
 	sf::Time m_cumulativeTime;//time
 	sf::Font m_Impact;//font
 	sf::Text m_textMessage;//text
-	sf::Texture m_Texture;//background texture
-	sf::Sprite m_Sprite;//sprite for texture
 	sf::Event event;
 
 };

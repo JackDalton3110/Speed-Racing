@@ -27,64 +27,6 @@ Game::Game() :
 	m_textMessage[1].setFont(m_Impact);//set font 
 	m_textMessage[1].setColor(sf::Color(255, 255, 255));//set colour
 
-
-	if (!m_Texture1.loadFromFile("G:/HCI/button-game-jack-jamie-1/ButtonGame/images/A.png"))
-	{
-		std::string s("error loading texture from file");
-		throw std::exception(s.c_str());
-	}
-
-	if (!m_Texture2.loadFromFile("G:/HCI/button-game-jack-jamie-1/ButtonGame/images/X.png"))
-	{
-		std::string s("error loading texture from file");
-		throw std::exception(s.c_str());
-	}
-	if (!m_Texture3.loadFromFile("G:/HCI/button-game-jack-jamie-1/ButtonGame/images/Y.png"))
-	{
-		std::string s("error loading texture from file");
-		throw std::exception(s.c_str());
-	}
-	if (!m_Texture4.loadFromFile("G:/HCI/button-game-jack-jamie-1/ButtonGame/images/B.png"))
-	{
-		std::string s("error loading texture from file");
-		throw std::exception(s.c_str());
-	}
-
-	m_Sprite1.setTexture(m_Texture1);
-	m_Sprite2.setTexture(m_Texture2);
-	m_Sprite3.setTexture(m_Texture3);
-	m_Sprite4.setTexture(m_Texture4);
-
-	m_Sprite1.setOrigin(325, 325);//set origin of image
-	m_Sprite1.setPosition(250, 250);//set image position in relation to origin
-	m_Sprite1.setScale(0.1f, 0.1f);
-
-	if (!m_Texture5.loadFromFile("G:/HCI/button-game-jack-jamie-1/ButtonGame/images/arrow.png"))
-	{
-		std::string s("error loading texture from file");
-		throw std::exception(s.c_str());
-	}
-
-	m_Sprite1.setTexture(m_Texture1);
-	m_Sprite2.setTexture(m_Texture2);
-	m_Sprite3.setTexture(m_Texture3);
-	m_Sprite4.setTexture(m_Texture4);
-	m_Sprite5.setTexture(m_Texture5);
-	m_Sprite1.setOrigin(325, 325);//set origin of image
-	m_Sprite1.setPosition(250, 100);//set image position in relation to origin
-	m_Sprite1.setScale(0.1f, 0.1f);
-	m_Sprite2.setOrigin(325, 325);//set origin of image
-	m_Sprite2.setPosition(100, 250);//set image position in relation to origin
-	m_Sprite2.setScale(0.1f, 0.1f);
-	m_Sprite3.setOrigin(350, 325);//set origin of image
-	m_Sprite3.setPosition(400, 250);//set image position in relation to origin
-	m_Sprite3.setScale(0.1f, 0.1f);
-	m_Sprite4.setOrigin(325, 325);//set origin of image
-	m_Sprite4.setPosition(275, 450);//set image position in relation to origin
-	m_Sprite4.setScale(0.2f, 0.2f);
-	m_Sprite5.setOrigin(300, 300);//set origin of image
-	m_Sprite5.setPosition(350, 350);//set image position in relation to origin
-	m_Sprite5.setScale(0.2f, 0.2f);
 }
 
 Game::~Game()
@@ -148,20 +90,14 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 
 	if (m_controller.m_currentState.B && score == 0)//any key accepted to change screen to credits
 	{
-		m_Sprite5.setPosition(350, 310);
-		m_Sprite5.setRotation(270);
 		score++;
 	}
 	if (m_controller.m_currentState.Y && score == 1)//any key accepted to change screen to credits
 	{
-		m_Sprite5.setPosition(300, 340);
-		m_Sprite5.setRotation(90);
 		score++;
 	}
 	if (m_controller.m_currentState.X && score == 2)//any key accepted to change screen to credits
 	{
-		m_Sprite5.setPosition(300, 300);
-		m_Sprite5.setRotation(180);
 		score++;
 	}
 	if (m_controller.m_currentState.A && score == 3)
@@ -214,11 +150,6 @@ void Game::render()
 		break;
 	default:
 		m_window.clear(sf::Color(93, 194, 30));
-		m_window.draw(m_Sprite1);
-		m_window.draw(m_Sprite3);
-		m_window.draw(m_Sprite2);
-		m_window.draw(m_Sprite4);
-		m_window.draw(m_Sprite5);
 		m_window.draw(m_textMessage[0]);
 		m_window.draw(m_textMessage[1]);
 		//m_window.draw(shape);

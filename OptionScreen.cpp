@@ -32,31 +32,6 @@ Option::Option(Game & game, sf::Font font) :
 	settingButton[1].setPosition(200, 250);
 
 
-	if (!m_Texture[0].loadFromFile("G:/HCI/button-game-jack-jamie-1/ButtonGame/images/Rec.png"))
-	{
-		std::string s("error loading texture from file");
-		throw std::exception(s.c_str());
-	}
-
-	if (!m_Texture[2].loadFromFile("G:/HCI/button-game-jack-jamie-1/ButtonGame/images/circlemover.png"))
-	{
-		std::string s("error loading texture from file");
-		throw std::exception(s.c_str());
-	}
-
-	if (!m_Texture[1].loadFromFile("G:/HCI/button-game-jack-jamie-1/ButtonGame/images/Bar.png"))
-	{
-		std::string s("error loading texture from file");
-		throw std::exception(s.c_str());
-	}
-	m_Sprite[0].setTexture(m_Texture[0]);
-	m_Sprite[0].setPosition(130, 230);//set image position in relation to origin
-	m_Sprite[1].setTexture(m_Texture[1]);
-	m_Sprite[1].setPosition(270, 400);
-	m_Sprite[2].setTexture(m_Texture[2]);
-	m_Sprite[2].setPosition(270, 400);
-
-
 	m_textMessage[3].setString("sound");//settings message
 	m_textMessage[3].setPosition(120, 140);//set position
 	m_textMessage[3].setFont(m_Impact);//set font 
@@ -85,7 +60,6 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 {
 	if (controller.m_currentState.DPadRight)
 	{
-		m_Sprite[0].setPosition(380, 230);//move selector to options
 		options = true;
 		strtgame = false;
 		quitGame = false;
@@ -94,7 +68,6 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	}
 	if (controller.m_currentState.DPadDown)
 	{
-		m_Sprite[0].setPosition(255, 330);//move selector to quit 
 		options = false;
 		strtgame = false;
 		quitGame = true;
@@ -102,7 +75,6 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 	if (controller.m_currentState.DPadLeft)
 	{
-		m_Sprite[0].setPosition(130, 230);//move selector to start game
 		options = false;
 		strtgame = true;
 		quitGame = false;
@@ -125,18 +97,10 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	}
 	if (controller.m_currentState.DPadRight && settings == true)
 	{
-		if (m_Sprite[2].getPosition().x <= 490 && m_Sprite[2].getPosition().x >= 270)
-		{
-			m_Sprite[2].move(0.5, 0);//move slider right
-		}
 
 	}
 	if (controller.m_currentState.DPadLeft && settings == true)
 	{
-		if (m_Sprite[2].getPosition().x <= 490 && m_Sprite[2].getPosition().x >= 260)
-		{
-			m_Sprite[2].move(-0.5, 0);//move slider left
-		}
 
 	}
 
@@ -157,7 +121,6 @@ void Option::render(sf::RenderWindow & Window)
 	Window.clear(sf::Color(0, 0, 1));//different from standards black
 	if (settings != true)
 	{
-		Window.draw(m_Sprite[0]);
 		Window.draw(m_textMessage[0]);
 		Window.draw(m_textMessage[1]);
 		Window.draw(m_textMessage[2]);//main menu draw
@@ -176,8 +139,6 @@ void Option::render(sf::RenderWindow & Window)
 		{
 			Window.draw(settingButton[i]);
 		}
-		Window.draw(m_Sprite[1]);
-		Window.draw(m_Sprite[2]);//draw scroll bar
 	}
 
 

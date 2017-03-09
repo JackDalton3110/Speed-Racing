@@ -52,5 +52,25 @@ public:
 	void Xbox360Controller::update();
 	bool isConnected();
 	bool connect();
+
+	bool Abutton();
+	bool Bbutton();
+	bool Xbutton();
+	bool Ybutton();
+	bool LBbutton();
+	bool RBbutton();
+	bool LeftThumbStickClickButton();
+	bool RightThumbStickClickButton();
+	bool DpadUpButton();
+	bool DpadDownButton();
+	bool DpadRightButton();
+	bool DpadLeftButton();
+	bool StartButton();
+	bool BackButton();
+	bool XboxButton();
+	float RTrigger();
+	float LTrigger();
+	sf::Vector2f RightThumbStick();
+	sf::Vector2f LeftThumbSticks();
 };
 #endif // !CONTROLLER_H

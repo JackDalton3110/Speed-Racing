@@ -22,7 +22,5 @@ private:
 	sf::Font m_Impact;
 	sf::Text m_textMessage;
 	sf::Text m_textMessage1;
-	sf::Texture m_Texture;//bullet texture
-	sf::Sprite m_Sprite;//bullet for texture
 };
 #endif 

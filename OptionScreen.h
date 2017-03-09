@@ -4,9 +4,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "Controller.h"
-#include "TextButton.h"
-#include "Slider.h"
-#include "ToggleButton.h"
 #include "Game.h"
 
 class Game;
@@ -41,8 +38,6 @@ private:
 	Game *m_game;
 	sf::Text m_textMessage[6];//text
 	sf::Font m_Impact;//font
-	sf::Texture m_Texture[3];//background texture
-	sf::Sprite m_Sprite[3];//sprite for texture
 };
 
 #endif
