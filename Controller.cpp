@@ -77,3 +77,80 @@ Xbox360Controller::~Xbox360Controller()
 {
 
 }
+
+bool Xbox360Controller::Abutton()
+{
+	return m_currentState.A;
+}
+bool Xbox360Controller::Bbutton()
+{
+	return m_currentState.B;
+}
+bool Xbox360Controller::Xbutton()
+{
+	return m_currentState.X;
+}
+bool Xbox360Controller::Ybutton()
+{
+	return m_currentState.Y;
+}
+bool Xbox360Controller::LBbutton()
+{
+	return m_currentState.LB;
+}
+bool Xbox360Controller::RBbutton()
+{
+	return m_currentState.RB;
+}
+bool Xbox360Controller::LeftThumbStickClickButton()
+{
+	return m_currentState.LeftThumbStickClick;
+}
+bool Xbox360Controller::RightThumbStickClickButton()
+{
+	return m_currentState.RightThumbStickClick;
+}
+bool Xbox360Controller::DpadUpButton()
+{
+	return m_currentState.DPadUp;
+}
+bool Xbox360Controller::DpadDownButton()
+{
+	return m_currentState.DPadDown;
+}
+bool Xbox360Controller::DpadRightButton()
+{
+	return m_currentState.DPadRight;
+}
+bool Xbox360Controller::DpadLeftButton()
+{
+	return m_currentState.DPadLeft;
+}
+bool Xbox360Controller::StartButton()
+{
+	return m_currentState.Start;
+}
+bool Xbox360Controller::BackButton()
+{
+	return m_currentState.Back;
+}
+bool Xbox360Controller::XboxButton()
+{
+	return m_currentState.Xbox;
+}
+float Xbox360Controller::RTrigger()
+{
+	return m_currentState.RTrigger;
+}
+float Xbox360Controller::LTrigger()
+{
+	return m_currentState.LTrigger;
+}
+sf::Vector2f Xbox360Controller::RightThumbStick()
+{
+	return m_currentState.RightThumbStick;
+}
+sf::Vector2f Xbox360Controller::LeftThumbSticks()
+{
+	return m_currentState.LeftThumbSticks;
+}

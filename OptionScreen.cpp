@@ -3,7 +3,8 @@
 
 Option::Option(Game & game, sf::Font font) :
 	m_game(&game),
-	m_Impact(font)
+	m_Impact(font),
+	m_button_released(false)
 {
 
 	m_textMessage[0].setPosition(830, 100);//set position
@@ -89,6 +90,24 @@ Option::~Option()
 
 }
 
+void Option::reset()
+{
+	if (m_reset_check)
+	{
+		m_reset_check = false;
+
+		button_ID = 0;
+		startgame = true;
+		options = false;
+		quitGame = false;
+		closeGame = false;
+		settings = false;
+		closeWindow = false;
+
+		m_button_released = false;
+	}
+}
+
 void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 {
 	if (controller.m_currentState.Back)
@@ -148,15 +167,23 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			}
 		}
 	}
-	if (controller.m_currentState.A && quitGame == true)
+
+	if (!controller.Abutton())
 	{
-		closeGame = true;//close window
+		m_button_released = true;
 	}
-	if (controller.m_currentState.A && strtgame == true)
+
+	if (controller.m_currentState.A && m_button_released && quitGame == true)
+	{
+		m_game->SetGameState(GameState::confirm); // change to Confirm
+		m_reset_check = true;
+	}
+	if (controller.m_currentState.A && m_button_released && startgame == true)
 	{
 		changeScreen();//change to game 
+		m_reset_check = true;
 	}
-	if (options == true && controller.m_currentState.A)
+	if (options == true && controller.m_currentState.A && m_button_released)
 	{
 		settings = true;//draw settings
 		if (settings == true)
@@ -189,7 +216,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	{
 		m_Sprite[0].setPosition(780, 100);
 		controller.m_previousState = controller.m_currentState;
-		strtgame = true;
+		startgame = true;
 		options = false;
 		quitGame = false;
 	}
@@ -198,7 +225,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		m_Sprite[0].setPosition(780, 175);
 		controller.m_previousState = controller.m_currentState;
 		options = true;
-		strtgame = false;
+		startgame = false;
 		quitGame = false;
 	}
 	else if (button_ID == 2)
@@ -207,7 +234,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		controller.m_previousState = controller.m_currentState;
 		quitGame = true;
 		options = false;
-		strtgame = false;
+		startgame = false;
 	}
 
 	if (settings == true)

@@ -10,12 +10,16 @@
 #include "Controller.h"
 #include "OptionScreen.h"
 #include "Game.h"
+#include "Confirm.h"
+#include "Player.h"
+#include "NPCplayer.h"
 
 class Licence;
 class Splash;
-class Game;
+class Gameplay;
 class Credits;
 class Option;
+class Confirm;
 
 enum class
 	GameState
@@ -24,7 +28,9 @@ enum class
 	licence,
 	splash,
 	option,
-	credits
+	credits,
+	confirm,
+	gameplay
 };
 
 class Game
@@ -60,6 +66,7 @@ private:
 	Licence *m_licence;
 	Credits *m_credits;
 	Option *m_option;
+	Confirm *m_confirm;
 
 	sf::Texture m_Texture1;
 	sf::Texture m_Texture2;

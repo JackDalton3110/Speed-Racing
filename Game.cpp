@@ -26,6 +26,7 @@ Game::Game() :
 	m_splashscreen = new Splash(*this, m_HARLOW, m_Motor);
 	m_option = new Option(*this, m_Motor);
 	m_credits = new Credits(*this, m_Motor);
+	m_confirm = new Confirm(*this, m_Motor);
 
 	m_textMessage[0].setPosition(20, 20);//set position
 	m_textMessage[0].setString("Score: ");//set text
@@ -44,6 +45,7 @@ Game::~Game()
 	delete(m_splashscreen);
 	delete(m_option);
 	delete(m_credits);
+	delete(m_confirm);
 	std::cout << "destroying game" << std::endl;
 }
 
@@ -94,10 +96,16 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		break;
 	case GameState::option:
 		std::cout << "Menu" << std::endl;
+		m_option->reset();
 		m_option->update(time, controller);
 		break;
 	case GameState::credits:
 		m_credits->update(time);
+		break;
+	case GameState::confirm:
+		std::cout << "NO!" << std::endl;
+		m_confirm->reset();
+		m_confirm->update(controller);
 		break;
 	default:
 		break;
@@ -130,6 +138,9 @@ void Game::render()
 {
 	switch (m_currentGameState)
 	{
+	case GameState::none:
+		m_window.close();
+		break;
 	case GameState::licence:
 		m_licence->render(m_window);
 		break;
@@ -141,6 +152,9 @@ void Game::render()
 		break;
 	case GameState::credits:
 		m_credits->render(m_window);
+		break;
+	case GameState::confirm:
+		m_confirm->render(m_window);
 		break;
 	default:
 		m_window.clear(sf::Color(93, 194, 30));
