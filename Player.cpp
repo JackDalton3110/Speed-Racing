@@ -48,16 +48,16 @@ void Player::update(double t)
 		}
 	}
 
-	if (m_positon.x > 650)
+	if (m_positon.x > 1000)
 	{
 		m_velocity = -m_velocity * 0.5;
-		m_positon.x = 650;
+		m_positon.x = 1000;
 	}
 
-	if (m_positon.y > 650)
+	if (m_positon.y > 800)
 	{
 		m_velocity = -m_velocity * 0.5;
-		m_positon.y = 650;
+		m_positon.y = 800;
 	}
 
 	if (m_positon.x < 0)

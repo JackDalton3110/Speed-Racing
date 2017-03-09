@@ -12,6 +12,7 @@
 #include "Game.h"
 
 #include "Player.h"
+#include "NPCplayer.h"
 
 class Licence;
 class Splash;
@@ -63,6 +64,7 @@ private:
 	Option *m_option;
 
 	Player m_player;
+	NPCplayer m_npc;
 };
 
 #endif // !GAME_H

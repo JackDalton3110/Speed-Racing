@@ -138,6 +138,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Licence.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NPCplayer.cpp" />
     <ClCompile Include="OptionScreen.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Credits.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Licence.h" />
+    <ClInclude Include="NPCplayer.h" />
     <ClInclude Include="OptionScreen.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Player.h" />

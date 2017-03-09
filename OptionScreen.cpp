@@ -32,8 +32,7 @@ Option::Option(Game & game, sf::Font font) :
 	settingButton[1].setPosition(200, 250);
 
 
-<<<<<<< HEAD
-=======
+
 	if (!m_Texture[0].loadFromFile("G:/jp-team-a/resource/images/selector.png"))
 	{
 		std::string s("error loading texture from file");
@@ -67,7 +66,7 @@ Option::Option(Game & game, sf::Font font) :
 	m_Sprite[3].setTexture(m_Texture[3]);
 
 
->>>>>>> 9ecea5490fcb49a254ca604fc73ce3f51c9f3a4d
+
 	m_textMessage[3].setString("sound");//settings message
 	m_textMessage[3].setPosition(120, 140);//set position
 	m_textMessage[3].setFont(m_Impact);//set font 
@@ -96,24 +95,24 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 {
 	if (controller.m_currentState.Back)
 	{
-<<<<<<< HEAD
+
 		options = true;
 		strtgame = false;
 		quitGame = false;
 		controller.m_previousState = controller.m_currentState;
 
-=======
+
 		closeWindow = true;
->>>>>>> 9ecea5490fcb49a254ca604fc73ce3f51c9f3a4d
+
 	}
 
 	if (controller.m_currentState.DPadDown && !controller.m_previousState.DPadDown)
 	{
-<<<<<<< HEAD
+
 		options = false;
 		strtgame = false;
 		quitGame = true;
-=======
+
 		if (button_ID < 2)
 		{
 			button_ID= button_ID +1;
@@ -122,17 +121,17 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		{
 			button_ID = 0;
 		}
->>>>>>> 9ecea5490fcb49a254ca604fc73ce3f51c9f3a4d
+
 	}
 
 
 	if (controller.m_currentState.DPadUp && !controller.m_previousState.DPadUp)
 	{
-<<<<<<< HEAD
+
 		options = false;
 		strtgame = true;
 		quitGame = false;
-=======
+
 		if (button_ID > 0)
 		{
 			button_ID--;
@@ -141,7 +140,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		{
 			button_ID = 3;
 		}
->>>>>>> 9ecea5490fcb49a254ca604fc73ce3f51c9f3a4d
+
 	}
 	if (controller.m_currentState.A && quitGame == true)
 	{
@@ -232,12 +231,12 @@ void Option::render(sf::RenderWindow & Window)
 		{
 			Window.draw(settingButton[i]);
 		}
-<<<<<<< HEAD
-=======
+
+
 
 		Window.draw(m_Sprite[1]);
 		Window.draw(m_Sprite[2]);//draw scroll bar
->>>>>>> 9ecea5490fcb49a254ca604fc73ce3f51c9f3a4d
+
 	}
 
 

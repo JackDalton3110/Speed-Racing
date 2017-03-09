@@ -40,11 +40,10 @@ private:
 	Game *m_game;
 	sf::Text m_textMessage[6];//text
 	sf::Font m_Impact;//font
-<<<<<<< HEAD
-=======
+
 	sf::Texture m_Texture[5];//background texture
 	sf::Sprite m_Sprite[5];//sprite for texture
->>>>>>> 9ecea5490fcb49a254ca604fc73ce3f51c9f3a4d
+
 };
 
 #endif

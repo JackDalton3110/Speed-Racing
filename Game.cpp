@@ -68,8 +68,8 @@ void Game::SetGameState(GameState gamestate)
 
 void Game::update(sf::Time time, Xbox360Controller &controller)
 {
-<<<<<<< HEAD
 	/*
+<<<<<<< HEAD
 =======
 	if (controller.m_currentState.Back)
 	{
@@ -120,6 +120,7 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 
 	m_controller.update();
 
+	m_npc.update(time.asSeconds());
 	m_player.update(time.asSeconds());
 	processEvents();
 }
@@ -172,6 +173,7 @@ void Game::render()
 	}
 	*/
 	m_player.render(m_window);
+	m_npc.render(m_window);
 	m_window.display();
 
 }
