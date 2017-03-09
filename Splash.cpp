@@ -4,7 +4,7 @@
 Splash::Splash(Game & game, sf::Font font) :
 	m_game(&game),
 	m_Impact(font),
-	m_textMessage("Press Y Button", m_Impact, 30)
+	m_textMessage("Press Start Button", m_Impact, 30)
 {
 	m_textMessage.setPosition(250.0f, 250.0f);//set text position
 	m_textMessage.setStyle(sf::Text::Underlined | sf::Text::Bold);//change style of text

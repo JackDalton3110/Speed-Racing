@@ -153,6 +153,10 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Splash.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="resource\images\openingCar.png" />
+    <Image Include="resource\images\OptionScreen.jpg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

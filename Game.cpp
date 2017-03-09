@@ -2,7 +2,7 @@
 #include "Controller.h"
 
 Game::Game() :
-	m_window(sf::VideoMode(650, 650), "Mash 'Em"),
+	m_window(sf::VideoMode(1000, 800), "Mash 'Em"),
 	m_currentGameState(GameState::licence)
 {
 	/*if (m_Impact.loadFromFile("c:/windows/fonts/impact.ttf"))
@@ -68,7 +68,14 @@ void Game::SetGameState(GameState gamestate)
 
 void Game::update(sf::Time time, Xbox360Controller &controller)
 {
+<<<<<<< HEAD
 	/*
+=======
+	if (controller.m_currentState.Back)
+	{
+		m_window.close();
+	}
+>>>>>>> 9ecea5490fcb49a254ca604fc73ce3f51c9f3a4d
 	switch (m_currentGameState)
 	{
 	case GameState::licence:

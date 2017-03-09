@@ -69,4 +69,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="resource\images\openingCar.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resource\images\OptionScreen.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
