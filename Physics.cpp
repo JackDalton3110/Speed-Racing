@@ -7,7 +7,7 @@ Physics::Physics() :
 	m_distance(0),
 	m_gravity(9.8),
 	m_friction(0),
-	m_pixelToMeter(10),
+	m_pixelToMeter(1),
 	m_radius(0)
 {
 

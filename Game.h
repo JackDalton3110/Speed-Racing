@@ -11,6 +11,8 @@
 #include "OptionScreen.h"
 #include "Game.h"
 
+#include "Player.h"
+
 class Licence;
 class Splash;
 class Game;
@@ -60,7 +62,7 @@ private:
 	Credits *m_credits;
 	Option *m_option;
 
-
+	Player m_player;
 };
 
 #endif // !GAME_H

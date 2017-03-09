@@ -19,6 +19,10 @@ Player::~Player()
 
 void Player::update(double t)
 {
+
+	controller.update();
+
+
 	if (controller.RTrigger() >= 5)
 	{
 		m_acceleration = controller.RTrigger();
@@ -29,10 +33,19 @@ void Player::update(double t)
 		m_acceleration = controller.LTrigger();
 	}
 
-	if (controller.LeftThumbSticks().y <= -20 ||
-		controller.LeftThumbSticks().y >= 20)
+	if (controller.LeftThumbSticks().x <= -20 ||
+		controller.LeftThumbSticks().x >= 20)
 	{
-		m_degree += controller.LeftThumbSticks().y / 20;
+		m_degree += controller.LeftThumbSticks().x / 20;
+		if (m_degree > 360)
+		{
+			m_degree = 0;
+		}
+		
+		if (m_degree < 0)
+		{
+			m_degree = 360;
+		}
 	}
 
 	if (m_positon.x > 650)
@@ -70,5 +83,6 @@ void Player::update(double t)
 
 void Player::render(sf::RenderWindow &window)
 {
+	window.clear(sf::Color::White);
 	window.draw(m_player);
 }

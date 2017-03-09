@@ -5,7 +5,7 @@ Game::Game() :
 	m_window(sf::VideoMode(650, 650), "Mash 'Em"),
 	m_currentGameState(GameState::licence)
 {
-	if (m_Impact.loadFromFile("c:/windows/fonts/impact.ttf"))
+	/*if (m_Impact.loadFromFile("c:/windows/fonts/impact.ttf"))
 	{
 		std::cout << "Impact has loaded" << std::endl;
 	}
@@ -26,16 +26,19 @@ Game::Game() :
 	m_textMessage[1].setString("Time: ");//set text
 	m_textMessage[1].setFont(m_Impact);//set font 
 	m_textMessage[1].setColor(sf::Color(255, 255, 255));//set colour
+	*/
 
 }
 
 Game::~Game()
 {
+	/*
 	delete(m_licence);//delete game states
 	delete(m_splashscreen);
 	delete(m_option);
 	delete(m_credits);
 	std::cout << "destroying game" << std::endl;
+	*/
 }
 
 void Game::run()
@@ -65,6 +68,7 @@ void Game::SetGameState(GameState gamestate)
 
 void Game::update(sf::Time time, Xbox360Controller &controller)
 {
+	/*
 	switch (m_currentGameState)
 	{
 	case GameState::licence:
@@ -105,8 +109,11 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		m_currentGameState = GameState::credits;
 	}
 
+	*/
 
 	m_controller.update();
+
+	m_player.update(time.asSeconds());
 	processEvents();
 }
 
@@ -134,6 +141,7 @@ void Game::processEvents()
 
 void Game::render()
 {
+	/*
 	switch (m_currentGameState)
 	{
 	case GameState::licence:
@@ -153,8 +161,10 @@ void Game::render()
 		m_window.draw(m_textMessage[0]);
 		m_window.draw(m_textMessage[1]);
 		//m_window.draw(shape);
-		m_window.display();
 		break;
 	}
+	*/
+	m_player.render(m_window);
+	m_window.display();
 
 }
