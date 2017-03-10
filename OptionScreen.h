@@ -11,7 +11,7 @@ class Game;
 class Option
 {
 public:
-	Option(Game& game, sf::Font font);
+	Option(Game& game, sf::Font font, sf::Font font2);
 	~Option();
 	void update(sf::Time time, Xbox360Controller& controller);
 	void render(sf::RenderWindow &window);
@@ -40,6 +40,7 @@ private:
 	Game *m_game;
 	sf::Text m_textMessage[7];//text
 	sf::Font m_Impact;//font
+	sf::Font m_Harlow;
 	sf::Texture m_Texture[5];//background texture
 	sf::Sprite m_Sprite[5];//sprite for texture
 };

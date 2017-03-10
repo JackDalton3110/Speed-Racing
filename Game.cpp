@@ -25,7 +25,7 @@ Game::Game() :
 	m_licence = new Licence(*this, m_HARLOW, m_Motor);
 	m_splashscreen = new Splash(*this, m_HARLOW, m_Motor);
 	m_carSelect = new CarSelect(*this, m_HARLOW);
-	m_option = new Option(*this, m_Motor);
+	m_option = new Option(*this, m_Motor, m_HARLOW);
 	m_credits = new Credits(*this, m_Motor);
 
 	m_textMessage[0].setPosition(20, 20);//set position

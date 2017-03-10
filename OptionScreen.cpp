@@ -1,33 +1,30 @@
 #include "OptionScreen.h"
 #include <iostream>
 
-Option::Option(Game & game, sf::Font font) :
+Option::Option(Game & game, sf::Font font, sf::Font font2) :
 	m_game(&game),
-	m_Impact(font)
+	m_Impact(font),
+	m_Harlow(font2)
+
 {
 
 	m_textMessage[0].setPosition(830, 100);//set position
 	m_textMessage[0].setString("Start Game");//set text
-	m_textMessage[0].setFont(m_Impact);//set font 
-	m_textMessage[0].setColor(sf::Color::Yellow);//set colour
+	m_textMessage[0].setFont(m_Harlow);//set font 
+	m_textMessage[0].setColor(sf::Color::Black);//set colour
 
 	m_textMessage[1].setPosition(830, 175);//set position
 	m_textMessage[1].setString("Settings");//set text
-	m_textMessage[1].setFont(m_Impact);//set font 
-	m_textMessage[1].setColor(sf::Color::Yellow);//set colour
+	m_textMessage[1].setFont(m_Harlow);//set font 
+	m_textMessage[1].setColor(sf::Color::Black);//set colour
 
 	m_textMessage[2].setPosition(830, 250);//set position
 	m_textMessage[2].setString("Quit");//set text
-	m_textMessage[2].setFont(m_Impact);//set font 
-	m_textMessage[2].setColor(sf::Color::Yellow);//set colour
+	m_textMessage[2].setFont(m_Harlow);//set font 
+	m_textMessage[2].setColor(sf::Color::Black);//set colour
 
-	for (int i = 0; i < 2; i++)
-	{
-		settingButton[i].setSize(sf::Vector2f(20, 20));
-		settingButton[i].setFillColor(sf::Color::Red);
-	}
-	settingButton[0].setPosition(250, 150);//positioning settings 
-	settingButton[1].setPosition(250, 250);
+	
+	
 	settingButton[2].setSize(sf::Vector2f(780, 500));
 	settingButton[2].setPosition(100, 100);
 	settingButton[2].setFillColor(sf::Color(96, 96, 96));
@@ -66,26 +63,29 @@ Option::Option(Game & game, sf::Font font) :
 
 
 	m_textMessage[3].setString("Sound");//settings message
-	m_textMessage[3].setPosition(150, 140);//set position
+	m_textMessage[3].setPosition(300, 140);//set position
 	m_textMessage[3].setFont(m_Impact);//set font 
+	m_textMessage[3].setCharacterSize(100);
 	m_textMessage[3].setColor(sf::Color(255, 255, 255));//set colour
 
 	m_textMessage[4].setString("Difficulty");//setting message
-	m_textMessage[4].setPosition(170, 240);//set position
-	m_textMessage[4].setFont(m_Impact);//set font 
+	m_textMessage[4].setPosition(300, 240);//set position
+	m_textMessage[4].setFont(m_Impact);//set font
+	m_textMessage[4].setCharacterSize(100);
 	m_textMessage[4].setColor(sf::Color(255, 255, 255));//set color
 
-	m_textMessage[5].setString("Volume");
-	m_textMessage[5].setPosition(150, 340);//set position
+	m_textMessage[5].setString("Help");
+	m_textMessage[5].setPosition(300, 340);//set position
 	m_textMessage[5].setFont(m_Impact);//set font 
+	m_textMessage[5].setCharacterSize(100);
 	m_textMessage[5].setColor(sf::Color(255, 255, 255));//set colour
 
 	m_textMessage[6].setString("SPEED");
-	m_textMessage[6].setPosition(500, 2);
+	m_textMessage[6].setPosition(500, 1);
 	m_textMessage[6].setStyle(sf::Text::Underlined);
 	m_textMessage[6].setFont(m_Impact);
-	m_textMessage[6].setCharacterSize(75);
-	m_textMessage[6].setColor(sf::Color::Yellow);
+	m_textMessage[6].setCharacterSize(100);
+	m_textMessage[6].setColor(sf::Color::Red);
 
 }
 
@@ -222,18 +222,18 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 		if (button_ID == 2)
 		{
-			m_Sprite[0].setPosition(100, 140);
+			m_Sprite[0].setPosition(275, 190);
 			controller.m_previousState = controller.m_currentState;
 		}
 
 		else if (button_ID == 1)
 		{
-			m_Sprite[0].setPosition(100, 240);
+			m_Sprite[0].setPosition(275, 290);
 			controller.m_previousState = controller.m_currentState;
 		}
 		else if (button_ID == 0)
 		{
-			m_Sprite[0].setPosition(100, 340);
+			m_Sprite[0].setPosition(275, 390);
 			controller.m_previousState = controller.m_currentState;
 		}
 	}
@@ -276,13 +276,13 @@ void Option::render(sf::RenderWindow & Window)
 		Window.draw(m_textMessage[4]);
 		Window.draw(m_textMessage[5]);//setting draw 
 
-		for (int i = 0; i < 2; i++)
+		/*for (int i = 0; i < 2; i++)
 		{
 			Window.draw(settingButton[i]);
-		}
+		}*/
 
-		Window.draw(m_Sprite[1]);
-		Window.draw(m_Sprite[2]);//draw scroll bar
+		//Window.draw(m_Sprite[1]);
+		//Window.draw(m_Sprite[2]);//draw scroll bar
 		Window.draw(m_Sprite[0]);
 	}
 
