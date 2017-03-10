@@ -9,15 +9,17 @@
 #include "Credits.h"
 #include "Controller.h"
 #include "OptionScreen.h"
+#include "CarSelectScreen.h"
 #include "Game.h"
 #include "Confirm.h"
-#include "Player.h"
-#include "NPCplayer.h"
 #include "Playagain.h"
+#include "Gameplay.h"
 
 class Licence;
 class Splash;
 class Gameplay;
+class CarSelect;
+class Game;
 class Credits;
 class Option;
 class Confirm;
@@ -29,6 +31,7 @@ enum class
 	none,
 	licence,
 	splash,
+	carSelect,
 	option,
 	credits,
 	confirm,
@@ -66,11 +69,13 @@ private:
 	Xbox360Controller m_controller;
 
 	Splash *m_splashscreen;
+	CarSelect *m_carSelect;
 	Licence *m_licence;
 	Credits *m_credits;
 	Option *m_option;
 	Confirm *m_confirm;
 	Playagain *m_again;
+	Gameplay *m_gameplay;
 
 	sf::Texture m_Texture1;
 	sf::Texture m_Texture2;

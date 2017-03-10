@@ -20,17 +20,17 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 
-	sf::Texture m_texture;
-	sf::Sprite m_sprite;
-
 	float m_acceleration;
 	float m_degree;
 	float m_velocity;
 
+
+	sf::View view;
+
 	sf::Vector2f m_positon;
 
 	sf::RectangleShape m_player;
-	
+	sf::RectangleShape m_filed;
 
 	std::string intToString(int num); // int to string
 };

@@ -1,12 +1,12 @@
 #include "NPCplayer.h"
 
 NPCplayer::NPCplayer() :
-	m_acceleration(50),
+	m_acceleration(200),
 	m_degree(0),
 	m_positon(300, 300),
 	m_velocity(0),
 	m_dirction(rand() % 5 - 3),
-	timer(2.0f)
+	timer(1.5f)
 {
 	m_driver.setPosition(m_positon);
 	m_driver.setSize(sf::Vector2f(30, 20));
@@ -23,11 +23,11 @@ void NPCplayer::update(double t)
 {
 	if (timer < 0)
 	{
-		timer = 2.0f;
+		timer = 1.5f;
 		m_dirction = rand() % 5 - 3;
 	}
 
-	
+
 	timer -= t;
 	m_degree += m_dirction;
 

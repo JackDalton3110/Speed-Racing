@@ -43,7 +43,7 @@ void Xbox360Controller::update()
 		m_currentState.DPadLeft = (sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::Axis::PovX) < -dpadThreshold ? true : false);
 		m_currentState.DPadUp = (sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::Axis::PovY) > dpadThreshold ? true : false);
 		m_currentState.DPadDown = (sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::Axis::PovY) < -dpadThreshold ? true : false);
-		m_currentState.LTrigger = sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::Z);
+		m_currentState.LTrigger = -sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::Z);
 		m_currentState.RTrigger = -sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::Z);
 		m_currentState.LeftThumbSticks = sf::Vector2f(sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::X),
 			sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::Y));

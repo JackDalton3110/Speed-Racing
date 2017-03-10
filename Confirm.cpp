@@ -43,6 +43,7 @@ Confirm::~Confirm()
 
 void Confirm::update(Xbox360Controller& controller)
 {
+	
 	controller.update();
 
 	if (controller.DpadLeftButton()) // select yes
