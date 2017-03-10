@@ -36,6 +36,9 @@
     <ClCompile Include="OptionScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CarSelectScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -56,9 +59,42 @@
     <ClInclude Include="Credits.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CarSelectScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\lambo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\Bar.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\circlemover.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\greenCarSprite.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\OptionScreen.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\redCarSprite.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\selector.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\whiteCarSprite.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\yellowCarSprite.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\arrow.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\selectbkgr.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

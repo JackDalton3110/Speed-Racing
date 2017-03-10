@@ -38,7 +38,7 @@ private:
 	void lessFrames();
 	void moreFrames();*/
 	Game *m_game;
-	sf::Text m_textMessage[6];//text
+	sf::Text m_textMessage[7];//text
 	sf::Font m_Impact;//font
 	sf::Texture m_Texture[5];//background texture
 	sf::Sprite m_Sprite[5];//sprite for texture

@@ -9,10 +9,12 @@
 #include "Credits.h"
 #include "Controller.h"
 #include "OptionScreen.h"
+#include "CarSelectScreen.h"
 #include "Game.h"
 
 class Licence;
 class Splash;
+class CarSelect;
 class Game;
 class Credits;
 class Option;
@@ -23,6 +25,7 @@ enum class
 	none,
 	licence,
 	splash,
+	carSelect,
 	option,
 	credits
 };
@@ -57,6 +60,7 @@ private:
 	Xbox360Controller m_controller;
 
 	Splash *m_splashscreen;
+	CarSelect *m_carSelect;
 	Licence *m_licence;
 	Credits *m_credits;
 	Option *m_option;

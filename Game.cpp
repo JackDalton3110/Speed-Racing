@@ -24,6 +24,7 @@ Game::Game() :
 	}
 	m_licence = new Licence(*this, m_HARLOW, m_Motor);
 	m_splashscreen = new Splash(*this, m_HARLOW, m_Motor);
+	m_carSelect = new CarSelect(*this, m_HARLOW);
 	m_option = new Option(*this, m_Motor);
 	m_credits = new Credits(*this, m_Motor);
 
@@ -43,6 +44,7 @@ Game::~Game()
 	delete(m_licence);//delete game states
 	delete(m_splashscreen);
 	delete(m_option);
+	delete(m_carSelect);
 	delete(m_credits);
 	std::cout << "destroying game" << std::endl;
 }
@@ -87,7 +89,13 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		break;
 	case GameState::splash:
 		processEvents();//accepts process events to change screen 
-		m_splashscreen->update(time); //update splash screen when game state is set to splash
+		m_splashscreen->update(time);
+		std::cout << "splash" << std::endl;//update splash screen when game state is set to splash
+		break;
+	case GameState::carSelect:
+		processEvents();
+		m_carSelect->update(time, controller);
+		std::cout << "car select" << std::endl;
 		break;
 	case GameState::none:
 		std::cout << "Game is playing" << std::endl;
@@ -122,6 +130,11 @@ void Game::processEvents()
 			m_option->changeToOption();
 		}
 
+		if (m_controller.m_currentState.A && m_currentGameState == GameState::option && m_option->strtgame == true)
+		{
+				m_option->changeScreen();
+		}
+
 
 	}
 }
@@ -135,6 +148,9 @@ void Game::render()
 		break;
 	case GameState::splash:
 		m_splashscreen->render(m_window);//draw each gamestate
+		break;
+	case GameState::carSelect:
+		m_carSelect->render(m_window);
 		break;
 	case GameState::option:
 		m_option->render(m_window);

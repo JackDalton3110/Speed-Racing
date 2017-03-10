@@ -65,12 +65,12 @@ Option::Option(Game & game, sf::Font font) :
 	m_Sprite[3].setTexture(m_Texture[3]);
 
 
-	m_textMessage[3].setString("sound");//settings message
+	m_textMessage[3].setString("Sound");//settings message
 	m_textMessage[3].setPosition(150, 140);//set position
 	m_textMessage[3].setFont(m_Impact);//set font 
 	m_textMessage[3].setColor(sf::Color(255, 255, 255));//set colour
 
-	m_textMessage[4].setString("FX");//setting message
+	m_textMessage[4].setString("Difficulty");//setting message
 	m_textMessage[4].setPosition(170, 240);//set position
 	m_textMessage[4].setFont(m_Impact);//set font 
 	m_textMessage[4].setColor(sf::Color(255, 255, 255));//set color
@@ -80,6 +80,12 @@ Option::Option(Game & game, sf::Font font) :
 	m_textMessage[5].setFont(m_Impact);//set font 
 	m_textMessage[5].setColor(sf::Color(255, 255, 255));//set colour
 
+	m_textMessage[6].setString("SPEED");
+	m_textMessage[6].setPosition(500, 2);
+	m_textMessage[6].setStyle(sf::Text::Underlined);
+	m_textMessage[6].setFont(m_Impact);
+	m_textMessage[6].setCharacterSize(75);
+	m_textMessage[6].setColor(sf::Color::Yellow);
 
 }
 
@@ -148,7 +154,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			}
 		}
 	}
-	if (controller.m_currentState.A && quitGame == true)
+	if (controller.m_currentState.A && quitGame == true && !controller.m_previousState.A)
 	{
 		closeGame = true;//close window
 	}
@@ -164,9 +170,10 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			button_ID = 2;
 		}
 	}
-	if (controller.m_currentState.B && settings == true)
+	if (controller.m_currentState.B && settings == true && !controller.m_previousState.A)
 	{
 		settings = false;//back out of settings
+		button_ID = 1;
 	}
 	if (controller.m_currentState.DPadRight && settings == true)
 	{
@@ -235,7 +242,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 void Option::changeScreen()
 {
-	//m_game->SetGameState(GameState::none);//change to game
+	m_game->SetGameState(GameState::carSelect);//change to game
 }
 void Option::changeToOption()
 {
@@ -247,6 +254,7 @@ void Option::render(sf::RenderWindow & Window)
 
 	Window.clear(sf::Color(0, 0, 1));//different from standards black
 	Window.draw(m_Sprite[3]);
+	Window.draw(m_textMessage[6]);
 
 	if (settings != true)
 	{
