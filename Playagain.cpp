@@ -40,7 +40,7 @@ Playagain::Playagain(Game &game, sf::Font font) :
 	sf::IntRect Bbutton(100, 0, 50, 48); // the rect of B button
 	m_SpriteB.setTextureRect(Bbutton);
 	m_SpriteB.setOrigin(Bbutton.width, 0);
-	m_SpriteB.setPosition(m_text[1].getPosition()); 
+	m_SpriteB.setPosition(m_text[1].getPosition());
 }
 
 Playagain::~Playagain()
