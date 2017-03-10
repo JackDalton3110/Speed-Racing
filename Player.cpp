@@ -11,6 +11,15 @@ Player::Player():
 		
 	}
 
+	if (!m_texture.loadFromFile("./images/Car-sprits.png"))
+	{
+		std::string s("error loading texture from file");
+		throw std::exception(s.c_str());
+	}
+	m_sprite.setTexture(m_texture);
+	sf::IntRect rect(0,0,200,100);
+	m_sprite.setTextureRect(rect);
+
 	m_player.setPosition(m_positon);
 	m_player.setSize(sf::Vector2f(30, 20));
 	m_player.setFillColor(sf::Color::Blue);
@@ -33,12 +42,12 @@ void Player::update(double t)
 
 	if (controller.RTrigger() >= 5)
 	{
-		m_acceleration = controller.RTrigger();
+		m_acceleration = controller.RTrigger(); // the acceleration follow the trigger
 	}
 
 	if (controller.LTrigger() <= -5)
 	{
-		m_acceleration = controller.LTrigger();
+		m_acceleration = controller.LTrigger(); // the acceleration follow the trigger
 	}
 
 	if (controller.LeftThumbSticks().x <= -20 ||

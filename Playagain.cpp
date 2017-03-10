@@ -4,7 +4,6 @@
 Playagain::Playagain(Game &game, sf::Font font) :
 	m_game(&game),
 	m_font(font),
-	m_confirm(true),
 	m_button_released(false),
 	m_reset_check(true)
 {
@@ -32,16 +31,16 @@ Playagain::Playagain(Game &game, sf::Font font) :
 		throw std::exception(s.c_str());
 	}
 	m_SpriteA.setTexture(m_texture);
-	sf::IntRect Abutton(100, 0, 50, 48);
+	sf::IntRect Abutton(150, 0, 50, 48); // the rect of A button
 	m_SpriteA.setTextureRect(Abutton);
-	m_SpriteA.setOrigin(Abutton.width / 2, Abutton.height / 2);
+	m_SpriteA.setOrigin(Abutton.width, 0);
 	m_SpriteA.setPosition(m_text[0].getPosition());
 
 	m_SpriteB.setTexture(m_texture);
-	sf::IntRect Abutton(150, 0, 50, 48);
-	m_SpriteB.setTextureRect(Abutton);
-	m_SpriteB.setOrigin(Abutton.width / 2, Abutton.height / 2);
-	m_SpriteB.setPosition(m_text[1].getPosition());
+	sf::IntRect Bbutton(100, 0, 50, 48); // the rect of B button
+	m_SpriteB.setTextureRect(Bbutton);
+	m_SpriteB.setOrigin(Bbutton.width, 0);
+	m_SpriteB.setPosition(m_text[1].getPosition()); 
 }
 
 Playagain::~Playagain()
@@ -60,11 +59,12 @@ void Playagain::update(Xbox360Controller& controller)
 
 	if (controller.Bbutton() && m_button_released) // press B button to Main menu
 	{
+		m_game->SetGameState(GameState::option);
 		m_reset_check = true;
 	}
 
 
-	if (!controller.Abutton() && !controller.Bbutton)
+	if (!controller.Abutton() && !controller.Bbutton())
 	{
 		m_button_released = true;
 	}
@@ -78,7 +78,6 @@ void Playagain::reset()
 	{
 		m_reset_check = false;
 		m_button_released = false;
-		m_confirm = true;
 	}
 }
 

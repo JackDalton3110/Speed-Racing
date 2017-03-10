@@ -20,6 +20,9 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 
+	sf::Texture m_texture;
+	sf::Sprite m_sprite;
+
 	float m_acceleration;
 	float m_degree;
 	float m_velocity;

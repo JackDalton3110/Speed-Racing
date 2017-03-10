@@ -27,16 +27,7 @@ Game::Game() :
 	m_option = new Option(*this, m_Motor);
 	m_credits = new Credits(*this, m_Motor);
 	m_confirm = new Confirm(*this, m_Motor);
-
-	m_textMessage[0].setPosition(20, 20);//set position
-	m_textMessage[0].setString("Score: ");//set text
-	m_textMessage[0].setFont(m_Motor);//set font 
-	m_textMessage[0].setColor(sf::Color(255, 255, 255));//set colour
-	m_textMessage[1].setPosition(450, 20);//set position
-	m_textMessage[1].setString("Time: ");//set text
-	m_textMessage[1].setFont(m_Motor);//set font 
-	m_textMessage[1].setColor(sf::Color(255, 255, 255));//set colour
-
+	m_again = new Playagain(*this, m_Motor);
 }
 
 Game::~Game()
@@ -82,6 +73,8 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		m_window.close();
 	}
 
+	m_controller.update();
+
 	switch (m_currentGameState)
 	{
 	case GameState::licence:
@@ -99,6 +92,8 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		m_option->reset();
 		m_option->update(time, controller);
 		break;
+	case GameState::gameplay:
+		break;
 	case GameState::credits:
 		m_credits->update(time);
 		break;
@@ -107,11 +102,13 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		m_confirm->reset();
 		m_confirm->update(controller);
 		break;
+	case GameState::playagain:
+		m_again->reset();
+		m_again->update(controller);
 	default:
 		break;
 	}
 
-	m_controller.update();
 	processEvents();
 }
 
@@ -150,17 +147,19 @@ void Game::render()
 	case GameState::option:
 		m_option->render(m_window);
 		break;
+	case GameState::gameplay:
+
+		break;
 	case GameState::credits:
 		m_credits->render(m_window);
 		break;
 	case GameState::confirm:
 		m_confirm->render(m_window);
 		break;
+	case GameState::playagain:
+		m_again->render(m_window);
 	default:
-		m_window.clear(sf::Color(93, 194, 30));
-		m_window.draw(m_textMessage[0]);
-		m_window.draw(m_textMessage[1]);
-		m_window.display();
+
 		break;
 	}
 

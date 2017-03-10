@@ -262,7 +262,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 void Option::changeScreen()
 {
-	//m_game->SetGameState(GameState::none);//change to game
+	m_game->SetGameState(GameState::playagain);//change to game
 }
 void Option::changeToOption()
 {

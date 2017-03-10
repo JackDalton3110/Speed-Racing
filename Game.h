@@ -13,6 +13,7 @@
 #include "Confirm.h"
 #include "Player.h"
 #include "NPCplayer.h"
+#include "Playagain.h"
 
 class Licence;
 class Splash;
@@ -20,6 +21,7 @@ class Gameplay;
 class Credits;
 class Option;
 class Confirm;
+class Playagain;
 
 enum class
 	GameState
@@ -30,7 +32,8 @@ enum class
 	option,
 	credits,
 	confirm,
-	gameplay
+	gameplay,
+	playagain
 };
 
 class Game
@@ -67,6 +70,7 @@ private:
 	Credits *m_credits;
 	Option *m_option;
 	Confirm *m_confirm;
+	Playagain *m_again;
 
 	sf::Texture m_Texture1;
 	sf::Texture m_Texture2;

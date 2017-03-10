@@ -28,7 +28,6 @@ private:
 	sf::Sprite m_SpriteA;
 	sf::Sprite m_SpriteB;
 
-	bool m_confirm; // check player selection
 	bool m_button_released; // chenk player release A button
 	bool m_reset_check;
 };
