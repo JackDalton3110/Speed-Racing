@@ -3,7 +3,8 @@
 CarSelect::CarSelect(Game &game, sf::Font font, sf::Font font1):
 	m_game(&game),
 	m_HARLOW(font),
-	m_Motor(font1)
+	m_Motor(font1),
+	m_button_released(false)
 {
 	if (!m_texture[0].loadFromFile("images/whiteCarSprite.png"))
 	{
@@ -173,13 +174,29 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 		controller.m_previousState = controller.m_currentState;
 	}
 	
+	if (controller.Abutton() && m_button_released)
+	{
+		carSelected = true;
+	}
+
+	if (!controller.Abutton())
+	{
+		m_button_released = true;
+	}
+
+	changeScreen();
+}
+
+int CarSelect::getSelection_ID()
+{
+	return button_ID;
 }
 
 void CarSelect::changeScreen()
 {
 	if (carSelected == true)
 	{
-		m_game->SetGameState(GameState::none);
+		m_game->SetGameState(GameState::gameplay);
 	}
 }
 

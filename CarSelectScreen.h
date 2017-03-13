@@ -19,6 +19,7 @@ public:
 	bool carSelected = false;
 	int button_ID = 0;
 
+	int getSelection_ID();
 private:
 	sf::Font m_Font;
 	sf::Texture m_texture[6];
@@ -32,5 +33,6 @@ private:
 
 	Game *m_game;
 
+	bool m_button_released;
 };
 #endif // !CAR_SELECTION
