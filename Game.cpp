@@ -112,6 +112,7 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 	case GameState::upgrade:
 		std::cout << "upgrade" << std::endl;
 		m_upgrade->update(time, controller);
+		break;
 	case GameState::gameplay:
 		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID());
 		break;

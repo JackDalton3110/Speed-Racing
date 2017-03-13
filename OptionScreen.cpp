@@ -93,6 +93,9 @@ Option::~Option()
 
 }
 
+/// <summary>
+/// reset everything when player enter this screen
+/// </summary>
 void Option::reset()
 {
 	if (m_reset_check)
@@ -100,10 +103,12 @@ void Option::reset()
 		m_reset_check = false;
 
 		button_ID = 0;
+		setting_ID = 0;
 		startgame = false;
 		options = false;
 		quitGame = false;
 		closeGame = false;
+		upgrade = false;
 		settings = false;
 		closeWindow = false;
 
@@ -179,12 +184,13 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	if (controller.m_currentState.A && quitGame == true && !controller.m_previousState.A)
 	{
 		m_game->SetGameState(GameState::confirm); // change to Confirm
-		//m_reset_check = true;
+		m_reset_check = true;
 		
 	}
-	if (controller.m_currentState.A && startgame == true)
+	if (controller.m_currentState.A &&  startgame == true && !controller.m_previousState.A)
 	{
 		changeScreen();//change to game
+		m_reset_check = true;
 	}
 
 	if (controller.m_currentState.A && !controller.m_previousState.A && startgame == true)
@@ -200,7 +206,9 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		{
 			button_ID = 2;
 		}
+		m_reset_check = true;
 	}
+
 	if (controller.m_currentState.B && settings == true && !controller.m_previousState.A)
 	{
 		settings = false;//back out of settings

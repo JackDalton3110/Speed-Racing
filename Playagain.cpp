@@ -71,7 +71,9 @@ void Playagain::update(Xbox360Controller& controller)
 
 }
 
-
+/// <summary>
+/// reset everything when player enter this screen
+/// </summary>
 void Playagain::reset()
 {
 	if (m_reset_check)

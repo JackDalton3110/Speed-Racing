@@ -16,7 +16,13 @@
     <ClCompile Include="Game.cpp">
       <Filter>Soucrce Files</Filter>
     </ClCompile>
+    <ClCompile Include="Gameplay.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
     <ClCompile Include="Licence.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
       <Filter>Soucrce Files</Filter>
     </ClCompile>
     <ClCompile Include="NPCplayer.cpp">
@@ -37,14 +43,8 @@
     <ClCompile Include="Splash.cpp">
       <Filter>Soucrce Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Soucrce Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Gameplay.cpp">
-      <Filter>Soucrce Files</Filter>
-    </ClCompile>
     <ClCompile Include="Upgrade.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Soucrce Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -57,10 +57,13 @@
     <ClInclude Include="Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Credits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Credits.h">
+    <ClInclude Include="Gameplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Licence.h">
@@ -84,30 +87,39 @@
     <ClInclude Include="Splash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Gameplay.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Upgrade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="images\circlemover.png">
+    <Image Include="images\Bar.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="images\greenCarSprite.png">
+    <Image Include="images\back.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\arrow.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="images\lambo.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="images\redCarSprite.png">
+    <Image Include="images\greenCarSprite.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\OptionScreen.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\selector.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="images\selectbkgr.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="images\selector.png">
+    <Image Include="images\redCarSprite.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\template.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="images\whiteCarSprite.png">
@@ -116,34 +128,19 @@
     <Image Include="images\yellowCarSprite.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="images\OptionScreen.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="images\Bar.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-<<<<<<< HEAD
-    <Image Include="images\template.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="images\back.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-=======
-    <Image Include="images\arrow.png">
+    <Image Include="images\circlemover.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{498b8289-6a2c-48ff-aa5f-8f15a5c9c71b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Soucrce Files">
-      <UniqueIdentifier>{fc13eed6-bf5e-4a38-8ade-63cfb4e6e3de}</UniqueIdentifier>
+      <UniqueIdentifier>{b5e378fc-32bc-42bb-b170-ebf3697d1188}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{bae321a3-80a9-4926-bf64-8fa1dc67727b}</UniqueIdentifier>
+      <UniqueIdentifier>{421550c5-8f31-4d05-80d3-e6a8562ffb26}</UniqueIdentifier>
     </Filter>
->>>>>>> b8abafc6a53389da509cf7b3df6e538f48e5be9f
+    <Filter Include="Soucrce Files">
+      <UniqueIdentifier>{6f1500ff-3878-4396-9541-9078dd8a4240}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
