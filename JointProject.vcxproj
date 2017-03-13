@@ -141,6 +141,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="OptionScreen.cpp" />
     <ClCompile Include="Splash.cpp" />
+    <ClCompile Include="Upgrade.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CarSelectScreen.h" />
@@ -150,9 +151,11 @@
     <ClInclude Include="Licence.h" />
     <ClInclude Include="OptionScreen.h" />
     <ClInclude Include="Splash.h" />
+    <ClInclude Include="Upgrade.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\arrow.png" />
+    <Image Include="images\back.png" />
     <Image Include="images\Bar.png" />
     <Image Include="images\circlemover.png" />
     <Image Include="images\greenCarSprite.png" />
@@ -161,6 +164,7 @@
     <Image Include="images\redCarSprite.png" />
     <Image Include="images\selectbkgr.png" />
     <Image Include="images\selector.png" />
+    <Image Include="images\template.png" />
     <Image Include="images\whiteCarSprite.png" />
     <Image Include="images\yellowCarSprite.png" />
   </ItemGroup>

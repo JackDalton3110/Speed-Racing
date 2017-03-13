@@ -10,6 +10,7 @@
 #include "Controller.h"
 #include "OptionScreen.h"
 #include "CarSelectScreen.h"
+#include "Upgrade.h"
 #include "Game.h"
 
 class Licence;
@@ -18,6 +19,7 @@ class CarSelect;
 class Game;
 class Credits;
 class Option;
+class Upgrade;
 
 enum class
 	GameState
@@ -27,6 +29,7 @@ enum class
 	splash,
 	carSelect,
 	option,
+	upgrade,
 	credits
 };
 
@@ -64,6 +67,7 @@ private:
 	Licence *m_licence;
 	Credits *m_credits;
 	Option *m_option;
+	Upgrade *m_upgrade;
 
 	sf::Texture m_Texture1;
 	sf::Texture m_Texture2;

@@ -39,6 +39,9 @@
     <ClCompile Include="CarSelectScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Upgrade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CarSelectScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Upgrade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -95,6 +101,12 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="images\selectbkgr.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\template.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\back.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
