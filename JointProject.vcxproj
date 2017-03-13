@@ -133,24 +133,48 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Confirm.cpp" />
+    <ClCompile Include="CarSelectScreen.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Credits.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Gameplay.cpp" />
     <ClCompile Include="Licence.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NPCplayer.cpp" />
     <ClCompile Include="OptionScreen.cpp" />
+    <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="Playagain.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Splash.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Confirm.h" />
+    <ClInclude Include="CarSelectScreen.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Credits.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Gameplay.h" />
     <ClInclude Include="Licence.h" />
+    <ClInclude Include="NPCplayer.h" />
     <ClInclude Include="OptionScreen.h" />
+    <ClInclude Include="Physics.h" />
+    <ClInclude Include="Playagain.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Splash.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="images\arrow.png" />
+    <Image Include="images\Bar.png" />
+    <Image Include="images\circlemover.png" />
+    <Image Include="images\greenCarSprite.png" />
     <Image Include="images\lambo.png" />
+    <Image Include="images\OptionScreen.jpg" />
+    <Image Include="images\redCarSprite.png" />
+    <Image Include="images\selectbkgr.png" />
+    <Image Include="images\selector.png" />
+    <Image Include="images\whiteCarSprite.png" />
+    <Image Include="images\yellowCarSprite.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -11,14 +11,15 @@ class Game;
 class Option
 {
 public:
-	Option(Game& game, sf::Font font);
+	Option(Game& game, sf::Font font, sf::Font font2);
 	~Option();
 	void update(sf::Time time, Xbox360Controller& controller);
 	void render(sf::RenderWindow &window);
 	void changeScreen();
 	void changeToOption();
+	void reset();
 	int button_ID = 0;
-	bool strtgame = true;//bool for game start
+	bool startgame = true;//bool for game start
 	bool options = false;//bool for options 
 	bool quitGame = false;//bool for quit 
 	bool closeGame = false;
@@ -28,6 +29,8 @@ public:
 										/*void changeScreen();*/
 										/*Gui m_gui;
 										*/
+
+
 private:
 	/*void volumeUpMusic();
 	void volumeDownMusic();
@@ -38,10 +41,14 @@ private:
 	void lessFrames();
 	void moreFrames();*/
 	Game *m_game;
-	sf::Text m_textMessage[6];//text
+	sf::Text m_textMessage[7];//text
 	sf::Font m_Impact;//font
+	sf::Font m_Harlow;
 	sf::Texture m_Texture[5];//background texture
 	sf::Sprite m_Sprite[5];//sprite for texture
+
+	bool m_button_released; // chenk player release A button
+	bool m_reset_check; // 
 };
 
 #endif
