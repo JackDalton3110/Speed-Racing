@@ -4,8 +4,8 @@
 Option::Option(Game & game, sf::Font font, sf::Font font1) :
 	m_game(&game),
 	m_Motor(font),
-	m_HARLOW(font1)
-
+	m_HARLOW(font1),
+	m_button_released(false)
 {
 
 	m_textMessage[0].setPosition(830, 100);//set position
@@ -48,6 +48,7 @@ Option::Option(Game & game, sf::Font font, sf::Font font1) :
 
 	m_Sprite[0].setTexture(m_Texture[0]);
 	m_Sprite[0].setPosition(780, 100);//set image position in relation to origin
+	m_Sprite[0].setOrigin(17.5, 18);
 	m_Sprite[1].setTexture(m_Texture[1]);
 	m_Sprite[1].setPosition(270, 400);
 	m_Sprite[2].setTexture(m_Texture[2]);
@@ -92,14 +93,28 @@ Option::~Option()
 
 }
 
+void Option::reset()
+{
+	if (m_reset_check)
+	{
+		m_reset_check = false;
+
+		button_ID = 0;
+		startgame = false;
+		options = false;
+		quitGame = false;
+		closeGame = false;
+		settings = false;
+		closeWindow = false;
+
+		m_button_released = false;
+	}
+}
+
 void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 {
 
-
-	if (controller.m_currentState.Back)
-	{
-		closeWindow = true;
-	}
+	m_Sprite[0].rotate(5);
 
 	if (controller.m_currentState.DPadDown && !controller.m_previousState.DPadDown)
 	{
@@ -153,15 +168,32 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			}
 		}
 	}
+
+
+	if (!controller.Abutton())
+	{
+		m_button_released = true;
+	}
+
+
 	if (controller.m_currentState.A && quitGame == true && !controller.m_previousState.A)
 	{
-		closeGame = true;//close window
+		m_game->SetGameState(GameState::confirm); // change to Confirm
+		//m_reset_check = true;
+		
 	}
-	if (controller.m_currentState.A && strtgame == true )
+	if (controller.m_currentState.A && startgame == true)
 	{
 		changeScreen();//change to game
 	}
-	if (options == true && controller.m_currentState.A)
+
+	if (controller.m_currentState.A && !controller.m_previousState.A && startgame == true)
+	{
+		changeToOption();//change to game 
+		m_reset_check = true;
+
+	}
+	if (options == true && controller.m_currentState.A && !controller.m_previousState.A)
 	{
 		settings = true;//draw settings
 		if (settings == true)
@@ -181,6 +213,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			m_Sprite[2].move(0.5, 0);//move slider right
 		}
 
+
 	}
 	if (controller.m_currentState.DPadLeft && settings == true)
 	{
@@ -195,7 +228,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	{
 		m_Sprite[0].setPosition(780, 100);
 		controller.m_previousState = controller.m_currentState;
-		strtgame = true;
+		startgame = true;
 		options = false;
 		upgrade = false;
 		quitGame = false;
@@ -204,7 +237,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	{
 		m_Sprite[0].setPosition(780, 150);
 		controller.m_previousState = controller.m_currentState;
-		strtgame = false;
+		startgame = false;
 		options = true;
 		upgrade = false;
 		quitGame = false;
@@ -213,7 +246,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	{
 		m_Sprite[0].setPosition(780, 200);
 		controller.m_previousState = controller.m_currentState;
-		strtgame = false;
+		startgame = false;
 		options = false;
 		upgrade = true;
 		quitGame = false;
@@ -222,7 +255,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	{
 		m_Sprite[0].setPosition(780, 250);
 		controller.m_previousState = controller.m_currentState;
-		strtgame = false;
+		startgame = false;
 		options = false;
 		upgrade = false;
 		quitGame = true;
@@ -230,7 +263,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 	if (settings == true)
 	{
-		strtgame = false;
+		startgame = false;
 		options = false;
 		upgrade = false;
 		quitGame = false;

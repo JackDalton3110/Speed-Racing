@@ -12,14 +12,21 @@
 #include "CarSelectScreen.h"
 #include "Upgrade.h"
 #include "Game.h"
+#include "Confirm.h"
+#include "Playagain.h"
+#include "Gameplay.h"
 
 class Licence;
 class Splash;
+class Gameplay;
 class CarSelect;
 class Game;
 class Credits;
 class Option;
 class Upgrade;
+class Confirm;
+class Playagain;
+
 
 enum class
 	GameState
@@ -30,7 +37,11 @@ enum class
 	carSelect,
 	option,
 	upgrade,
-	credits
+	credits,
+	confirm,
+	gameplay,
+	playagain
+
 };
 
 class Game
@@ -47,7 +58,6 @@ public:
 	bool X;
 	bool Y;
 	int score = 0;
-
 
 private:
 	void processEvents();
@@ -68,6 +78,9 @@ private:
 	Credits *m_credits;
 	Option *m_option;
 	Upgrade *m_upgrade;
+	Confirm *m_confirm;
+	Playagain *m_again;
+	Gameplay *m_gameplay;
 
 	sf::Texture m_Texture1;
 	sf::Texture m_Texture2;

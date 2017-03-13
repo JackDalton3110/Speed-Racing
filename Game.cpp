@@ -28,6 +28,9 @@ Game::Game() :
 	m_option = new Option(*this, m_Motor, m_HARLOW);
 	m_credits = new Credits(*this, m_Motor);
 	m_upgrade = new Upgrade(*this, m_HARLOW, m_Motor);
+	m_confirm = new Confirm(*this, m_Motor);
+	m_again = new Playagain(*this, m_Motor);
+	m_gameplay = new Gameplay(*this, m_Motor);
 
 	m_textMessage[0].setPosition(20, 20);//set position
 	m_textMessage[0].setString("Score: ");//set text
@@ -48,6 +51,8 @@ Game::~Game()
 	delete(m_carSelect);
 	delete(m_credits);
 	delete(m_upgrade);
+	delete(m_confirm);
+	delete(m_gameplay);
 	std::cout << "destroying game" << std::endl;
 }
 
@@ -79,10 +84,7 @@ void Game::SetGameState(GameState gamestate)
 void Game::update(sf::Time time, Xbox360Controller &controller)
 {
 
-	if (controller.m_currentState.Back)
-	{
-		m_window.close();
-	}
+	m_controller.update();
 
 	switch (m_currentGameState)
 	{
@@ -104,20 +106,30 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		break;
 	case GameState::option:
 		std::cout << "Menu" << std::endl;
+		m_option->reset();
 		m_option->update(time, controller);
 		break;
 	case GameState::upgrade:
 		std::cout << "upgrade" << std::endl;
 		m_upgrade->update(time, controller);
+	case GameState::gameplay:
+		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID());
 		break;
 	case GameState::credits:
 		m_credits->update(time);
 		break;
+	case GameState::confirm:
+		std::cout << "NO!" << std::endl;
+		m_confirm->reset();
+		m_confirm->update(controller);
+		break;
+	case GameState::playagain:
+		m_again->reset();
+		m_again->update(controller);
 	default:
 		break;
 	}
 
-	m_controller.update();
 	processEvents();
 }
 
@@ -134,7 +146,8 @@ void Game::processEvents()
 		{
 			m_option->changeToOption();
 		}
-		if (m_controller.m_currentState.A && m_currentGameState == GameState::option && m_option->strtgame == true)
+
+		if (m_controller.m_currentState.A && m_currentGameState == GameState::option && m_option->startgame == true)
 		{
 			m_option->changeScreen();
 		}
@@ -146,14 +159,22 @@ void Game::processEvents()
 		{
 			m_upgrade->backOut();
 		}
+		if (m_controller.m_currentState.Back)
+		{
+			SetGameState(GameState::confirm);
+		}
 
 	}
 }
+
 
 void Game::render()
 {
 	switch (m_currentGameState)
 	{
+	case GameState::none:
+		m_window.close();
+		break;
 	case GameState::licence:
 		m_licence->render(m_window);
 		break;
@@ -169,14 +190,19 @@ void Game::render()
 	case GameState::upgrade:
 		m_upgrade->render(m_window);
 		break;
+	case GameState::gameplay:
+		m_gameplay->render(m_window);
+		break;
 	case GameState::credits:
 		m_credits->render(m_window);
 		break;
+	case GameState::confirm:
+		m_confirm->render(m_window);
+		break;
+	case GameState::playagain:
+		m_again->render(m_window);
 	default:
-		m_window.clear(sf::Color(93, 194, 30));
-		m_window.draw(m_textMessage[0]);
-		m_window.draw(m_textMessage[1]);
-		m_window.display();
+
 		break;
 	}
 
