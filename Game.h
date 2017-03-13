@@ -4,12 +4,15 @@
 
 #include<iostream>
 #include <SFML\Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Licence.h"
 #include "Splash.h"
 #include "Credits.h"
 #include "Controller.h"
 #include "OptionScreen.h"
 #include "CarSelectScreen.h"
+#include "SoundScreen.h"
+#include "DifficultyScreen.h"
 #include "Game.h"
 
 class Licence;
@@ -18,6 +21,8 @@ class CarSelect;
 class Game;
 class Credits;
 class Option;
+class Sound;
+class Difficulty;
 
 enum class
 	GameState
@@ -27,6 +32,8 @@ enum class
 	splash,
 	carSelect,
 	option,
+	sound,
+	Difficulty,
 	credits
 };
 
@@ -44,6 +51,8 @@ public:
 	bool X;
 	bool Y;
 	int score = 0;
+	sf::Sound songs[3];
+	sf::SoundBuffer songBuffer[3];
 
 
 private:
@@ -64,6 +73,8 @@ private:
 	Licence *m_licence;
 	Credits *m_credits;
 	Option *m_option;
+	Sound *m_soundScreen;
+	Difficulty *m_DifficultyScreen;
 
 	sf::Texture m_Texture1;
 	sf::Texture m_Texture2;
@@ -75,6 +86,7 @@ private:
 	sf::Sprite m_Sprite2;
 	sf::Sprite m_Sprite4;
 	sf::Sprite m_Sprite5;
+	
 
 
 };

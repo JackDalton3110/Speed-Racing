@@ -83,6 +83,10 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 	if (button_ID == 0)
 	{
 		selectSprite.setPosition(200, 250);
+		if (carSprite[0].getPosition().y > 240 && !carSprite[0].getPosition().y < 230)
+		{
+			carSprite[0].move(0, -2.5);
+		}
 		controller.m_previousState = controller.m_currentState;	
 	}
 	else if (button_ID == 1)

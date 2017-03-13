@@ -91,7 +91,7 @@ Option::Option(Game & game, sf::Font font, sf::Font font2) :
 
 Option::~Option()
 {
-	std::cout << "Destroying Splash Screen" << std::endl;
+	std::cout << "Destroying Option Screen" << std::endl;
 
 }
 
@@ -158,7 +158,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	{
 		closeGame = true;//close window
 	}
-	if (controller.m_currentState.A && strtgame == true)
+	if (controller.m_currentState.A && strtgame == true &&!controller.m_previousState.A)
 	{
 		changeScreen();//change to game 
 	}
@@ -219,22 +219,38 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 	if (settings == true)
 	{
+		quitGame = false;
+		options = false;
+		strtgame = false;
 
 		if (button_ID == 2)
 		{
 			m_Sprite[0].setPosition(275, 190);
 			controller.m_previousState = controller.m_currentState;
+			sound = true;
+			difficulty = false;
 		}
 
 		else if (button_ID == 1)
 		{
 			m_Sprite[0].setPosition(275, 290);
 			controller.m_previousState = controller.m_currentState;
+			sound = false;
+			difficulty = true;
 		}
 		else if (button_ID == 0)
 		{
 			m_Sprite[0].setPosition(275, 390);
 			controller.m_previousState = controller.m_currentState;
+		}
+		if (controller.m_currentState.A && !controller.m_previousState.A && button_ID == 2)
+		{
+			changeToSound();
+		}
+
+		if (controller.m_currentState.A && !controller.m_previousState.A && button_ID == 1)
+		{
+			changeToDifficulty();
 		}
 	}
 
@@ -247,6 +263,15 @@ void Option::changeScreen()
 void Option::changeToOption()
 {
 	m_game->SetGameState(GameState::option);//settings
+}
+void Option::changeToSound()
+{
+	m_game->SetGameState(GameState::sound);
+}
+
+void Option::changeToDifficulty()
+{
+	m_game->SetGameState(GameState::Difficulty);
 }
 
 void Option::render(sf::RenderWindow & Window)
@@ -265,7 +290,7 @@ void Option::render(sf::RenderWindow & Window)
 
 		if (closeGame == true)
 		{
-			Window.close();
+			Window.close();//quit game
 		}
 	}
 
@@ -275,14 +300,6 @@ void Option::render(sf::RenderWindow & Window)
 		Window.draw(m_textMessage[3]);
 		Window.draw(m_textMessage[4]);
 		Window.draw(m_textMessage[5]);//setting draw 
-
-		/*for (int i = 0; i < 2; i++)
-		{
-			Window.draw(settingButton[i]);
-		}*/
-
-		//Window.draw(m_Sprite[1]);
-		//Window.draw(m_Sprite[2]);//draw scroll bar
 		Window.draw(m_Sprite[0]);
 	}
 
