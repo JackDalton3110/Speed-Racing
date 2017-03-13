@@ -10,6 +10,7 @@
 #include "Controller.h"
 #include "OptionScreen.h"
 #include "CarSelectScreen.h"
+#include "Upgrade.h"
 #include "Game.h"
 #include "Confirm.h"
 #include "Playagain.h"
@@ -23,9 +24,11 @@ class CarSelect;
 class Game;
 class Credits;
 class Option;
+class Upgrade;
 class Confirm;
 class Playagain;
 class Help;
+
 
 enum class
 	GameState
@@ -35,11 +38,13 @@ enum class
 	splash,
 	carSelect,
 	option,
+	upgrade,
 	credits,
 	confirm,
 	gameplay,
 	playagain,
 	Help
+
 };
 
 class Game
@@ -56,7 +61,6 @@ public:
 	bool X;
 	bool Y;
 	int score = 0;
-
 
 private:
 	void processEvents();
@@ -76,6 +80,7 @@ private:
 	Licence *m_licence;
 	Credits *m_credits;
 	Option *m_option;
+	Upgrade *m_upgrade;
 	Confirm *m_confirm;
 	Playagain *m_again;
 	Gameplay *m_gameplay;

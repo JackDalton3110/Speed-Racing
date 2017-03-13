@@ -2,8 +2,10 @@
 #include "Controller.h"
 
 Game::Game() :
-	m_window(sf::VideoMode(1000, 800), "Mash 'Em"),
-	m_currentGameState(GameState::Help)
+
+	m_window(sf::VideoMode(1000, 800), "Speed"),
+	m_currentGameState(GameState::licence)
+
 {
 	if (m_HARLOW.loadFromFile("C:/Windows/Fonts/HARLOWSI.TTF"))
 	{
@@ -24,13 +26,26 @@ Game::Game() :
 	}
 	m_licence = new Licence(*this, m_HARLOW, m_Motor);
 	m_splashscreen = new Splash(*this, m_HARLOW, m_Motor);
-	m_carSelect = new CarSelect(*this, m_HARLOW);
+	m_carSelect = new CarSelect(*this, m_HARLOW, m_Motor);
 	m_option = new Option(*this, m_Motor, m_HARLOW);
 	m_credits = new Credits(*this, m_Motor);
+	m_upgrade = new Upgrade(*this, m_HARLOW, m_Motor);
 	m_confirm = new Confirm(*this, m_Motor);
 	m_again = new Playagain(*this, m_Motor);
 	m_gameplay = new Gameplay(*this, m_Motor);
 	m_help = new Help(*this, m_Motor);
+
+
+	m_textMessage[0].setPosition(20, 20);//set position
+	m_textMessage[0].setString("Score: ");//set text
+	m_textMessage[0].setFont(m_Motor);//set font 
+	m_textMessage[0].setColor(sf::Color(255, 255, 255));//set colour
+	m_textMessage[1].setPosition(450, 20);//set position
+	m_textMessage[1].setString("Time: ");//set text
+	m_textMessage[1].setFont(m_Motor);//set font 
+	m_textMessage[1].setColor(sf::Color(255, 255, 255));//set colour
+
+
 }
 
 Game::~Game()
@@ -40,6 +55,7 @@ Game::~Game()
 	delete(m_option);
 	delete(m_carSelect);
 	delete(m_credits);
+	delete(m_upgrade);
 	delete(m_confirm);
 	delete(m_gameplay);
 	delete(m_help);
@@ -74,11 +90,6 @@ void Game::SetGameState(GameState gamestate)
 void Game::update(sf::Time time, Xbox360Controller &controller)
 {
 
-	if (controller.m_currentState.Back)
-	{
-		m_window.close();
-	}
-
 	m_controller.update();
 
 	switch (m_currentGameState)
@@ -104,6 +115,9 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		m_option->reset();
 		m_option->update(time, controller);
 		break;
+	case GameState::upgrade:
+		std::cout << "upgrade" << std::endl;
+		m_upgrade->update(time, controller);
 	case GameState::gameplay:
 		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID());
 		break;
@@ -137,7 +151,6 @@ void Game::processEvents()
 		if (m_controller.m_currentState.Start && m_currentGameState == GameState::splash)//any key accepted to change screen to credits
 		{
 			m_splashscreen->changeScreen();
-
 		}
 		if (m_controller.m_currentState.Start && m_currentGameState == GameState::none)//any key accepted to change screen to credits
 		{
@@ -146,12 +159,24 @@ void Game::processEvents()
 
 		if (m_controller.m_currentState.A && m_currentGameState == GameState::option && m_option->startgame == true)
 		{
-				m_option->changeScreen();
+			m_option->changeScreen();
 		}
-
+		if (m_controller.m_currentState.A && m_currentGameState == GameState::option && m_option->upgrade == true)
+		{
+			m_upgrade->changeScreen();
+		}
+		if (m_controller.m_currentState.B && m_currentGameState == GameState::upgrade)
+		{
+			m_upgrade->backOut();
+		}
+		if (m_controller.m_currentState.Back)
+		{
+			SetGameState(GameState::confirm);
+		}
 
 	}
 }
+
 
 void Game::render()
 {
@@ -171,6 +196,9 @@ void Game::render()
 		break;
 	case GameState::option:
 		m_option->render(m_window);
+		break;
+	case GameState::upgrade:
+		m_upgrade->render(m_window);
 		break;
 	case GameState::gameplay:
 		m_gameplay->render(m_window);

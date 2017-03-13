@@ -103,7 +103,6 @@ void Player::update(double t, int car_ID)
 		m_velocity = -m_velocity * 0.5;
 		m_positon.y = 0;
 	}
-
 	physics.update(t, m_velocity, m_acceleration, m_degree); // sand player statu to physics
 	m_velocity = physics.getVelocity(); // get new motion from physics
 	m_positon.x += physics.getDistance().x; // get new position 
@@ -111,10 +110,12 @@ void Player::update(double t, int car_ID)
 
 	m_sprite.setPosition(m_positon);
 	view.setCenter(m_positon);
-	m_text[0].setPosition(m_positon.x, m_positon.y + 300);
+	m_text[1].setPosition(m_positon.x, m_positon.y + 300);
+	m_text[0].setPosition(m_positon.x + 300, m_positon.y - 400);
 
 	m_sprite.setRotation(m_degree);
 	m_text[1].setString(intToString(m_velocity));
+	m_text[0].setString("Lap time:");
 }
 
 void Player::render(sf::RenderWindow &window)
@@ -129,6 +130,7 @@ void Player::render(sf::RenderWindow &window)
 		window.draw(m_text[i]);
 	}
 }
+
 
 std::string Player::intToString(int num) {
 	char numString[10];

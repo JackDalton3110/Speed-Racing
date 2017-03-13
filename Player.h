@@ -5,6 +5,8 @@
 #include "Physics.h"
 #include "Controller.h"
 
+class Game;
+
 class Player
 {
 public:
@@ -13,12 +15,13 @@ public:
 
 	void update(double t, int car_ID);
 	void render(sf::RenderWindow &window);
+	
 private:
 	Physics physics;
 	Xbox360Controller controller;
 
 	sf::Font m_font;
-	sf::Text m_text[2];
+	sf::Text m_text[3];
 
 	float m_acceleration;
 	float m_degree;

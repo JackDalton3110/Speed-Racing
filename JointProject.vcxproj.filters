@@ -43,7 +43,13 @@
     <ClCompile Include="Gameplay.cpp">
       <Filter>Soucrce Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Help.cpp" />
+=======
+    <ClCompile Include="Upgrade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+>>>>>>> 5c6eb3bce20dd88f21089299c7eca5f6214639f6
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CarSelectScreen.h">
@@ -85,7 +91,13 @@
     <ClInclude Include="Gameplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Help.h" />
+=======
+    <ClInclude Include="Upgrade.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+>>>>>>> 5c6eb3bce20dd88f21089299c7eca5f6214639f6
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\circlemover.png">
@@ -118,6 +130,14 @@
     <Image Include="images\Bar.png">
       <Filter>Resource Files</Filter>
     </Image>
+<<<<<<< HEAD
+    <Image Include="images\template.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\back.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+=======
     <Image Include="images\arrow.png">
       <Filter>Resource Files</Filter>
     </Image>
@@ -135,5 +155,6 @@
     <Filter Include="Resource Files">
       <UniqueIdentifier>{bae321a3-80a9-4926-bf64-8fa1dc67727b}</UniqueIdentifier>
     </Filter>
+>>>>>>> b8abafc6a53389da509cf7b3df6e538f48e5be9f
   </ItemGroup>
 </Project>
