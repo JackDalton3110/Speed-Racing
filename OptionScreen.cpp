@@ -56,6 +56,7 @@ Option::Option(Game & game, sf::Font font, sf::Font font2) :
 
 	m_Sprite[0].setTexture(m_Texture[0]);
 	m_Sprite[0].setPosition(780, 100);//set image position in relation to origin
+	m_Sprite[0].setOrigin(17.5, 18);
 	m_Sprite[1].setTexture(m_Texture[1]);
 	m_Sprite[1].setPosition(270, 400);
 	m_Sprite[2].setTexture(m_Texture[2]);
@@ -116,6 +117,10 @@ void Option::reset()
 
 void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 {
+
+	m_Sprite[0].rotate(5);
+
+
 	if (controller.m_currentState.Back)
 	{
 		closeWindow = true;

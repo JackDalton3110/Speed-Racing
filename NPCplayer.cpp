@@ -6,12 +6,18 @@ NPCplayer::NPCplayer() :
 	m_positon(300, 300),
 	m_velocity(0),
 	m_dirction(rand() % 5 - 3),
+	m_car_id(rand()%4),
 	timer(1.5f)
 {
-	m_driver.setPosition(m_positon);
-	m_driver.setSize(sf::Vector2f(30, 20));
-	m_driver.setFillColor(sf::Color::Red);
-	m_driver.setOrigin(15, 10);
+	if (!m_texture.loadFromFile("images/carSprite.png"))
+	{
+		std::string s("error loading texture from file");
+		throw std::exception(s.c_str());
+	}
+	m_sprite.setTexture(m_texture);
+	m_sprite.setOrigin(25, 15);
+	m_sprite.setPosition(m_positon);
+
 }
 
 NPCplayer::~NPCplayer()
@@ -19,7 +25,7 @@ NPCplayer::~NPCplayer()
 
 }
 
-void NPCplayer::update(double t)
+void NPCplayer::update(double t, int car_id)
 {
 	if (timer < 0)
 	{
@@ -27,6 +33,13 @@ void NPCplayer::update(double t)
 		m_dirction = rand() % 5 - 3;
 	}
 
+	if (m_car_id == car_id)
+	{
+		m_car_id = rand() % 4;
+	}
+
+	sf::IntRect car(0, m_car_id * 30, 50, 30);
+	m_sprite.setTextureRect(car);
 
 	timer -= t;
 	m_degree += m_dirction;
@@ -60,11 +73,11 @@ void NPCplayer::update(double t)
 	m_positon.x += physics.getDistance().x;
 	m_positon.y += physics.getDistance().y;
 
-	m_driver.setPosition(m_positon);
-	m_driver.setRotation(m_degree);
+	m_sprite.setPosition(m_positon);
+	m_sprite.setRotation(m_degree);
 }
 
 void NPCplayer::render(sf::RenderWindow &window)
 {
-	window.draw(m_driver);
+	window.draw(m_sprite);
 }

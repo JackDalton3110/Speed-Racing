@@ -109,6 +109,11 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 	changeScreen();
 }
 
+int CarSelect::getSelection_ID()
+{
+	return button_ID;
+}
+
 void CarSelect::changeScreen()
 {
 	if (carSelected == true)

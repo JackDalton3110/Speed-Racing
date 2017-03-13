@@ -9,7 +9,7 @@ public:
 	NPCplayer();
 	~NPCplayer();
 
-	void update(double t);
+	void update(double t, int car_id);
 	void render(sf::RenderWindow &window);
 private:
 	Physics physics;
@@ -21,7 +21,10 @@ private:
 	int m_dirction;
 	float timer;
 
-	sf::Vector2f m_positon;
+	int m_car_id;
 
-	sf::RectangleShape m_driver;
+	sf::Texture m_texture; // car texture
+	sf::Sprite m_sprite; // car sprite
+
+	sf::Vector2f m_positon;
 };

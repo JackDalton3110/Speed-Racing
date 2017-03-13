@@ -11,25 +11,26 @@ public:
 	Player();
 	~Player();
 
-	void update(double t);
+	void update(double t, int car_ID);
 	void render(sf::RenderWindow &window);
 private:
 	Physics physics;
 	Xbox360Controller controller;
 
 	sf::Font m_font;
-	sf::Text m_text;
+	sf::Text m_text[2];
 
 	float m_acceleration;
 	float m_degree;
 	float m_velocity;
 
-
 	sf::View view;
 
 	sf::Vector2f m_positon;
 
-	sf::RectangleShape m_player;
+	sf::Texture m_texture; // car texture
+	sf::Sprite m_sprite; // car sprite
+
 	sf::RectangleShape m_filed;
 
 	std::string intToString(int num); // int to string

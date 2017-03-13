@@ -15,7 +15,7 @@ public:
 	Gameplay(Game &game, sf::Font font);
 	~Gameplay();
 
-	void update(double t);
+	void update(double t, int car_id);
 	void render(sf::RenderWindow &window);
 
 private:

@@ -12,10 +12,12 @@ Gameplay::~Gameplay()
 
 }
 
-void Gameplay::update(double t)
+void Gameplay::update(double t, int car_id)
 {
-	m_player.update(t);
-	m_npc.update(t);
+
+
+	m_player.update(t, car_id);
+	m_npc.update(t, car_id);
 
 
 }
@@ -25,7 +27,7 @@ void Gameplay::render(sf::RenderWindow &window)
 	window.clear(sf::Color::White);
 
 	m_player.render(window);
-	m_player.render(window);
+	m_npc.render(window);
 
 	window.display();
 }

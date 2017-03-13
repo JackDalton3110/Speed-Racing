@@ -10,21 +10,26 @@ Player::Player() :
 	{
 
 	}
+	for (int i = 0; i < 2; i++)
+	{
+		m_text[i].setFont(m_font);
+		m_text[i].setColor(sf::Color::Yellow);
+	}
 
-	m_player.setPosition(m_positon);
-	m_player.setSize(sf::Vector2f(30, 20));
-	m_player.setFillColor(sf::Color::Blue);
-	m_player.setOrigin(15, 10);
+	if (!m_texture.loadFromFile("images/carSprite.png"))
+	{
+		std::string s("error loading texture from file");
+		throw std::exception(s.c_str());
+	}
+	m_sprite.setTexture(m_texture);
+	m_sprite.setOrigin(25, 15);
+	m_sprite.setPosition(m_positon);
 
-	m_filed.setSize(sf::Vector2f(1000, 800));
+	m_filed.setSize(sf::Vector2f(2000, 2000));
 	m_filed.setPosition(0, 0);
 	m_filed.setFillColor(sf::Color::Black);
 
-
-	m_text.setFont(m_font);
-	m_text.setColor(sf::Color::White);
-
-	view.setCenter(sf::Vector2f(m_player.getPosition()));
+	view.setCenter(m_positon);
 	view.setSize(sf::Vector2f(1000, 800));
 }
 
@@ -33,15 +38,17 @@ Player::~Player()
 
 }
 
-void Player::update(double t)
+void Player::update(double t, int car_ID)
 {
 
 	controller.update();
 
+	sf::IntRect car(0, car_ID * 30, 50 , 30);
+	m_sprite.setTextureRect(car);
 
 	if (controller.RTrigger() >= 5) // right trigger to speed up
 	{
-		m_acceleration = controller.RTrigger() * 2;
+		m_acceleration = controller.RTrigger();
 	}
 	else if (controller.RTrigger() < 5 && controller.RTrigger() >= 0)
 	{
@@ -50,7 +57,7 @@ void Player::update(double t)
 
 	if (controller.LTrigger() <= -5)
 	{
-		m_acceleration = controller.LTrigger() * 2;
+		m_acceleration = controller.LTrigger();
 	}
 	else if (controller.LTrigger() > -5 && controller.LTrigger() <= 0)
 	{
@@ -73,16 +80,16 @@ void Player::update(double t)
 		}
 	}
 
-	if (m_positon.x > 1000)
+	if (m_positon.x > 2000)
 	{
 		m_velocity = -m_velocity * 0.5;
-		m_positon.x = 1000;
+		m_positon.x = 2000;
 	}
 
-	if (m_positon.y > 800)
+	if (m_positon.y > 2000)
 	{
 		m_velocity = -m_velocity * 0.5;
-		m_positon.y = 800;
+		m_positon.y = 2000;
 	}
 
 	if (m_positon.x < 0)
@@ -102,12 +109,12 @@ void Player::update(double t)
 	m_positon.x += physics.getDistance().x; // get new position 
 	m_positon.y += physics.getDistance().y;
 
-	m_player.setPosition(m_positon);
-	view.setCenter(sf::Vector2f(m_player.getPosition()));
+	m_sprite.setPosition(m_positon);
+	view.setCenter(m_positon);
+	m_text[0].setPosition(m_positon.x, m_positon.y + 300);
 
-
-	m_player.setRotation(m_degree);
-	m_text.setString(intToString(m_velocity));
+	m_sprite.setRotation(m_degree);
+	m_text[1].setString(intToString(m_velocity));
 }
 
 void Player::render(sf::RenderWindow &window)
@@ -116,8 +123,11 @@ void Player::render(sf::RenderWindow &window)
 	window.setView(view);
 
 	window.draw(m_filed);
-	window.draw(m_player);
-	window.draw(m_text);
+	window.draw(m_sprite);
+	for (int i = 0; i < 2; i++)
+	{
+		window.draw(m_text[i]);
+	}
 }
 
 std::string Player::intToString(int num) {

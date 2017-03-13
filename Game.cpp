@@ -103,7 +103,7 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		m_option->update(time, controller);
 		break;
 	case GameState::gameplay:
-		m_gameplay->update(time.asSeconds());
+		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID());
 		break;
 	case GameState::credits:
 		m_credits->update(time);

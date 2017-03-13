@@ -19,6 +19,7 @@ public:
 	bool carSelected = false;
 	int button_ID = 0;
 
+	int getSelection_ID();
 private:
 	sf::Font m_Font;
 	sf::Texture carText[4];
