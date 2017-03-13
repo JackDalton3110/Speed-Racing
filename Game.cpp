@@ -3,7 +3,7 @@
 
 Game::Game() :
 	m_window(sf::VideoMode(1000, 800), "Mash 'Em"),
-	m_currentGameState(GameState::credits)
+	m_currentGameState(GameState::Help)
 {
 	if (m_HARLOW.loadFromFile("C:/Windows/Fonts/HARLOWSI.TTF"))
 	{
@@ -30,6 +30,7 @@ Game::Game() :
 	m_confirm = new Confirm(*this, m_Motor);
 	m_again = new Playagain(*this, m_Motor);
 	m_gameplay = new Gameplay(*this, m_Motor);
+	m_help = new Help(*this, m_Motor);
 }
 
 Game::~Game()
@@ -41,6 +42,7 @@ Game::~Game()
 	delete(m_credits);
 	delete(m_confirm);
 	delete(m_gameplay);
+	delete(m_help);
 	std::cout << "destroying game" << std::endl;
 }
 
@@ -116,6 +118,10 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 	case GameState::playagain:
 		m_again->reset();
 		m_again->update(controller);
+		break;
+	case GameState::Help:
+		m_help->update();
+		break;
 	default:
 		break;
 	}
@@ -177,6 +183,10 @@ void Game::render()
 		break;
 	case GameState::playagain:
 		m_again->render(m_window);
+		break;
+	case GameState::Help:
+		m_help->render(m_window);
+		break;
 	default:
 
 		break;

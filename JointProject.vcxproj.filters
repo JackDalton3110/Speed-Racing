@@ -43,6 +43,7 @@
     <ClCompile Include="Gameplay.cpp">
       <Filter>Soucrce Files</Filter>
     </ClCompile>
+    <ClCompile Include="Help.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CarSelectScreen.h">
@@ -84,6 +85,7 @@
     <ClInclude Include="Gameplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Help.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\circlemover.png">
@@ -117,6 +119,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="images\arrow.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\360 controller.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
