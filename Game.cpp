@@ -3,7 +3,7 @@
 
 Game::Game() :
 	m_window(sf::VideoMode(1000, 800), "Mash 'Em"),
-	m_currentGameState(GameState::licence)
+	m_currentGameState(GameState::credits)
 {
 	if (m_HARLOW.loadFromFile("C:/Windows/Fonts/HARLOWSI.TTF"))
 	{
