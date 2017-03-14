@@ -1,12 +1,11 @@
 #pragma once
-
+#ifndef GAMEPLAY
+#define GAMEPLAY
 #include "Player.h"
 #include "NPCplayer.h"
 #include "Game.h"
 #include "Controller.h"
 
-#ifndef GAMEPLAY
-#define GAMEPLAY
 
 class Game;
 
@@ -15,7 +14,6 @@ class Gameplay
 public:
 	Gameplay(Game &game, sf::Font font);
 	~Gameplay();
-
 	void update(double t, int car_id, Xbox360Controller& controller);
 	void render(sf::RenderWindow &window);
 

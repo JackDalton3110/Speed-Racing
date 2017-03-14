@@ -83,9 +83,7 @@ void Confirm::update(Xbox360Controller& controller)
 
 }
 
-/// <summary>
-/// reset everything when player enter this screen
-/// </summary>
+
 void Confirm::reset()
 {
 	if (m_reset_check)

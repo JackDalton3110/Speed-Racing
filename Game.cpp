@@ -24,6 +24,22 @@ Game::Game() :
 	{
 		std::cout << "Motor not found" << std::endl;
 	}
+
+	if (!songBuffer[0].loadFromFile("sounds/song1.wav"))
+	{
+		std::string s("error loading wav file");
+		throw std::exception(s.c_str());
+	}
+
+	if (!buttonBuffer.loadFromFile("sounds/ButtonClick.wav"))
+	{
+		std::string s("error loading wav file");
+		throw std::exception(s.c_str());
+	}
+
+	songs[0].setBuffer(songBuffer[0]);
+	buttonsound.setBuffer(buttonBuffer);
+
 	m_licence = new Licence(*this, m_HARLOW, m_Motor);
 	m_splashscreen = new Splash(*this, m_HARLOW, m_Motor);
 	m_carSelect = new CarSelect(*this, m_HARLOW, m_Motor);
@@ -34,6 +50,8 @@ Game::Game() :
 	m_again = new Playagain(*this, m_Motor);
 	m_gameplay = new Gameplay(*this, m_Motor);
 	m_help = new Help(*this, m_Motor);
+	m_DifficultyScreen = new Difficulty(*this, m_Motor, m_HARLOW);
+	m_soundScreen = new Sound(*this, m_Motor, m_HARLOW);
 
 
 	m_textMessage[0].setPosition(20, 20);//set position
@@ -59,6 +77,8 @@ Game::~Game()
 	delete(m_confirm);
 	delete(m_gameplay);
 	delete(m_help);
+	delete(m_DifficultyScreen);
+	delete(m_soundScreen);
 	std::cout << "destroying game" << std::endl;
 }
 
@@ -121,6 +141,13 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		break;
 	case GameState::gameplay:
 		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID(), m_controller);
+	case GameState::Difficulty:
+		std::cout << "difficulty" << std::endl;
+		m_DifficultyScreen->Update(time, controller);
+		break;
+	case GameState::sound:
+		std::cout << "sound" << std::endl;
+		m_soundScreen->Update(time, controller);
 		break;
 	case GameState::credits:
 		m_credits->update(time);
@@ -140,7 +167,7 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 	default:
 		break;
 	}
-
+	m_controller.update();
 	processEvents();
 }
 
@@ -152,11 +179,42 @@ void Game::processEvents()
 		if (m_controller.m_currentState.Start && m_currentGameState == GameState::splash)//any key accepted to change screen to credits
 		{
 			m_splashscreen->changeScreen();
+			songs[0].play();
+		}
+		if (m_controller.m_currentState.Start && m_currentGameState == GameState::none)//any key accepted to change screen to credits
+		{
+			m_option->changeToOption();
 		}
 
 		if (m_controller.m_currentState.Back)
 		{
 			SetGameState(GameState::confirm);
+		}
+
+		if (m_controller.m_currentState.A && !m_controller.m_previousState.A && m_currentGameState == GameState::option && m_option->sound == true)
+		{
+			m_option->changeToSound();
+		}
+
+		if(m_controller.m_currentState.A && !m_controller.m_previousState.A && m_currentGameState == GameState::option && m_option->difficulty == true)
+		{
+			m_option->changeToDifficulty();
+			m_option->settings = true;
+		}
+
+		if (m_controller.m_currentState.B && m_currentGameState == GameState::Difficulty)
+		{
+			m_DifficultyScreen->changeScreen();
+			m_option->settings = true;
+		}
+		if (m_controller.m_currentState.B&&m_currentGameState == GameState::sound)
+		{
+			m_soundScreen->changeScreen();
+		}
+		
+		if(m_currentGameState==GameState::option|| m_currentGameState==GameState::sound||m_currentGameState==GameState::carSelect||m_currentGameState==GameState::Difficulty)
+		{
+			buttonsound.play();
 		}
 
 	}
@@ -187,6 +245,11 @@ void Game::render()
 		break;
 	case GameState::gameplay:
 		m_gameplay->render(m_window);
+	case GameState::sound:
+		m_soundScreen->render(m_window);
+		break;
+	case GameState::Difficulty:
+		m_DifficultyScreen->render(m_window);
 		break;
 	case GameState::credits:
 		m_credits->render(m_window);

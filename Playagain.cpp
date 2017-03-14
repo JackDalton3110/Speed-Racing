@@ -71,9 +71,13 @@ void Playagain::update(Xbox360Controller& controller)
 
 }
 
+<<<<<<< HEAD
 /// <summary>
 /// reset everything when player enter this screen
 /// </summary>
+=======
+
+>>>>>>> Sound_Difficulty
 void Playagain::reset()
 {
 	if (m_reset_check)

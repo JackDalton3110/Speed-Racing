@@ -23,6 +23,7 @@ private:
 	sf::Font m_font;
 	sf::Text m_text[3]; // text 0 for time, text 1 for motion, text 2 for loop
 
+
 	float m_acceleration;
 	float m_degree;
 	float m_velocity;

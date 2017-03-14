@@ -19,10 +19,12 @@ public:
 private:
 	void backOut();
 	void drawStatusShape(sf::RenderWindow &window, int maxSpeed, int acceleration, int handling);
-
-	int setting_ID = 0;
-	int button_ID = 0;
 	int status_ID = 0; 
+
+	void changeScreen();
+	void backOut();
+	int button_ID = 0;
+	int setting_ID = 0;
 
 	Game *m_game;
 	sf::Text m_textMessage[10];//text

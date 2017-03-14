@@ -89,7 +89,7 @@ Option::Option(Game & game, sf::Font font, sf::Font font1) :
 
 Option::~Option()
 {
-	std::cout << "Destroying Splash Screen" << std::endl;
+	std::cout << "Destroying Option Screen" << std::endl;
 
 }
 
@@ -199,6 +199,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		changeToOption();//change to game 
 	}
 
+
 	if (controller.m_currentState.A && !controller.m_previousState.A && upgrade == true)
 	{
 		m_reset_check = true;
@@ -219,21 +220,6 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	{
 		settings = false;//back out of settings
 		button_ID = 1;
-	}
-	if (controller.m_currentState.DPadRight && settings == true)
-	{
-		if (m_Sprite[2].getPosition().x <= 490 && m_Sprite[2].getPosition().x >= 260)
-		{
-			m_Sprite[2].move(0.5, 0);//move slider right
-		}
-	}
-	if (controller.m_currentState.DPadLeft && settings == true)
-	{
-		if (m_Sprite[2].getPosition().x <= 500 && m_Sprite[2].getPosition().x >= 260)
-		{
-			m_Sprite[2].move(-0.5, 0);//move slider left
-		}
-
 	}
 
 	if (button_ID == 0)
@@ -273,7 +259,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		quitGame = true;
 	}
 
-	if (settings == true)
+	if (settings == true)//within settings menu
 	{
 		startgame = false;
 		options = false;
@@ -284,17 +270,30 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		{
 			m_Sprite[0].setPosition(275, 200);
 			controller.m_previousState = controller.m_currentState;
+			sound = true;
+			difficulty = false;
 		}
 
 		else if (setting_ID == 1)
 		{
 			m_Sprite[0].setPosition(275, 325);
 			controller.m_previousState = controller.m_currentState;
+			sound = false;
+			difficulty = true;
 		}
 		else if (setting_ID == 2)
 		{
 			m_Sprite[0].setPosition(275, 465);
 			controller.m_previousState = controller.m_currentState;
+		}
+		if (controller.m_currentState.A && !controller.m_previousState.A && button_ID == 2)
+		{
+			changeToSound();
+		}
+
+		if (controller.m_currentState.A && !controller.m_previousState.A && button_ID == 1)
+		{
+			changeToDifficulty();
 		}
 	}
 
@@ -312,6 +311,14 @@ void Option::changeToUpgrade()
 {
 	m_game->SetGameState(GameState::upgrade); // chagne to upgrade
 
+void Option::changeToSound()
+{
+	m_game->SetGameState(GameState::sound);
+}
+
+void Option::changeToDifficulty()
+{
+	m_game->SetGameState(GameState::Difficulty);
 }
 
 void Option::render(sf::RenderWindow & Window)
@@ -331,7 +338,7 @@ void Option::render(sf::RenderWindow & Window)
 
 		if (closeGame == true)
 		{
-			Window.close();
+			Window.close();//quit game
 		}
 	}
 

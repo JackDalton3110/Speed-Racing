@@ -24,7 +24,6 @@ Player::Player() :
 	m_sprite.setTexture(m_texture); // set car texture
 	m_sprite.setOrigin(25, 15); // set origin
 	m_sprite.setPosition(m_positon); // set position 
-
 	m_filed.setSize(sf::Vector2f(2000, 2000));
 	m_filed.setPosition(0, 0);
 	m_filed.setFillColor(sf::Color::Black);
@@ -43,7 +42,9 @@ void Player::update(double t, int car_ID)
 
 	controller.update();
 
+
 	sf::IntRect car(0, car_ID * 30, 50 , 30); // get rect of player selection
+
 	m_sprite.setTextureRect(car);
 
 	if (controller.RTrigger() >= 5) // right trigger to speed up

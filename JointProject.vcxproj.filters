@@ -53,6 +53,12 @@
     <ClCompile Include="Upgrade.cpp">
       <Filter>Soucrce Files</Filter>
     </ClCompile>
+    <ClCompile Include="SoundScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DifficultyScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CarSelectScreen.h">
@@ -103,6 +109,12 @@
     <ClInclude Include="Upgrade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SoundScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DifficultyScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\Bar.png">
@@ -149,6 +161,7 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Filter Include="Header Files">
       <UniqueIdentifier>{b5e378fc-32bc-42bb-b170-ebf3697d1188}</UniqueIdentifier>
     </Filter>
@@ -158,5 +171,10 @@
     <Filter Include="Soucrce Files">
       <UniqueIdentifier>{6f1500ff-3878-4396-9541-9078dd8a4240}</UniqueIdentifier>
     </Filter>
+=======
+    <Media Include="sounds\song1.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+>>>>>>> Sound_Difficulty
   </ItemGroup>
 </Project>

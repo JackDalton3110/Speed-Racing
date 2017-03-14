@@ -119,6 +119,7 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 	}
 	if (button_ID == 0)
 	{
+
 		if (m_Sprite[0].getPosition().x < 450)//any key accepted to change screen to credits
 		{
 			m_Sprite[0].move(10, 0);
@@ -129,6 +130,12 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 		m_textMessage[4].setString("100kph");//set Max Speed
 		m_textMessage[5].setString("4.2 sec  to Max Speed");//set Aceeleration
 		m_textMessage[6].setString("50%");//set Handling
+
+		/*selectSprite.setPosition(200, 250);
+		if (carSprite[0].getPosition().y > 240 && !carSprite[0].getPosition().y < 230)
+		{
+			carSprite[0].move(0, -2.5);
+		}*/
 		controller.m_previousState = controller.m_currentState;	
 	}
 	else if (button_ID == 1)
