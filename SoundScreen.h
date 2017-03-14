@@ -19,9 +19,11 @@ public:
 	void Update(sf::Time time, Xbox360Controller &controller);
 	void render(sf::RenderWindow &window);
 	int button_ID = 0;
-	int soundVolume=10;
-	bool Music =true;
-	bool FX = false;
+	int soundVolume=50;
+	bool on=true;
+	bool off=false;
+	bool FXon = true;
+	bool FXoff = false;
 	bool volume = false;
 
 private:

@@ -175,22 +175,6 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		settings = false;//back out of settings
 		button_ID = 1;
 	}
-	if (controller.m_currentState.DPadRight && settings == true)
-	{
-		if (m_Sprite[2].getPosition().x <= 490 && m_Sprite[2].getPosition().x >= 260)
-		{
-			m_Sprite[2].move(0.5, 0);//move slider right
-		}
-
-	}
-	if (controller.m_currentState.DPadLeft && settings == true)
-	{
-		if (m_Sprite[2].getPosition().x <= 500 && m_Sprite[2].getPosition().x >= 260)
-		{
-			m_Sprite[2].move(-0.5, 0);//move slider left
-		}
-
-	}
 
 	if (button_ID == 0)
 	{
@@ -217,7 +201,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		strtgame = false;
 	}
 
-	if (settings == true)
+	if (settings == true)//within settings menu
 	{
 		quitGame = false;
 		options = false;

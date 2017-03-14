@@ -29,7 +29,14 @@ Game::Game() :
 		throw std::exception(s.c_str());
 	}
 
+	if (!buttonBuffer.loadFromFile("sounds/ButtonClick.wav"))
+	{
+		std::string s("error loading wav file");
+		throw std::exception(s.c_str());
+	}
+
 	songs[0].setBuffer(songBuffer[0]);
+	buttonsound.setBuffer(buttonBuffer);
 
 	m_licence = new Licence(*this, m_HARLOW, m_Motor);
 	m_splashscreen = new Splash(*this, m_HARLOW, m_Motor);
@@ -131,7 +138,6 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 	default:
 		break;
 	}
-
 	m_controller.update();
 	processEvents();
 }
@@ -176,7 +182,13 @@ void Game::processEvents()
 		{
 			m_soundScreen->changeScreen();
 		}
+		
+		if(m_currentGameState==GameState::option|| m_currentGameState==GameState::sound||m_currentGameState==GameState::carSelect||m_currentGameState==GameState::Difficulty)
+		{
+			buttonsound.play();
+		}
 
+		
 
 	}
 }

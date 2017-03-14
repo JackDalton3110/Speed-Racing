@@ -48,7 +48,7 @@ Sound::Sound(Game &game, sf::Font Font, sf::Font Font2) :
 	}
 
 	scrollBarSprite[0].setTexture(scrollBarTxt[0]);
-	scrollBarSprite[0].setPosition(170, 695);
+	scrollBarSprite[0].setPosition(250, 695);
 	scrollBarSprite[1].setTexture(scrollBarTxt[1]);
 	scrollBarSprite[1].setPosition(175, 700);
 
@@ -58,6 +58,7 @@ Sound::Sound(Game &game, sf::Font Font, sf::Font Font2) :
 		toggleButtons[i].setFillColor(sf::Color::Green);
 	}
 	toggleButtons[0].setPosition(250, 300);
+	toggleButtons[1].setPosition(250, 500);
 
 	selectorSprite.setTexture(selectorTxt);
 }
@@ -96,25 +97,35 @@ void Sound::Update(sf::Time time , Xbox360Controller &controller)
 	{
 		changeScreen();
 	}
+
 	if (button_ID == 0)
 	{
 		selectorSprite.setPosition(180, 300);
+		if (controller.m_currentState.A && !controller.m_previousState.A && on==true)
+		{
+			on = false;
+			off = true;
+		}
+		else if (controller.m_currentState.A && !controller.m_previousState.A && off == true)
+		{
+			on = true;
+			off = false;
+		}
 		controller.m_previousState = controller.m_currentState;
-		if (controller.m_currentState.A)
-		{
-			toggleButtons[0].setFillColor(sf::Color::Red);
-			Music = false;
-		}
-		else if (controller.m_currentState.A && Music == false)
-		{
-			toggleButtons[0].setFillColor(sf::Color::Green);
-			Music = true;
-		}
 	}
-
 	else if (button_ID == 1)
 	{
 		selectorSprite.setPosition(180, 500);
+		if (controller.m_currentState.A && !controller.m_previousState.A && FXon == true)
+		{
+			FXon = false;
+			FXoff = true;
+		}
+		else if (controller.m_currentState.A && !controller.m_previousState.A && FXoff == true)
+		{
+			FXon = true;
+			FXoff = false;
+		}
 		controller.m_previousState = controller.m_currentState;
 	}
 	else if (button_ID == 2)
@@ -150,6 +161,28 @@ void Sound::Update(sf::Time time , Xbox360Controller &controller)
 		m_game->songs[0].setVolume(soundVolume);
 	}
 
+	if (on == true)
+	{
+		toggleButtons[0].setFillColor(sf::Color::Green);
+		m_game->songs[0].setVolume(soundVolume);
+	
+	}
+	else if (off == true)
+	{
+		toggleButtons[0].setFillColor(sf::Color::Red);
+		m_game->songs[0].setVolume(0);
+	}
+	if (FXon == true)
+	{
+		toggleButtons[1].setFillColor(sf::Color::Green);
+		m_game->buttonsound.setVolume(soundVolume);
+
+	}
+	else if (FXoff == true)
+	{
+		toggleButtons[1].setFillColor(sf::Color::Red);
+		m_game->buttonsound.setVolume(0);
+	}
 	
 }
 
@@ -166,6 +199,7 @@ void Sound::render(sf::RenderWindow &window)
 		window.draw(message[i]);
 	}
 	window.draw(toggleButtons[0]);
+	window.draw(toggleButtons[1]);
 	for (int i = 1; i >=0 ; i--)
 	{
 		window.draw(scrollBarSprite[i]);

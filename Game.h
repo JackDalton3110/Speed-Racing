@@ -53,6 +53,8 @@ public:
 	int score = 0;
 	sf::Sound songs[3];
 	sf::SoundBuffer songBuffer[3];
+	sf::Sound buttonsound;
+	sf::SoundBuffer buttonBuffer;
 
 
 private:
