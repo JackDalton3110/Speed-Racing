@@ -48,6 +48,26 @@ public:
 	//the previous state to use to check for the moment a button is pressed
 	GamePadState m_previousState;
 
+	bool Abutton();
+	bool Bbutton();
+	bool Xbutton();
+	bool Ybutton();
+	bool LBbutton();
+	bool RBbutton();
+	bool LeftThumbStickClickButton();
+	bool RightThumbStickClickButton();
+	bool DpadUpButton();
+	bool DpadDownButton();
+	bool DpadRightButton();
+	bool DpadLeftButton();
+	bool StartButton();
+	bool BackButton();
+	bool XboxButton();
+	float RTrigger();
+	float LTrigger();
+	sf::Vector2f RightThumbStick();
+	sf::Vector2f LeftThumbSticks();
+
 	Xbox360Controller();
 	~Xbox360Controller();
 	void Xbox360Controller::update();
