@@ -17,6 +17,7 @@ public:
 	void render(sf::RenderWindow &window);
 	void changeScreen();
 	void changeToOption();
+	void changeToUpgrade();
 	void reset();
 	int button_ID = 0;
 	int setting_ID = 0;

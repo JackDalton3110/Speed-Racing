@@ -104,7 +104,7 @@ void Option::reset()
 
 		button_ID = 0;
 		setting_ID = 0;
-		startgame = false;
+		startgame = true;
 		options = false;
 		quitGame = false;
 		closeGame = false;
@@ -183,22 +183,28 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 	if (controller.m_currentState.A && quitGame == true && !controller.m_previousState.A)
 	{
-		m_game->SetGameState(GameState::confirm); // change to Confirm
 		m_reset_check = true;
+		m_game->SetGameState(GameState::confirm); // change to Confirm
 		
 	}
 	if (controller.m_currentState.A &&  startgame == true && !controller.m_previousState.A)
 	{
+		m_reset_check = true;
 		changeScreen();//change to game
-		m_reset_check = true;
 	}
 
-	if (controller.m_currentState.A && !controller.m_previousState.A && startgame == true)
+	if (controller.m_currentState.A && !controller.m_previousState.A && options == true)
 	{
-		changeToOption();//change to game 
 		m_reset_check = true;
-
+		changeToOption();//change to game 
 	}
+
+	if (controller.m_currentState.A && !controller.m_previousState.A && upgrade == true)
+	{
+		m_reset_check = true;
+		changeToUpgrade();
+	}
+
 	if (options == true && controller.m_currentState.A && !controller.m_previousState.A)
 	{
 		settings = true;//draw settings
@@ -220,8 +226,6 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		{
 			m_Sprite[2].move(0.5, 0);//move slider right
 		}
-
-
 	}
 	if (controller.m_currentState.DPadLeft && settings == true)
 	{
@@ -304,6 +308,11 @@ void Option::changeToOption()
 {
 	m_game->SetGameState(GameState::option);//settings
 }
+void Option::changeToUpgrade()
+{
+	m_game->SetGameState(GameState::upgrade); // chagne to upgrade
+
+}
 
 void Option::render(sf::RenderWindow & Window)
 {
@@ -316,8 +325,8 @@ void Option::render(sf::RenderWindow & Window)
 		Window.draw(m_Sprite[0]);
 		Window.draw(m_textMessage[0]);
 		Window.draw(m_textMessage[1]);
-		Window.draw(m_textMessage[2]);//main menu draw
-		Window.draw(m_textMessage[7]);//setting draw 
+		Window.draw(m_textMessage[2]); //main menu draw
+		Window.draw(m_textMessage[7]); //setting draw 
 		Window.draw(m_textMessage[6]);
 
 		if (closeGame == true)

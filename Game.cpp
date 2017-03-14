@@ -114,7 +114,7 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		m_upgrade->update(time, controller);
 		break;
 	case GameState::gameplay:
-		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID());
+		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID(), m_controller);
 		break;
 	case GameState::credits:
 		m_credits->update(time);
@@ -143,23 +143,7 @@ void Game::processEvents()
 		{
 			m_splashscreen->changeScreen();
 		}
-		if (m_controller.m_currentState.Start && m_currentGameState == GameState::none)//any key accepted to change screen to credits
-		{
-			m_option->changeToOption();
-		}
 
-		if (m_controller.m_currentState.A && m_currentGameState == GameState::option && m_option->startgame == true)
-		{
-			m_option->changeScreen();
-		}
-		if (m_controller.m_currentState.A && m_currentGameState == GameState::option && m_option->upgrade == true)
-		{
-			m_upgrade->changeScreen();
-		}
-		if (m_controller.m_currentState.B && m_currentGameState == GameState::upgrade)
-		{
-			m_upgrade->backOut();
-		}
 		if (m_controller.m_currentState.Back)
 		{
 			SetGameState(GameState::confirm);
