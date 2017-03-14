@@ -2,8 +2,10 @@
 #include "Controller.h"
 
 Game::Game() :
+
 	m_window(sf::VideoMode(1000, 800), "Speed"),
 	m_currentGameState(GameState::licence)
+
 {
 	if (m_HARLOW.loadFromFile("C:/Windows/Fonts/HARLOWSI.TTF"))
 	{
@@ -31,6 +33,8 @@ Game::Game() :
 	m_confirm = new Confirm(*this, m_Motor);
 	m_again = new Playagain(*this, m_Motor);
 	m_gameplay = new Gameplay(*this, m_Motor);
+	m_help = new Help(*this, m_Motor);
+
 
 	m_textMessage[0].setPosition(20, 20);//set position
 	m_textMessage[0].setString("Score: ");//set text
@@ -40,6 +44,7 @@ Game::Game() :
 	m_textMessage[1].setString("Time: ");//set text
 	m_textMessage[1].setFont(m_Motor);//set font 
 	m_textMessage[1].setColor(sf::Color(255, 255, 255));//set colour
+
 
 }
 
@@ -53,6 +58,7 @@ Game::~Game()
 	delete(m_upgrade);
 	delete(m_confirm);
 	delete(m_gameplay);
+	delete(m_help);
 	std::cout << "destroying game" << std::endl;
 }
 
@@ -127,6 +133,10 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 	case GameState::playagain:
 		m_again->reset();
 		m_again->update(controller);
+		break;
+	case GameState::Help:
+		m_help->update();
+		break;
 	default:
 		break;
 	}
@@ -186,6 +196,10 @@ void Game::render()
 		break;
 	case GameState::playagain:
 		m_again->render(m_window);
+		break;
+	case GameState::Help:
+		m_help->render(m_window);
+		break;
 	default:
 
 		break;

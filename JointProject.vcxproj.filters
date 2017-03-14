@@ -43,6 +43,13 @@
     <ClCompile Include="Splash.cpp">
       <Filter>Soucrce Files</Filter>
     </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Help.cpp" />
     <ClCompile Include="Upgrade.cpp">
       <Filter>Soucrce Files</Filter>
     </ClCompile>
@@ -87,6 +94,12 @@
     <ClInclude Include="Splash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Gameplay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Help.h" />
+       <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Upgrade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -129,6 +142,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="images\circlemover.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\360 controller.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

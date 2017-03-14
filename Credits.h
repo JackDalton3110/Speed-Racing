@@ -23,6 +23,7 @@ private:
 	std::string textline;
 	sf::Font m_impact;
 	sf::Text m_textMessage;
+	
 
 };
 
