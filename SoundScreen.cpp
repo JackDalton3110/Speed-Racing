@@ -93,6 +93,7 @@ void Sound::Update(sf::Time time , Xbox360Controller &controller)
 			button_ID = 2;
 		}
 	}
+
 	if (controller.m_currentState.B)
 	{
 		changeScreen();

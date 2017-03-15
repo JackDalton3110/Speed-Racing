@@ -13,7 +13,7 @@ public:
 	Splash(Game& game, sf::Font font, sf::Font font1);
 	~Splash();
 	//methods for Splash
-	void update(sf::Time deltaTime);
+	void update(sf::Time deltaTime, Xbox360Controller& controller);
 	void render(sf::RenderWindow& window);
 	void changeScreen();
 	bool change = false;

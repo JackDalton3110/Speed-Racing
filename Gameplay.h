@@ -25,6 +25,7 @@ private:
 
 	sf::Font m_font;
 
+	int button_ID;
 };
 
 #endif // GAMEPLAY

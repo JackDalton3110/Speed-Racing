@@ -109,7 +109,6 @@ void Option::reset()
 		quitGame = false;
 		closeGame = false;
 		upgrade = false;
-		settings = false;
 		closeWindow = false;
 
 		m_button_released = false;
@@ -123,45 +122,46 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 	if (controller.m_currentState.DPadDown && !controller.m_previousState.DPadDown)
 	{
-		if (button_ID < 3)
+		if (!settings)
 		{
-			button_ID = button_ID + 1;
+
+			if (button_ID < 3)
+			{
+				button_ID = button_ID + 1;
+			}
+			else
+			{
+				button_ID = 0;
+			}
 		}
 		else
-		{
-			button_ID = 0;
-		}
-	}
-
-
-	if (controller.m_currentState.DPadUp && !controller.m_previousState.DPadUp)
-	{
-		if (button_ID > 0)
-		{
-			button_ID--;
-		}
-		else
-		{
-			button_ID = 3;
-		}
-	}
-
-	if (settings == true)
-	{
-		if (controller.m_currentState.DPadDown && !controller.m_previousState.DPadDown)
 		{
 			if (setting_ID < 2)
 			{
-				setting_ID = setting_ID + 1;
+				setting_ID++;
 			}
 			else
 			{
 				setting_ID = 0;
 			}
 		}
+	}
 
 
-		if (controller.m_currentState.DPadUp && !controller.m_previousState.DPadUp)
+	if (controller.m_currentState.DPadUp && !controller.m_previousState.DPadUp)
+	{
+		if (!settings)
+		{
+			if (button_ID > 0)
+			{
+				button_ID--;
+			}
+			else
+			{
+				button_ID = 3;
+			}
+		}
+		else
 		{
 			if (setting_ID > 0)
 			{
@@ -173,7 +173,6 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			}
 		}
 	}
-
 
 	if (!controller.Abutton())
 	{
@@ -209,11 +208,8 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	if (options == true && controller.m_currentState.A && !controller.m_previousState.A)
 	{
 		settings = true;//draw settings
-		if (settings == true)
-		{
-			button_ID = 2;
-		}
 		m_reset_check = true;
+		m_button_released = false;
 	}
 
 	if (controller.m_currentState.B && settings == true && !controller.m_previousState.A)
@@ -273,7 +269,6 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			sound = true;
 			difficulty = false;
 		}
-
 		else if (setting_ID == 1)
 		{
 			m_Sprite[0].setPosition(275, 325);
@@ -286,12 +281,13 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			m_Sprite[0].setPosition(275, 465);
 			controller.m_previousState = controller.m_currentState;
 		}
-		if (controller.m_currentState.A && !controller.m_previousState.A && button_ID == 2)
+
+		if (controller.m_currentState.A && m_button_released && setting_ID == 0)
 		{
 			changeToSound();
 		}
 
-		if (controller.m_currentState.A && !controller.m_previousState.A && button_ID == 1)
+		if (controller.m_currentState.A  && m_button_released && setting_ID == 1)
 		{
 			changeToDifficulty();
 		}
@@ -310,13 +306,14 @@ void Option::changeToOption()
 void Option::changeToUpgrade()
 {
 	m_game->SetGameState(GameState::upgrade); // chagne to upgrade
+}
 
-void Option::changeToSound()
+void Option::changeToSound() // chagne to sound
 {
 	m_game->SetGameState(GameState::sound);
 }
 
-void Option::changeToDifficulty()
+void Option::changeToDifficulty() // change to difficulty 
 {
 	m_game->SetGameState(GameState::Difficulty);
 }
@@ -327,7 +324,7 @@ void Option::render(sf::RenderWindow & Window)
 	Window.clear(sf::Color(0, 0, 1));//different from standards black
 	Window.draw(m_Sprite[3]);
 
-	if (settings != true)
+	if (!settings)
 	{
 		Window.draw(m_Sprite[0]);
 		Window.draw(m_textMessage[0]);
@@ -335,14 +332,9 @@ void Option::render(sf::RenderWindow & Window)
 		Window.draw(m_textMessage[2]); //main menu draw
 		Window.draw(m_textMessage[7]); //setting draw 
 		Window.draw(m_textMessage[6]);
-
-		if (closeGame == true)
-		{
-			Window.close();//quit game
-		}
 	}
 
-	if (settings == true)
+	if (settings)
 	{
 
 		Window.draw(m_Sprite[4]);

@@ -31,11 +31,16 @@ Splash::~Splash()
 
 }
 
-void Splash::update(sf::Time deltaTime)
+void Splash::update(sf::Time deltaTime, Xbox360Controller& controller)
 {
 
 	m_cumulativeTime += deltaTime;
 	drawTime = true;//set draw time to true (allows text to draw to screen
+
+	if (controller.StartButton())
+	{
+		changeScreen();
+	}
 
 	if (change == true)
 	{

@@ -49,11 +49,9 @@ enum class
 	confirm,
 	gameplay,
 	playagain,
-	Help
+	Help,
 	sound,
-	Difficulty,
-	credits
-
+	Difficulty
 };
 
 class Game
@@ -111,9 +109,8 @@ private:
 	sf::Sprite m_Sprite2;
 	sf::Sprite m_Sprite4;
 	sf::Sprite m_Sprite5;
-	
 
-
+	sf::View view; // camera
 };
 
 #endif // !GAME_H

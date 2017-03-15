@@ -6,7 +6,6 @@ Upgrade::Upgrade(Game &game, sf::Font font, sf::Font font1) :
 	m_Motor(font1),
 	button_released(false),
 	m_status(false)
-
 {
 	if (!m_texture[0].loadFromFile("images/whiteCarSprite.png"))
 	{
@@ -33,8 +32,7 @@ Upgrade::Upgrade(Game &game, sf::Font font, sf::Font font1) :
 	m_Sprite[1].setTexture(m_texture[1]); // red car 
 	m_Sprite[2].setTexture(m_texture[2]); // yellow car
 	m_Sprite[3].setTexture(m_texture[3]); // green car 
-	//m_Sprite[4].setTexture(m_texture[4]);
-
+										  //m_Sprite[4].setTexture(m_texture[4]);
 	m_Sprite[0].setPosition(325, 0);
 	m_Sprite[1].setPosition(325, 200);
 	m_Sprite[2].setPosition(325, 400);
@@ -43,7 +41,6 @@ Upgrade::Upgrade(Game &game, sf::Font font, sf::Font font1) :
 	m_Sprite[1].setRotation(90);
 	m_Sprite[2].setRotation(90);
 	m_Sprite[3].setRotation(90);
-
 	//m_Sprite[3].setRotation(90);
 
 
@@ -73,13 +70,11 @@ Upgrade::Upgrade(Game &game, sf::Font font, sf::Font font1) :
 	m_textMessage[4].setPosition(700, 300);//set position
 	m_textMessage[4].setFont(m_Motor);//set font 
 	m_textMessage[4].setColor(sf::Color::Red);//set colour
-
-	//Aceleration
+											  //Aceleration
 	m_textMessage[5].setPosition(700, 500);//set position
 	m_textMessage[5].setFont(m_Motor);//set font 
 	m_textMessage[5].setColor(sf::Color::Red);//set colour
-	//Handling
-
+											  //Handling
 	m_textMessage[6].setPosition(700, 700);//set position
 	m_textMessage[6].setFont(m_Motor);//set font 
 	m_textMessage[6].setColor(sf::Color::Red);//set colour
@@ -124,7 +119,6 @@ Upgrade::Upgrade(Game &game, sf::Font font, sf::Font font1) :
 	m_selecter.setOutlineColor(sf::Color::Blue);
 	m_selecter.setFillColor(sf::Color::Black);
 	m_selecter.setSize(sf::Vector2f(300, 200));
-
 }
 
 Upgrade::~Upgrade()
@@ -222,12 +216,11 @@ void Upgrade::update(sf::Time time, Xbox360Controller &controller)
 			{
 				status_ID = 0;
 			}
-
-	
+		}
+	}
 
 	if (controller.m_currentState.DPadUp && !controller.m_previousState.DPadUp)
 	{
-
 		if (!m_status)
 		{
 
@@ -253,6 +246,7 @@ void Upgrade::update(sf::Time time, Xbox360Controller &controller)
 		}
 	}
 	// use up and down arrow to select car
+
 
 	if (button_ID == 0)
 	{
@@ -303,7 +297,6 @@ void Upgrade::update(sf::Time time, Xbox360Controller &controller)
 		m_Sprite[1].setPosition(325, 200);
 		m_Sprite[3].setPosition(325, 600);
 
-
 		yellowCar_values[0] = 98 + yellowCar_status[0] * 4;
 		yellowCar_values[1] = 4.5 - yellowCar_status[1] * 0.5;
 		yellowCar_values[2] = 25 + yellowCar_status[2] * 10;
@@ -323,7 +316,6 @@ void Upgrade::update(sf::Time time, Xbox360Controller &controller)
 		m_Sprite[1].setPosition(325, 200);
 		m_Sprite[2].setPosition(325, 400);
 
-
 		greenCar_values[0] = 94 + greenCar_status[0] * 5;
 		greenCar_values[1] = 4.0 - greenCar_status[1] * 0.4;
 		greenCar_values[2] = 30 + greenCar_status[2] * 8;
@@ -336,12 +328,6 @@ void Upgrade::update(sf::Time time, Xbox360Controller &controller)
 
 }
 
-
-void Upgrade::changeScreen()
-{
-	m_game->SetGameState(GameState::upgrade);
-	
-}
 void Upgrade::backOut()
 {
 	m_game->SetGameState(GameState::option);
@@ -357,7 +343,6 @@ void Upgrade::render(sf::RenderWindow &window)
 	{
 		window.draw(m_Sprite[i]);
 	}
-
 
 	if (m_status)
 	{
@@ -382,15 +367,13 @@ void Upgrade::render(sf::RenderWindow &window)
 		break;
 	}
 
-
-//>>>>>>> Sound_Difficulty
-//	window.draw(m_textMessage[0]);
-//	window.draw(m_textMessage[1]);
-//	window.draw(m_textMessage[2]);//main menu draw
-//	window.draw(m_textMessage[3]);//setting draw 
-//	window.draw(m_textMessage[4]);
-//	window.draw(m_textMessage[5]);
-//	window.draw(m_textMessage[6]);
+	window.draw(m_textMessage[0]);
+	window.draw(m_textMessage[1]);
+	window.draw(m_textMessage[2]);//main menu draw
+	window.draw(m_textMessage[3]);//setting draw 
+	window.draw(m_textMessage[4]);
+	window.draw(m_textMessage[5]);
+	window.draw(m_textMessage[6]);
 
 	window.display();
 }

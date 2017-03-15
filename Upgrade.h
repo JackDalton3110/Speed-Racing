@@ -17,7 +17,6 @@ public:
 	void render(sf::RenderWindow &window);
 
 private:
-	void backOut();
 	void drawStatusShape(sf::RenderWindow &window, int maxSpeed, int acceleration, int handling);
 	int status_ID = 0; 
 

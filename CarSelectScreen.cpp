@@ -4,7 +4,8 @@ CarSelect::CarSelect(Game &game, sf::Font font, sf::Font font1):
 	m_game(&game),
 	m_HARLOW(font),
 	m_Motor(font1),
-	m_button_released(false)
+	m_button_released(false),
+	reset_check(false)
 {
 	if (!m_texture[0].loadFromFile("images/whiteCarSprite.png"))
 	{
@@ -90,6 +91,15 @@ CarSelect::CarSelect(Game &game, sf::Font font, sf::Font font1):
 CarSelect::~CarSelect()
 {
 	std::cout << "destroying car select" << std::endl;
+}
+
+void CarSelect::reset()
+{
+	if (reset_check)
+	{
+		carSelected = false;
+		button_ID = 0;
+	}
 }
 
 void CarSelect::update(sf::Time time, Xbox360Controller &controller)
