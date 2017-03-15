@@ -56,5 +56,4 @@ void Help::render(sf::RenderWindow& window)
 	window.draw(m_line3);
 	window.draw(m_line4);
 	window.draw(m_line);
-	window.display();
 }

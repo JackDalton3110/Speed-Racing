@@ -66,5 +66,5 @@ void Splash::render(sf::RenderWindow & Window)
 	Window.draw(m_Sprite);
 	Window.draw(m_textMessage1);//draw text
 	Window.draw(m_textMessage);//draws text when drawTime is true. If key is pressed remove text.
-	Window.display();
+	
 }

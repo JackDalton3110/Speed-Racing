@@ -22,10 +22,10 @@ void Gameplay::update(double t, int car_id)
 
 void Gameplay::render(sf::RenderWindow &window)
 {
-	window.clear(sf::Color::White);
+	
 
 	m_player.render(window);
 	m_npc.render(window);
 
-	window.display();
+	
 }

@@ -25,9 +25,9 @@ Player::Player() :
 	m_sprite.setOrigin(25, 15);
 	m_sprite.setPosition(m_positon);
 
-	m_filed.setSize(sf::Vector2f(2000, 2000));
+	/*m_filed.setSize(sf::Vector2f(2000, 2000));
 	m_filed.setPosition(0, 0);
-	m_filed.setFillColor(sf::Color::Black);
+	m_filed.setFillColor(sf::Color::Black);*/
 
 	view.setCenter(m_positon);
 	view.setSize(sf::Vector2f(1000, 800));
@@ -80,28 +80,28 @@ void Player::update(double t, int car_ID)
 		}
 	}
 
-	if (m_positon.x > 2000)
+	if (m_positon.x > 1350)
 	{
 		m_velocity = -m_velocity * 0.5;
-		m_positon.x = 2000;
+		m_positon.x = 1350;
 	}
 
-	if (m_positon.y > 2000)
+	if (m_positon.y > 1700)
 	{
 		m_velocity = -m_velocity * 0.5;
-		m_positon.y = 2000;
+		m_positon.y = 1700;
 	}
 
-	if (m_positon.x < 0)
+	if (m_positon.x < -50)
 	{
 		m_velocity = -m_velocity * 0.5;
-		m_positon.x = 0;
+		m_positon.x = -50;
 	}
 
-	if (m_positon.y < 0)
+	if (m_positon.y < -50)
 	{
 		m_velocity = -m_velocity * 0.5;
-		m_positon.y = 0;
+		m_positon.y = -50;
 	}
 	physics.update(t, m_velocity, m_acceleration, m_degree); // sand player statu to physics
 	m_velocity = physics.getVelocity(); // get new motion from physics
@@ -120,10 +120,10 @@ void Player::update(double t, int car_ID)
 
 void Player::render(sf::RenderWindow &window)
 {
-	window.clear(sf::Color::White);
+	//window.clear(sf::Color::White);
 	window.setView(view);
 
-	window.draw(m_filed);
+	//window.draw(m_filed);
 	window.draw(m_sprite);
 	for (int i = 0; i < 2; i++)
 	{

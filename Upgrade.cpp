@@ -197,5 +197,5 @@ void Upgrade::render(sf::RenderWindow &window)
 	window.draw(m_textMessage[5]);
 	window.draw(m_textMessage[6]);
 
-	window.display();
+	//window.display();
 }

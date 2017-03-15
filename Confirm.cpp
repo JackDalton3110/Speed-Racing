@@ -103,6 +103,4 @@ void Confirm::render(sf::RenderWindow &window)
 	{
 		window.draw(m_text[i]);
 	}
-
-	window.display();
 }

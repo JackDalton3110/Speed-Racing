@@ -34,6 +34,7 @@ Game::Game() :
 	m_again = new Playagain(*this, m_Motor);
 	m_gameplay = new Gameplay(*this, m_Motor);
 	m_help = new Help(*this, m_Motor);
+	m_map = new Map(*this);
 
 
 	m_textMessage[0].setPosition(20, 20);//set position
@@ -59,6 +60,7 @@ Game::~Game()
 	delete(m_confirm);
 	delete(m_gameplay);
 	delete(m_help);
+	delete(m_map);
 	std::cout << "destroying game" << std::endl;
 }
 
@@ -118,7 +120,9 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 	case GameState::upgrade:
 		std::cout << "upgrade" << std::endl;
 		m_upgrade->update(time, controller);
+		break;
 	case GameState::gameplay:
+		m_map->update();
 		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID());
 		break;
 	case GameState::credits:
@@ -135,6 +139,9 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		break;
 	case GameState::Help:
 		m_help->update();
+		break;
+	case GameState::Map:
+		m_map->update();
 		break;
 	default:
 		break;
@@ -201,6 +208,7 @@ void Game::render()
 		m_upgrade->render(m_window);
 		break;
 	case GameState::gameplay:
+		m_map->render(m_window);
 		m_gameplay->render(m_window);
 		break;
 	case GameState::credits:
@@ -215,9 +223,13 @@ void Game::render()
 	case GameState::Help:
 		m_help->render(m_window);
 		break;
+	case GameState::Map:
+		m_map->render(m_window);
+		break;
 	default:
 
 		break;
 	}
 
+	m_window.display();
 }

@@ -16,6 +16,7 @@
 #include "Playagain.h"
 #include "Gameplay.h"
 #include "Help.h"
+#include "Map.h"
 
 class Licence;
 class Splash;
@@ -28,6 +29,7 @@ class Upgrade;
 class Confirm;
 class Playagain;
 class Help;
+class Map;
 
 
 enum class
@@ -43,7 +45,8 @@ enum class
 	confirm,
 	gameplay,
 	playagain,
-	Help
+	Help,
+	Map
 
 };
 
@@ -85,6 +88,7 @@ private:
 	Playagain *m_again;
 	Gameplay *m_gameplay;
 	Help *m_help;
+	Map *m_map;
 
 	sf::Texture m_Texture1;
 	sf::Texture m_Texture2;

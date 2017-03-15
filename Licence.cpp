@@ -65,5 +65,4 @@ void Licence::render(sf::RenderWindow &window)
 	window.draw(m_Sprite);
 	window.draw(m_textMessage);
 	window.draw(m_textMessage1);//draw text
-	window.display();
 }

@@ -332,5 +332,5 @@ void Option::render(sf::RenderWindow & Window)
 	}
 
 
-	Window.display();
+	
 }
