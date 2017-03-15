@@ -223,7 +223,8 @@ void Upgrade::update(sf::Time time, Xbox360Controller &controller)
 				status_ID = 0;
 			}
 
-	
+		}
+	}
 
 	if (controller.m_currentState.DPadUp && !controller.m_previousState.DPadUp)
 	{
@@ -337,15 +338,15 @@ void Upgrade::update(sf::Time time, Xbox360Controller &controller)
 }
 
 
-void Upgrade::changeScreen()
+void Upgrade::changeScreen()		
 {
 	m_game->SetGameState(GameState::upgrade);
-	
 }
+
+
 void Upgrade::backOut()
 {
 	m_game->SetGameState(GameState::option);
-
 }
 
 void Upgrade::render(sf::RenderWindow &window)

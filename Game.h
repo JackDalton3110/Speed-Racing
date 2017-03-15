@@ -31,7 +31,6 @@ class Upgrade;
 class Confirm;
 class Playagain;
 class Help;
-
 class Sound;
 class Difficulty;
 
@@ -49,11 +48,9 @@ enum class
 	confirm,
 	gameplay,
 	playagain,
-	Help
+	Help,
 	sound,
-	Difficulty,
-	credits
-
+	Difficulty
 };
 
 class Game

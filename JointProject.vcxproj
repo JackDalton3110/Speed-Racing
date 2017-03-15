@@ -145,13 +145,10 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="NPCplayer.cpp" />
     <ClCompile Include="OptionScreen.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Playagain.cpp" />
     <ClCompile Include="Player.cpp" />
-=======
     <ClCompile Include="SoundScreen.cpp" />
->>>>>>> Sound_Difficulty
     <ClCompile Include="Splash.cpp" />
     <ClCompile Include="Upgrade.cpp" />
   </ItemGroup>
@@ -167,13 +164,10 @@
     <ClInclude Include="Licence.h" />
     <ClInclude Include="NPCplayer.h" />
     <ClInclude Include="OptionScreen.h" />
-<<<<<<< HEAD
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Playagain.h" />
     <ClInclude Include="Player.h" />
-=======
     <ClInclude Include="SoundScreen.h" />
->>>>>>> Sound_Difficulty
     <ClInclude Include="Splash.h" />
     <ClInclude Include="Upgrade.h" />
   </ItemGroup>

@@ -103,13 +103,13 @@ void Option::reset()
 		m_reset_check = false;
 
 		button_ID = 0;
-		setting_ID = 0;
+		//setting_ID = 0;
 		startgame = true;
 		options = false;
 		quitGame = false;
 		closeGame = false;
 		upgrade = false;
-		settings = false;
+		//settings = false;
 		closeWindow = false;
 
 		m_button_released = false;
@@ -152,7 +152,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		{
 			if (setting_ID < 2)
 			{
-				setting_ID = setting_ID + 1;
+				setting_ID++;
 			}
 			else
 			{
@@ -173,12 +173,13 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			}
 		}
 	}
+	
 
 
-	if (!controller.Abutton())
+	/*if (!controller.Abutton())
 	{
 		m_button_released = true;
-	}
+	}*/
 
 
 	if (controller.m_currentState.A && quitGame == true && !controller.m_previousState.A)
@@ -195,8 +196,9 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 	if (controller.m_currentState.A && !controller.m_previousState.A && options == true)
 	{
-		m_reset_check = true;
+		//m_reset_check = true;
 		changeToOption();//change to game 
+	
 	}
 
 
@@ -211,15 +213,19 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		settings = true;//draw settings
 		if (settings == true)
 		{
-			button_ID = 2;
+			setting_ID = 0;
 		}
-		m_reset_check = true;
+		//m_reset_check = true;
+		m_button_released = false;
+		controller.m_previousState = controller.m_currentState;
 	}
 
 	if (controller.m_currentState.B && settings == true && !controller.m_previousState.A)
 	{
 		settings = false;//back out of settings
 		button_ID = 1;
+		difficulty = false;
+		sound = false;
 	}
 
 	if (button_ID == 0)
@@ -266,9 +272,11 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		upgrade = false;
 		quitGame = false;
 
+		
+
 		if (setting_ID == 0)
 		{
-			m_Sprite[0].setPosition(275, 200);
+			m_Sprite[0].setPosition(275, 210);
 			controller.m_previousState = controller.m_currentState;
 			sound = true;
 			difficulty = false;
@@ -276,24 +284,28 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 		else if (setting_ID == 1)
 		{
-			m_Sprite[0].setPosition(275, 325);
+			m_Sprite[0].setPosition(275, 335);
 			controller.m_previousState = controller.m_currentState;
 			sound = false;
 			difficulty = true;
 		}
 		else if (setting_ID == 2)
 		{
-			m_Sprite[0].setPosition(275, 465);
+			m_Sprite[0].setPosition(275, 475);
 			controller.m_previousState = controller.m_currentState;
 		}
-		if (controller.m_currentState.A && !controller.m_previousState.A && button_ID == 2)
+		if (controller.m_currentState.A && !controller.m_previousState.A && settings==true)
 		{
 			changeToSound();
 		}
 
-		if (controller.m_currentState.A && !controller.m_previousState.A && button_ID == 1)
+		if (controller.m_currentState.A && !controller.m_previousState.A && setting_ID == 1)
 		{
-			changeToDifficulty();
+			if (settings == true)
+			{
+				changeToDifficulty();
+			}
+			
 		}
 	}
 
@@ -310,7 +322,8 @@ void Option::changeToOption()
 void Option::changeToUpgrade()
 {
 	m_game->SetGameState(GameState::upgrade); // chagne to upgrade
-
+}
+ 
 void Option::changeToSound()
 {
 	m_game->SetGameState(GameState::sound);

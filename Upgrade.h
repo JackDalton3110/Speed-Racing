@@ -20,9 +20,7 @@ private:
 	void backOut();
 	void drawStatusShape(sf::RenderWindow &window, int maxSpeed, int acceleration, int handling);
 	int status_ID = 0; 
-
 	void changeScreen();
-	void backOut();
 	int button_ID = 0;
 	int setting_ID = 0;
 

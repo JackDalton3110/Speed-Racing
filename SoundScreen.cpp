@@ -70,6 +70,7 @@ Sound::~Sound()
 
 void Sound::Update(sf::Time time , Xbox360Controller &controller)
 {
+	
 	if (controller.m_currentState.DPadDown && !controller.m_previousState.DPadDown)
 	{
 		if (button_ID < 2)
@@ -138,7 +139,7 @@ void Sound::Update(sf::Time time , Xbox360Controller &controller)
 	{
 		if (scrollBarSprite[0].getPosition().x <=350)
 		{
-			scrollBarSprite[0].move(5, 0);
+			scrollBarSprite[0].move(7, 0);
 		}
 		if (soundVolume <= 100)
 		{
@@ -152,7 +153,7 @@ void Sound::Update(sf::Time time , Xbox360Controller &controller)
 	{
 		if (scrollBarSprite[0].getPosition().x >= 175)
 		{
-			scrollBarSprite[0].move(-5, 0);
+			scrollBarSprite[0].move(-7, 0);
 		}
 		if (soundVolume >= 0)
 		{
