@@ -17,7 +17,10 @@ public:
 	void render(sf::RenderWindow &window);
 	void changeScreen();
 	void changeToOption();
+	void changeToUpgrade();
 	void reset();
+	void changeToSound();
+	void changeToDifficulty();
 	int button_ID = 0;
 	int setting_ID = 0;
 	bool startgame = true;//bool for game start
@@ -26,6 +29,8 @@ public:
 	bool upgrade = false;
 	bool closeGame = false;
 	bool settings = false;
+	bool difficulty = false;
+	bool sound = false;
 	bool closeWindow = false;
 	sf::RectangleShape settingButton[9];//array for buttons
 										/*void changeScreen();*/

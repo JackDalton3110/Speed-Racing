@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="Confirm.cpp" />
     <ClCompile Include="CarSelectScreen.cpp" />
     <ClCompile Include="Controller.cpp" />
@@ -68,5 +69,179 @@
     <Image Include="images\Track images\slice_3_1.png" />
     <Image Include="images\Track images\slice_3_2.png" />
     <Image Include="images\Track images\slice_3_3.png" />
+=======
+    <ClCompile Include="CarSelectScreen.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Confirm.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Credits.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Licence.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCplayer.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionScreen.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Playagain.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Splash.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Help.cpp" />
+    <ClCompile Include="Upgrade.cpp">
+      <Filter>Soucrce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DifficultyScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CarSelectScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Confirm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Credits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Licence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCplayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Playagain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Splash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Help.h" />
+       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Upgrade.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DifficultyScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\Bar.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\back.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\arrow.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\lambo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\greenCarSprite.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\OptionScreen.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\selector.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\selectbkgr.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\redCarSprite.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\template.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\whiteCarSprite.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\yellowCarSprite.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\circlemover.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\360 controller.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{b5e378fc-32bc-42bb-b170-ebf3697d1188}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{421550c5-8f31-4d05-80d3-e6a8562ffb26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Soucrce Files">
+      <UniqueIdentifier>{6f1500ff-3878-4396-9541-9078dd8a4240}</UniqueIdentifier>
+    </Filter>
+    <Media Include="sounds\song1.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+>>>>>>> 2329180c41ee585325e6704e7f9806bd641fef6f
   </ItemGroup>
 </Project>

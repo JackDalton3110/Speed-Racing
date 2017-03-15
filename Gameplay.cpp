@@ -12,7 +12,8 @@ Gameplay::~Gameplay()
 
 }
 
-void Gameplay::update(double t, int car_id)
+
+void Gameplay::update(double t, int car_id,Xbox360Controller& controller)
 {
 	m_player.update(t, car_id);
 	m_npc.update(t, car_id);

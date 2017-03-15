@@ -89,10 +89,13 @@ Option::Option(Game & game, sf::Font font, sf::Font font1) :
 
 Option::~Option()
 {
-	std::cout << "Destroying Splash Screen" << std::endl;
+	std::cout << "Destroying Option Screen" << std::endl;
 
 }
 
+/// <summary>
+/// reset everything when player enter this screen
+/// </summary>
 void Option::reset()
 {
 	if (m_reset_check)
@@ -100,11 +103,13 @@ void Option::reset()
 		m_reset_check = false;
 
 		button_ID = 0;
-		startgame = false;
+		//setting_ID = 0;
+		startgame = true;
 		options = false;
 		quitGame = false;
 		closeGame = false;
-		settings = false;
+		upgrade = false;
+		//settings = false;
 		closeWindow = false;
 
 		m_button_released = false;
@@ -147,7 +152,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		{
 			if (setting_ID < 2)
 			{
-				setting_ID = setting_ID + 1;
+				setting_ID++;
 			}
 			else
 			{
@@ -168,60 +173,59 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			}
 		}
 	}
+	
 
 
-	if (!controller.Abutton())
+	/*if (!controller.Abutton())
 	{
 		m_button_released = true;
-	}
+	}*/
 
 
 	if (controller.m_currentState.A && quitGame == true && !controller.m_previousState.A)
 	{
+		m_reset_check = true;
 		m_game->SetGameState(GameState::confirm); // change to Confirm
-		//m_reset_check = true;
 		
 	}
-	if (controller.m_currentState.A && startgame == true)
+	if (controller.m_currentState.A &&  startgame == true && !controller.m_previousState.A)
 	{
+		m_reset_check = true;
 		changeScreen();//change to game
 	}
 
-	if (controller.m_currentState.A && !controller.m_previousState.A && startgame == true)
+	if (controller.m_currentState.A && !controller.m_previousState.A && options == true)
 	{
+		//m_reset_check = true;
 		changeToOption();//change to game 
-		m_reset_check = true;
-
+	
 	}
+
+
+	if (controller.m_currentState.A && !controller.m_previousState.A && upgrade == true)
+	{
+		m_reset_check = true;
+		changeToUpgrade();
+	}
+
 	if (options == true && controller.m_currentState.A && !controller.m_previousState.A)
 	{
 		settings = true;//draw settings
 		if (settings == true)
 		{
-			button_ID = 2;
+			setting_ID = 0;
 		}
+		//m_reset_check = true;
+		m_button_released = false;
+		controller.m_previousState = controller.m_currentState;
 	}
+
 	if (controller.m_currentState.B && settings == true && !controller.m_previousState.A)
 	{
 		settings = false;//back out of settings
 		button_ID = 1;
-	}
-	if (controller.m_currentState.DPadRight && settings == true)
-	{
-		if (m_Sprite[2].getPosition().x <= 490 && m_Sprite[2].getPosition().x >= 260)
-		{
-			m_Sprite[2].move(0.5, 0);//move slider right
-		}
-
-
-	}
-	if (controller.m_currentState.DPadLeft && settings == true)
-	{
-		if (m_Sprite[2].getPosition().x <= 500 && m_Sprite[2].getPosition().x >= 260)
-		{
-			m_Sprite[2].move(-0.5, 0);//move slider left
-		}
-
+		difficulty = false;
+		sound = false;
 	}
 
 	if (button_ID == 0)
@@ -261,28 +265,47 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		quitGame = true;
 	}
 
-	if (settings == true)
+	if (settings == true)//within settings menu
 	{
 		startgame = false;
 		options = false;
 		upgrade = false;
 		quitGame = false;
 
+		
+
 		if (setting_ID == 0)
 		{
-			m_Sprite[0].setPosition(275, 200);
+			m_Sprite[0].setPosition(275, 210);
 			controller.m_previousState = controller.m_currentState;
+			sound = true;
+			difficulty = false;
 		}
 
 		else if (setting_ID == 1)
 		{
-			m_Sprite[0].setPosition(275, 325);
+			m_Sprite[0].setPosition(275, 335);
 			controller.m_previousState = controller.m_currentState;
+			sound = false;
+			difficulty = true;
 		}
 		else if (setting_ID == 2)
 		{
-			m_Sprite[0].setPosition(275, 465);
+			m_Sprite[0].setPosition(275, 475);
 			controller.m_previousState = controller.m_currentState;
+		}
+		if (controller.m_currentState.A && !controller.m_previousState.A && settings==true)
+		{
+			changeToSound();
+		}
+
+		if (controller.m_currentState.A && !controller.m_previousState.A && setting_ID == 1)
+		{
+			if (settings == true)
+			{
+				changeToDifficulty();
+			}
+			
 		}
 	}
 
@@ -296,6 +319,20 @@ void Option::changeToOption()
 {
 	m_game->SetGameState(GameState::option);//settings
 }
+void Option::changeToUpgrade()
+{
+	m_game->SetGameState(GameState::upgrade); // chagne to upgrade
+}
+ 
+void Option::changeToSound()
+{
+	m_game->SetGameState(GameState::sound);
+}
+
+void Option::changeToDifficulty()
+{
+	m_game->SetGameState(GameState::Difficulty);
+}
 
 void Option::render(sf::RenderWindow & Window)
 {
@@ -308,13 +345,13 @@ void Option::render(sf::RenderWindow & Window)
 		Window.draw(m_Sprite[0]);
 		Window.draw(m_textMessage[0]);
 		Window.draw(m_textMessage[1]);
-		Window.draw(m_textMessage[2]);//main menu draw
-		Window.draw(m_textMessage[7]);//setting draw 
+		Window.draw(m_textMessage[2]); //main menu draw
+		Window.draw(m_textMessage[7]); //setting draw 
 		Window.draw(m_textMessage[6]);
 
 		if (closeGame == true)
 		{
-			Window.close();
+			Window.close();//quit game
 		}
 	}
 

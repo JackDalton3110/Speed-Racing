@@ -21,13 +21,14 @@ private:
 	Xbox360Controller controller;
 
 	sf::Font m_font;
-	sf::Text m_text[3];
+	sf::Text m_text[3]; // text 0 for time, text 1 for motion, text 2 for loop
+
 
 	float m_acceleration;
 	float m_degree;
 	float m_velocity;
 
-	sf::View view;
+	sf::View view; // camera
 
 	sf::Vector2f m_positon;
 

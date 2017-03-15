@@ -21,16 +21,21 @@ Player::Player() :
 		std::string s("error loading texture from file");
 		throw std::exception(s.c_str());
 	}
+
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(25, 15);
 	m_sprite.setPosition(m_positon);
 
 	/*m_filed.setSize(sf::Vector2f(2000, 2000));
+	m_sprite.setTexture(m_texture); // set car texture
+	m_sprite.setOrigin(25, 15); // set origin
+	m_sprite.setPosition(m_positon); // set position 
+	m_filed.setSize(sf::Vector2f(2000, 2000));
 	m_filed.setPosition(0, 0);
 	m_filed.setFillColor(sf::Color::Black);*/
 
-	view.setCenter(m_positon);
-	view.setSize(sf::Vector2f(1000, 800));
+	view.setCenter(m_positon); // set player's position to camera
+	view.setSize(sf::Vector2f(1000, 800)); // set camera's size
 }
 
 Player::~Player()
@@ -43,7 +48,9 @@ void Player::update(double t, int car_ID)
 
 	controller.update();
 
-	sf::IntRect car(0, car_ID * 30, 50 , 30);
+
+	sf::IntRect car(0, car_ID * 30, 50 , 30); // get rect of player selection
+
 	m_sprite.setTextureRect(car);
 
 	if (controller.RTrigger() >= 5) // right trigger to speed up
