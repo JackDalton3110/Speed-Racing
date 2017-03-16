@@ -158,5 +158,10 @@ void Map::render(sf::RenderWindow& window)
 	for (int index = 0; index < 16; index++)
 	{
 		window.draw(m_sprites[index]);
+		/*if (m_sprites[index].getPosition < m_player->getPositionX(m_posYrowFour) + 305 && m_sprites[index].getPosition  > m_player->getPositionX(m_posYrowTwo) - 305
+			&& m_sprites[index].getPosition < m_player->getPositionY(m_posYrowOne) + 391 && m_sprites[index].getPosition  > m_player->getPositionY(m_posYrowThree) - 391)
+		{
+			window.draw(m_sprites[index]);
+		}*/
 	}
 }

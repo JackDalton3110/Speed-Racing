@@ -206,5 +206,4 @@ void Sound::render(sf::RenderWindow &window)
 		window.draw(scrollBarSprite[i]);
 	}
 	window.draw(selectorSprite);
-	window.display();
 }

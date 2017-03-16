@@ -15,6 +15,8 @@ public:
 
 	void update(double t, int car_ID);
 	void render(sf::RenderWindow &window);
+	float getPositionX(float xPos);
+	float getPositionY(float yPos);
 	
 private:
 	Physics physics;

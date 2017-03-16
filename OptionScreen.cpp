@@ -208,6 +208,13 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		changeToUpgrade();
 	}
 
+	//setting to the help screen
+	if (controller.m_currentState.A && !controller.m_previousState.A && help == true)
+	{
+		m_reset_check = true;
+		changeToHelp();
+	}
+
 	if (options == true && controller.m_currentState.A && !controller.m_previousState.A)
 	{
 		settings = true;//draw settings
@@ -271,6 +278,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		options = false;
 		upgrade = false;
 		quitGame = false;
+		//help = false;
 
 		
 
@@ -280,6 +288,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			controller.m_previousState = controller.m_currentState;
 			sound = true;
 			difficulty = false;
+			help = true;
 		}
 
 		else if (setting_ID == 1)
@@ -288,11 +297,16 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			controller.m_previousState = controller.m_currentState;
 			sound = false;
 			difficulty = true;
+			help = false;
 		}
 		else if (setting_ID == 2)
 		{
 			m_Sprite[0].setPosition(275, 475);
 			controller.m_previousState = controller.m_currentState;
+			sound = false;
+			difficulty = false;
+			help = true;
+
 		}
 		if (controller.m_currentState.A && !controller.m_previousState.A && settings==true)
 		{
@@ -306,6 +320,11 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 				changeToDifficulty();
 			}
 			
+		}
+
+		if (controller.m_currentState.A && !controller.m_previousState.A && help==true)
+		{
+			changeToHelp();
 		}
 	}
 
@@ -332,6 +351,11 @@ void Option::changeToSound()
 void Option::changeToDifficulty()
 {
 	m_game->SetGameState(GameState::Difficulty);
+}
+
+void Option::changeToHelp()
+{
+	m_game->SetGameState(GameState::Help);
 }
 
 void Option::render(sf::RenderWindow & Window)

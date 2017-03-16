@@ -3,7 +3,7 @@
 Player::Player() :
 	m_acceleration(0),
 	m_degree(0),
-	m_positon(600, 600),
+	m_positon(1000, 800),
 	m_velocity(0)
 {
 	if (!m_font.loadFromFile("c:/windows/fonts/comic.ttf"))
@@ -25,6 +25,10 @@ Player::Player() :
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(25, 15);
 	m_sprite.setPosition(m_positon);
+	
+	//This scales the player car down
+	m_sprite.scale(.5, .5);
+
 
 	/*m_filed.setSize(sf::Vector2f(2000, 2000));
 	m_sprite.setTexture(m_texture); // set car texture
@@ -143,4 +147,14 @@ std::string Player::intToString(int num) {
 	char numString[10];
 	sprintf_s(numString, "%i", num);
 	return numString;
+}
+
+float Player::getPositionX(float xPos)
+{
+	return m_positon.x;
+}
+
+float Player::getPositionY(float yPos)
+{
+	return m_positon.y;
 }
