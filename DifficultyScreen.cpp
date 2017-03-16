@@ -169,5 +169,4 @@ void Difficulty::render(sf::RenderWindow &window)
 		window.draw(message[2]);
 		window.draw(message[3]);
 
-	window.display();
 }

@@ -51,7 +51,7 @@ enum class
 	gameplay,
 	playagain,
 	Help,
-	Map
+	Map,
 	sound,
 	Difficulty
 };
