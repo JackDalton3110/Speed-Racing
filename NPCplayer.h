@@ -13,11 +13,12 @@ public:
 	void render(sf::RenderWindow &window);
 private:
 	Physics physics;
+	float m_velocity;
 
 	float m_acceleration;
 	float m_degree;
-	float m_velocity;
 
+	sf::Vector2f m_motion;
 	int m_dirction;
 	float timer;
 
@@ -26,5 +27,8 @@ private:
 	sf::Texture m_texture; // car texture
 	sf::Sprite m_sprite; // car sprite
 
-	sf::Vector2f m_positon;
+	sf::Vector2f m_postion;
+
+	float located_time;
+	sf::Vector2f location_record;
 };

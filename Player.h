@@ -22,18 +22,29 @@ private:
 
 	sf::Font m_font;
 	sf::Text m_text[3]; // text 0 for time, text 1 for motion, text 2 for loop
-
+	sf::Text m_timer; // text for timer
 
 	float m_acceleration;
 	float m_degree;
 	float m_velocity;
 
+	float m_handbrake;
+
+	sf::Vector2f m_motion;
+
+	int timer_mis; // millisecond
+	int timer_sec; // second
+	int timer_min; // minute
+
 	sf::View view; // camera
 
-	sf::Vector2f m_positon;
+	sf::Vector2f m_postion;
 
 	sf::Texture m_texture; // car texture
 	sf::Sprite m_sprite; // car sprite
+
+	sf::Vector2f location_record;
+	float located_time;
 
 	sf::RectangleShape m_filed;
 
