@@ -20,6 +20,7 @@
     <ClCompile Include="SoundScreen.cpp" />
     <ClCompile Include="Splash.cpp" />
     <ClCompile Include="Upgrade.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Confirm.h" />
@@ -41,6 +42,8 @@
     <ClInclude Include="Splash.h" />
     <ClInclude Include="Upgrade.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="LevelLoader.h" />
+    <ClInclude Include="ResourcePath.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="sounds\song1.wav" />

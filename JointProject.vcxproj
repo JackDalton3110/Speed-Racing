@@ -141,6 +141,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gameplay.cpp" />
     <ClCompile Include="Help.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="Licence.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gameplay.h" />
     <ClInclude Include="Help.h" />
+    <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="Licence.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Map.h" />
@@ -170,6 +172,7 @@
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Playagain.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="ResourcePath.hpp" />
     <ClInclude Include="SoundScreen.h" />
     <ClInclude Include="Splash.h" />
     <ClInclude Include="Upgrade.h" />
