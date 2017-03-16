@@ -88,7 +88,11 @@
       <AdditionalIncludeDirectories>H:\Programming\include;.\include;$(SFML_SDK)\include;%(AdditionalIncludeDirectories);.\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
+<<<<<<< HEAD
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories).\;.\lib</AdditionalLibraryDirectories>
+=======
+      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories);.\lib</AdditionalLibraryDirectories>
+>>>>>>> 754369388464066f003ffee86941d6a1278685cc
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -114,7 +118,11 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+<<<<<<< HEAD
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories).\;.\lib</AdditionalLibraryDirectories>
+=======
+      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories);.\lib</AdditionalLibraryDirectories>
+>>>>>>> 754369388464066f003ffee86941d6a1278685cc
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -141,6 +149,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gameplay.cpp" />
     <ClCompile Include="Help.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="Licence.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -149,6 +158,7 @@
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Playagain.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ResourcePath.cpp" />
     <ClCompile Include="SoundScreen.cpp" />
     <ClCompile Include="Splash.cpp" />
     <ClCompile Include="Upgrade.cpp" />
@@ -162,13 +172,16 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gameplay.h" />
     <ClInclude Include="Help.h" />
+    <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="Licence.h" />
+    <ClInclude Include="Main.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="NPCplayer.h" />
     <ClInclude Include="OptionScreen.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Playagain.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="ResourcePath.hpp" />
     <ClInclude Include="SoundScreen.h" />
     <ClInclude Include="Splash.h" />
     <ClInclude Include="Upgrade.h" />

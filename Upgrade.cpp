@@ -384,6 +384,7 @@ void Upgrade::render(sf::RenderWindow &window)
 	}
 
 
+
 //>>>>>>> Sound_Difficulty
 	window.draw(m_textMessage[0]);
 	window.draw(m_textMessage[1]);
