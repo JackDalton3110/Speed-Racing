@@ -125,7 +125,7 @@ private:
 	sf::Sprite m_Sprite4;
 	sf::Sprite m_Sprite5;
 	
-
+	std::vector<sf::CircleShape> m_trackCircle;
 
 };
 

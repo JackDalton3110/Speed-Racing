@@ -1,8 +1,9 @@
 #include "Gameplay.h"
 
-Gameplay::Gameplay(Game &game, sf::Font font):
+Gameplay::Gameplay(Game &game, sf::Font font, std::vector<sf::CircleShape> &Node) :
 	m_game(&game),
-	m_font(font)
+	m_font(font),
+	m_npc(Node)
 {
 
 }

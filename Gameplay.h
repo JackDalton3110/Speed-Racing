@@ -12,7 +12,7 @@ class Game;
 class Gameplay
 {
 public:
-	Gameplay(Game &game, sf::Font font);
+	Gameplay(Game &game, sf::Font font, std::vector<sf::CircleShape> &Node);
 	~Gameplay();
 	void update(double t, int car_id, Xbox360Controller& controller);
 	void render(sf::RenderWindow &window);

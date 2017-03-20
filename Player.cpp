@@ -4,7 +4,7 @@ Player::Player() :
 	m_acceleration(0),
 	m_degree(0),
 	m_velocity(0),
-	m_postion(600, 600),
+	m_postion(540, 540 ),
 	location_record(0, 0),
 	located_time(0.1),
 	m_motion(0, 0),
@@ -28,7 +28,7 @@ Player::Player() :
 
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(25, 15);
-	/*m_sprite.setPosition(m_positon);*/
+	//m_sprite.setPosition(m_positon);
 	
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
@@ -83,11 +83,16 @@ void Player::update(double t, int car_ID)
 	else if (controller.RTrigger() < 5 && controller.RTrigger() >= 0)
 	{
 		m_acceleration = 0;
+		std::cout << m_postion.x << std::endl;
+		std::cout << m_postion.y << std::endl;
 	}
 
 	if (controller.LTrigger() <= -5)
 	{
 		m_acceleration = controller.LTrigger() * 2;
+		std::cout << m_postion.x << std::endl;
+		std::cout << m_postion.y << std::endl;
+		
 	}
 	else if (controller.LTrigger() > -5 && controller.LTrigger() <= 0)
 	{
@@ -106,7 +111,7 @@ void Player::update(double t, int car_ID)
 	if (controller.LeftThumbSticks().x <= -20 ||
 		controller.LeftThumbSticks().x >= 20) 
 	{
-		m_degree += controller.LeftThumbSticks().x / 20 * m_velocity/200;
+
 		m_degree += controller.LeftThumbSticks().x * m_velocity / 150 * t;
 		if (m_degree > 360)
 		{
@@ -193,4 +198,3 @@ std::string Player::intToString(int num) {
 	sprintf_s(numString, "%i", num);
 	return numString;
 }
-
