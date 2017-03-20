@@ -3,11 +3,11 @@
 Player::Player() :
 	m_acceleration(0),
 	m_degree(0),
+	m_velocity(0),
 	m_postion(600, 600),
 	location_record(0, 0),
 	located_time(0.1),
 	m_motion(0, 0),
-	m_velocity(0),
 	m_handbrake(0)
 {
 	if (!m_font.loadFromFile("c:/windows/fonts/comic.ttf"))
@@ -28,8 +28,15 @@ Player::Player() :
 
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(25, 15);
-	m_sprite.setPosition(m_postion);
+	m_sprite.setPosition(m_positon);
+	
+	//This scales the player car down
+	m_sprite.scale(.5, .5);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 050b7539f24fe526bf50edec9d04a79e4aa8cb92
 	view.setCenter(m_postion); // set player's position to camera
 	view.setSize(sf::Vector2f(1000, 800)); // set camera's size
 }
@@ -44,6 +51,7 @@ void Player::update(double t, int car_ID)
 
 	controller.update();
 
+	located_time -= t;
 	if (located_time <= 0)
 	{
 		location_record = m_postion;
@@ -101,7 +109,9 @@ void Player::update(double t, int car_ID)
 	if (controller.LeftThumbSticks().x <= -20 ||
 		controller.LeftThumbSticks().x >= 20) 
 	{
+
 		m_degree += controller.LeftThumbSticks().x * m_velocity / 150 * t;
+		m_degree += controller.LeftThumbSticks().x / 20 * m_velocity/200;
 		if (m_degree > 360)
 		{
 			m_degree = 0;
@@ -160,6 +170,15 @@ sf::FloatRect Player::getRect()
 {
 	return sf::FloatRect(m_postion.x - m_sprite.getOrigin().x, m_postion.y - m_sprite.getOrigin().y, 50, 30);
 }
+<<<<<<< HEAD
+=======
+
+void Player::setLocation()
+{
+	m_postion = location_record;
+	m_acceleration = 0;
+}
+>>>>>>> 050b7539f24fe526bf50edec9d04a79e4aa8cb92
 
 void Player::render(sf::RenderWindow &window)
 {
@@ -180,4 +199,14 @@ std::string Player::intToString(int num) {
 	char numString[10];
 	sprintf_s(numString, "%i", num);
 	return numString;
+}
+
+float Player::getPositionX(float xPos)
+{
+	return m_positon.x;
+}
+
+float Player::getPositionY(float yPos)
+{
+	return m_positon.y;
 }

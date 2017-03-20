@@ -18,6 +18,7 @@ public:
 	void changeScreen();
 	void changeToOption();
 	void changeToUpgrade();
+	void changeToHelp();
 	void reset();
 	void changeToSound();
 	void changeToDifficulty();
@@ -31,6 +32,7 @@ public:
 	bool settings = false;
 	bool difficulty = false;
 	bool sound = false;
+	bool help = false;
 	bool closeWindow = false;
 	sf::RectangleShape settingButton[9];//array for buttons
 										/*void changeScreen();*/

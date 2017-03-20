@@ -464,7 +464,13 @@ void Upgrade::render(sf::RenderWindow &window)
 		break;
 	}
 
+<<<<<<< HEAD
 //Sound_Difficulty
+=======
+
+
+//>>>>>>> Sound_Difficulty
+>>>>>>> 050b7539f24fe526bf50edec9d04a79e4aa8cb92
 	window.draw(m_textMessage[0]);
 	window.draw(m_textMessage[1]);
 	window.draw(m_textMessage[2]);//main menu draw

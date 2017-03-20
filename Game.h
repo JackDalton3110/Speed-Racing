@@ -5,6 +5,9 @@
 #include<iostream>
 #include <SFML\Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <sfeMovie\Movie.hpp>
+#include <sfeMovie\StreamSelection.hpp>
+#include <sfeMovie\Visibility.hpp>
 #include "Licence.h"
 #include "Splash.h"
 #include "Credits.h"
@@ -20,6 +23,7 @@
 #include "Gameplay.h"
 #include "Help.h"
 #include "Map.h"
+#include "LevelLoader.h"
 
 class Licence;
 class Splash;
@@ -69,11 +73,18 @@ public:
 	bool B;
 	bool X;
 	bool Y;
+	void GenerateTrack();
 	int score = 0;
 	sf::Sound songs[3];
 	sf::SoundBuffer songBuffer[3];
 	sf::Sound buttonsound;
 	sf::SoundBuffer buttonBuffer;
+	sf::Texture ai_Txt;
+	sf::Sprite ai_Sprite;
+
+protected:
+	LevelData m_level;
+	std::vector<std::unique_ptr<sf::Sprite>>m_TrackNodes;
 
 private:
 	void processEvents();
@@ -85,6 +96,7 @@ private:
 	sf::Font m_Motor;
 	sf::Text m_textMessage[4];
 	sf::RenderWindow m_window;
+	sfe::Movie m_movie;
 
 	Xbox360Controller m_controller;
 

@@ -20,8 +20,14 @@ void Gameplay::update(double t, int car_id,Xbox360Controller& controller)
 
 	if (m_player.getRect().intersects(m_npc.getRect()))
 	{
+<<<<<<< HEAD
 		float temp = m_player.m_motion.x;
 		m_player.m_motion.x = m_npc.m_motion.x;
+=======
+		m_player.setLocation();
+		float temp = m_player.m_motion.x * 0.7;
+		m_player.m_motion.x = m_npc.m_motion.x * 0.7;
+>>>>>>> 050b7539f24fe526bf50edec9d04a79e4aa8cb92
 		m_npc.m_motion.x = temp;
 	}
 
