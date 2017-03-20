@@ -102,6 +102,8 @@ private:
 	Sound *m_soundScreen;
 	Difficulty *m_DifficultyScreen;
 
+	sf::View view; // camera
+
 	sf::Texture m_Texture1;
 	sf::Texture m_Texture2;
 	sf::Texture m_Texture3;

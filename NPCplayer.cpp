@@ -86,6 +86,11 @@ void NPCplayer::update(double t, int car_id)
 	m_sprite.setRotation(m_degree);
 }
 
+sf::FloatRect NPCplayer::getRect()
+{
+	return sf::FloatRect(m_postion.x - m_sprite.getOrigin().x, m_postion.y - m_sprite.getOrigin().y, 50, 30);
+}
+
 void NPCplayer::render(sf::RenderWindow &window)
 {
 	window.draw(m_sprite);

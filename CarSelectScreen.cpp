@@ -1,10 +1,11 @@
 #include "CarSelectScreen.h"
 
-CarSelect::CarSelect(Game &game, sf::Font font, sf::Font font1):
+CarSelect::CarSelect(Game &game, sf::Font font, sf::Font font1) :
 	m_game(&game),
 	m_HARLOW(font),
 	m_Motor(font1),
-	m_button_released(false)
+	m_button_released(false),
+	reset_check(false)
 {
 	if (!m_texture[0].loadFromFile("images/whiteCarSprite.png"))
 	{
@@ -70,13 +71,13 @@ CarSelect::CarSelect(Game &game, sf::Font font, sf::Font font1):
 	m_textMessage[3].setFont(m_Motor);//set font 
 	m_textMessage[3].setColor(sf::Color::Red);//set colour
 	m_textMessage[3].setCharacterSize(110);
-	
+
 	// car varibles 
 	//Max Speed
 	m_textMessage[4].setPosition(700, 300);//set position
 	m_textMessage[4].setFont(m_Motor);//set font 
 	m_textMessage[4].setColor(sf::Color::Red);//set colour
-	//Aceleration
+											  //Aceleration
 	m_textMessage[5].setPosition(700, 500);//set position
 	m_textMessage[5].setFont(m_Motor);//set font 
 	m_textMessage[5].setColor(sf::Color::Red);//set colour
@@ -92,11 +93,22 @@ CarSelect::~CarSelect()
 	std::cout << "destroying car select" << std::endl;
 }
 
+void CarSelect::reset()
+{
+	if (reset_check)
+	{
+		reset_check = false;
+		button_ID = 0;
+		m_button_released = false;
+		carSelected = false;
+	}
+}
+
 void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 {
 	if (controller.m_currentState.DPadDown && !controller.m_previousState.DPadDown)
 	{
-		if(button_ID<3)
+		if (button_ID<3)
 		{
 			button_ID++;
 		}
@@ -108,7 +120,7 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 
 	if (controller.m_currentState.DPadUp && !controller.m_previousState.DPadUp)
 	{
-		if(button_ID>0)
+		if (button_ID>0)
 		{
 			button_ID--;
 		}
@@ -127,16 +139,12 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 		m_Sprite[1].setPosition(325, 200);
 		m_Sprite[2].setPosition(325, 400);
 		m_Sprite[3].setPosition(325, 600);
-		m_textMessage[4].setString("100kph");//set Max Speed
-		m_textMessage[5].setString("4.2 sec  to Max Speed");//set Aceeleration
-		m_textMessage[6].setString("50%");//set Handling
 
-		/*selectSprite.setPosition(200, 250);
-		if (carSprite[0].getPosition().y > 240 && !carSprite[0].getPosition().y < 230)
-		{
-			carSprite[0].move(0, -2.5);
-		}*/
-		controller.m_previousState = controller.m_currentState;	
+		m_textMessage[4].setString(floatToString(whiteCar_values[0]) + " kph");//set Max Speed
+		m_textMessage[5].setString(floatToString(whiteCar_values[1]) + " sec  to Max Speed");//set Aceeleration
+		m_textMessage[6].setString(floatToString(whiteCar_values[2]) + "%");//set Handling
+
+		controller.m_previousState = controller.m_currentState;
 	}
 	else if (button_ID == 1)
 	{
@@ -147,9 +155,11 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 		m_Sprite[0].setPosition(325, 0);
 		m_Sprite[2].setPosition(325, 400);
 		m_Sprite[3].setPosition(325, 600);
-		m_textMessage[4].setString("90kph");//need to be changed to a player editable varible
-		m_textMessage[5].setString("3.9 sec  to Max Speed");//set Aceeleration
-		m_textMessage[6].setString("60%");//set Handling
+
+		m_textMessage[4].setString(floatToString(reaCar_values[0]) + " kph");//need to be changed to a player editable varible
+		m_textMessage[5].setString(floatToString(reaCar_values[1]) + " sec  to Max Speed");//set Aceeleration
+		m_textMessage[6].setString(floatToString(reaCar_values[2]) + "%");//set Handling
+
 		controller.m_previousState = controller.m_currentState;
 	}
 	else if (button_ID == 2)
@@ -161,9 +171,11 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 		m_Sprite[0].setPosition(325, 0);
 		m_Sprite[1].setPosition(325, 200);
 		m_Sprite[3].setPosition(325, 600);
-		m_textMessage[4].setString("98kph");
-		m_textMessage[5].setString("4.5 sec  to Max Speed");//set Aceeleration
-		m_textMessage[6].setString("30%");//set Handling
+
+		m_textMessage[4].setString(floatToString(yellowCar_values[0]) + " kph");
+		m_textMessage[5].setString(floatToString(yellowCar_values[1]) + " sec  to Max Speed");//set Aceeleration
+		m_textMessage[6].setString(floatToString(yellowCar_values[2]) + "%");//set Handling
+
 		controller.m_previousState = controller.m_currentState;
 	}
 	else if (button_ID == 3)
@@ -175,12 +187,14 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 		m_Sprite[0].setPosition(325, 0);
 		m_Sprite[1].setPosition(325, 200);
 		m_Sprite[2].setPosition(325, 400);
-		m_textMessage[4].setString("94kph");
-		m_textMessage[5].setString("4.0 sec  to Max Speed");//set Aceeleration
-		m_textMessage[6].setString("40%");//set Handling
+
+		m_textMessage[4].setString(floatToString(greenCar_values[0]) + " kph");
+		m_textMessage[5].setString(floatToString(greenCar_values[1]) + " sec  to Max Speed");//set Aceeleration
+		m_textMessage[6].setString(floatToString(greenCar_values[2]) + "%");//set Handling
+
 		controller.m_previousState = controller.m_currentState;
 	}
-	
+
 	if (controller.Abutton() && m_button_released)
 	{
 		carSelected = true;
@@ -201,9 +215,10 @@ int CarSelect::getSelection_ID()
 
 void CarSelect::changeScreen()
 {
-	if (carSelected == true)
+	if (carSelected)
 	{
 		m_game->SetGameState(GameState::gameplay);
+		reset_check = true;
 	}
 }
 
@@ -227,4 +242,18 @@ void CarSelect::render(sf::RenderWindow &window)
 	window.draw(m_textMessage[6]);
 
 
+}
+
+void CarSelect::getCarValues(float white, float red, float yellow, float green, int i)
+{
+	whiteCar_values[i] = white;
+	reaCar_values[i] = red;
+	yellowCar_values[i] = yellow;
+	greenCar_values[i] = green;
+}
+
+std::string CarSelect::floatToString(float num) {
+	char numString[256];
+	sprintf_s(numString, "%.1f", num);
+	return numString;
 }

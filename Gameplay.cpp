@@ -18,6 +18,12 @@ void Gameplay::update(double t, int car_id,Xbox360Controller& controller)
 	m_player.update(t, car_id);
 	m_npc.update(t, car_id);
 
+	if (m_player.getRect().intersects(m_npc.getRect()))
+	{
+		float temp = m_player.m_motion.x;
+		m_player.m_motion.x = m_npc.m_motion.x;
+		m_npc.m_motion.x = temp;
+	}
 
 }
 

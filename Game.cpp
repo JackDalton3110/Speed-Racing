@@ -64,7 +64,8 @@ Game::Game() :
 	m_textMessage[1].setFont(m_Motor);//set font 
 	m_textMessage[1].setColor(sf::Color(255, 255, 255));//set colour
 
-
+	view.setCenter(500, 400); // set player's position to camera
+	view.setSize(sf::Vector2f(1000, 800)); // set camera's size
 }
 
 Game::~Game()
@@ -124,6 +125,11 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		break;
 	case GameState::carSelect:
 		processEvents();
+		m_carSelect->reset();
+		for (int i = 0; i < 3; i++)
+		{
+			m_carSelect->getCarValues(m_upgrade->whiteCar_values[i], m_upgrade->reaCar_values[i], m_upgrade->yellowCar_values[i], m_upgrade->greenCar_values[i], i);
+		}
 		m_carSelect->update(time, controller);
 		std::cout << "car select" << std::endl;
 		break;
@@ -137,7 +143,7 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		break;
 	case GameState::upgrade:
 		std::cout << "upgrade" << std::endl;
-		m_upgrade->update(time, controller);
+		m_upgrade->update(time.asSeconds(), controller);
 		break;
 	case GameState::gameplay:
 		m_map->update();
@@ -277,6 +283,13 @@ void Game::render()
 	default:
 
 		break;
+	}
+
+	if (m_currentGameState != GameState::gameplay)
+	{
+		view.setCenter(500, 400); // set player's position to camera
+		view.setSize(sf::Vector2f(1000, 800)); // set camera's size
+		m_window.setView(view);
 	}
 
 	m_window.display();

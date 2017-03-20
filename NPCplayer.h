@@ -11,6 +11,10 @@ public:
 
 	void update(double t, int car_id);
 	void render(sf::RenderWindow &window);
+
+	sf::FloatRect getRect();
+	sf::Vector2f m_motion;
+	
 private:
 	Physics physics;
 	float m_velocity;
@@ -18,7 +22,6 @@ private:
 	float m_acceleration;
 	float m_degree;
 
-	sf::Vector2f m_motion;
 	int m_dirction;
 	float timer;
 

@@ -17,6 +17,7 @@ public:
 	void update(double t, int car_id, Xbox360Controller& controller);
 	void render(sf::RenderWindow &window);
 
+
 private:
 	Player m_player;
 	NPCplayer m_npc;
