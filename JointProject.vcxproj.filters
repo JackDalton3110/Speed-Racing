@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Confirm.cpp" />
@@ -51,6 +51,10 @@
     <ClInclude Include="ResourcePath.hpp" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <Media Include="sounds\song1.wav" />
+>>>>>>> bce91fc31c547773468f566ae57721987f17200a
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\360 controller.png" />

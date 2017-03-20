@@ -89,6 +89,10 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories).\;.\lib</AdditionalLibraryDirectories>
+<<<<<<< HEAD
+=======
+      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories);.\lib</AdditionalLibraryDirectories>
+>>>>>>> bce91fc31c547773468f566ae57721987f17200a
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -115,6 +119,10 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories).\;.\lib</AdditionalLibraryDirectories>
+<<<<<<< HEAD
+=======
+      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories);.\lib</AdditionalLibraryDirectories>
+>>>>>>> bce91fc31c547773468f566ae57721987f17200a
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

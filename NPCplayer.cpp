@@ -1,7 +1,7 @@
 #include "NPCplayer.h"
 
 NPCplayer::NPCplayer() :
-	m_acceleration(200),
+	m_acceleration(100),
 	m_degree(0),
 	m_postion(300, 300),
 	m_velocity(0),
@@ -84,6 +84,17 @@ void NPCplayer::update(double t, int car_id)
 
 	m_sprite.setPosition(m_postion);
 	m_sprite.setRotation(m_degree);
+}
+
+void NPCplayer::setLocation()
+{
+	m_postion = location_record;
+	m_acceleration = 0;
+}
+
+sf::FloatRect NPCplayer::getRect()
+{
+	return sf::FloatRect(m_postion.x - m_sprite.getOrigin().x, m_postion.y - m_sprite.getOrigin().y, 50, 30);
 }
 
 void NPCplayer::render(sf::RenderWindow &window)

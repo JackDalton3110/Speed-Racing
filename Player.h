@@ -18,6 +18,11 @@ public:
 	float getPositionX(float xPos);
 	float getPositionY(float yPos);
 	
+	sf::FloatRect getRect();
+	sf::Vector2f m_motion;
+	
+	void setLocation();
+
 private:
 	Physics physics;
 	Xbox360Controller controller;
@@ -32,7 +37,6 @@ private:
 
 	float m_handbrake;
 
-	sf::Vector2f m_motion;
 
 	int timer_mis; // millisecond
 	int timer_sec; // second
@@ -47,8 +51,6 @@ private:
 
 	sf::Vector2f location_record;
 	float located_time;
-
-	sf::RectangleShape m_filed;
 
 	std::string intToString(int num); // int to string
 };
