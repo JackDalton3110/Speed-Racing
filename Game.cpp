@@ -50,6 +50,14 @@ Game::Game() :
 		throw std::exception(s.c_str());
 	}
 
+	//Loading final animation
+	if (!m_movie.openFromFile("Video/animation4.mov"))
+	{
+		std::string s("error loading mov file");
+		throw std::exception(s.c_str());
+	}
+
+
 	songs[0].setBuffer(songBuffer[0]);
 	buttonsound.setBuffer(buttonBuffer);
 
@@ -57,7 +65,7 @@ Game::Game() :
 	m_splashscreen = new Splash(*this, m_HARLOW, m_Motor);
 	m_carSelect = new CarSelect(*this, m_HARLOW, m_Motor);
 	m_option = new Option(*this, m_Motor, m_HARLOW);
-	m_credits = new Credits(*this, m_Motor);
+	m_credits = new Credits(*this, m_Motor, m_movie);
 	m_upgrade = new Upgrade(*this, m_HARLOW, m_Motor);
 	m_confirm = new Confirm(*this, m_Motor);
 	m_again = new Playagain(*this, m_Motor);
@@ -303,9 +311,6 @@ void Game::render()
 		break;
 	case GameState::Help:
 		m_help->render(m_window);
-		break;
-	case GameState::Map:
-		m_map->render(m_window);
 		break;
 	default:
 

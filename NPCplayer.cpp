@@ -1,13 +1,14 @@
 #include "NPCplayer.h"
 
 NPCplayer::NPCplayer() :
-	m_acceleration(200),
+	m_acceleration(100),
 	m_degree(0),
-	m_positon(300, 300),
+	m_postion(300, 300),
 	m_velocity(0),
 	m_dirction(rand() % 5 - 3),
-	m_car_id(rand()%4),
-	timer(1.5f)
+	m_car_id(rand() % 4),
+	timer(1.5f),
+	located_time(0.1)
 {
 	if (!m_texture.loadFromFile("images/carSprite.png"))
 	{
@@ -16,7 +17,7 @@ NPCplayer::NPCplayer() :
 	}
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(25, 15);
-	m_sprite.setPosition(m_positon);
+	m_sprite.setPosition(m_postion);
 
 }
 
@@ -27,6 +28,13 @@ NPCplayer::~NPCplayer()
 
 void NPCplayer::update(double t, int car_id)
 {
+	located_time -= t;
+	if (located_time <= 0)
+	{
+		location_record = m_postion;
+		located_time = 0.1;
+	}
+
 	if (timer < 0)
 	{
 		timer = 1.5f;
@@ -44,37 +52,49 @@ void NPCplayer::update(double t, int car_id)
 	timer -= t;
 	m_degree += m_dirction;
 
-	if (m_positon.x > 1000)
+	if (m_postion.x > 1350)
 	{
-		m_velocity = -m_velocity * 0.5;
-		m_positon.x = 1000;
+		m_motion.x = -m_motion.x * 0.5;
+		m_postion.x = 1350;
 	}
 
-	if (m_positon.y > 800)
+	if (m_postion.y > 1700)
 	{
-		m_velocity = -m_velocity * 0.5;
-		m_positon.y = 800;
+		m_motion.y = -m_motion.y * 0.5;
+		m_postion.y = 1700;
 	}
 
-	if (m_positon.x < 0)
+	if (m_postion.x < 0)
 	{
-		m_velocity = -m_velocity * 0.5;
-		m_positon.x = 0;
+		m_motion.x = -m_motion.x * 0.5;
+		m_postion.x = 0;
 	}
 
-	if (m_positon.y < 0)
+	if (m_postion.y < 0)
 	{
-		m_velocity = -m_velocity * 0.5;
-		m_positon.y = 0;
+		m_motion.y = -m_motion.y * 0.5;
+		m_postion.y = 0;
 	}
 
-	physics.update(t, m_velocity, m_acceleration, m_degree);
+	physics.update(t, m_motion, m_acceleration, m_degree);
+	m_motion = physics.getMotion();
 	m_velocity = physics.getVelocity();
-	m_positon.x += physics.getDistance().x;
-	m_positon.y += physics.getDistance().y;
+	m_postion.x += physics.getDistance().x;
+	m_postion.y += physics.getDistance().y;
 
-	m_sprite.setPosition(m_positon);
+	m_sprite.setPosition(m_postion);
 	m_sprite.setRotation(m_degree);
+}
+
+void NPCplayer::setLocation()
+{
+	m_postion = location_record;
+	m_acceleration = 0;
+}
+
+sf::FloatRect NPCplayer::getRect()
+{
+	return sf::FloatRect(m_postion.x - m_sprite.getOrigin().x, m_postion.y - m_sprite.getOrigin().y, 50, 30);
 }
 
 void NPCplayer::render(sf::RenderWindow &window)

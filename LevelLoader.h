@@ -16,6 +16,7 @@ struct NodeData
 	sf::Vector2f m_position;
 	double m_rotation;
 };
+
 struct LevelData
 {
 	std::vector<NodeData> m_node;
@@ -30,5 +31,5 @@ public:
 	static bool load(int nr, LevelData& level);
 };
 
-#endif // !Level_Loader
 
+#endif // !Level_Loader

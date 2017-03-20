@@ -5,6 +5,9 @@
 #include<iostream>
 #include <SFML\Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <sfeMovie\Movie.hpp>
+#include <sfeMovie\StreamSelection.hpp>
+#include <sfeMovie\Visibility.hpp>
 #include "Licence.h"
 #include "Splash.h"
 #include "Credits.h"
@@ -93,6 +96,7 @@ private:
 	sf::Font m_Motor;
 	sf::Text m_textMessage[4];
 	sf::RenderWindow m_window;
+	sfe::Movie m_movie;
 
 	Xbox360Controller m_controller;
 

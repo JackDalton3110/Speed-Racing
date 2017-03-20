@@ -1,7 +1,11 @@
-#pragma once
+/// <summary>
+/// i am conr i am code good for porjct
+/// </summary>
+
 #ifndef CREDITS
 #define CREDITS
 #include <SFML\Graphics.hpp>
+#include <sfeMovie\Movie.hpp>
 #include "Game.h"
 #include <fstream>
 class Game;
@@ -9,7 +13,7 @@ class Game;
 class Credits
 {
 public:
-	Credits(Game& game, sf::Font font);
+	Credits(Game& game, sf::Font font, sfe::Movie);
 	~Credits();
 
 	void update(sf::Time deltaTime);
@@ -23,6 +27,7 @@ private:
 	std::string textline;
 	sf::Font m_impact;
 	sf::Text m_textMessage;
+	sfe::Movie m_movie;
 	
 
 };
