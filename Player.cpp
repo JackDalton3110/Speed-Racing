@@ -113,7 +113,9 @@ void Player::update(double t, int car_ID)
 	if (controller.LeftThumbSticks().x <= -20 ||
 		controller.LeftThumbSticks().x >= 20) 
 	{
+
 		m_degree += controller.LeftThumbSticks().x * m_velocity / 150 * t;
+		m_degree += controller.LeftThumbSticks().x / 20 * m_velocity/200;
 		if (m_degree > 360)
 		{
 			m_degree = 0;

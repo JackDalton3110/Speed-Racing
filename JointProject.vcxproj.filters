@@ -20,11 +20,8 @@
     <ClCompile Include="SoundScreen.cpp" />
     <ClCompile Include="Splash.cpp" />
     <ClCompile Include="Upgrade.cpp" />
-<<<<<<< HEAD
-=======
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="ResourcePath.cpp" />
->>>>>>> 754369388464066f003ffee86941d6a1278685cc
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Confirm.h" />
@@ -45,19 +42,15 @@
     <ClInclude Include="SoundScreen.h" />
     <ClInclude Include="Splash.h" />
     <ClInclude Include="Upgrade.h" />
-<<<<<<< HEAD
   </ItemGroup>
   <ItemGroup>
     <Media Include="sounds\song1.wav" />
     <Media Include="Video\animation4.mov" />
-=======
     <ClInclude Include="Main.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="ResourcePath.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="sounds\song1.wav" />
->>>>>>> 754369388464066f003ffee86941d6a1278685cc
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\360 controller.png" />
