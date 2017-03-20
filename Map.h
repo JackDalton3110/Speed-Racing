@@ -10,6 +10,7 @@
 #ifndef MAP
 #define MAP
 #include <SFML\Graphics.hpp>
+#include "Player.h"
 #include "Game.h"
 
 class Game;

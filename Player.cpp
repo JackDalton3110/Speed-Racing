@@ -3,11 +3,11 @@
 Player::Player() :
 	m_acceleration(0),
 	m_degree(0),
+	m_velocity(0),
 	m_postion(600, 600),
 	location_record(0, 0),
 	located_time(0.1),
 	m_motion(0, 0),
-	m_velocity(0),
 	m_handbrake(0)
 {
 	if (!m_font.loadFromFile("c:/windows/fonts/comic.ttf"))
@@ -28,7 +28,11 @@ Player::Player() :
 
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(25, 15);
-	m_sprite.setPosition(m_postion);
+	m_sprite.setPosition(m_positon);
+	
+	//This scales the player car down
+	m_sprite.scale(.5, .5);
+
 
 	view.setCenter(m_postion); // set player's position to camera
 	view.setSize(sf::Vector2f(1000, 800)); // set camera's size
@@ -187,4 +191,14 @@ std::string Player::intToString(int num) {
 	char numString[10];
 	sprintf_s(numString, "%i", num);
 	return numString;
+}
+
+float Player::getPositionX(float xPos)
+{
+	return m_positon.x;
+}
+
+float Player::getPositionY(float yPos)
+{
+	return m_positon.y;
 }

@@ -15,6 +15,8 @@ public:
 
 	void update(double t, int car_ID);
 	void render(sf::RenderWindow &window);
+	float getPositionX(float xPos);
+	float getPositionY(float yPos);
 	
 	sf::FloatRect getRect();
 	sf::Vector2f m_motion;
