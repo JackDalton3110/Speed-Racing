@@ -30,14 +30,6 @@ Player::Player() :
 	m_sprite.setOrigin(25, 15);
 	m_sprite.setPosition(m_postion);
 
-	/*m_filed.setSize(sf::Vector2f(2000, 2000));
-	m_sprite.setTexture(m_texture); // set car texture
-	m_sprite.setOrigin(25, 15); // set origin
-	m_sprite.setPosition(m_positon); // set position 
-	m_filed.setSize(sf::Vector2f(2000, 2000));
-	m_filed.setPosition(0, 0);
-	m_filed.setFillColor(sf::Color::Black);*/
-
 	view.setCenter(m_postion); // set player's position to camera
 	view.setSize(sf::Vector2f(1000, 800)); // set camera's size
 }
@@ -52,6 +44,7 @@ void Player::update(double t, int car_ID)
 
 	controller.update();
 
+	located_time -= t;
 	if (located_time <= 0)
 	{
 		location_record = m_postion;
@@ -164,7 +157,16 @@ void Player::update(double t, int car_ID)
 	m_text[0].setString("Lap time:");
 }
 
+sf::FloatRect Player::getRect()
+{
+	return sf::FloatRect(m_postion.x - m_sprite.getOrigin().x, m_postion.y - m_sprite.getOrigin().y, 50, 30);
+}
 
+void Player::setLocation()
+{
+	m_postion = location_record;
+	m_acceleration = 0;
+}
 
 void Player::render(sf::RenderWindow &window)
 {
