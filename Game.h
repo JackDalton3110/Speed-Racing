@@ -20,6 +20,7 @@
 #include "Gameplay.h"
 #include "Help.h"
 #include "Map.h"
+#include "LevelLoader.h"
 
 class Licence;
 class Splash;
@@ -69,11 +70,18 @@ public:
 	bool B;
 	bool X;
 	bool Y;
+	void GenerateTrack();
 	int score = 0;
 	sf::Sound songs[3];
 	sf::SoundBuffer songBuffer[3];
 	sf::Sound buttonsound;
 	sf::SoundBuffer buttonBuffer;
+	sf::Texture ai_Txt;
+	sf::Sprite ai_Sprite;
+
+protected:
+	LevelData m_level;
+	std::vector<std::unique_ptr<sf::Sprite>>m_TrackNodes;
 
 private:
 	void processEvents();

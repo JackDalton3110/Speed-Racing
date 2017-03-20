@@ -7,6 +7,19 @@ Game::Game() :
 	m_currentGameState(GameState::licence)
 
 {
+	int currentLevel = 1;
+	if (!LevelLoader::load(currentLevel, m_level))
+	{
+		return;
+	}
+	GenerateTrack();
+
+	if (!ai_Txt.loadFromFile("images/redCarSprite.png"))
+	{
+		std::cout << "error loading ai Sprite" << std::endl;
+	}
+	ai_Sprite.setTexture(ai_Txt);
+
 	if (m_HARLOW.loadFromFile("C:/Windows/Fonts/HARLOWSI.TTF"))
 	{
 		std::cout << "Harlow has loaded" << std::endl;
@@ -82,6 +95,22 @@ Game::~Game()
 	delete(m_DifficultyScreen);
 	delete(m_soundScreen);
 	std::cout << "destroying game" << std::endl;
+}
+
+void Game::GenerateTrack()
+{
+	sf::IntRect nodeRect(2, 129, 33, 23);
+	
+	for (NodeData const &node : m_level.m_node)
+	{
+		std::unique_ptr<sf::Sprite> sprite(new sf::Sprite());
+		sprite->setTexture(ai_Txt);
+		sprite->setTextureRect(nodeRect);
+		sprite->setOrigin(nodeRect.height / 2, nodeRect.width / 2);
+		sprite->setPosition(node.m_position);
+		sprite->setRotation(node.m_rotation);
+		m_TrackNodes.push_back(std::move(sprite));
+	}
 }
 
 void Game::run()
@@ -252,6 +281,10 @@ void Game::render()
 	case GameState::gameplay:
 		m_map->render(m_window);
 		m_gameplay->render(m_window);
+		for (auto &m_sprite : m_TrackNodes)
+		{
+			m_window.draw(*m_sprite); //draws wall sprites
+		}
 		break;
 	case GameState::sound:
 		m_soundScreen->render(m_window);
