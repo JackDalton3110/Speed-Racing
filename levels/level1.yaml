@@ -1,61 +1,76 @@
 Nodes:
    - type: node
-     position: {x: 100,y: 600}
+     position: {x: 618,y: 511}
      rotation: 0
    - type: node
-     position: {x: 100, y: 500}
+     position: {x: 814, y: 463}
      rotation: 0
    - type: node
-     position: {x: 100, y: 300}
+     position: {x: 854, y: 394}
      rotation: 0
    - type: node
-     position: {x: 50, y: 100}
+     position: {x: 826, y: 221}
      rotation: 0
    - type: node
-     position: {x: 300, y: 100}
+     position: {x: 776, y: 137}
      rotation: 0
    - type: node
-     position: {x: 300, y: 300}
+     position: {x: 703, y: 62}
      rotation: 0
    - type: node
-     position: {x: 400, y: 500}
+     position: {x: 590, y: 118}
      rotation: 0
    - type: node
-     position: {x: 600, y: 700}
+     position: {x: 490, y: 368}
      rotation: 0
    - type: node
-     position: {x: 800, y: 500}
+     position: {x: 217, y: 877}
      rotation: 0
    - type: node
-     position: {x: 1000, y: 100}
+     position: {x: 76, y: 1177}
      rotation: 0
    - type: node
-     position: {x: 1200, y: 600}
+     position: {x: 142, y: 1298}
      rotation: 0
    - type: node
-     position: {x: 1400, y: 850}
+     position: {x: 208, y: 1314}
      rotation: 0
    - type: node
-     position: {x: 900, y: 450}
+     position: {x: 359, y: 1005}
      rotation: 0
    - type: node
-     position: {x: 600, y: 225}
+     position: {x: 483, y: 975}
      rotation: 0
    - type: node
-     position: {x: 300, y: 100}
+     position: {x: 533, y: 1119}
      rotation: 0
    - type: node
-     position: {x: 300, y: 550}
+     position: {x: 454, y: 1277}
      rotation: 0
    - type: node
-     position: {x: 600, y: 125}
+     position: {x: 543, y: 1512}
      rotation: 0
    - type: node
-     position: {x: 725, y: 460}
+     position: {x: 661, y: 1478}
      rotation: 0
    - type: node
-     position: {x: 895, y: 755}
+     position: {x: 1155, y: 507}
      rotation: 0
    - type: node
-     position: {x: 1400, y: 100}
+     position: {x: 1119, y: 415}
+     rotation: 0
+   - type: node
+     position: {x: 1005, y: 443}
+     rotation: 0
+   - type: node
+     position: {x: 819, y: 848}
+     rotation: 0
+   - type: node
+     position: {x: 616, y: 901}
+     rotation: 0
+   - type: node
+     position: {x: 528, y: 628}
+     rotation: 0
+   - type: node
+     position: {x: 532, y: 543}
      rotation: 0

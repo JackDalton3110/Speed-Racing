@@ -4,7 +4,7 @@ Player::Player() :
 	m_acceleration(0),
 	m_degree(0),
 	m_velocity(0),
-	m_postion(600, 600),
+	m_postion(540, 540 ),
 	location_record(0, 0),
 	located_time(0.1),
 	m_motion(0, 0),
@@ -28,7 +28,11 @@ Player::Player() :
 
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(25, 15);
+<<<<<<< HEAD
 	m_sprite.setPosition(m_postion);
+=======
+	//m_sprite.setPosition(m_positon);
+>>>>>>> Ai_Car
 	
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
@@ -89,11 +93,20 @@ void Player::update(double t, int car_ID)
 	else if (controller.RTrigger() < 5 && controller.RTrigger() >= 0)
 	{
 		m_acceleration = 0;
+		std::cout << m_postion.x << std::endl;
+		std::cout << m_postion.y << std::endl;
 	}
 
 	if (controller.LTrigger() <= -5)
 	{
+<<<<<<< HEAD
 		m_acceleration = controller.LTrigger() * max_speed / 4;
+=======
+		m_acceleration = controller.LTrigger() * 2;
+		std::cout << m_postion.x << std::endl;
+		std::cout << m_postion.y << std::endl;
+		
+>>>>>>> Ai_Car
 	}
 	else if (controller.LTrigger() > -5 && controller.LTrigger() <= 0)
 	{
@@ -197,4 +210,8 @@ std::string Player::intToString(int num) {
 	char numString[10];
 	sprintf_s(numString, "%i", num);
 	return numString;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Ai_Car

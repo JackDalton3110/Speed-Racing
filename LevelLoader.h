@@ -1,6 +1,11 @@
 #pragma once
+<<<<<<< HEAD
 #define Level_Loader
 #ifdef Level_Loader
+=======
+#ifndef Level_Loader
+#define Level_Loader
+>>>>>>> Ai_Car
 
 #include <SFML/System/Vector2.hpp>
 #include <vector>
@@ -32,4 +37,8 @@ public:
 	static bool load(int nr, LevelData& level);
 };
 
+<<<<<<< HEAD
 #endif // !Level_Loader
+=======
+#endif
+>>>>>>> Ai_Car

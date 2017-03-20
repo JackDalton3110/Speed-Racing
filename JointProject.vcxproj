@@ -90,7 +90,6 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories).\;.\lib</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories);.\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -118,7 +117,6 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories).\;.\lib</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories);.\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BTMath.cpp" />
     <ClCompile Include="Confirm.cpp" />
     <ClCompile Include="CarSelectScreen.cpp" />
     <ClCompile Include="Controller.cpp" />
@@ -160,6 +159,7 @@
     <ClCompile Include="Upgrade.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BTMath.h" />
     <ClInclude Include="Confirm.h" />
     <ClInclude Include="CarSelectScreen.h" />
     <ClInclude Include="Controller.h" />
