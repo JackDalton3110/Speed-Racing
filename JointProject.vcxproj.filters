@@ -1,63 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Confirm.cpp" />
     <ClCompile Include="CarSelectScreen.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Credits.cpp" />
-    <ClCompile Include="DifficultyScreen.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gameplay.cpp" />
-    <ClCompile Include="Help.cpp" />
     <ClCompile Include="Licence.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Map.cpp" />
     <ClCompile Include="NPCplayer.cpp" />
     <ClCompile Include="OptionScreen.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Playagain.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="SoundScreen.cpp" />
     <ClCompile Include="Splash.cpp" />
     <ClCompile Include="Upgrade.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="SoundScreen.cpp" />
+    <ClCompile Include="DifficultyScreen.cpp" />
+    <ClCompile Include="Help.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
-    <ClCompile Include="ResourcePath.cpp" />
+    <ClCompile Include="BTMath.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Confirm.h" />
     <ClInclude Include="CarSelectScreen.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Credits.h" />
-    <ClInclude Include="DifficultyScreen.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gameplay.h" />
-    <ClInclude Include="Help.h" />
     <ClInclude Include="Licence.h" />
-    <ClInclude Include="Map.h" />
     <ClInclude Include="NPCplayer.h" />
     <ClInclude Include="OptionScreen.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Playagain.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="SoundScreen.h" />
     <ClInclude Include="Splash.h" />
     <ClInclude Include="Upgrade.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="sounds\song1.wav" />
-    <Media Include="Video\animation4.mov" />
-    <ClInclude Include="Main.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="SoundScreen.h" />
+    <ClInclude Include="DifficultyScreen.h" />
+    <ClInclude Include="Help.h" />
     <ClInclude Include="LevelLoader.h" />
-    <ClInclude Include="ResourcePath.hpp" />
+    <ClInclude Include="BTMath.h" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
-    <Media Include="sounds\song1.wav" />
->>>>>>> bce91fc31c547773468f566ae57721987f17200a
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="images\360 controller.png" />
     <Image Include="images\arrow.png" />
     <Image Include="images\back.png" />
     <Image Include="images\Bar.png" />
@@ -69,22 +57,6 @@
     <Image Include="images\selectbkgr.png" />
     <Image Include="images\selector.png" />
     <Image Include="images\template.png" />
-    <Image Include="images\Track images\slice_0_0.png" />
-    <Image Include="images\Track images\slice_0_1.png" />
-    <Image Include="images\Track images\slice_0_2.png" />
-    <Image Include="images\Track images\slice_0_3.png" />
-    <Image Include="images\Track images\slice_1_0.png" />
-    <Image Include="images\Track images\slice_1_1.png" />
-    <Image Include="images\Track images\slice_1_2.png" />
-    <Image Include="images\Track images\slice_1_3.png" />
-    <Image Include="images\Track images\slice_2_0.png" />
-    <Image Include="images\Track images\slice_2_1.png" />
-    <Image Include="images\Track images\slice_2_2.png" />
-    <Image Include="images\Track images\slice_2_3.png" />
-    <Image Include="images\Track images\slice_3_0.png" />
-    <Image Include="images\Track images\slice_3_1.png" />
-    <Image Include="images\Track images\slice_3_2.png" />
-    <Image Include="images\Track images\slice_3_3.png" />
     <Image Include="images\whiteCarSprite.png" />
     <Image Include="images\yellowCarSprite.png" />
   </ItemGroup>

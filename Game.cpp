@@ -14,7 +14,7 @@ Game::Game() :
 	}
 	GenerateTrack();
 
-	if (!ai_Txt.loadFromFile("images/redCarSprite.png"))
+	if (!ai_Txt.loadFromFile("images/Node.png"))
 	{
 		std::cout << "error loading ai Sprite" << std::endl;
 	}
@@ -69,7 +69,7 @@ Game::Game() :
 	m_upgrade = new Upgrade(*this, m_HARLOW, m_Motor);
 	m_confirm = new Confirm(*this, m_Motor);
 	m_again = new Playagain(*this, m_Motor);
-	m_gameplay = new Gameplay(*this, m_Motor);
+	m_gameplay = new Gameplay(*this, m_Motor, m_trackCircle);
 	m_help = new Help(*this, m_Motor);
 	m_map = new Map(*this);
 	m_DifficultyScreen = new Difficulty(*this, m_Motor, m_HARLOW);
@@ -111,13 +111,11 @@ void Game::GenerateTrack()
 	
 	for (NodeData const &node : m_level.m_node)
 	{
-		std::unique_ptr<sf::Sprite> sprite(new sf::Sprite());
-		sprite->setTexture(ai_Txt);
-		sprite->setTextureRect(nodeRect);
-		sprite->setOrigin(nodeRect.height / 2, nodeRect.width / 2);
-		sprite->setPosition(node.m_position);
-		sprite->setRotation(node.m_rotation);
-		m_TrackNodes.push_back(std::move(sprite));
+		sf::CircleShape circle(nodeRect.width * 1.5);
+		circle.setFillColor(sf::Color::Black);
+		circle.setOrigin(circle.getRadius(), circle.getRadius());
+		circle.setPosition(node.m_position);
+		m_trackCircle.push_back(std::move(circle));
 	}
 }
 
@@ -289,9 +287,9 @@ void Game::render()
 	case GameState::gameplay:
 		m_map->render(m_window);
 		m_gameplay->render(m_window);
-		for (auto &m_sprite : m_TrackNodes)
+		for (int i =0; i <25; i++)
 		{
-			m_window.draw(*m_sprite); //draws wall sprites
+			m_window.draw(m_trackCircle[i]); //draws wall sprites
 		}
 		break;
 	case GameState::sound:

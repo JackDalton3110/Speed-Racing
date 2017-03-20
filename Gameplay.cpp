@@ -1,8 +1,9 @@
 #include "Gameplay.h"
 
-Gameplay::Gameplay(Game &game, sf::Font font):
+Gameplay::Gameplay(Game &game, sf::Font font, std::vector<sf::CircleShape> &Node):
 	m_game(&game),
-	m_font(font)
+	m_font(font),
+	m_npc(Node)
 {
 
 }
@@ -30,10 +31,6 @@ void Gameplay::update(double t, int car_id,Xbox360Controller& controller)
 
 void Gameplay::render(sf::RenderWindow &window)
 {
-	
-
 	m_player.render(window);
 	m_npc.render(window);
-
-	
 }

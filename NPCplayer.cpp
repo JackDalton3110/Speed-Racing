@@ -1,6 +1,6 @@
 #include "NPCplayer.h"
 
-NPCplayer::NPCplayer() :
+NPCplayer::NPCplayer(std::vector<sf::CircleShape> & Node) :
 	m_acceleration(100),
 	m_degree(0),
 	m_postion(300, 300),
@@ -8,7 +8,8 @@ NPCplayer::NPCplayer() :
 	m_dirction(rand() % 5 - 3),
 	m_car_id(rand() % 4),
 	timer(1.5f),
-	located_time(0.1)
+	located_time(0.1),
+	m_NodeCircle(Node)
 {
 	if (!m_texture.loadFromFile("images/carSprite.png"))
 	{
@@ -28,19 +29,7 @@ NPCplayer::~NPCplayer()
 
 void NPCplayer::update(double t, int car_id)
 {
-	located_time -= t;
-	if (located_time <= 0)
-	{
-		location_record = m_postion;
-		located_time = 0.1;
-	}
-
-	if (timer < 0)
-	{
-		timer = 1.5f;
-		m_dirction = rand() % 5 - 3;
-	}
-
+	
 	if (m_car_id == car_id)
 	{
 		m_car_id = rand() % 4;
@@ -49,48 +38,16 @@ void NPCplayer::update(double t, int car_id)
 	sf::IntRect car(0, m_car_id * 30, 50, 30);
 	m_sprite.setTextureRect(car);
 
-	timer -= t;
-	m_degree += m_dirction;
-
-	if (m_postion.x > 1350)
-	{
-		m_motion.x = -m_motion.x * 0.5;
-		m_postion.x = 1350;
-	}
-
-	if (m_postion.y > 1700)
-	{
-		m_motion.y = -m_motion.y * 0.5;
-		m_postion.y = 1700;
-	}
-
-	if (m_postion.x < 0)
-	{
-		m_motion.x = -m_motion.x * 0.5;
-		m_postion.x = 0;
-	}
-
-	if (m_postion.y < 0)
-	{
-		m_motion.y = -m_motion.y * 0.5;
-		m_postion.y = 0;
-	}
-
-	physics.update(t, m_motion, m_acceleration, m_degree);
+	/*physics.update(t, m_motion, m_acceleration, m_degree);
 	m_motion = physics.getMotion();
 	m_velocity = physics.getVelocity();
 	m_postion.x += physics.getDistance().x;
-	m_postion.y += physics.getDistance().y;
+	m_postion.y += physics.getDistance().y;*/
 
 	m_sprite.setPosition(m_postion);
 	m_sprite.setRotation(m_degree);
 }
 
-void NPCplayer::setLocation()
-{
-	m_postion = location_record;
-	m_acceleration = 0;
-}
 
 sf::FloatRect NPCplayer::getRect()
 {
@@ -100,4 +57,32 @@ sf::FloatRect NPCplayer::getRect()
 void NPCplayer::render(sf::RenderWindow &window)
 {
 	window.draw(m_sprite);
+}
+
+sf::Vector2f NPCplayer::follow()
+{
+	sf::Vector2f target;
+		target = m_NodeCircle.at(currentNode).getPosition();
+		
+			if (Math::distance(m_postion, target) <= 10)
+			{
+				currentNode += 1;
+			
+				if (currentNode >= m_NodeCircle.size()) 
+				{
+				currentNode = 0;
+				}
+			}
+		
+			if (thor::length(target) != 0)
+			{
+				return target - m_postion;
+			}
+			else
+			{
+				return sf::Vector2f();
+			
+			}
+		
+			
 }

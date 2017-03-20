@@ -1,20 +1,21 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-
 #include "Physics.h"
+#include "BTMath.h"
+#include <Thor/Vectors.hpp>
+#include "LevelLoader.h"
 
 class NPCplayer
 {
 public:
-	NPCplayer();
+	NPCplayer(std::vector<sf::CircleShape> & Node);
 	~NPCplayer();
-
 	void update(double t, int car_id);
 	void render(sf::RenderWindow &window);
+	sf::Vector2f follow();
 
 	sf::FloatRect getRect();
 	sf::Vector2f m_motion;
-	void setLocation();
 
 private:
 	Physics physics;
@@ -27,6 +28,7 @@ private:
 	float timer;
 
 	int m_car_id;
+	int currentNode = 0;
 
 	sf::Texture m_texture; // car texture
 	sf::Sprite m_sprite; // car sprite
@@ -35,4 +37,6 @@ private:
 
 	float located_time;
 	sf::Vector2f location_record;
+
+	std::vector<sf::CircleShape> & m_NodeCircle;
 };

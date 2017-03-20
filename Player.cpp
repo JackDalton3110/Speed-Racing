@@ -28,7 +28,6 @@ Player::Player() :
 
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(25, 15);
-	m_sprite.setPosition(m_positon);
 	
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
@@ -108,7 +107,6 @@ void Player::update(double t, int car_ID)
 	{
 
 		m_degree += controller.LeftThumbSticks().x * m_velocity / 150 * t;
-		m_degree += controller.LeftThumbSticks().x / 20 * m_velocity/200;
 		if (m_degree > 360)
 		{
 			m_degree = 0;
@@ -195,12 +193,3 @@ std::string Player::intToString(int num) {
 	return numString;
 }
 
-float Player::getPositionX(float xPos)
-{
-	return m_positon.x;
-}
-
-float Player::getPositionY(float yPos)
-{
-	return m_positon.y;
-}

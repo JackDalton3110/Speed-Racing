@@ -84,7 +84,7 @@ public:
 
 protected:
 	LevelData m_level;
-	std::vector<std::unique_ptr<sf::Sprite>>m_TrackNodes;
+	
 
 private:
 	void processEvents();
@@ -125,7 +125,7 @@ private:
 	sf::Sprite m_Sprite4;
 	sf::Sprite m_Sprite5;
 	
-
+	std::vector<sf::CircleShape> m_trackCircle;
 
 };
 
