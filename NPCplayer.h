@@ -14,12 +14,8 @@ public:
 
 	sf::FloatRect getRect();
 	sf::Vector2f m_motion;
-<<<<<<< HEAD
-	
-=======
 	void setLocation();
 
->>>>>>> 050b7539f24fe526bf50edec9d04a79e4aa8cb92
 private:
 	Physics physics;
 	float m_velocity;

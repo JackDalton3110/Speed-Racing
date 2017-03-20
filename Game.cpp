@@ -184,6 +184,24 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		break;
 	case GameState::gameplay:
 		m_map->update();
+		switch (m_carSelect->getSelection_ID())
+		{
+		case 0:
+			m_gameplay->getStatus(m_upgrade->whiteCar_values[0], m_upgrade->whiteCar_values[1], m_upgrade->whiteCar_values[2]);
+			break;
+		case 1 :
+			m_gameplay->getStatus(m_upgrade->reaCar_values[0], m_upgrade->reaCar_values[1], m_upgrade->reaCar_values[2]);
+			break;
+		case 2:
+			m_gameplay->getStatus(m_upgrade->yellowCar_values[0], m_upgrade->yellowCar_values[1], m_upgrade->yellowCar_values[2]);
+			break;
+		case 3:
+			m_gameplay->getStatus(m_upgrade->greenCar_values[0], m_upgrade->greenCar_values[1], m_upgrade->greenCar_values[2]);
+			break;
+		default:
+			break;
+		}
+		
 		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID(), m_controller);
 		break;
 	case GameState::Difficulty:

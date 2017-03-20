@@ -1,5 +1,6 @@
 #pragma once
 #define Level_Loader
+#ifdef Level_Loader
 
 #include <SFML/System/Vector2.hpp>
 #include <vector>

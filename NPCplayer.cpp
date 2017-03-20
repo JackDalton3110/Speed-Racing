@@ -86,15 +86,12 @@ void NPCplayer::update(double t, int car_id)
 	m_sprite.setRotation(m_degree);
 }
 
-<<<<<<< HEAD
-=======
 void NPCplayer::setLocation()
 {
 	m_postion = location_record;
 	m_acceleration = 0;
 }
 
->>>>>>> 050b7539f24fe526bf50edec9d04a79e4aa8cb92
 sf::FloatRect NPCplayer::getRect()
 {
 	return sf::FloatRect(m_postion.x - m_sprite.getOrigin().x, m_postion.y - m_sprite.getOrigin().y, 50, 30);

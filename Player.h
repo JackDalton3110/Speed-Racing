@@ -15,16 +15,12 @@ public:
 
 	void update(double t, int car_ID);
 	void render(sf::RenderWindow &window);
-	float getPositionX(float xPos);
-	float getPositionY(float yPos);
 	
 	sf::FloatRect getRect();
 	sf::Vector2f m_motion;
 	
-<<<<<<< HEAD
-=======
 	void setLocation();
->>>>>>> 050b7539f24fe526bf50edec9d04a79e4aa8cb92
+	void setPlayerStatus(float maxspeed, float accelecation, float handling);
 
 private:
 	Physics physics;
@@ -40,6 +36,8 @@ private:
 
 	float m_handbrake;
 
+	float max_speed; // max speed
+	float m_handling;
 
 	int timer_mis; // millisecond
 	int timer_sec; // second

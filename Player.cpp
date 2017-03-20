@@ -28,15 +28,11 @@ Player::Player() :
 
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(25, 15);
-	m_sprite.setPosition(m_positon);
+	m_sprite.setPosition(m_postion);
 	
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 050b7539f24fe526bf50edec9d04a79e4aa8cb92
 	view.setCenter(m_postion); // set player's position to camera
 	view.setSize(sf::Vector2f(1000, 800)); // set camera's size
 }
@@ -45,6 +41,13 @@ Player::~Player()
 {
 
 }
+
+void Player::setPlayerStatus(float maxspeed, float accelecation, float handling)
+{
+	max_speed = (0.2 * 9.8 * maxspeed) / 100; // get max speed from upgrade
+	m_handling = handling / 100 + 0.5;
+}
+
 
 void Player::update(double t, int car_ID)
 {
@@ -81,7 +84,7 @@ void Player::update(double t, int car_ID)
 
 	if (controller.RTrigger() >= 5) // right trigger to speed up
 	{
-		m_acceleration = controller.RTrigger() * 6;
+		m_acceleration = controller.RTrigger() * max_speed;
 	}
 	else if (controller.RTrigger() < 5 && controller.RTrigger() >= 0)
 	{
@@ -90,7 +93,7 @@ void Player::update(double t, int car_ID)
 
 	if (controller.LTrigger() <= -5)
 	{
-		m_acceleration = controller.LTrigger() * 2;
+		m_acceleration = controller.LTrigger() * max_speed / 4;
 	}
 	else if (controller.LTrigger() > -5 && controller.LTrigger() <= 0)
 	{
@@ -99,10 +102,10 @@ void Player::update(double t, int car_ID)
 
 	if (controller.Bbutton())
 	{
-		m_handbrake = m_motion.x * 0.5;
+		m_handbrake = m_motion.x * m_handling;
 		m_motion.x -= m_handbrake * t;
 
-		m_handbrake = m_motion.y  * 0.5;
+		m_handbrake = m_motion.y  * m_handling;
 		m_motion.y -= m_handbrake * t;
 	}
 
@@ -111,7 +114,6 @@ void Player::update(double t, int car_ID)
 	{
 
 		m_degree += controller.LeftThumbSticks().x * m_velocity / 150 * t;
-		m_degree += controller.LeftThumbSticks().x / 20 * m_velocity/200;
 		if (m_degree > 360)
 		{
 			m_degree = 0;
@@ -170,15 +172,11 @@ sf::FloatRect Player::getRect()
 {
 	return sf::FloatRect(m_postion.x - m_sprite.getOrigin().x, m_postion.y - m_sprite.getOrigin().y, 50, 30);
 }
-<<<<<<< HEAD
-=======
-
 void Player::setLocation()
 {
 	m_postion = location_record;
 	m_acceleration = 0;
 }
->>>>>>> 050b7539f24fe526bf50edec9d04a79e4aa8cb92
 
 void Player::render(sf::RenderWindow &window)
 {
@@ -199,14 +197,4 @@ std::string Player::intToString(int num) {
 	char numString[10];
 	sprintf_s(numString, "%i", num);
 	return numString;
-}
-
-float Player::getPositionX(float xPos)
-{
-	return m_positon.x;
-}
-
-float Player::getPositionY(float yPos)
-{
-	return m_positon.y;
 }

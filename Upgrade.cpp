@@ -332,7 +332,7 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 		m_textMessage[10].setPosition(100, 60);
 		m_textMessage[10].setString(intToString(scrap));
 
-		whiteCar_values[0] = 100 + whiteCar_status[0] * 3;
+		whiteCar_values[0] = 200 + whiteCar_status[0] * 10;
 		whiteCar_values[1] = 4.2 - whiteCar_status[1] * 0.4;
 		whiteCar_values[2] = 50 + whiteCar_status[2] * 5;
 
@@ -356,7 +356,7 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 		m_textMessage[10].setPosition(100, 260);
 		m_textMessage[10].setString(intToString(scrap));
 
-		reaCar_values[0] = 90 + redCar_status[0] * 6;
+		reaCar_values[0] = 180 + redCar_status[0] * 12;
 		reaCar_values[1] = 3.9 - redCar_status[1] * 0.35;
 		reaCar_values[2] = 55 + redCar_status[2] * 4;
 
@@ -379,7 +379,7 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 		m_textMessage[10].setPosition(100, 460);
 		m_textMessage[10].setString(intToString(scrap));
 
-		yellowCar_values[0] = 98 + yellowCar_status[0] * 4;
+		yellowCar_values[0] = 190 + yellowCar_status[0] * 8;
 		yellowCar_values[1] = 4.5 - yellowCar_status[1] * 0.5;
 		yellowCar_values[2] = 25 + yellowCar_status[2] * 10;
 
@@ -402,7 +402,7 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 		m_textMessage[10].setPosition(100, 660);
 		m_textMessage[10].setString(intToString(scrap));
 
-		greenCar_values[0] = 94 + greenCar_status[0] * 5;
+		greenCar_values[0] = 188 + greenCar_status[0] * 10;
 		greenCar_values[1] = 4.0 - greenCar_status[1] * 0.4;
 		greenCar_values[2] = 30 + greenCar_status[2] * 8;
 
@@ -464,13 +464,7 @@ void Upgrade::render(sf::RenderWindow &window)
 		break;
 	}
 
-<<<<<<< HEAD
 //Sound_Difficulty
-=======
-
-
-//>>>>>>> Sound_Difficulty
->>>>>>> 050b7539f24fe526bf50edec9d04a79e4aa8cb92
 	window.draw(m_textMessage[0]);
 	window.draw(m_textMessage[1]);
 	window.draw(m_textMessage[2]);//main menu draw
