@@ -13,9 +13,9 @@ public:
 	~Difficulty();
 	void Update(sf::Time time, Xbox360Controller &controller);
 	void render(sf::RenderWindow &window);
-	void changeScreen();
 	int button_ID = 0;
-	bool Easy = false;
+
+	bool Easy = true;
 	bool Medium = false;
 	bool Hard = false;
 
@@ -28,4 +28,5 @@ private:
 	sf::Sprite selectorSprite;
 	sf::CircleShape difficulties[3];
 
+	void changeScreen();
 };

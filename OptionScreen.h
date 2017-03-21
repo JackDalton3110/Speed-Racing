@@ -15,13 +15,7 @@ public:
 	~Option();
 	void update(sf::Time time, Xbox360Controller& controller);
 	void render(sf::RenderWindow &window);
-	void changeScreen();
-	void changeToOption();
-	void changeToUpgrade();
-	void changeToHelp();
 	void reset();
-	void changeToSound();
-	void changeToDifficulty();
 	int button_ID = 0;
 	int setting_ID = 0;
 	bool startgame = true;//bool for game start
@@ -53,6 +47,12 @@ private:
 	bool m_button_released; // chenk player release A button
 	bool m_reset_check; // 
 
+	void changeScreen();
+	void changeToOption();
+	void changeToUpgrade();
+	void changeToHelp();
+	void changeToSound();
+	void changeToDifficulty();
 };
 
 #endif

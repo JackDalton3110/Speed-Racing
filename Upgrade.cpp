@@ -251,12 +251,14 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 	{
 		warning_time -= t;
 		m_size.y -= 2; // decrease the high of the warning background
+		m_size.x -= 2; 
 
 		if (warning_time <= 0)
 		{
 			warning_time = 1.0f;
 			warning = false;
-			m_size.y = 200;
+			m_size.y = 200; // set the x and y back to start
+			m_size.x = 600;
 		}
 		warning_back.setSize(m_size);
 		warning_back.setOrigin(m_size.x / 2, m_size.y / 2);
@@ -332,7 +334,7 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 		m_textMessage[10].setPosition(100, 60);
 		m_textMessage[10].setString(intToString(scrap));
 
-		whiteCar_values[0] = 200 + whiteCar_status[0] * 10;
+		whiteCar_values[0] = 200 + whiteCar_status[0] * 15;
 		whiteCar_values[1] = 4.2 - whiteCar_status[1] * 0.4;
 		whiteCar_values[2] = 50 + whiteCar_status[2] * 5;
 
@@ -356,7 +358,7 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 		m_textMessage[10].setPosition(100, 260);
 		m_textMessage[10].setString(intToString(scrap));
 
-		reaCar_values[0] = 180 + redCar_status[0] * 12;
+		reaCar_values[0] = 180 + redCar_status[0] * 18;
 		reaCar_values[1] = 3.9 - redCar_status[1] * 0.35;
 		reaCar_values[2] = 55 + redCar_status[2] * 4;
 
@@ -379,7 +381,7 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 		m_textMessage[10].setPosition(100, 460);
 		m_textMessage[10].setString(intToString(scrap));
 
-		yellowCar_values[0] = 190 + yellowCar_status[0] * 8;
+		yellowCar_values[0] = 190 + yellowCar_status[0] * 12;
 		yellowCar_values[1] = 4.5 - yellowCar_status[1] * 0.5;
 		yellowCar_values[2] = 25 + yellowCar_status[2] * 10;
 
@@ -402,7 +404,7 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 		m_textMessage[10].setPosition(100, 660);
 		m_textMessage[10].setString(intToString(scrap));
 
-		greenCar_values[0] = 188 + greenCar_status[0] * 10;
+		greenCar_values[0] = 188 + greenCar_status[0] * 15;
 		greenCar_values[1] = 4.0 - greenCar_status[1] * 0.4;
 		greenCar_values[2] = 30 + greenCar_status[2] * 8;
 

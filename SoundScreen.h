@@ -15,7 +15,6 @@ class Sound
 public:
 	Sound(Game& game, sf::Font font, sf::Font font2);
 	~Sound();
-	void changeScreen();
 	void Update(sf::Time time, Xbox360Controller &controller);
 	void render(sf::RenderWindow &window);
 	int button_ID = 0;
@@ -37,6 +36,7 @@ private:
 	sf::Sprite selectorSprite;
 	sf::RectangleShape toggleButtons[2];
 	
+	void changeScreen();
 };
 
 #endif

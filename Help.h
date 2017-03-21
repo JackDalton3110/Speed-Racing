@@ -7,6 +7,7 @@
 #define HELP
 #include <SFML\Graphics.hpp>
 #include "Game.h"
+#include "Controller.h"
 #include <fstream>
 class Game;
 
@@ -15,9 +16,8 @@ class Help
 public:
 	Help(Game & game, sf::Font font);
 	~Help();
-	void update();
+	void update(Xbox360Controller &controller);
 	void render(sf::RenderWindow& window);
-
 
 private:
 

@@ -35,6 +35,8 @@ Player::Player() :
 
 	view.setCenter(m_postion); // set player's position to camera
 	view.setSize(sf::Vector2f(1000, 800)); // set camera's size
+
+	m_timer.setFont(m_font);
 }
 
 Player::~Player()
@@ -45,6 +47,7 @@ Player::~Player()
 void Player::setPlayerStatus(float maxspeed, float accelecation, float handling)
 {
 	max_speed = (0.2 * 9.8 * maxspeed) / 100; // get max speed from upgrade
+	m_turning = maxspeed * 0.6;
 	m_handling = handling / 100 + 0.5;
 }
 
@@ -113,7 +116,7 @@ void Player::update(double t, int car_ID)
 		controller.LeftThumbSticks().x >= 20) 
 	{
 
-		m_degree += controller.LeftThumbSticks().x * m_velocity / 150 * t;
+		m_degree += controller.LeftThumbSticks().x * m_velocity / m_turning * t;
 		if (m_degree > 360)
 		{
 			m_degree = 0;
@@ -170,7 +173,7 @@ void Player::update(double t, int car_ID)
 
 sf::FloatRect Player::getRect()
 {
-	return sf::FloatRect(m_postion.x - m_sprite.getOrigin().x, m_postion.y - m_sprite.getOrigin().y, 50, 30);
+	return sf::FloatRect(m_postion.x - m_sprite.getOrigin().x, m_postion.y - m_sprite.getOrigin().y, 25, 15);
 }
 void Player::setLocation()
 {
@@ -180,10 +183,8 @@ void Player::setLocation()
 
 void Player::render(sf::RenderWindow &window)
 {
-	//window.clear(sf::Color::White);
 	window.setView(view);
 
-	//window.draw(m_filed);
 	window.draw(m_sprite);
 	for (int i = 0; i < 3; i++)
 	{

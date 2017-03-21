@@ -226,7 +226,7 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		m_again->update(controller);
 		break;
 	case GameState::Help:
-		m_help->update();
+		m_help->update(controller);
 		break;
 	case GameState::Map:
 		m_map->update();
@@ -248,35 +248,10 @@ void Game::processEvents()
 			m_splashscreen->changeScreen();
 			songs[0].play();
 		}
-		if (m_controller.m_currentState.Start && m_currentGameState == GameState::none)//any key accepted to change screen to credits
-		{
-			m_option->changeToOption();
-		}
 
 		if (m_controller.m_currentState.Back)
 		{
 			SetGameState(GameState::confirm);
-		}
-
-		if (m_controller.m_currentState.A && !m_controller.m_previousState.A && m_currentGameState == GameState::option&& m_option->sound==true)
-		{
-			m_option->changeToSound();
-		}
-
-		if(m_controller.m_currentState.A && !m_controller.m_previousState.A && m_currentGameState == GameState::option && m_option->difficulty == true)
-		{
-			m_option->changeToDifficulty();
-			m_option->settings = true;
-		}
-
-		if (m_controller.m_currentState.B && m_currentGameState == GameState::Difficulty)
-		{
-			m_DifficultyScreen->changeScreen();
-			m_option->settings = true;
-		}
-		if (m_controller.m_currentState.B&&m_currentGameState == GameState::sound)
-		{
-			m_soundScreen->changeScreen();
 		}
 		
 		if(m_currentGameState==GameState::option|| m_currentGameState==GameState::sound||m_currentGameState==GameState::carSelect||m_currentGameState==GameState::Difficulty || m_currentGameState ==GameState::upgrade)

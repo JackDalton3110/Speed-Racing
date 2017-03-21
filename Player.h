@@ -37,6 +37,7 @@ private:
 	float m_handbrake;
 
 	float max_speed; // max speed
+	float m_turning;
 	float m_handling;
 
 	int timer_mis; // millisecond
