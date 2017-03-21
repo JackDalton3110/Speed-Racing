@@ -254,15 +254,7 @@ std::string Player::intToString(int num) {
 }
 
 
-float Player::getPositionX(float xPos)
-{
-	return m_postion.x;
-}
 
-float Player::getPositionY(float yPos)
-{
-	return m_postion.y;
-}
 
 sf::Vector2f Player::getSpritePosition() const
 {
