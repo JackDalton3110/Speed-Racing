@@ -47,7 +47,7 @@ Option::Option(Game & game, sf::Font font, sf::Font font1) :
 	}
 
 	m_Sprite[0].setTexture(m_Texture[0]);
-	m_Sprite[0].setPosition(780, 100);//set image position in relation to origin
+	m_Sprite[0].setPosition(800, 120);//set image position in relation to origin
 	m_Sprite[0].setOrigin(17.5, 18);
 	m_Sprite[1].setTexture(m_Texture[1]);
 	m_Sprite[1].setPosition(270, 400);
@@ -229,7 +229,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 	if (button_ID == 0)
 	{
-		m_Sprite[0].setPosition(780, 100);
+		m_Sprite[0].setPosition(800, 120);
 		controller.m_previousState = controller.m_currentState;
 		startgame = true;
 		options = false;
@@ -238,7 +238,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	}
 	else if (button_ID == 1)
 	{
-		m_Sprite[0].setPosition(780, 150);
+		m_Sprite[0].setPosition(800, 170);
 		controller.m_previousState = controller.m_currentState;
 		startgame = false;
 		options = true;
@@ -247,7 +247,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	}
 	else if (button_ID == 2)
 	{
-		m_Sprite[0].setPosition(780, 200);
+		m_Sprite[0].setPosition(800, 220);
 		controller.m_previousState = controller.m_currentState;
 		startgame = false;
 		options = false;
@@ -256,7 +256,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	}
 	else if (button_ID == 3)
 	{
-		m_Sprite[0].setPosition(780, 250);
+		m_Sprite[0].setPosition(800, 270);
 		controller.m_previousState = controller.m_currentState;
 		startgame = false;
 		options = false;

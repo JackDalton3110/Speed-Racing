@@ -6,7 +6,6 @@ NPCplayer::NPCplayer(std::vector<sf::CircleShape> &Node) :
 	m_postion(500, 500),
 	m_dirction(rand() % 5 - 3),
 	m_car_id(rand() % 4),
-	timer(1.5f),
 	located_time(0.1),
 	m_NodeCircle(Node)
 {
@@ -51,8 +50,28 @@ sf::Vector2f NPCplayer::follow()
 	}
 }
 
+void NPCplayer::timer(double t)
+{
+	// timer part
+	timer_mis += t * 100;
+
+	if (timer_mis >= 100) // when millisecond great than 100, second add 1
+	{
+		timer_sec++;
+		timer_mis = 0;
+	}
+
+	if (timer_sec >= 60) // when second over 60, minute add 1
+	{
+		timer_min++;
+		timer_sec = 0;
+	}
+}
+
 void NPCplayer::update(double t, int car_id)
 {
+	timer(t);
+
 	sf::Vector2f vectorToNode = follow();
 
 	auto dest = atan2(-1 * m_velocity.y, -1 * m_velocity.x) / thor::Pi * 180 + 180;
@@ -103,9 +122,10 @@ void NPCplayer::update(double t, int car_id)
 }
 
 
-sf::FloatRect NPCplayer::getRect()
+sf::FloatRect NPCplayer::boundingBox()
 {
-	return sf::FloatRect(m_postion.x - m_sprite.getOrigin().x, m_postion.y - m_sprite.getOrigin().y, 50, 30);
+	sf::FloatRect boundingBox(m_sprite.getGlobalBounds().left + 2, m_sprite.getGlobalBounds().top + 2, m_sprite.getGlobalBounds().width - 4, m_sprite.getGlobalBounds().height - 5);
+	return boundingBox;
 }
 
 void NPCplayer::render(sf::RenderWindow &window)

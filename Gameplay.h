@@ -29,6 +29,9 @@ private:
 	float max_speed; // max speed of player
 	float m_acceleration; // the acceleration of player
 	float m_handling; // the handling of player
+
+	sf::RectangleShape box1;
+	sf::RectangleShape box2;
 };
 
 #endif // GAMEPLAY

@@ -27,18 +27,18 @@ Player::Player() :
 	}
 
 	m_sprite.setTexture(m_texture);
-	m_sprite.setOrigin(25, 15);
-
-	//m_sprite.setPosition(m_positon);
-
+	m_sprite.setOrigin(10, 15);
 	
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
 
 	view.setCenter(m_postion); // set player's position to camera
-	view.setSize(sf::Vector2f(1000, 800)); // set camera's size
+	view.setSize(sf::Vector2f(500, 400)); // set camera's size
 
 	m_timer.setFont(m_font);
+	m_lap_timer.setFont(m_font);
+	m_timer.setColor(sf::Color::Black);
+	m_lap_timer.setColor(sf::Color::Black);
 }
 
 Player::~Player()
@@ -49,22 +49,12 @@ Player::~Player()
 void Player::setPlayerStatus(float maxspeed, float accelecation, float handling)
 {
 	max_speed = (0.2 * 9.8 * maxspeed) / 100; // get max speed from upgrade
-	m_turning = maxspeed * 0.6;
+	m_turning = maxspeed * 0.65;
 	m_handling = handling / 100 + 0.5;
 }
 
-
-void Player::update(double t, int car_ID)
+void Player::timer(double t)
 {
-
-	controller.update();
-
-	located_time -= t;
-	if (located_time <= 0)
-	{
-		location_record = m_postion;
-		located_time = 0.1;
-	}
 	// timer part
 	timer_mis += t * 100;
 
@@ -82,6 +72,43 @@ void Player::update(double t, int car_ID)
 	m_timer.setString(intToString(timer_min) + "::"
 		+ intToString(timer_sec) + "::"
 		+ intToString(timer_mis)); // convert minute to string
+
+	m_lap_timer.setString(intToString(lap_timer[0]) + "::"
+		+ intToString(lap_timer[1]) + "::"
+		+ intToString(lap_timer[2])); // convert minute to string
+}
+
+void Player::getLapTimer()
+{
+	lap_timer[0] = timer_mis - lap_timer[0];
+	lap_timer[1] = timer_sec - lap_timer[1];
+	lap_timer[2] = timer_min - lap_timer[2];
+	if (lap_timer[0] < 0)
+	{
+		lap_timer[1] --; // less 1 second
+		lap_timer[0] += 100; // gain 100 millisecond
+	}
+
+	if (lap_timer[1] < 0)
+	{
+		lap_timer[2]--; // less 1 minute
+		lap_timer[1] += 60; // gain 60 second
+	}
+}
+
+void Player::update(double t, int car_ID)
+{
+
+	controller.update();
+
+	located_time -= t;
+	if (located_time <= 0)
+	{
+		location_record = m_postion;
+		located_time = 0.1;
+	}
+
+	timer(t);
 
 	sf::IntRect car(0, car_ID * 30, 50 , 30); // get rect of player selection
 
@@ -168,19 +195,21 @@ void Player::update(double t, int car_ID)
 	m_sprite.setPosition(m_postion);
 
 	view.setCenter(m_postion);
-	m_text[1].setPosition(m_postion.x, m_postion.y + 300);
-	m_text[0].setPosition(m_postion.x + 300, m_postion.y - 400);
+	m_text[1].setPosition(m_postion.x, m_postion.y + 150);
 
-	m_timer.setPosition(m_postion.x - 500, m_postion.y - 400);
+	m_timer.setPosition(m_postion.x - 250, m_postion.y - 200);
+	m_text[0].setPosition(m_postion.x - 250, m_postion.y - 170);
+	m_lap_timer.setPosition(m_postion.x - 250, m_postion.y - 140);
 
 	m_sprite.setRotation(m_degree);
 	m_text[1].setString(intToString(m_velocity));
 	m_text[0].setString("Lap time:");
 }
 
-sf::FloatRect Player::getRect()
+sf::FloatRect Player::boundingBox()
 {
-	return sf::FloatRect(m_postion.x - m_sprite.getOrigin().x, m_postion.y - m_sprite.getOrigin().y, 25, 15);
+	sf::FloatRect boundingBox(m_sprite.getGlobalBounds().left + 2, m_sprite.getGlobalBounds().top + 2, m_sprite.getGlobalBounds().width - 4, m_sprite.getGlobalBounds().height - 5);
+	return boundingBox;
 }
 void Player::setLocation()
 {
@@ -198,6 +227,7 @@ void Player::render(sf::RenderWindow &window)
 		window.draw(m_text[i]);
 	}
 	window.draw(m_timer);
+	window.draw(m_lap_timer);
 }
 
 

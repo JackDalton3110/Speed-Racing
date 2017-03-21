@@ -17,19 +17,13 @@ public:
 	~Sound();
 	void Update(sf::Time time, Xbox360Controller &controller);
 	void render(sf::RenderWindow &window);
-	int button_ID = 0;
-	int soundVolume=50;
-	bool on=true;
-	bool off=false;
-	bool FXon = true;
-	bool FXoff = false;
-	bool volume = false;
 
 private:
 	Game *m_game;
 	sf::Font m_motor;
 	sf::Font m_harlow;
 	sf::Text message[4];
+	sf::Text m_text[3];
 	sf::Texture scrollBarTxt[2];
 	sf::Sprite scrollBarSprite[2];
 	sf::Texture selectorTxt;
@@ -37,6 +31,16 @@ private:
 	sf::RectangleShape toggleButtons[2];
 	
 	void changeScreen();
+
+	int button_ID = 0;
+	int soundVolume = 100;
+	bool on = true;
+	bool off = false;
+	bool FXon = true;
+	bool FXoff = false;
+	bool volume = false;
+
+	std::string intToString(int num); // int to string
 };
 
 #endif

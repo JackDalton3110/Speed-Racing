@@ -34,21 +34,30 @@ CarSelect::CarSelect(Game &game, sf::Font font, sf::Font font1) :
 		throw std::exception(s.c_str());
 	}
 
+	if (!m_texture[5].loadFromFile("images/carSprite.png"))
+	{
+		std::string s("error loading texture from file");
+		throw std::exception(s.c_str());
+	}
+
 
 	m_Sprite[0].setTexture(m_texture[0]);
 	m_Sprite[1].setTexture(m_texture[1]);
 	m_Sprite[2].setTexture(m_texture[2]);
 	m_Sprite[3].setTexture(m_texture[3]);
 	m_Sprite[4].setTexture(m_texture[4]);
+	m_Sprite[5].setTexture(m_texture[5]);
 	m_Sprite[0].setPosition(325, 0);
 	m_Sprite[1].setPosition(325, 200);
 	m_Sprite[2].setPosition(325, 400);
 	m_Sprite[3].setPosition(325, 600);
+	m_Sprite[5].setPosition(500, 400);
 	m_Sprite[0].setRotation(90);
 	m_Sprite[1].setRotation(90);
 	m_Sprite[2].setRotation(90);
 	m_Sprite[3].setRotation(90);
 	m_Sprite[3].setRotation(90);
+	m_Sprite[5].setOrigin(25, 15);
 
 
 	m_textMessage[0].setPosition(700, 200);//set position
@@ -106,6 +115,10 @@ void CarSelect::reset()
 
 void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 {
+	sf::IntRect car(0, button_ID * 30, 50, 30); // get rect of player selection
+	m_Sprite[5].setTextureRect(car);
+	m_Sprite[5].rotate(1);
+
 	if (controller.m_currentState.DPadDown && !controller.m_previousState.DPadDown)
 	{
 		if (button_ID<3)
@@ -233,6 +246,8 @@ void CarSelect::render(sf::RenderWindow &window)
 		window.draw(m_Sprite[i]);
 	}
 
+	window.draw(m_Sprite[5]);
+
 	window.draw(m_textMessage[0]);
 	window.draw(m_textMessage[1]);
 	window.draw(m_textMessage[2]);//main menu draw
@@ -240,8 +255,6 @@ void CarSelect::render(sf::RenderWindow &window)
 	window.draw(m_textMessage[4]);
 	window.draw(m_textMessage[5]);
 	window.draw(m_textMessage[6]);
-
-
 }
 
 void CarSelect::getCarValues(float white, float red, float yellow, float green, int i)
