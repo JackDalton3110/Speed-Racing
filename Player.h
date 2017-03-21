@@ -20,8 +20,14 @@ public:
 	
 	sf::FloatRect getRect();
 	sf::Vector2f m_motion;
-	
+
+	sf::Vector2f m_postion;
+
 	void setLocation();
+	float m_acceleration;
+	void highFriction();
+	void normalFriction();
+	sf::Vector2f getSpritePosition() const;
 
 private:
 	Physics physics;
@@ -31,7 +37,7 @@ private:
 	sf::Text m_text[3]; // text 0 for time, text 1 for motion, text 2 for loop
 	sf::Text m_timer; // text for timer
 
-	float m_acceleration;
+	;
 	float m_degree;
 	float m_velocity;
 
@@ -44,7 +50,7 @@ private:
 
 	sf::View view; // camera
 
-	sf::Vector2f m_postion;
+	
 
 	sf::Texture m_texture; // car texture
 	sf::Sprite m_sprite; // car sprite

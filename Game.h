@@ -105,6 +105,7 @@ private:
 	Map *m_map;
 	Sound *m_soundScreen;
 	Difficulty *m_DifficultyScreen;
+	Player m_player;
 
 	sf::Texture m_Texture1;
 	sf::Texture m_Texture2;

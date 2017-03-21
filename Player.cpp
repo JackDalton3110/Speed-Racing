@@ -4,7 +4,7 @@ Player::Player() :
 	m_acceleration(0),
 	m_degree(0),
 	m_velocity(0),
-	m_postion(600, 600),
+	m_postion(180, 900),
 	location_record(0, 0),
 	located_time(0.1),
 	m_motion(0, 0),
@@ -28,7 +28,7 @@ Player::Player() :
 
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(25, 15);
-	m_sprite.setPosition(m_positon);
+	m_sprite.setPosition(m_postion);
 	
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
@@ -41,6 +41,17 @@ Player::Player() :
 Player::~Player()
 {
 
+}
+
+void Player::highFriction()
+{
+	physics.slowDown();
+	int x = 0;
+}
+
+void Player::normalFriction()
+{
+	physics.resetGravity();
 }
 
 void Player::update(double t, int car_ID)
@@ -195,10 +206,15 @@ std::string Player::intToString(int num) {
 
 float Player::getPositionX(float xPos)
 {
-	return m_positon.x;
+	return m_postion.x;
 }
 
 float Player::getPositionY(float yPos)
 {
-	return m_positon.y;
+	return m_postion.y;
+}
+
+sf::Vector2f Player::getSpritePosition() const
+{
+	return m_sprite.getPosition();
 }

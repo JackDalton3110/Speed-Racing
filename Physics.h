@@ -12,6 +12,8 @@ public:
 	sf::Vector2f getDistance();
 	sf::Vector2f getMotion();
 	float getVelocity();
+	void slowDown();
+	void resetGravity();
 
 private:
 	float pi;

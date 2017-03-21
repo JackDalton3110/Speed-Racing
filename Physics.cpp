@@ -49,4 +49,12 @@ sf::Vector2f Physics::getMotion()
 	return m_motion;
 }
 
+void Physics::slowDown()
+{
+	m_gravity = 40;
+}
 
+void Physics::resetGravity()
+{
+	m_gravity = 9.8;
+}

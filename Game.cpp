@@ -56,9 +56,9 @@ Game::Game() :
 	m_upgrade = new Upgrade(*this, m_HARLOW, m_Motor);
 	m_confirm = new Confirm(*this, m_Motor);
 	m_again = new Playagain(*this, m_Motor);
-	m_gameplay = new Gameplay(*this, m_Motor);
+	m_gameplay = new Gameplay(*this, m_Motor, m_player);
 	m_help = new Help(*this, m_Motor);
-	m_map = new Map(*this);
+	m_map = new Map(*this, m_player);
 	m_DifficultyScreen = new Difficulty(*this, m_Motor, m_HARLOW);
 	m_soundScreen = new Sound(*this, m_Motor, m_HARLOW);
 

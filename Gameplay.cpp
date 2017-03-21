@@ -1,8 +1,9 @@
 #include "Gameplay.h"
 
-Gameplay::Gameplay(Game &game, sf::Font font):
+Gameplay::Gameplay(Game &game, sf::Font font, Player & player):
 	m_game(&game),
-	m_font(font)
+	m_font(font),
+	m_player(player)
 {
 
 }
