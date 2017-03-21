@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include <string>
-
+#include <iostream>
 #include "Physics.h"
 #include "Controller.h"
 
@@ -15,10 +15,8 @@ public:
 
 	void update(double t, int car_ID);
 	void render(sf::RenderWindow &window);
-	float getPositionX(float xPos);
-	float getPositionY(float yPos);
 	
-	sf::FloatRect getRect();
+	sf::FloatRect boundingBox();
 	sf::Vector2f m_motion;
 
 	sf::Vector2f m_postion;
@@ -28,14 +26,25 @@ public:
 	void highFriction();
 	void normalFriction();
 	sf::Vector2f getSpritePosition() const;
+	void setPlayerStatus(float maxspeed, float accelecation, float handling);
+	void getLapTimer();
+
 
 private:
+	void timer(double t);
+
 	Physics physics;
 	Xbox360Controller controller;
 
 	sf::Font m_font;
 	sf::Text m_text[3]; // text 0 for time, text 1 for motion, text 2 for loop
 	sf::Text m_timer; // text for timer
+	sf::Text m_lap_timer; // text for lap timer
+	int timer_mis; // millisecond
+	int timer_sec; // second
+	int timer_min; // minute
+
+	int lap_timer[3] = {0,0,0}; // 0 for millisecond, 1 for second, 2 for minute
 
 	;
 	float m_degree;
@@ -43,10 +52,9 @@ private:
 
 	float m_handbrake;
 
-
-	int timer_mis; // millisecond
-	int timer_sec; // second
-	int timer_min; // minute
+	float max_speed; // max speed
+	float m_turning;
+	float m_handling;
 
 	sf::View view; // camera
 

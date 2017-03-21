@@ -7,6 +7,19 @@ Game::Game() :
 	m_currentGameState(GameState::licence)
 
 {
+	int currentLevel = 1;
+	if (!LevelLoader::load(currentLevel, m_level))
+	{
+		return;
+	}
+	GenerateTrack();
+
+	if (!ai_Txt.loadFromFile("images/redCarSprite.png"))
+	{
+		std::cout << "error loading ai Sprite" << std::endl;
+	}
+	ai_Sprite.setTexture(ai_Txt);
+
 	if (m_HARLOW.loadFromFile("C:/Windows/Fonts/HARLOWSI.TTF"))
 	{
 		std::cout << "Harlow has loaded" << std::endl;
@@ -56,7 +69,7 @@ Game::Game() :
 	m_upgrade = new Upgrade(*this, m_HARLOW, m_Motor);
 	m_confirm = new Confirm(*this, m_Motor);
 	m_again = new Playagain(*this, m_Motor);
-	m_gameplay = new Gameplay(*this, m_Motor, m_player);
+	m_gameplay = new Gameplay(*this, m_Motor, m_player, m_trackCircle);
 	m_help = new Help(*this, m_Motor);
 	m_map = new Map(*this, m_player);
 	m_DifficultyScreen = new Difficulty(*this, m_Motor, m_HARLOW);
@@ -72,7 +85,8 @@ Game::Game() :
 	m_textMessage[1].setFont(m_Motor);//set font 
 	m_textMessage[1].setColor(sf::Color(255, 255, 255));//set colour
 
-
+	view.setCenter(500, 400); // set player's position to camera
+	view.setSize(sf::Vector2f(1000, 800)); // set camera's size
 }
 
 Game::~Game()
@@ -90,6 +104,31 @@ Game::~Game()
 	delete(m_DifficultyScreen);
 	delete(m_soundScreen);
 	std::cout << "destroying game" << std::endl;
+}
+
+void Game::GenerateTrack()
+{
+	sf::IntRect nodeRect(2, 129, 33, 23);
+	
+	/*for (NodeData const &node : m_level.m_node)
+	{
+		std::unique_ptr<sf::Sprite> sprite(new sf::Sprite());
+		sprite->setTexture(ai_Txt);
+		sprite->setTextureRect(nodeRect);
+		sprite->setOrigin(nodeRect.height / 2, nodeRect.width / 2);
+		sprite->setPosition(node.m_position);
+		sprite->setRotation(node.m_rotation);
+		m_TrackNodes.push_back(std::move(sprite));
+	}*/
+
+	for (NodeData const &node : m_level.m_node)
+	{
+		sf::CircleShape circle(nodeRect.width * 1.5);
+		circle.setFillColor(sf::Color::Black);
+		circle.setOrigin(circle.getRadius(), circle.getRadius());
+		circle.setPosition(node.m_position);
+		m_trackCircle.push_back(std::move(circle));
+	}
 }
 
 void Game::run()
@@ -132,6 +171,11 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		break;
 	case GameState::carSelect:
 		processEvents();
+		m_carSelect->reset();
+		for (int i = 0; i < 3; i++)
+		{
+			m_carSelect->getCarValues(m_upgrade->whiteCar_values[i], m_upgrade->reaCar_values[i], m_upgrade->yellowCar_values[i], m_upgrade->greenCar_values[i], i);
+		}
 		m_carSelect->update(time, controller);
 		std::cout << "car select" << std::endl;
 		break;
@@ -145,10 +189,28 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		break;
 	case GameState::upgrade:
 		std::cout << "upgrade" << std::endl;
-		m_upgrade->update(time, controller);
+		m_upgrade->update(time.asSeconds(), controller);
 		break;
 	case GameState::gameplay:
 		m_map->update();
+		switch (m_carSelect->getSelection_ID())
+		{
+		case 0:
+			m_gameplay->getStatus(m_upgrade->whiteCar_values[0], m_upgrade->whiteCar_values[1], m_upgrade->whiteCar_values[2]);
+			break;
+		case 1 :
+			m_gameplay->getStatus(m_upgrade->reaCar_values[0], m_upgrade->reaCar_values[1], m_upgrade->reaCar_values[2]);
+			break;
+		case 2:
+			m_gameplay->getStatus(m_upgrade->yellowCar_values[0], m_upgrade->yellowCar_values[1], m_upgrade->yellowCar_values[2]);
+			break;
+		case 3:
+			m_gameplay->getStatus(m_upgrade->greenCar_values[0], m_upgrade->greenCar_values[1], m_upgrade->greenCar_values[2]);
+			break;
+		default:
+			break;
+		}
+		
 		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID(), m_controller);
 		break;
 	case GameState::Difficulty:
@@ -173,7 +235,7 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		m_again->update(controller);
 		break;
 	case GameState::Help:
-		m_help->update();
+		m_help->update(controller);
 		break;
 	case GameState::Map:
 		m_map->update();
@@ -195,35 +257,10 @@ void Game::processEvents()
 			m_splashscreen->changeScreen();
 			songs[0].play();
 		}
-		if (m_controller.m_currentState.Start && m_currentGameState == GameState::none)//any key accepted to change screen to credits
-		{
-			m_option->changeToOption();
-		}
 
 		if (m_controller.m_currentState.Back)
 		{
 			SetGameState(GameState::confirm);
-		}
-
-		if (m_controller.m_currentState.A && !m_controller.m_previousState.A && m_currentGameState == GameState::option&& m_option->sound==true)
-		{
-			m_option->changeToSound();
-		}
-
-		if(m_controller.m_currentState.A && !m_controller.m_previousState.A && m_currentGameState == GameState::option && m_option->difficulty == true)
-		{
-			m_option->changeToDifficulty();
-			m_option->settings = true;
-		}
-
-		if (m_controller.m_currentState.B && m_currentGameState == GameState::Difficulty)
-		{
-			m_DifficultyScreen->changeScreen();
-			m_option->settings = true;
-		}
-		if (m_controller.m_currentState.B&&m_currentGameState == GameState::sound)
-		{
-			m_soundScreen->changeScreen();
 		}
 		
 		if(m_currentGameState==GameState::option|| m_currentGameState==GameState::sound||m_currentGameState==GameState::carSelect||m_currentGameState==GameState::Difficulty || m_currentGameState ==GameState::upgrade)
@@ -259,6 +296,10 @@ void Game::render()
 		break;
 	case GameState::gameplay:
 		m_map->render(m_window);
+		for (int i = 0; i<25; i++)
+		{
+			m_window.draw(m_trackCircle[i]); //draws wall sprites
+		}
 		m_gameplay->render(m_window);
 		break;
 	case GameState::sound:
@@ -282,6 +323,13 @@ void Game::render()
 	default:
 
 		break;
+	}
+
+	if (m_currentGameState != GameState::gameplay)
+	{
+		view.setCenter(500, 400); // set player's position to camera
+		view.setSize(sf::Vector2f(1000, 800)); // set camera's size
+		m_window.setView(view);
 	}
 
 	m_window.display();

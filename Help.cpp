@@ -41,9 +41,12 @@ Help::~Help()
 {
 }
 
-void Help::update()
+void Help::update(Xbox360Controller &controller)
 {
-
+	if (controller.m_currentState.B)
+	{
+		m_game->SetGameState(GameState::option);
+	}
 }
 
 void Help::render(sf::RenderWindow& window)

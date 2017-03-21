@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BTMath.cpp" />
     <ClCompile Include="Confirm.cpp" />
     <ClCompile Include="CarSelectScreen.cpp" />
     <ClCompile Include="Controller.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="Upgrade.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BTMath.h" />
     <ClInclude Include="Confirm.h" />
     <ClInclude Include="CarSelectScreen.h" />
     <ClInclude Include="Controller.h" />

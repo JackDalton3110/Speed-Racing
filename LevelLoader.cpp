@@ -1,33 +1,36 @@
 #include "LevelLoader.h"
+#include <time.h>
 
-void operator >> (const YAML::Node& followNode, NodeData& Nodes)
+void operator >> (const YAML::Node & trackNode, NodeData& track)
 {
-	Nodes.m_type = followNode["type"].as<std::string>();
-	Nodes.m_position.x = followNode["position"]["x"].as<float>();
-	Nodes.m_position.y = followNode["position"]["y"].as<float>();
+	track.m_type = trackNode["type"].as<std::string>();
+	track.m_position.x = trackNode["position"]["x"].as<float>();
+	track.m_position.y = trackNode["position"]["y"].as<float>();
+	track.m_rotation = trackNode["rotation"].as<double>();
 }
 
-void operator >> (const YAML::Node& levelNode, LevelData& level)
+void operator >> (const YAML::Node& levelNode, LevelData &level)
 {
-	const YAML::Node& Node = levelNode["Nodes"].as<YAML::Node>();
-	for (unsigned i = 0; i < Node.size(); i++)
+	const YAML::Node& trackNode = levelNode["Nodes"].as<YAML::Node>();
+	for (unsigned i = 0; i < trackNode.size(); ++i)
 	{
-		NodeData node;
-		Node[i] >> node;
-		level.m_node.push_back(node);
+		NodeData track;
+		trackNode[i] >> track;
+		level.m_node.push_back(track);
+
 	}
 }
 
 LevelLoader::LevelLoader()
 {
+
 }
 
-bool LevelLoader::load(int nr, LevelData& level)
+
+bool LevelLoader::load(int nr, LevelData &level)
 {
 	std::stringstream ss;
-
-	ss << resourcePath();
-	ss << "levels/level";
+	ss << "./levels/level";
 	ss << nr;
 	ss << ".yaml";
 
@@ -37,6 +40,7 @@ bool LevelLoader::load(int nr, LevelData& level)
 		if (baseNode.IsNull())
 		{
 			std::string message("file: " + ss.str() + " not found");
+
 			throw std::exception(message.c_str());
 		}
 		baseNode >> level;
@@ -46,11 +50,12 @@ bool LevelLoader::load(int nr, LevelData& level)
 		std::cout << e.what() << "\n";
 		return false;
 	}
-	catch (std::exception& e)
+
+	catch (std::exception &e)
 	{
 		std::cout << e.what() << "\n";
 		return false;
 	}
-
 	return true;
 }
+

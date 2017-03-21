@@ -4,6 +4,7 @@ Upgrade::Upgrade(Game &game, sf::Font font, sf::Font font1) :
 	m_game(&game),
 	m_HARLOW(font),
 	m_Motor(font1),
+	m_size(600, 200),
 	button_released(false),
 	m_status(false)
 
@@ -33,7 +34,6 @@ Upgrade::Upgrade(Game &game, sf::Font font, sf::Font font1) :
 	m_Sprite[1].setTexture(m_texture[1]); // red car 
 	m_Sprite[2].setTexture(m_texture[2]); // yellow car
 	m_Sprite[3].setTexture(m_texture[3]); // green car 
-	//m_Sprite[4].setTexture(m_texture[4]);
 
 	m_Sprite[0].setPosition(325, 0);
 	m_Sprite[1].setPosition(325, 200);
@@ -45,7 +45,6 @@ Upgrade::Upgrade(Game &game, sf::Font font, sf::Font font1) :
 	m_Sprite[3].setRotation(90);
 
 	//m_Sprite[3].setRotation(90);
-
 
 	m_textMessage[0].setPosition(700, 200);//set position
 	m_textMessage[0].setString("Max Speed");//set text
@@ -78,8 +77,8 @@ Upgrade::Upgrade(Game &game, sf::Font font, sf::Font font1) :
 	m_textMessage[5].setPosition(700, 500);//set position
 	m_textMessage[5].setFont(m_Motor);//set font 
 	m_textMessage[5].setColor(sf::Color::Red);//set colour
+	
 	//Handling
-
 	m_textMessage[6].setPosition(700, 700);//set position
 	m_textMessage[6].setFont(m_Motor);//set font 
 	m_textMessage[6].setColor(sf::Color::Red);//set colour
@@ -98,6 +97,13 @@ Upgrade::Upgrade(Game &game, sf::Font font, sf::Font font1) :
 	m_textMessage[9].setFont(m_Motor);//set font 
 	m_textMessage[9].setColor(sf::Color::Red);//set colour
 	m_textMessage[9].setString("MAX"); // set string
+
+	m_textMessage[10].setFont(m_Motor);
+	m_textMessage[10].setColor(sf::Color::Red);
+
+	m_textMessage[11].setFont(m_Motor);
+	m_textMessage[11].setColor(sf::Color::Red);
+	m_textMessage[11].setString("Need 1 Scrap");
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -125,6 +131,33 @@ Upgrade::Upgrade(Game &game, sf::Font font, sf::Font font1) :
 	m_selecter.setFillColor(sf::Color::Black);
 	m_selecter.setSize(sf::Vector2f(300, 200));
 
+	warning_back.setOutlineThickness(5);
+	warning_back.setOutlineColor(sf::Color::Red);
+	warning_back.setFillColor(sf::Color::White);
+	warning_back.setSize(m_size);
+	warning_back.setOrigin(m_size.x / 2, m_size.y / 2);
+	warning_back.setPosition(500, 400);
+
+	m_textMessage[12].setFont(m_Motor);
+	m_textMessage[12].setColor(sf::Color::Red);
+	m_textMessage[12].setString("!! NOT ENOUGH SCRAP !! ");
+	sf::FloatRect textRect = m_textMessage[12].getLocalBounds();
+	m_textMessage[12].setOrigin(textRect.width / 2, textRect.height / 2);
+	m_textMessage[12].setPosition(500, 400);
+
+	if (!m_texture_scrap.loadFromFile("images/Scrap.png"))
+	{
+		std::string s("error loading texture");
+		throw std::exception(s.c_str());
+	}
+
+	m_sprite_scrap[0].setTexture(m_texture_scrap);
+
+	m_sprite_scrap[1].setTexture(m_texture_scrap);
+	m_sprite_scrap[1].setOrigin(50, 50.5);
+	m_sprite_scrap[1].setScale(0.5f, 0.5f);
+
+
 }
 
 Upgrade::~Upgrade()
@@ -132,8 +165,9 @@ Upgrade::~Upgrade()
 	std::cout << "destroying upgrade menu" << std::endl;
 }
 
-void Upgrade::update(sf::Time time, Xbox360Controller &controller)
+void Upgrade::update(double t, Xbox360Controller &controller)
 {
+
 	if (!controller.Abutton() && !controller.Bbutton()) // button release check
 	{
 		button_released = true;
@@ -155,37 +189,48 @@ void Upgrade::update(sf::Time time, Xbox360Controller &controller)
 	}
 	else
 	{
-		if (controller.Abutton() && button_released)
+		if (controller.Abutton() && button_released && !warning)
 		{
-			switch (button_ID)
+			if (scrap > 0)
 			{
-			case 0:
-				if (whiteCar_status[status_ID] < 3)
+				switch (button_ID)
 				{
-					whiteCar_status[status_ID]++;
+				case 0:
+					if (whiteCar_status[status_ID] < 3)
+					{
+						whiteCar_status[status_ID]++;
+						scrap--;
+					}
+					break;
+				case 1:
+					if (redCar_status[status_ID] < 3)
+					{
+						redCar_status[status_ID]++;
+						scrap--;
+					}
+					break;
+				case 2:
+					if (yellowCar_status[status_ID] < 3)
+					{
+						yellowCar_status[status_ID]++;
+						scrap--;
+					}
+					break;
+				case 3:
+					if (greenCar_status[status_ID] < 3)
+					{
+						greenCar_status[status_ID]++;
+						scrap--;
+					}
+				default:
+					break;
 				}
-				break;
-			case 1:
-				if (redCar_status[status_ID] < 3)
-				{
-					redCar_status[status_ID]++;
-				}
-				break;
-			case 2:
-				if (yellowCar_status[status_ID] < 3)
-				{
-					yellowCar_status[status_ID]++;
-				}
-				break;
-			case 3:
-				if (greenCar_status[status_ID] < 3)
-				{
-					greenCar_status[status_ID]++;
-				}
-			default:
-				break;
+				button_released = false;
 			}
-			button_released = false;
+			else
+			{
+				warning = true;
+			}
 		}
 
 		if (controller.Bbutton() && button_released) // when player isn in status back to car select
@@ -196,8 +241,28 @@ void Upgrade::update(sf::Time time, Xbox360Controller &controller)
 		}
 
 		m_selecter.setPosition(m_textMessage[status_ID].getPosition().x - 10, m_textMessage[status_ID].getPosition().y - 10); // set seleter's positoin
+		m_sprite_scrap[1].setPosition(m_textMessage[status_ID].getPosition().x + 25, m_textMessage[status_ID].getPosition().y + 75); // set seleter's positoin
+		m_sprite_scrap[1].rotate(3);
+
+		m_textMessage[11].setPosition(m_sprite_scrap[1].getPosition().x + 50, m_sprite_scrap[1].getPosition().y);
 	}
 
+	if (warning)
+	{
+		warning_time -= t;
+		m_size.y -= 2; // decrease the high of the warning background
+		m_size.x -= 2; 
+
+		if (warning_time <= 0)
+		{
+			warning_time = 1.0f;
+			warning = false;
+			m_size.y = 200; // set the x and y back to start
+			m_size.x = 600;
+		}
+		warning_back.setSize(m_size);
+		warning_back.setOrigin(m_size.x / 2, m_size.y / 2);
+	}
 
 	if (controller.m_currentState.DPadDown && !controller.m_previousState.DPadDown)
 	{
@@ -265,7 +330,11 @@ void Upgrade::update(sf::Time time, Xbox360Controller &controller)
 		m_Sprite[2].setPosition(325, 400);
 		m_Sprite[3].setPosition(325, 600);
 
-		whiteCar_values[0] = 100 + whiteCar_status[0] * 3;
+		m_sprite_scrap[0].setPosition(0, 50);
+		m_textMessage[10].setPosition(100, 60);
+		m_textMessage[10].setString(intToString(scrap));
+
+		whiteCar_values[0] = 200 + whiteCar_status[0] * 15;
 		whiteCar_values[1] = 4.2 - whiteCar_status[1] * 0.4;
 		whiteCar_values[2] = 50 + whiteCar_status[2] * 5;
 
@@ -285,7 +354,11 @@ void Upgrade::update(sf::Time time, Xbox360Controller &controller)
 		m_Sprite[2].setPosition(325, 400);
 		m_Sprite[3].setPosition(325, 600);
 
-		reaCar_values[0] = 90 + redCar_status[0] * 6;
+		m_sprite_scrap[0].setPosition(0, 250);
+		m_textMessage[10].setPosition(100, 260);
+		m_textMessage[10].setString(intToString(scrap));
+
+		reaCar_values[0] = 180 + redCar_status[0] * 18;
 		reaCar_values[1] = 3.9 - redCar_status[1] * 0.35;
 		reaCar_values[2] = 55 + redCar_status[2] * 4;
 
@@ -304,8 +377,11 @@ void Upgrade::update(sf::Time time, Xbox360Controller &controller)
 		m_Sprite[1].setPosition(325, 200);
 		m_Sprite[3].setPosition(325, 600);
 
+		m_sprite_scrap[0].setPosition(0,450);
+		m_textMessage[10].setPosition(100, 460);
+		m_textMessage[10].setString(intToString(scrap));
 
-		yellowCar_values[0] = 98 + yellowCar_status[0] * 4;
+		yellowCar_values[0] = 190 + yellowCar_status[0] * 12;
 		yellowCar_values[1] = 4.5 - yellowCar_status[1] * 0.5;
 		yellowCar_values[2] = 25 + yellowCar_status[2] * 10;
 
@@ -324,8 +400,11 @@ void Upgrade::update(sf::Time time, Xbox360Controller &controller)
 		m_Sprite[1].setPosition(325, 200);
 		m_Sprite[2].setPosition(325, 400);
 
+		m_sprite_scrap[0].setPosition(0, 650);
+		m_textMessage[10].setPosition(100, 660);
+		m_textMessage[10].setString(intToString(scrap));
 
-		greenCar_values[0] = 94 + greenCar_status[0] * 5;
+		greenCar_values[0] = 188 + greenCar_status[0] * 15;
 		greenCar_values[1] = 4.0 - greenCar_status[1] * 0.4;
 		greenCar_values[2] = 30 + greenCar_status[2] * 8;
 
@@ -353,6 +432,8 @@ void Upgrade::render(sf::RenderWindow &window)
 {
 	window.clear(sf::Color(0, 0, 0, 255));
 
+	window.draw(m_sprite_scrap[0]);
+	window.draw(m_textMessage[10]);
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -363,6 +444,8 @@ void Upgrade::render(sf::RenderWindow &window)
 	if (m_status)
 	{
 		window.draw(m_selecter); // status seleter
+		window.draw(m_sprite_scrap[1]); // scrap image
+		window.draw(m_textMessage[11]); // scrap player needs
 	}
 
 	switch (button_ID)
@@ -383,9 +466,7 @@ void Upgrade::render(sf::RenderWindow &window)
 		break;
 	}
 
-
-
-//>>>>>>> Sound_Difficulty
+//Sound_Difficulty
 	window.draw(m_textMessage[0]);
 	window.draw(m_textMessage[1]);
 	window.draw(m_textMessage[2]);//main menu draw
@@ -393,6 +474,12 @@ void Upgrade::render(sf::RenderWindow &window)
 	window.draw(m_textMessage[4]);
 	window.draw(m_textMessage[5]);
 	window.draw(m_textMessage[6]);
+
+	if (warning)
+	{
+		window.draw(warning_back);
+		window.draw(m_textMessage[12]);
+	}
 
 	//window.display();
 }

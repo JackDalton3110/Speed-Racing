@@ -29,6 +29,16 @@ Sound::Sound(Game &game, sf::Font Font, sf::Font Font2) :
 	message[3].setCharacterSize(50);
 	message[3].setColor(sf::Color::Black);
 
+	for (int i = 0; i < 3; i++)
+	{
+		m_text[i].setFont(m_motor);
+		m_text[i].setCharacterSize(50);
+		m_text[i].setColor(sf::Color::Black);
+	}
+	m_text[0].setPosition(250, 250);
+	m_text[1].setPosition(250, 450);
+	m_text[2].setPosition(450, 600);
+
 	if (!scrollBarTxt[0].loadFromFile("images/circlemover.png"))
 	{
 		std::string s("error loading texture from file");
@@ -71,6 +81,26 @@ Sound::~Sound()
 void Sound::Update(sf::Time time , Xbox360Controller &controller)
 {
 	
+	if (on)
+	{
+		m_text[0].setString("ON");
+	}
+	else if (off)
+	{
+		m_text[0].setString("OFF");
+	}
+
+	if (FXon)
+	{
+		m_text[1].setString("ON");
+	}
+	else if (FXoff)
+	{
+		m_text[1].setString("OFF");
+	}
+
+	m_text[2].setString(intToString(soundVolume));
+
 	if (controller.m_currentState.DPadDown && !controller.m_previousState.DPadDown)
 	{
 		if (button_ID < 2)
@@ -106,6 +136,7 @@ void Sound::Update(sf::Time time , Xbox360Controller &controller)
 		{
 			on = false;
 			off = true;
+			
 		}
 		else if (controller.m_currentState.A && !controller.m_previousState.A && off == true)
 		{
@@ -135,8 +166,7 @@ void Sound::Update(sf::Time time , Xbox360Controller &controller)
 		controller.m_previousState = controller.m_currentState;
 	}
 
-	if (button_ID == 2 && controller.m_currentState.DPadRight)
-	{
+	if (button_ID == 2 && (controller.m_currentState.DPadRight || controller.LeftThumbSticks().x >= 20)){
 		if (scrollBarSprite[0].getPosition().x <=350)
 		{
 			scrollBarSprite[0].move(7, 0);
@@ -149,7 +179,8 @@ void Sound::Update(sf::Time time , Xbox360Controller &controller)
 		std::cout << "volume" << soundVolume << std::endl;
 
 	}
-	if (button_ID == 2 && controller.m_currentState.DPadLeft)
+
+	if (button_ID == 2 && (controller.m_currentState.DPadLeft || controller.LeftThumbSticks().x <= -20))
 	{
 		if (scrollBarSprite[0].getPosition().x >= 175)
 		{
@@ -205,5 +236,16 @@ void Sound::render(sf::RenderWindow &window)
 	{
 		window.draw(scrollBarSprite[i]);
 	}
+
+	for (int i = 0; i < 3; i++)
+	{
+		window.draw(m_text[i]);
+	}
 	window.draw(selectorSprite);
+}
+
+std::string Sound::intToString(int num) {
+	char numString[10];
+	sprintf_s(numString, "%i", num);
+	return numString;
 }

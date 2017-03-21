@@ -12,11 +12,13 @@ class Game;
 class Gameplay
 {
 public:
-	Gameplay(Game &game, sf::Font font, Player & player);
+
+	Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::CircleShape> &Node);
 	~Gameplay();
 	void update(double t, int car_id, Xbox360Controller& controller);
 	void render(sf::RenderWindow &window);
 
+	void getStatus(float maxspeed, float accelecation, float handling);
 private:
 	Player & m_player;
 	NPCplayer m_npc;
@@ -25,6 +27,12 @@ private:
 
 	sf::Font m_font;
 
+	float max_speed; // max speed of player
+	float m_acceleration; // the acceleration of player
+	float m_handling; // the handling of player
+
+	sf::RectangleShape box1;
+	sf::RectangleShape box2;
 };
 
 #endif // GAMEPLAY

@@ -47,7 +47,7 @@ Option::Option(Game & game, sf::Font font, sf::Font font1) :
 	}
 
 	m_Sprite[0].setTexture(m_Texture[0]);
-	m_Sprite[0].setPosition(780, 100);//set image position in relation to origin
+	m_Sprite[0].setPosition(800, 120);//set image position in relation to origin
 	m_Sprite[0].setOrigin(17.5, 18);
 	m_Sprite[1].setTexture(m_Texture[1]);
 	m_Sprite[1].setPosition(270, 400);
@@ -103,13 +103,13 @@ void Option::reset()
 		m_reset_check = false;
 
 		button_ID = 0;
-		//setting_ID = 0;
+		setting_ID = 0;
 		startgame = true;
 		options = false;
 		quitGame = false;
 		closeGame = false;
 		upgrade = false;
-		//settings = false;
+		settings = false;
 		closeWindow = false;
 
 		m_button_released = false;
@@ -173,20 +173,20 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			}
 		}
 	}
-	
 
 
-	/*if (!controller.Abutton())
+
+	if (!controller.Abutton())
 	{
 		m_button_released = true;
-	}*/
+	}
 
 
 	if (controller.m_currentState.A && quitGame == true && !controller.m_previousState.A)
 	{
 		m_reset_check = true;
 		m_game->SetGameState(GameState::confirm); // change to Confirm
-		
+
 	}
 	if (controller.m_currentState.A &&  startgame == true && !controller.m_previousState.A)
 	{
@@ -196,9 +196,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 	if (controller.m_currentState.A && !controller.m_previousState.A && options == true)
 	{
-		//m_reset_check = true;
 		changeToOption();//change to game 
-	
 	}
 
 
@@ -209,11 +207,6 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	}
 
 	//setting to the help screen
-	if (controller.m_currentState.A && !controller.m_previousState.A && help == true)
-	{
-		m_reset_check = true;
-		changeToHelp();
-	}
 
 	if (options == true && controller.m_currentState.A && !controller.m_previousState.A)
 	{
@@ -222,7 +215,6 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		{
 			setting_ID = 0;
 		}
-		//m_reset_check = true;
 		m_button_released = false;
 		controller.m_previousState = controller.m_currentState;
 	}
@@ -237,7 +229,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 	if (button_ID == 0)
 	{
-		m_Sprite[0].setPosition(780, 100);
+		m_Sprite[0].setPosition(800, 120);
 		controller.m_previousState = controller.m_currentState;
 		startgame = true;
 		options = false;
@@ -246,7 +238,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	}
 	else if (button_ID == 1)
 	{
-		m_Sprite[0].setPosition(780, 150);
+		m_Sprite[0].setPosition(800, 170);
 		controller.m_previousState = controller.m_currentState;
 		startgame = false;
 		options = true;
@@ -255,7 +247,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	}
 	else if (button_ID == 2)
 	{
-		m_Sprite[0].setPosition(780, 200);
+		m_Sprite[0].setPosition(800, 220);
 		controller.m_previousState = controller.m_currentState;
 		startgame = false;
 		options = false;
@@ -264,7 +256,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	}
 	else if (button_ID == 3)
 	{
-		m_Sprite[0].setPosition(780, 250);
+		m_Sprite[0].setPosition(800, 270);
 		controller.m_previousState = controller.m_currentState;
 		startgame = false;
 		options = false;
@@ -272,7 +264,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		quitGame = true;
 	}
 
-	if (settings == true)//within settings menu
+	if (settings)//within settings menu
 	{
 		startgame = false;
 		options = false;
@@ -280,7 +272,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		quitGame = false;
 		//help = false;
 
-		
+
 
 		if (setting_ID == 0)
 		{
@@ -288,7 +280,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			controller.m_previousState = controller.m_currentState;
 			sound = true;
 			difficulty = false;
-			help = true;
+			help = false;
 		}
 
 		else if (setting_ID == 1)
@@ -308,24 +300,26 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 			help = true;
 
 		}
-		if (controller.m_currentState.A && !controller.m_previousState.A && settings==true)
+
+
+		if (controller.m_currentState.A && m_button_released && sound)
 		{
 			changeToSound();
+			m_button_released = false;
 		}
 
-		if (controller.m_currentState.A && !controller.m_previousState.A && setting_ID == 1)
+		if (controller.m_currentState.A && m_button_released && difficulty)
 		{
-			if (settings == true)
-			{
-				changeToDifficulty();
-			}
-			
+			changeToDifficulty();
+			m_button_released = false;
 		}
 
-		if (controller.m_currentState.A && !controller.m_previousState.A && help==true)
+		if (controller.m_currentState.A && m_button_released && help)
 		{
 			changeToHelp();
+			m_button_released = false;
 		}
+
 	}
 
 }
@@ -345,16 +339,19 @@ void Option::changeToUpgrade()
  
 void Option::changeToSound()
 {
+	m_reset_check = true;
 	m_game->SetGameState(GameState::sound);
 }
 
 void Option::changeToDifficulty()
 {
+	m_reset_check = true;
 	m_game->SetGameState(GameState::Difficulty);
 }
 
 void Option::changeToHelp()
 {
+	m_reset_check = true;
 	m_game->SetGameState(GameState::Help);
 }
 

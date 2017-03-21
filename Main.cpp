@@ -8,6 +8,8 @@
 #pragma comment (lib, "sfeMovie-d.lib")
 #pragma comment (lib, "thor-d.lib") 
 #pragma comment(lib,"libyaml-cppmdd")
+#pragma comment(lib, "libyaml-cppmdd.lib")
+
 #else
 #pragma comment (lib, "sfml-graphics-d.lib")
 #pragma comment (lib, "sfml-audio-d.lib")
@@ -17,6 +19,7 @@
 #pragma comment (lib, "sfml-network-d.lib")
 #pragma comment (lib, "sfeMovie-d.lib")
 #pragma comment (lib, "thor.lib") 
+#pragma comment (lib, "libyaml-cppmdd.lib")
 #endif
 
 #include "game.h"

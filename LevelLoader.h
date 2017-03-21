@@ -1,4 +1,6 @@
 #pragma once
+#define Level_Loader
+#ifdef Level_Loader
 
 #include <SFML/System/Vector2.hpp>
 #include <vector>
@@ -12,7 +14,9 @@ struct NodeData
 {
 	std::string m_type;
 	sf::Vector2f m_position;
+	double m_rotation;
 };
+
 
 struct LevelData
 {
@@ -27,3 +31,5 @@ public:
 
 	static bool load(int nr, LevelData& level);
 };
+
+#endif // !Level_Loader
