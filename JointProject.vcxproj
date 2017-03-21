@@ -85,8 +85,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SFML_SDK)\include;%(AdditionalIncludeDirectories);.\include</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories>H:\Programming\include;.\include;$(SFML_SDK)\include;%(AdditionalIncludeDirectories);.\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\Programming\include;$(SFML_SDK)\include;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories).\;.\lib</AdditionalLibraryDirectories>
@@ -111,8 +110,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SFML_SDK)\include;%(AdditionalIncludeDirectories);.\include</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories>H:\Programming\include;.\include;$(SFML_SDK)\include;%(AdditionalIncludeDirectories);.\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\Programming\include;$(SFML_SDK)\include;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -137,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BTMath.cpp" />
     <ClCompile Include="Confirm.cpp" />
     <ClCompile Include="CarSelectScreen.cpp" />
     <ClCompile Include="Controller.cpp" />
@@ -160,6 +159,7 @@
     <ClCompile Include="Upgrade.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BTMath.h" />
     <ClInclude Include="Confirm.h" />
     <ClInclude Include="CarSelectScreen.h" />
     <ClInclude Include="Controller.h" />

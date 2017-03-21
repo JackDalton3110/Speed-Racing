@@ -69,7 +69,7 @@ Game::Game() :
 	m_upgrade = new Upgrade(*this, m_HARLOW, m_Motor);
 	m_confirm = new Confirm(*this, m_Motor);
 	m_again = new Playagain(*this, m_Motor);
-	m_gameplay = new Gameplay(*this, m_Motor);
+	m_gameplay = new Gameplay(*this, m_Motor, m_trackCircle);
 	m_help = new Help(*this, m_Motor);
 	m_map = new Map(*this);
 	m_DifficultyScreen = new Difficulty(*this, m_Motor, m_HARLOW);
@@ -110,7 +110,7 @@ void Game::GenerateTrack()
 {
 	sf::IntRect nodeRect(2, 129, 33, 23);
 	
-	for (NodeData const &node : m_level.m_node)
+	/*for (NodeData const &node : m_level.m_node)
 	{
 		std::unique_ptr<sf::Sprite> sprite(new sf::Sprite());
 		sprite->setTexture(ai_Txt);
@@ -119,6 +119,15 @@ void Game::GenerateTrack()
 		sprite->setPosition(node.m_position);
 		sprite->setRotation(node.m_rotation);
 		m_TrackNodes.push_back(std::move(sprite));
+	}*/
+
+	for (NodeData const &node : m_level.m_node)
+	{
+		sf::CircleShape circle(nodeRect.width * 1.5);
+		circle.setFillColor(sf::Color::Black);
+		circle.setOrigin(circle.getRadius(), circle.getRadius());
+		circle.setPosition(node.m_position);
+		m_trackCircle.push_back(std::move(circle));
 	}
 }
 
@@ -287,11 +296,11 @@ void Game::render()
 		break;
 	case GameState::gameplay:
 		m_map->render(m_window);
-		m_gameplay->render(m_window);
-		for (auto &m_sprite : m_TrackNodes)
+		for (int i = 0; i<25; i++)
 		{
-			m_window.draw(*m_sprite); //draws wall sprites
+			m_window.draw(m_trackCircle[i]); //draws wall sprites
 		}
+		m_gameplay->render(m_window);
 		break;
 	case GameState::sound:
 		m_soundScreen->render(m_window);
