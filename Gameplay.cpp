@@ -30,7 +30,6 @@ void Gameplay::update(double t, int car_id,Xbox360Controller& controller)
 	if (m_player.getRect().intersects(m_npc.getRect()))
 	{
 		m_player.setLocation();
-		m_npc.setLocation();
 		float temp = m_player.m_motion.x * 0.7;
 		m_player.m_motion.x = m_npc.m_motion.x * 0.7;
 		m_npc.m_motion.x = temp;
@@ -40,10 +39,6 @@ void Gameplay::update(double t, int car_id,Xbox360Controller& controller)
 
 void Gameplay::render(sf::RenderWindow &window)
 {
-	
-
 	m_player.render(window);
 	m_npc.render(window);
-
-	
 }

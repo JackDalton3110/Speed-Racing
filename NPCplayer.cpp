@@ -18,6 +18,7 @@ NPCplayer::NPCplayer(std::vector<sf::CircleShape> &Node) :
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(25, 15);
 	m_sprite.setPosition(m_postion);
+	m_sprite.setScale(0.5f, 0.5f);
 
 }
 
@@ -65,11 +66,11 @@ void NPCplayer::update(double t, int car_id)
 	}
 	else if (static_cast<int>(std::round(dest - currentRotation + 360)) % 360 < 180)
 	{
-		m_degree += 1;
+		m_degree += 6;
 	}
 	else
 	{
-		m_degree -= 1;
+		m_degree -= 6;
 	}
 
 	/*if (thor::length(vectorToNode) > MAX_SEE_AHEAD)
@@ -94,18 +95,13 @@ void NPCplayer::update(double t, int car_id)
 	//m_steering += collisionAvoidance(aiId, entities);
 	m_steering = Math::truncate(m_steering, MAX_FORCE);
 	m_velocity = Math::truncate(m_velocity + m_steering, MAX_SPEED);
-	m_postion += m_steering;
+	m_postion += m_velocity;
 
 	
 	m_sprite.setPosition(m_postion);
 	m_sprite.setRotation(m_degree);
 }
 
-//void NPCplayer::setLocation()
-//{
-//	m_postion = location_record;
-//	m_acceleration = 0;
-//}
 
 sf::FloatRect NPCplayer::getRect()
 {

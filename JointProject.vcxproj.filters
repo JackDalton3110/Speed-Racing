@@ -22,10 +22,7 @@
     <ClCompile Include="Upgrade.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="ResourcePath.cpp" />
-<<<<<<< HEAD
-=======
     <ClCompile Include="BTMath.cpp" />
->>>>>>> Ai_Car
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Confirm.h" />
@@ -56,6 +53,7 @@
     <ClInclude Include="ResourcePath.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="sounds\song1.wav" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\360 controller.png" />
