@@ -25,6 +25,7 @@ public:
 	int scrap = 5;
 
 private:
+	void scrapAnimation(double t);
 	void backOut();
 	void drawStatusShape(sf::RenderWindow &window, int maxSpeed, int acceleration, int handling);
 	int status_ID = 0; 
@@ -40,7 +41,7 @@ private:
 	sf::Sprite m_Sprite[4];//sprite for texture
 
 	sf::Texture m_texture_scrap;
-	sf::Sprite m_sprite_scrap[2];
+	sf::Sprite m_sprite_scrap[3];
 
 	int whiteCar_status[3] = { 0,0,0 };
 	int redCar_status[3] = { 0,0,0 }; 
@@ -60,6 +61,12 @@ private:
 
 	bool m_status;
 	bool button_released;
+
+	bool move_scrap = false;
+	double scrap_time = 1.0f;
+	sf::Vector2f scrap_mover_positoin;
+	sf::Vector2f scrap_dirction;
+	sf::Vector2f scrap_size;
 
 	std::string intToString(float num); // int to string
 };

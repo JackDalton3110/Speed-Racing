@@ -208,7 +208,7 @@ void Player::update(double t, int car_ID)
 
 sf::FloatRect Player::boundingBox()
 {
-	sf::FloatRect boundingBox(m_sprite.getGlobalBounds().left + 2, m_sprite.getGlobalBounds().top + 2, m_sprite.getGlobalBounds().width - 4, m_sprite.getGlobalBounds().height - 5);
+	sf::FloatRect boundingBox(m_sprite.getGlobalBounds().left + 2, m_sprite.getGlobalBounds().top + 2, m_sprite.getGlobalBounds().width - 5, m_sprite.getGlobalBounds().height - 5);
 	return boundingBox;
 }
 void Player::setLocation()

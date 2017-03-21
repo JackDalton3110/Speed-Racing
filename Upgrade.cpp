@@ -6,7 +6,10 @@ Upgrade::Upgrade(Game &game, sf::Font font, sf::Font font1) :
 	m_Motor(font1),
 	m_size(600, 200),
 	button_released(false),
-	m_status(false)
+	m_status(false),
+	scrap_size(1,1),
+	scrap_dirction(0,0),
+	scrap_mover_positoin(0,0)
 
 {
 	if (!m_texture[0].loadFromFile("images/whiteCarSprite.png"))
@@ -157,7 +160,7 @@ Upgrade::Upgrade(Game &game, sf::Font font, sf::Font font1) :
 	m_sprite_scrap[1].setOrigin(50, 50.5);
 	m_sprite_scrap[1].setScale(0.5f, 0.5f);
 
-
+	m_sprite_scrap[2].setTexture(m_texture_scrap);
 }
 
 Upgrade::~Upgrade()
@@ -189,7 +192,7 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 	}
 	else
 	{
-		if (controller.Abutton() && button_released && !warning)
+		if (controller.Abutton() && button_released && !warning && !move_scrap)
 		{
 			if (scrap > 0)
 			{
@@ -226,6 +229,7 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 					break;
 				}
 				button_released = false;
+				move_scrap = true;
 			}
 			else
 			{
@@ -414,8 +418,44 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 		controller.m_previousState = controller.m_currentState;
 	}
 
+	scrapAnimation(t);
+
 }
 
+
+/// <summary>
+/// upgrade animation
+/// </summary>
+/// <param name="t"></param>
+void Upgrade::scrapAnimation(double t)
+{
+	if (!move_scrap)
+	{
+		m_sprite_scrap[2].setPosition(m_sprite_scrap[0].getPosition());
+		scrap_mover_positoin = m_sprite_scrap[0].getPosition();
+		scrap_dirction = m_sprite_scrap[1].getPosition() - scrap_mover_positoin;
+		scrap_size.x = 1;
+		scrap_size.y = 1;
+	}
+	else
+	{
+		scrap_time -= t;
+		scrap_mover_positoin.x += scrap_dirction.x * t;
+		scrap_mover_positoin.y += scrap_dirction.y * t;
+
+		scrap_size.x -= 1 * t;
+		scrap_size.y -= 1 * t;
+ 
+		m_sprite_scrap[2].setPosition(scrap_mover_positoin);
+
+		if (scrap_time <= 0)
+		{
+			scrap_time = 1.0f;
+			move_scrap = false;
+		}
+	}
+	m_sprite_scrap[2].setScale(scrap_size);
+}
 
 void Upgrade::changeScreen()		
 {
@@ -474,6 +514,11 @@ void Upgrade::render(sf::RenderWindow &window)
 	window.draw(m_textMessage[4]);
 	window.draw(m_textMessage[5]);
 	window.draw(m_textMessage[6]);
+
+	if (move_scrap)
+	{
+		window.draw(m_sprite_scrap[2]);
+	}
 
 	if (warning)
 	{

@@ -33,9 +33,27 @@ void Gameplay::update(double t, int car_id,Xbox360Controller& controller)
 	if (m_player.boundingBox().intersects(m_npc.boundingBox()))
 	{
 		m_player.setLocation();
-		float temp = m_player.m_motion.x * 0.5;
-		m_player.m_motion.x = m_npc.m_motion.x * 0.5;
-		m_npc.m_motion.x = temp;
+		m_npc.setLocation();
+		if (m_player.boundingBox().top - m_npc.boundingBox().top > m_player.boundingBox().left - m_npc.boundingBox().left)
+		{
+			float temp = m_player.m_motion.x * 0.5;
+			m_player.m_motion.x = m_npc.m_motion.x * 0.5;
+			m_npc.m_motion.x = temp;
+
+			temp = (m_player.m_motion.y + m_npc.m_motion.y) / 2;
+			m_player.m_motion.y = temp;
+			m_npc.m_motion.y = temp;
+		}
+		else
+		{
+			float temp = m_player.m_motion.y * 0.5;
+			m_player.m_motion.y = m_npc.m_motion.y * 0.5;
+			m_npc.m_motion.y = temp;
+
+			temp = (m_player.m_motion.x + m_npc.m_motion.x) / 2;
+			m_player.m_motion.x = temp;
+			m_npc.m_motion.x = temp;
+		}
 	}
 
 	box1.setPosition(m_player.boundingBox().left, m_player.boundingBox().top);

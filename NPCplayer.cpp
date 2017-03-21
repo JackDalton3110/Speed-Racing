@@ -1,7 +1,7 @@
 #include "NPCplayer.h"
 
 NPCplayer::NPCplayer(std::vector<sf::CircleShape> &Node) :
-	m_acceleration(10),
+	m_acceleration(200),
 	m_degree(0),
 	m_postion(500, 500),
 	m_dirction(rand() % 5 - 3),
@@ -31,7 +31,7 @@ sf::Vector2f NPCplayer::follow()
 	sf::Vector2f target;
 	target = m_NodeCircle.at(currentNode).getPosition();
 
-	if (Math::distance(m_postion, target) <= 10)
+	if (Math::distance(m_postion, target) <= 50)
 	{
 		currentNode++;
 		if (currentNode >= m_NodeCircle.size())
@@ -72,9 +72,21 @@ void NPCplayer::update(double t, int car_id)
 {
 	timer(t);
 
+	located_time -= t;
+	if (located_time <= 0)
+	{
+		location_record = m_postion;
+		located_time = 0.1;
+	}
+
+	if (m_acceleration < MAX_SPEED)
+	{
+		m_acceleration += 5;
+	}
+
 	sf::Vector2f vectorToNode = follow();
 
-	auto dest = atan2(-1 * m_velocity.y, -1 * m_velocity.x) / thor::Pi * 180 + 180;
+	auto dest = atan2(-1 * m_motion.y, -1 * m_motion.x) / thor::Pi * 180 + 180;
 
 	auto currentRotation = m_degree;
 
@@ -113,18 +125,29 @@ void NPCplayer::update(double t, int car_id)
 	
 	//m_steering += collisionAvoidance(aiId, entities);
 	m_steering = Math::truncate(m_steering, MAX_FORCE);
-	m_velocity = Math::truncate(m_velocity + m_steering, MAX_SPEED);
-	m_postion += m_velocity;
+	m_motion = Math::truncate(m_motion + m_steering, m_acceleration);
+	m_postion.x += m_motion.x * t;
+	m_postion.y += m_motion.y * t;
+
+	//physics.update(t, m_velocity, m_acceleration, m_degree);
+	//m_velocity = physics.getMotion(); // get new motion from physics
+	//m_postion.x += physics.getDistance().x; // get new position 
+	//m_postion.y += physics.getDistance().y;
 
 	
 	m_sprite.setPosition(m_postion);
 	m_sprite.setRotation(m_degree);
 }
 
+void NPCplayer::setLocation()
+{
+	m_postion = location_record;
+	m_acceleration = 0;
+}
 
 sf::FloatRect NPCplayer::boundingBox()
 {
-	sf::FloatRect boundingBox(m_sprite.getGlobalBounds().left + 2, m_sprite.getGlobalBounds().top + 2, m_sprite.getGlobalBounds().width - 4, m_sprite.getGlobalBounds().height - 5);
+	sf::FloatRect boundingBox(m_sprite.getGlobalBounds().left + 2, m_sprite.getGlobalBounds().top + 2, m_sprite.getGlobalBounds().width - 5, m_sprite.getGlobalBounds().height - 5);
 	return boundingBox;
 }
 
