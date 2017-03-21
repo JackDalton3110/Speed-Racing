@@ -113,6 +113,7 @@ private:
 	Map *m_map;
 	Sound *m_soundScreen;
 	Difficulty *m_DifficultyScreen;
+	Player m_player;
 
 	sf::View view; // camera
 

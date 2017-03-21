@@ -18,11 +18,17 @@ public:
 	
 	sf::FloatRect boundingBox();
 	sf::Vector2f m_motion;
-	
-	void setLocation();
-	void setPlayerStatus(float maxspeed, float accelecation, float handling);
 
+	sf::Vector2f m_postion;
+
+	void setLocation();
+	float m_acceleration;
+	void highFriction();
+	void normalFriction();
+	sf::Vector2f getSpritePosition() const;
+	void setPlayerStatus(float maxspeed, float accelecation, float handling);
 	void getLapTimer();
+
 
 private:
 	void timer(double t);
@@ -40,7 +46,7 @@ private:
 
 	int lap_timer[3] = {0,0,0}; // 0 for millisecond, 1 for second, 2 for minute
 
-	float m_acceleration;
+	;
 	float m_degree;
 	float m_velocity;
 
@@ -52,7 +58,7 @@ private:
 
 	sf::View view; // camera
 
-	sf::Vector2f m_postion;
+	
 
 	sf::Texture m_texture; // car texture
 	sf::Sprite m_sprite; // car sprite

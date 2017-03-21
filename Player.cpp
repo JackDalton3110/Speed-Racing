@@ -4,7 +4,7 @@ Player::Player() :
 	m_acceleration(0),
 	m_degree(0),
 	m_velocity(0),
-	m_postion(540, 540 ),
+	m_postion(180, 900),
 	location_record(0, 0),
 	located_time(0.1),
 	m_motion(0, 0),
@@ -27,7 +27,11 @@ Player::Player() :
 	}
 
 	m_sprite.setTexture(m_texture);
+	m_sprite.setPosition(m_postion);
+
 	m_sprite.setOrigin(10, 15);
+
+
 	
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
@@ -45,6 +49,18 @@ Player::~Player()
 {
 
 }
+
+void Player::highFriction()
+{
+	physics.slowDown();
+	int x = 0;
+}
+
+void Player::normalFriction()
+{
+	physics.resetGravity();
+}
+
 
 void Player::setPlayerStatus(float maxspeed, float accelecation, float handling)
 {
@@ -237,3 +253,89 @@ std::string Player::intToString(int num) {
 	return numString;
 }
 
+
+
+
+sf::Vector2f Player::getSpritePosition() const
+{
+	return m_sprite.getPosition();
+}
+
+
+//Larry was here
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+///

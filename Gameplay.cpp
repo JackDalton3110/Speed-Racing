@@ -1,9 +1,12 @@
 #include "Gameplay.h"
 
-Gameplay::Gameplay(Game &game, sf::Font font, std::vector<sf::CircleShape> &Node) :
+
+Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::CircleShape> &Node) :
 	m_game(&game),
 	m_font(font),
+	m_player(player),
 	m_npc(Node)
+
 {
 	box1.setOutlineThickness(1);
 	box1.setOutlineColor(sf::Color::Blue);

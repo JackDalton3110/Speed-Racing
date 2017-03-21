@@ -12,14 +12,15 @@ class Game;
 class Gameplay
 {
 public:
-	Gameplay(Game &game, sf::Font font, std::vector<sf::CircleShape> &Node);
+
+	Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::CircleShape> &Node);
 	~Gameplay();
 	void update(double t, int car_id, Xbox360Controller& controller);
 	void render(sf::RenderWindow &window);
 
 	void getStatus(float maxspeed, float accelecation, float handling);
 private:
-	Player m_player;
+	Player & m_player;
 	NPCplayer m_npc;
 
 	Game *m_game;
