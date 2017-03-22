@@ -334,3 +334,15 @@ void Game::render()
 
 	m_window.display();
 }
+
+std::string Game::intToString(int num) {
+	char numString[10];
+	sprintf_s(numString, "%i", num);
+	return numString;
+}
+
+std::string Game::floatToString(float num) {
+	char numString[256];
+	sprintf_s(numString, "%.1f", num);
+	return numString;
+}

@@ -32,6 +32,7 @@ public:
 
 private:
 	void timer(double t);
+	void driftMark();
 
 	Physics physics;
 	Xbox360Controller controller;
@@ -46,7 +47,6 @@ private:
 
 	int lap_timer[3] = {0,0,0}; // 0 for millisecond, 1 for second, 2 for minute
 
-	;
 	float m_degree;
 	float m_velocity;
 
@@ -58,13 +58,17 @@ private:
 
 	sf::View view; // camera
 
-	
-
 	sf::Texture m_texture; // car texture
 	sf::Sprite m_sprite; // car sprite
 
 	sf::Vector2f location_record;
+	float degree_record;
 	float located_time;
+
+	sf::Texture texture_draft_mark;
+	sf::Sprite sprite_draft_mark[100];
+	int mark_count = 1;
+	float draw_time = 0.1f;
 
 	std::string intToString(int num); // int to string
 };

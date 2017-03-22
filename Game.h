@@ -82,6 +82,9 @@ public:
 	sf::Texture ai_Txt;
 	sf::Sprite ai_Sprite;
 
+	std::string intToString(int num); // int to string
+	std::string floatToString(float num); // int to string
+
 protected:
 	LevelData m_level;
 	std::vector<std::unique_ptr<sf::Sprite>>m_TrackNodes;

@@ -45,7 +45,5 @@ private:
 	float reaCar_values[3];
 	float yellowCar_values[3];
 	float greenCar_values[3];
-
-	std::string floatToString(float num); // int to string
 };
 #endif // !CAR_SELECTION

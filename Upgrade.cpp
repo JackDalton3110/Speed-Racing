@@ -336,15 +336,15 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 
 		m_sprite_scrap[0].setPosition(0, 50);
 		m_textMessage[10].setPosition(100, 60);
-		m_textMessage[10].setString(intToString(scrap));
+		m_textMessage[10].setString(m_game->floatToString(scrap));
 
 		whiteCar_values[0] = 200 + whiteCar_status[0] * 15;
 		whiteCar_values[1] = 4.2 - whiteCar_status[1] * 0.4;
 		whiteCar_values[2] = 50 + whiteCar_status[2] * 5;
 
-		m_textMessage[4].setString(intToString(whiteCar_values[0]) + " kph");//set Max Speed
-		m_textMessage[5].setString(intToString(whiteCar_values[1]) + " sec  to Max Speed");//set Aceeleration
-		m_textMessage[6].setString(intToString(whiteCar_values[2]) + "%");//set Handling
+		m_textMessage[4].setString(m_game->floatToString(whiteCar_values[0]) + " kph");//set Max Speed
+		m_textMessage[5].setString(m_game->floatToString(whiteCar_values[1]) + " sec  to Max Speed");//set Aceeleration
+		m_textMessage[6].setString(m_game->floatToString(whiteCar_values[2]) + "%");//set Handling
 
 		controller.m_previousState = controller.m_currentState;
 	}
@@ -360,15 +360,15 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 
 		m_sprite_scrap[0].setPosition(0, 250);
 		m_textMessage[10].setPosition(100, 260);
-		m_textMessage[10].setString(intToString(scrap));
+		m_textMessage[10].setString(m_game->floatToString(scrap));
 
 		reaCar_values[0] = 180 + redCar_status[0] * 18;
 		reaCar_values[1] = 3.9 - redCar_status[1] * 0.35;
 		reaCar_values[2] = 55 + redCar_status[2] * 4;
 
-		m_textMessage[4].setString(intToString(reaCar_values[0]) + " kph");//need to be changed to a player editable varible
-		m_textMessage[5].setString(intToString(reaCar_values[1]) + " sec  to Max Speed");//set Aceeleration
-		m_textMessage[6].setString(intToString(reaCar_values[2]) + "%");//set Handling
+		m_textMessage[4].setString(m_game->floatToString(reaCar_values[0]) + " kph");//need to be changed to a player editable varible
+		m_textMessage[5].setString(m_game->floatToString(reaCar_values[1]) + " sec  to Max Speed");//set Aceeleration
+		m_textMessage[6].setString(m_game->floatToString(reaCar_values[2]) + "%");//set Handling
 		controller.m_previousState = controller.m_currentState;
 	}
 	else if (button_ID == 2)
@@ -383,15 +383,15 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 
 		m_sprite_scrap[0].setPosition(0,450);
 		m_textMessage[10].setPosition(100, 460);
-		m_textMessage[10].setString(intToString(scrap));
+		m_textMessage[10].setString(m_game->floatToString(scrap));
 
 		yellowCar_values[0] = 190 + yellowCar_status[0] * 12;
 		yellowCar_values[1] = 4.5 - yellowCar_status[1] * 0.5;
 		yellowCar_values[2] = 25 + yellowCar_status[2] * 10;
 
-		m_textMessage[4].setString(intToString(yellowCar_values[0]) + " kph");
-		m_textMessage[5].setString(intToString(yellowCar_values[1]) + " sec  to Max Speed");//set Aceeleration
-		m_textMessage[6].setString(intToString(yellowCar_values[2]) + "%");//set Handling
+		m_textMessage[4].setString(m_game->floatToString(yellowCar_values[0]) + " kph");
+		m_textMessage[5].setString(m_game->floatToString(yellowCar_values[1]) + " sec  to Max Speed");//set Aceeleration
+		m_textMessage[6].setString(m_game->floatToString(yellowCar_values[2]) + "%");//set Handling
 		controller.m_previousState = controller.m_currentState;
 	}
 	else if (button_ID == 3)
@@ -406,15 +406,15 @@ void Upgrade::update(double t, Xbox360Controller &controller)
 
 		m_sprite_scrap[0].setPosition(0, 650);
 		m_textMessage[10].setPosition(100, 660);
-		m_textMessage[10].setString(intToString(scrap));
+		m_textMessage[10].setString(m_game->floatToString(scrap));
 
 		greenCar_values[0] = 188 + greenCar_status[0] * 15;
 		greenCar_values[1] = 4.0 - greenCar_status[1] * 0.4;
 		greenCar_values[2] = 30 + greenCar_status[2] * 8;
 
-		m_textMessage[4].setString(intToString(greenCar_values[0]) + " kph");
-		m_textMessage[5].setString(intToString(greenCar_values[1]) + " sec  to Max Speed");//set Aceeleration
-		m_textMessage[6].setString(intToString(greenCar_values[2]) + "%");//set Handling
+		m_textMessage[4].setString(m_game->floatToString(greenCar_values[0]) + " kph");
+		m_textMessage[5].setString(m_game->floatToString(greenCar_values[1]) + " sec  to Max Speed");//set Aceeleration
+		m_textMessage[6].setString(m_game->floatToString(greenCar_values[2]) + "%");//set Handling
 		controller.m_previousState = controller.m_currentState;
 	}
 
@@ -560,10 +560,4 @@ void Upgrade::drawStatusShape(sf::RenderWindow &window, int maxSpeed, int accele
 		window.draw(m_textMessage[9]);
 	}
 
-}
-
-std::string Upgrade::intToString(float num) {
-	char numString[256];
-	sprintf_s(numString, "%.1f", num);
-	return numString;
 }

@@ -20,6 +20,8 @@ public:
 
 	void getStatus(float maxspeed, float accelecation, float handling);
 private:
+	void collisionCheck();
+
 	Player & m_player;
 	NPCplayer m_npc;
 
@@ -31,8 +33,13 @@ private:
 	float m_acceleration; // the acceleration of player
 	float m_handling; // the handling of player
 
-	sf::RectangleShape box1;
-	sf::RectangleShape box2;
+	bool game_pause = false;
+	bool m_countdown = false;
+	int button_ID = 0;
+	float restart_countdown = 3.0f;
+	sf::Text countdown_text;
+	sf::Text m_textMessage[2];
+	sf::RectangleShape m_selection[2];
 };
 
 #endif // GAMEPLAY

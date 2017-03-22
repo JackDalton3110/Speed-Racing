@@ -26,12 +26,24 @@ Player::Player() :
 		throw std::exception(s.c_str());
 	}
 
+	if (!texture_draft_mark.loadFromFile("images/DriftMark.png"))
+	{
+		std::string s("error loading texture from file");
+		throw std::exception(s.c_str());
+	}
+
+	for (int i = 0; i < 100; i++)
+	{
+		sprite_draft_mark[i].setTexture(texture_draft_mark);
+		sprite_draft_mark[i].setScale(0.5, 0.5);
+		sprite_draft_mark[i].setPosition(-1000, -100);
+		sprite_draft_mark[i].setOrigin(11, 15);
+	}
+
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(m_postion);
 
 	m_sprite.setOrigin(10, 15);
-
-
 	
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
@@ -112,15 +124,42 @@ void Player::getLapTimer()
 	}
 }
 
+void Player::driftMark()
+{
+	sf::FloatRect boundingBox(m_sprite.getGlobalBounds().left + 10, m_sprite.getGlobalBounds().top + 5, m_sprite.getGlobalBounds().width - 15, m_sprite.getGlobalBounds().height - 5);
+	if (!boundingBox.intersects(sprite_draft_mark[mark_count - 1].getGlobalBounds()))
+	{
+		sprite_draft_mark[mark_count].setPosition(m_postion);
+		sprite_draft_mark[mark_count].setRotation(degree_record);
+		mark_count++;
+		if (mark_count >= 100)
+		{
+			mark_count = 1;
+		}
+	}
+}
+
 void Player::update(double t, int car_ID)
 {
 
 	controller.update();
 
+		if (controller.Bbutton())
+	{
+		m_handbrake = m_motion.x * m_handling;
+		m_motion.x -= m_handbrake * t;
+
+		m_handbrake = m_motion.y  * m_handling;
+		m_motion.y -= m_handbrake * t;
+
+		driftMark();
+	}
+
 	located_time -= t;
 	if (located_time <= 0)
 	{
 		location_record = m_postion;
+		degree_record = m_degree;
 		located_time = 0.1;
 	}
 
@@ -151,15 +190,6 @@ void Player::update(double t, int car_ID)
 	else if (controller.LTrigger() > -5 && controller.LTrigger() <= 0)
 	{
 		m_acceleration = 0;
-	}
-
-	if (controller.Bbutton())
-	{
-		m_handbrake = m_motion.x * m_handling;
-		m_motion.x -= m_handbrake * t;
-
-		m_handbrake = m_motion.y  * m_handling;
-		m_motion.y -= m_handbrake * t;
 	}
 
 	if (controller.LeftThumbSticks().x <= -20 ||
@@ -237,7 +267,13 @@ void Player::render(sf::RenderWindow &window)
 {
 	window.setView(view);
 
-	window.draw(m_sprite);
+	for (int i = 0; i < 100; i++)
+	{
+		window.draw(sprite_draft_mark[i]);
+	}
+
+	window.draw(m_sprite); // draw player car
+
 	for (int i = 0; i < 3; i++)
 	{
 		window.draw(m_text[i]);
@@ -260,82 +296,3 @@ sf::Vector2f Player::getSpritePosition() const
 {
 	return m_sprite.getPosition();
 }
-
-
-//Larry was here
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-///

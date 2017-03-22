@@ -153,9 +153,9 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 		m_Sprite[2].setPosition(325, 400);
 		m_Sprite[3].setPosition(325, 600);
 
-		m_textMessage[4].setString(floatToString(whiteCar_values[0]) + " kph");//set Max Speed
-		m_textMessage[5].setString(floatToString(whiteCar_values[1]) + " sec  to Max Speed");//set Aceeleration
-		m_textMessage[6].setString(floatToString(whiteCar_values[2]) + "%");//set Handling
+		m_textMessage[4].setString(m_game->floatToString(whiteCar_values[0]) + " kph");//set Max Speed
+		m_textMessage[5].setString(m_game->floatToString(whiteCar_values[1]) + " sec  to Max Speed");//set Aceeleration
+		m_textMessage[6].setString(m_game->floatToString(whiteCar_values[2]) + "%");//set Handling
 
 		controller.m_previousState = controller.m_currentState;
 	}
@@ -169,9 +169,9 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 		m_Sprite[2].setPosition(325, 400);
 		m_Sprite[3].setPosition(325, 600);
 
-		m_textMessage[4].setString(floatToString(reaCar_values[0]) + " kph");//need to be changed to a player editable varible
-		m_textMessage[5].setString(floatToString(reaCar_values[1]) + " sec  to Max Speed");//set Aceeleration
-		m_textMessage[6].setString(floatToString(reaCar_values[2]) + "%");//set Handling
+		m_textMessage[4].setString(m_game->floatToString(reaCar_values[0]) + " kph");//need to be changed to a player editable varible
+		m_textMessage[5].setString(m_game->floatToString(reaCar_values[1]) + " sec  to Max Speed");//set Aceeleration
+		m_textMessage[6].setString(m_game->floatToString(reaCar_values[2]) + "%");//set Handling
 
 		controller.m_previousState = controller.m_currentState;
 	}
@@ -185,9 +185,9 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 		m_Sprite[1].setPosition(325, 200);
 		m_Sprite[3].setPosition(325, 600);
 
-		m_textMessage[4].setString(floatToString(yellowCar_values[0]) + " kph");
-		m_textMessage[5].setString(floatToString(yellowCar_values[1]) + " sec  to Max Speed");//set Aceeleration
-		m_textMessage[6].setString(floatToString(yellowCar_values[2]) + "%");//set Handling
+		m_textMessage[4].setString(m_game->floatToString(yellowCar_values[0]) + " kph");
+		m_textMessage[5].setString(m_game->floatToString(yellowCar_values[1]) + " sec  to Max Speed");//set Aceeleration
+		m_textMessage[6].setString(m_game->floatToString(yellowCar_values[2]) + "%");//set Handling
 
 		controller.m_previousState = controller.m_currentState;
 	}
@@ -201,9 +201,9 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 		m_Sprite[1].setPosition(325, 200);
 		m_Sprite[2].setPosition(325, 400);
 
-		m_textMessage[4].setString(floatToString(greenCar_values[0]) + " kph");
-		m_textMessage[5].setString(floatToString(greenCar_values[1]) + " sec  to Max Speed");//set Aceeleration
-		m_textMessage[6].setString(floatToString(greenCar_values[2]) + "%");//set Handling
+		m_textMessage[4].setString(m_game->floatToString(greenCar_values[0]) + " kph");
+		m_textMessage[5].setString(m_game->floatToString(greenCar_values[1]) + " sec  to Max Speed");//set Aceeleration
+		m_textMessage[6].setString(m_game->floatToString(greenCar_values[2]) + "%");//set Handling
 
 		controller.m_previousState = controller.m_currentState;
 	}
@@ -263,10 +263,4 @@ void CarSelect::getCarValues(float white, float red, float yellow, float green, 
 	reaCar_values[i] = red;
 	yellowCar_values[i] = yellow;
 	greenCar_values[i] = green;
-}
-
-std::string CarSelect::floatToString(float num) {
-	char numString[256];
-	sprintf_s(numString, "%.1f", num);
-	return numString;
 }
