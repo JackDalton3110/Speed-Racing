@@ -68,7 +68,18 @@ void NPCplayer::timer(double t)
 	}
 }
 
-void NPCplayer::update(double t, int car_id)
+void NPCplayer::setNPC(int car_ID)
+{
+	if (m_car_id == car_ID)
+	{
+		m_car_id = rand() % 4;
+	}
+
+	sf::IntRect car(0, m_car_id * 30, 50, 30);
+	m_sprite.setTextureRect(car);
+}
+
+void NPCplayer::update(double t)
 {
 	timer(t);
 
@@ -97,16 +108,19 @@ void NPCplayer::update(double t, int car_id)
 	}
 	else if (static_cast<int>(std::round(dest - currentRotation + 360)) % 360 < 180)
 	{
-		m_degree += 6;
+		m_degree += 5;
+		if (m_degree > 359)
+		{
+			m_degree = 0 - m_degree;
+		}
 	}
 	else
 	{
-		m_degree -= 6;
-	}
-
-	if (m_car_id == car_id)
-	{
-		m_car_id = rand() % 4;
+		m_degree -= 5;
+		if (m_degree < 0)
+		{
+			m_degree = 359 + m_degree;
+		}
 	}
 
 	sf::IntRect car(0, m_car_id * 30, 50, 30);
@@ -122,11 +136,6 @@ void NPCplayer::update(double t, int car_id)
 	m_motion = Math::truncate(m_motion + m_steering, m_acceleration);
 	m_postion.x += m_motion.x * t;
 	m_postion.y += m_motion.y * t;
-
-	//physics.update(t, m_velocity, m_acceleration, m_degree);
-	//m_velocity = physics.getMotion(); // get new motion from physics
-	//m_postion.x += physics.getDistance().x; // get new position 
-	//m_postion.y += physics.getDistance().y;
 	
 	m_sprite.setPosition(m_postion);
 	m_sprite.setRotation(m_degree);

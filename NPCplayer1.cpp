@@ -32,7 +32,7 @@ sf::Vector2f NPCplayer1::follow()
 	sf::Vector2f target;
 	target = m_NodeCircle.at(currentNode).getPosition();
 
-	if (Math::distance(m_postion, target) <= 14)
+	if (Math::distance(m_postion, target) <= 50)
 	{
 		currentNode++;
 		if (currentNode >= 39)
@@ -51,11 +51,40 @@ sf::Vector2f NPCplayer1::follow()
 	}
 }
 
-void NPCplayer1::update(double t, int car_id)
+void NPCplayer1::setNPC(int car_ID)
+{
+	if (m_car_id == car_ID)
+	{
+		m_car_id = rand() % 4;
+	}
+
+	sf::IntRect car(0, m_car_id * 30, 50, 30);
+	m_sprite.setTextureRect(car);
+}
+
+sf::FloatRect NPCplayer1::boundingBox()
+{
+	sf::FloatRect boundingBox(m_sprite.getGlobalBounds().left + 2, m_sprite.getGlobalBounds().top + 2, m_sprite.getGlobalBounds().width - 5, m_sprite.getGlobalBounds().height - 5);
+	return boundingBox;
+}
+
+void NPCplayer1::update(double t)
 {
 	sf::Vector2f vectorToNode = follow();
 
-	auto dest = atan2(-1 * m_velocity.y, -1 * m_velocity.x) / thor::Pi * 180 + 180;
+	located_time -= t;
+	if (located_time <= 0)
+	{
+		location_record = m_postion;
+		located_time = 0.1;
+	}
+
+	if (m_acceleration < MAX_SPEED)
+	{
+		m_acceleration += 5;
+	}
+
+	auto dest = atan2(-1 * m_motion.y, -1 * m_motion.x) / thor::Pi * 180 + 180;
 
 	auto currentRotation = m_degree;
 
@@ -73,14 +102,6 @@ void NPCplayer1::update(double t, int car_id)
 		m_degree -= 6;
 	}
 
-	if (m_car_id == car_id)
-	{
-		m_car_id = rand() % 4;
-	}
-
-	sf::IntRect car(0, m_car_id * 30, 50, 30);
-	m_sprite.setTextureRect(car);
-
 	if (thor::length(vectorToNode) != 0)
 	{
 		m_steering += thor::unitVector(vectorToNode);
@@ -88,18 +109,19 @@ void NPCplayer1::update(double t, int car_id)
 	}
 
 	m_steering = Math::truncate(m_steering, MAX_FORCE);
-	m_velocity = Math::truncate(m_velocity + m_steering, MAX_SPEED);
-	m_postion += m_velocity;
+	m_motion = Math::truncate(m_motion + m_steering, m_acceleration);
+	m_postion.x += m_motion.x * t;
+	m_postion.y += m_motion.y * t;
 
 
 	m_sprite.setPosition(m_postion);
 	m_sprite.setRotation(m_degree);
 }
 
-
-sf::FloatRect NPCplayer1::getRect()
+void NPCplayer1::setLocation()
 {
-	return sf::FloatRect(m_postion.x - m_sprite.getOrigin().x, m_postion.y - m_sprite.getOrigin().y, 50, 30);
+	m_postion = location_record;
+	m_acceleration = 0;
 }
 
 void NPCplayer1::render(sf::RenderWindow &window)

@@ -1,21 +1,21 @@
 Nodes:
    - type: node
-     position: {x: 555,y: 493}
+     position: {x: 562,y: 528}
      rotation: 0
    - type: node
-     position: {x: 771, y: 452}
+     position: {x: 764, y: 460}
      rotation: 0
    - type: node
-     position: {x: 854, y: 394}
+     position: {x: 844, y: 347}
      rotation: 0
    - type: node
-     position: {x: 826, y: 221}
+     position: {x: 777, y: 112}
      rotation: 0
    - type: node
-     position: {x: 776, y: 137}
+     position: {x: 621, y: 79}
      rotation: 0
    - type: node
-     position: {x: 651, y: 66}
+     position: {x: 550, y: 245}
      rotation: 0
    - type: node
      position: {x: 490, y: 368}

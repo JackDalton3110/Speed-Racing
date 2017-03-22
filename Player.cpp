@@ -74,8 +74,11 @@ void Player::normalFriction()
 }
 
 
-void Player::setPlayerStatus(float maxspeed, float accelecation, float handling)
+void Player::setPlayerStatus(float maxspeed, float accelecation, float handling, int car_ID)
 {
+	sf::IntRect car(0, car_ID * 30, 50, 30); // get rect of player selection
+	m_sprite.setTextureRect(car);
+
 	max_speed = (0.2 * 9.8 * maxspeed) / 100; // get max speed from upgrade
 	m_turning = maxspeed * 0.65;
 	m_handling = handling / 100 + 0.5;
@@ -147,7 +150,7 @@ void Player::driftMark()
 	}
 }
 
-void Player::update(double t, int car_ID)
+void Player::update(double t)
 {
 
 	controller.update();
@@ -172,10 +175,6 @@ void Player::update(double t, int car_ID)
 	}
 
 	timer(t);
-
-	sf::IntRect car(0, car_ID * 30, 50 , 30); // get rect of player selection
-
-	m_sprite.setTextureRect(car);
 
 	if (controller.RTrigger() >= 5) // right trigger to speed up
 	{

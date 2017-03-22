@@ -19,7 +19,6 @@ public:
 	~Gameplay();
 	void update(double t, int car_id, Xbox360Controller& controller);
 	void render(sf::RenderWindow &window);
-
 	void getStatus(float maxspeed, float accelecation, float handling);
 private:
 	void collisionCheck();
@@ -37,13 +36,20 @@ private:
 	float m_acceleration; // the acceleration of player
 	float m_handling; // the handling of player
 
+	bool game_start = false;
 	bool game_pause = false;
 	bool m_countdown = false;
-	int button_ID = 0;
 	float restart_countdown = 3.0f;
+	float start_count = 5.0f;
+	int button_ID = 0;
 	sf::Text countdown_text;
 	sf::Text m_textMessage[2];
 	sf::RectangleShape m_selection[2];
+
+	sf::Texture m_signal_texture;
+	sf::Texture m_goTexture;
+	sf::Sprite m_signal_sprite;
+	sf::Sprite m_goSprite;
 };
 
 #endif // GAMEPLAY

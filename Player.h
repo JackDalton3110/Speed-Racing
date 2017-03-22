@@ -13,7 +13,7 @@ public:
 	Player();
 	~Player();
 
-	void update(double t, int car_ID);
+	void update(double t);
 	void render(sf::RenderWindow &window);
 	
 	sf::FloatRect boundingBox();
@@ -26,7 +26,7 @@ public:
 	void highFriction();
 	void normalFriction();
 	sf::Vector2f getSpritePosition() const;
-	void setPlayerStatus(float maxspeed, float accelecation, float handling);
+	void setPlayerStatus(float maxspeed, float accelecation, float handling, int car_ID);
 	void getLapTimer();
 
 
