@@ -28,12 +28,6 @@ Player::Player() :
 
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(25, 15);
-<<<<<<< HEAD
-
-	//m_sprite.setPosition(m_positon);
-
-=======
->>>>>>> 5903129f1052da86f7c06b60224d2bed61d0a256
 	
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
