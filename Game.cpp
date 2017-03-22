@@ -12,9 +12,10 @@ Game::Game() :
 	{
 		return;
 	}
+	
 	GenerateTrack();
 
-	if (!ai_Txt.loadFromFile("images/redCarSprite.png"))
+	if (!ai_Txt.loadFromFile("images/Node.png"))
 	{
 		std::cout << "error loading ai Sprite" << std::endl;
 	}
@@ -109,25 +110,34 @@ Game::~Game()
 void Game::GenerateTrack()
 {
 	sf::IntRect nodeRect(2, 129, 33, 23);
-	
-	/*for (NodeData const &node : m_level.m_node)
-	{
-		std::unique_ptr<sf::Sprite> sprite(new sf::Sprite());
-		sprite->setTexture(ai_Txt);
-		sprite->setTextureRect(nodeRect);
-		sprite->setOrigin(nodeRect.height / 2, nodeRect.width / 2);
-		sprite->setPosition(node.m_position);
-		sprite->setRotation(node.m_rotation);
-		m_TrackNodes.push_back(std::move(sprite));
-	}*/
 
 	for (NodeData const &node : m_level.m_node)
 	{
-		sf::CircleShape circle(nodeRect.width * 1.5);
+		sf::CircleShape circle(nodeRect.width * 1);
 		circle.setFillColor(sf::Color::Black);
 		circle.setOrigin(circle.getRadius(), circle.getRadius());
 		circle.setPosition(node.m_position);
 		m_trackCircle.push_back(std::move(circle));
+	}
+
+	sf::IntRect nodeRect1(2, 129, 33, 23);
+	for (NodeData const &node1 : m_level.m_node1)
+	{
+		sf::CircleShape circle1(nodeRect1.width * 1);
+		circle1.setFillColor(sf::Color::Blue);
+		circle1.setOrigin(circle1.getRadius(), circle1.getRadius());
+		circle1.setPosition(node1.m_position);
+		m_trackCircle1.push_back(std::move(circle1));
+	}
+
+	sf::IntRect nodeRect2(2, 129, 33, 23);
+	for (NodeData const &node2 : m_level.m_node2)
+	{
+		sf::CircleShape circle2(nodeRect2.width * 1);
+		circle2.setFillColor(sf::Color::Blue);
+		circle2.setOrigin(circle2.getRadius(), circle2.getRadius());
+		circle2.setPosition(node2.m_position);
+		m_trackCircle2.push_back(std::move(circle2));
 	}
 }
 

@@ -1,10 +1,10 @@
 #include "Player.h"
 
 Player::Player() :
-	m_acceleration(0),
-	m_degree(0),
+	m_acceleration(100),
+	m_degree(255),
 	m_velocity(0),
-	m_postion(180, 900),
+	m_postion(520, 681),
 	location_record(0, 0),
 	located_time(0.1),
 	m_motion(0, 0),
@@ -27,6 +27,7 @@ Player::Player() :
 	}
 
 	m_sprite.setTexture(m_texture);
+
 	m_sprite.setPosition(m_postion);
 
 	m_sprite.setOrigin(10, 15);
@@ -35,7 +36,6 @@ Player::Player() :
 	
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
-
 	view.setCenter(m_postion); // set player's position to camera
 	view.setSize(sf::Vector2f(500, 400)); // set camera's size
 
@@ -71,6 +71,14 @@ void Player::setPlayerStatus(float maxspeed, float accelecation, float handling)
 
 void Player::timer(double t)
 {
+	controller.update();
+
+	located_time -= t;
+	if (located_time <= 0)
+	{
+		/*location_record = m_postion;*/
+		located_time = 0.1;
+	}
 	// timer part
 	timer_mis += t * 100;
 
@@ -229,7 +237,7 @@ sf::FloatRect Player::boundingBox()
 }
 void Player::setLocation()
 {
-	m_postion = location_record;
+	//m_postion = location_record;
 	m_acceleration = 0;
 }
 
@@ -246,96 +254,13 @@ void Player::render(sf::RenderWindow &window)
 	window.draw(m_lap_timer);
 }
 
-
 std::string Player::intToString(int num) {
 	char numString[10];
 	sprintf_s(numString, "%i", num);
 	return numString;
 }
 
-
-
-
 sf::Vector2f Player::getSpritePosition() const
 {
 	return m_sprite.getPosition();
 }
-
-
-//Larry was here
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-/// 
-///
