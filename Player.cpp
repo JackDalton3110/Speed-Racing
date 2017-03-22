@@ -100,6 +100,17 @@ void Player::timer(double t)
 	m_lap_timer.setString(intToString(lap_timer[0]) + "::"
 		+ intToString(lap_timer[1]) + "::"
 		+ intToString(lap_timer[2])); // convert minute to string
+
+	if (m_postion.y > 1444)
+	{
+		m_halfway = true;
+		std::cout << "halfway::" << std::endl;
+	}
+}
+
+void Player::resetHalfWay()
+{
+	m_halfway = false;
 }
 
 void Player::getLapTimer()

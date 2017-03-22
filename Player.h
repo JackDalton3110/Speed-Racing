@@ -28,6 +28,8 @@ public:
 	sf::Vector2f getSpritePosition() const;
 	void setPlayerStatus(float maxspeed, float accelecation, float handling);
 	void getLapTimer();
+	void resetHalfWay();
+	bool m_halfway;
 
 
 private:

@@ -13,6 +13,12 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 	box1.setOutlineColor(sf::Color::Blue);
 	box2.setOutlineThickness(1);
 	box2.setOutlineColor(sf::Color::Blue);
+	m_finishLine.setOutlineThickness(1);
+	m_finishLine.setOutlineColor(sf::Color::Blue);
+
+	//Setting the position for the finish line collision box
+	m_finishLinePos.x = 100;
+	m_finishLinePos.y = 12;
 }
 
 Gameplay::~Gameplay()
@@ -62,18 +68,47 @@ void Gameplay::update(double t, int car_id,Xbox360Controller& controller)
 		}
 	}
 
+	/*if (m_player.boundingBox().intersects(intersectLine()))
+	{
+		std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+	}*/
+
+	//This is collision with the finish line
+
+	if (m_player.m_postion.x >= m_finishLine.getPosition().x && m_player.m_postion.x <= m_finishLine.getPosition().x + 100)
+	{
+		if (m_player.m_postion.y >= m_finishLine.getPosition().y && m_player.m_postion.y <= m_finishLine.getPosition().y + 30)
+		{
+			std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+			m_player.getLapTimer();
+		}
+	}
 	box1.setPosition(m_player.boundingBox().left, m_player.boundingBox().top);
 	box1.setSize(sf::Vector2f(m_player.boundingBox().width, m_player.boundingBox().height));
 
 	box2.setPosition(m_npc.boundingBox().left, m_npc.boundingBox().top);
 	box2.setSize(sf::Vector2f(m_npc.boundingBox().width, m_npc.boundingBox().height));
+
+	m_finishLine.setPosition(482, 645);
+	m_finishLine.setSize(sf::Vector2f(m_finishLinePos.x, m_finishLinePos.y));
+	m_finishLine.setRotation(345.0f);
+}
+
+sf::FloatRect Gameplay::intersectLine()
+{
+	sf::FloatRect intersectLine(645 + m_finishLine.getSize().y, 482,
+		482 + m_finishLine.getSize().x, 645);
+	return intersectLine;
+
 }
 
 void Gameplay::render(sf::RenderWindow &window)
 {
-	window.draw(box1);
-	window.draw(box2);
+	/*window.draw(box1);
+	window.draw(box2);*/
+	
 	// comment or delete this when we finished
+	window.draw(m_finishLine);
 
 	m_player.render(window);
 	m_npc.render(window);

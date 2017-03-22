@@ -109,7 +109,7 @@ void Map::collision()
 				//if (m_image.getPixel(0,0).b >= 106)	
 				auto pixelColor = m_image.getPixel(m_findTile.x, m_findTile.y).b;
 
-				std::cout << m_player.getSpritePosition().x << " " << m_player.getSpritePosition().y << std::endl;
+				//std::cout << m_player.getSpritePosition().x << " " << m_player.getSpritePosition().y << std::endl;
 
 				if (m_image.getPixel(m_findTile.x , m_findTile.y).b <= 106)
 				{

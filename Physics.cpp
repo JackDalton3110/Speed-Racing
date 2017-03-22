@@ -49,11 +49,19 @@ sf::Vector2f Physics::getMotion()
 	return m_motion;
 }
 
+/// <summary>
+/// Used for simulation of high friction
+/// off the track
+/// </summary>
 void Physics::slowDown()
 {
 	m_gravity = 40;
 }
 
+/// <summary>
+/// Used to simulate the return to normal friction
+/// coming back on the track
+/// </summary>
 void Physics::resetGravity()
 {
 	m_gravity = 9.8;
