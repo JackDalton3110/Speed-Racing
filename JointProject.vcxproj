@@ -149,6 +149,8 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="NPCplayer.cpp" />
+    <ClCompile Include="NPCplayer1.cpp" />
+    <ClCompile Include="NPCplayer2.cpp" />
     <ClCompile Include="OptionScreen.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Playagain.cpp" />
@@ -173,6 +175,8 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="NPCplayer.h" />
+    <ClInclude Include="NPCplayer1.h" />
+    <ClInclude Include="NPCplayer2.h" />
     <ClInclude Include="OptionScreen.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Playagain.h" />
@@ -190,6 +194,7 @@
     <Image Include="images\circlemover.png" />
     <Image Include="images\greenCarSprite.png" />
     <Image Include="images\lambo.png" />
+    <Image Include="images\line.png" />
     <Image Include="images\OptionScreen.jpg" />
     <Image Include="images\redCarSprite.png" />
     <Image Include="images\selectbkgr.png" />

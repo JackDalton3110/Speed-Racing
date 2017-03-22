@@ -23,6 +23,8 @@
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="ResourcePath.cpp" />
     <ClCompile Include="BTMath.cpp" />
+    <ClCompile Include="NPCplayer1.cpp" />
+    <ClCompile Include="NPCplayer2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Confirm.h" />
@@ -44,6 +46,8 @@
     <ClInclude Include="Splash.h" />
     <ClInclude Include="Upgrade.h" />
     <ClInclude Include="BTMath.h" />
+    <ClInclude Include="NPCplayer1.h" />
+    <ClInclude Include="NPCplayer2.h" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="sounds\song1.wav" />
@@ -86,5 +90,6 @@
     <Image Include="images\Track images\slice_3_3.png" />
     <Image Include="images\whiteCarSprite.png" />
     <Image Include="images\yellowCarSprite.png" />
+    <Image Include="images\line.png" />
   </ItemGroup>
 </Project>

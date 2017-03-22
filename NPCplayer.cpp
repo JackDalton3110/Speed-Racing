@@ -1,9 +1,9 @@
 #include "NPCplayer.h"
 
 NPCplayer::NPCplayer(std::vector<sf::CircleShape> &Node) :
-	m_acceleration(10),
-	m_degree(0),
-	m_postion(500, 500),
+	m_acceleration(150),
+	m_degree(255),
+	m_postion(563, 700),
 	m_dirction(rand() % 5 - 3),
 	m_car_id(rand() % 4),
 	timer(1.5f),
@@ -32,10 +32,10 @@ sf::Vector2f NPCplayer::follow()
 	sf::Vector2f target;
 	target = m_NodeCircle.at(currentNode).getPosition();
 
-	if (Math::distance(m_postion, target) <= 10)
+	if (Math::distance(m_postion, target) <= 15)
 	{
 		currentNode++;
-		if (currentNode >= m_NodeCircle.size())
+		if (currentNode >= 24)
 		{
 			currentNode = 0;
 		}
@@ -95,7 +95,7 @@ void NPCplayer::update(double t, int car_id)
 	//m_steering += collisionAvoidance(aiId, entities);
 	m_steering = Math::truncate(m_steering, MAX_FORCE);
 	m_velocity = Math::truncate(m_velocity + m_steering, MAX_SPEED);
-	m_postion += m_velocity;
+	m_postion += m_velocity ;
 
 	
 	m_sprite.setPosition(m_postion);

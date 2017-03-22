@@ -1,10 +1,10 @@
 #include "Player.h"
 
 Player::Player() :
-	m_acceleration(0),
-	m_degree(0),
+	m_acceleration(100),
+	m_degree(255),
 	m_velocity(0),
-	m_postion(540, 540 ),
+	m_postion(520, 681),
 	location_record(0, 0),
 	located_time(0.1),
 	m_motion(0, 0),
@@ -34,7 +34,6 @@ Player::Player() :
 	
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
-
 	view.setCenter(m_postion); // set player's position to camera
 	view.setSize(sf::Vector2f(1000, 800)); // set camera's size
 }
@@ -59,7 +58,7 @@ void Player::update(double t, int car_ID)
 	located_time -= t;
 	if (located_time <= 0)
 	{
-		location_record = m_postion;
+		/*location_record = m_postion;*/
 		located_time = 0.1;
 	}
 	// timer part
@@ -181,7 +180,7 @@ sf::FloatRect Player::getRect()
 }
 void Player::setLocation()
 {
-	m_postion = location_record;
+	//m_postion = location_record;
 	m_acceleration = 0;
 }
 
