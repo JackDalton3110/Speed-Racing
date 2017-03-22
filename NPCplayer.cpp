@@ -31,11 +31,6 @@ sf::Vector2f NPCplayer::follow()
 	sf::Vector2f target;
 	target = m_NodeCircle.at(currentNode).getPosition();
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 123c11d6de356def2bf17289bcf5eb67a180378e
 	if (Math::distance(m_postion, target) <= 50)
 	{
 		currentNode++;
