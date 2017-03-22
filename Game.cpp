@@ -113,7 +113,7 @@ void Game::GenerateTrack()
 
 	for (NodeData const &node : m_level.m_node)
 	{
-		sf::CircleShape circle(nodeRect.width * 1);
+		sf::CircleShape circle(nodeRect.width * 0.5);
 		circle.setFillColor(sf::Color::Black);
 		circle.setOrigin(circle.getRadius(), circle.getRadius());
 		circle.setPosition(node.m_position);
@@ -123,7 +123,7 @@ void Game::GenerateTrack()
 	sf::IntRect nodeRect1(2, 129, 33, 23);
 	for (NodeData const &node1 : m_level.m_node1)
 	{
-		sf::CircleShape circle1(nodeRect1.width * 1);
+		sf::CircleShape circle1(nodeRect1.width * 0.5);
 		circle1.setFillColor(sf::Color::Blue);
 		circle1.setOrigin(circle1.getRadius(), circle1.getRadius());
 		circle1.setPosition(node1.m_position);
@@ -133,7 +133,7 @@ void Game::GenerateTrack()
 	sf::IntRect nodeRect2(2, 129, 33, 23);
 	for (NodeData const &node2 : m_level.m_node2)
 	{
-		sf::CircleShape circle2(nodeRect2.width * 1);
+		sf::CircleShape circle2(nodeRect2.width * 0.5);
 		circle2.setFillColor(sf::Color::Blue);
 		circle2.setOrigin(circle2.getRadius(), circle2.getRadius());
 		circle2.setPosition(node2.m_position);
@@ -339,4 +339,16 @@ void Game::render()
 	}
 
 	m_window.display();
+}
+
+std::string Game::intToString(int num) {
+	char numString[10];
+	sprintf_s(numString, "%i", num);
+	return numString;
+}
+
+std::string Game::floatToString(float num) {
+	char numString[256];
+	sprintf_s(numString, "%.1f", num);
+	return numString;
 }

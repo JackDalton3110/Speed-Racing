@@ -67,8 +67,6 @@ private:
 	sf::Vector2f scrap_mover_positoin;
 	sf::Vector2f scrap_dirction;
 	sf::Vector2f scrap_size;
-
-	std::string intToString(float num); // int to string
 };
 
 #endif

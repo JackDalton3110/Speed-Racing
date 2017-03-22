@@ -11,14 +11,13 @@ class NPCplayer
 public:
 	NPCplayer(std::vector<sf::CircleShape> &Node);
 	~NPCplayer();
-	void update(double t, int car_id);
+	void update(double t);
 	void render(sf::RenderWindow &window);
 	void setLocation();
-
+	void setNPC(int car_ID);
 	sf::FloatRect boundingBox();
 
 	sf::Vector2f follow();
-	sf::FloatRect getRect();
 	sf::Vector2f m_motion;
 
 

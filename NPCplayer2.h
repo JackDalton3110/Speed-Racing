@@ -10,16 +10,17 @@ public:
 	NPCplayer2(std::vector<sf::CircleShape> &Node);
 	~NPCplayer2();
 
-	void update(double t, int car_id);
+	void update(double t);
 	void render(sf::RenderWindow &window);
+	void setLocation();
+	void setNPC(int car_ID);
+	sf::FloatRect boundingBox();
 
-	sf::FloatRect getRect();
 	sf::Vector2f m_motion;
 	sf::Vector2f follow();
 
 private:
 	Physics physics;
-	sf::Vector2f m_velocity;
 
 	float timer;
 	float m_acceleration;
@@ -32,7 +33,7 @@ private:
 
 	const float MAX_FORCE = 10.0f;
 	const float MAX_SEE_AHEAD = 50.0f;
-	float MAX_SPEED = 4.0F;
+	float MAX_SPEED = 200.0F;
 
 	sf::Vector2f m_steering;
 
