@@ -145,7 +145,7 @@ void Map::collision()
 
 /// <summary>
 /// draw the map array of sprites to the screen
-/// draw the outer ring to the screen
+/// clears to the same desert colour
 /// </summary>
 /// <param name="window"></param>
 void Map::render(sf::RenderWindow& window)
@@ -153,6 +153,7 @@ void Map::render(sf::RenderWindow& window)
 	window.clear(sf::Color(255,204,104, 255));
 	//window.clear(sf::Color::Black);
 
+	//Culling
 	for (int index = 0; index < 16; index++)
 	{
 		m_findTile.x = m_player.m_postion.x - m_sprites[index].getPosition().x;
@@ -205,26 +206,36 @@ void Map::render(sf::RenderWindow& window)
 					window.draw(m_sprites[index + 3]);
 				}
 				
-				window.draw(m_sprites[0]);
+				
 
 				/*window.draw(m_sprites[index-5]);
 				window.draw(m_sprites[index-3]);
 				window.draw(m_sprites[index+5]);
 				window.draw(m_sprites[index+3]);*/
 				
+
+
 			}
 		}
 	}
 
-
-	for (int index = 0; index < 16; index++)
-	{
-		
-		window.draw(m_sprites[index]);
-		//if (m_sprites[index].getPosition().x < m_player->m_postion.x + 305 && m_sprites[index].getPosition().x  > m_player->m_postion.x - 305)
-		//	//&& m_sprites[index].getPosition().y < m_player->m_postion.y + 393 && m_sprites[index].getPosition().y  > m_player->m_postion.y - 393)
-		//{
-		//	window.draw(m_sprites[index]);
-		//}
-	}
+	
+	window.draw(m_sprites[1]);
+	window.draw(m_sprites[2]);
+	window.draw(m_sprites[4]);
+	window.draw(m_sprites[5]);
+	window.draw(m_sprites[6]);
+	window.draw(m_sprites[9]);
+	window.draw(m_sprites[10]);
+	window.draw(m_sprites[13]);
+	//for (int index = 0; index < 16; index++)
+	//{
+	//	
+	//	window.draw(m_sprites[index]);
+	//	//if (m_sprites[index].getPosition().x < m_player->m_postion.x + 305 && m_sprites[index].getPosition().x  > m_player->m_postion.x - 305)
+	//	//	//&& m_sprites[index].getPosition().y < m_player->m_postion.y + 393 && m_sprites[index].getPosition().y  > m_player->m_postion.y - 393)
+	//	//{
+	//	//	window.draw(m_sprites[index]);
+	//	//}
+	//}
 }
