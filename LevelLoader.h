@@ -17,11 +17,13 @@ struct NodeData
 	double m_rotation;
 };
 
-
 struct LevelData
 {
 	std::vector<NodeData> m_node;
+	std::vector<NodeData> m_node1;
+	std::vector<NodeData> m_node2;
 };
+
 
 class LevelLoader
 {

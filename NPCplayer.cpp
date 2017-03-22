@@ -1,9 +1,15 @@
 #include "NPCplayer.h"
 
 NPCplayer::NPCplayer(std::vector<sf::CircleShape> &Node) :
+<<<<<<< HEAD
 	m_acceleration(200),
 	m_degree(0),
 	m_postion(500, 500),
+=======
+	m_acceleration(150),
+	m_degree(255),
+	m_postion(563, 700),
+>>>>>>> AI
 	m_dirction(rand() % 5 - 3),
 	m_car_id(rand() % 4),
 	located_time(0.1),
@@ -31,10 +37,14 @@ sf::Vector2f NPCplayer::follow()
 	sf::Vector2f target;
 	target = m_NodeCircle.at(currentNode).getPosition();
 
+<<<<<<< HEAD
 	if (Math::distance(m_postion, target) <= 50)
+=======
+	if (Math::distance(m_postion, target) <= 15)
+>>>>>>> AI
 	{
 		currentNode++;
-		if (currentNode >= m_NodeCircle.size())
+		if (currentNode >= 24)
 		{
 			currentNode = 0;
 		}
@@ -104,11 +114,6 @@ void NPCplayer::update(double t, int car_id)
 		m_degree -= 6;
 	}
 
-	/*if (thor::length(vectorToNode) > MAX_SEE_AHEAD)
-	{
-		m_acceleration = thor::length(m_velocity);
-	}*/
-
 	if (m_car_id == car_id)
 	{
 		m_car_id = rand() % 4;
@@ -123,8 +128,8 @@ void NPCplayer::update(double t, int car_id)
 
 	}
 	
-	//m_steering += collisionAvoidance(aiId, entities);
 	m_steering = Math::truncate(m_steering, MAX_FORCE);
+<<<<<<< HEAD
 	m_motion = Math::truncate(m_motion + m_steering, m_acceleration);
 	m_postion.x += m_motion.x * t;
 	m_postion.y += m_motion.y * t;
@@ -134,6 +139,10 @@ void NPCplayer::update(double t, int car_id)
 	//m_postion.x += physics.getDistance().x; // get new position 
 	//m_postion.y += physics.getDistance().y;
 
+=======
+	m_velocity = Math::truncate(m_velocity + m_steering, MAX_SPEED);
+	m_postion += m_velocity ;
+>>>>>>> AI
 	
 	m_sprite.setPosition(m_postion);
 	m_sprite.setRotation(m_degree);
@@ -155,3 +164,4 @@ void NPCplayer::render(sf::RenderWindow &window)
 {
 	window.draw(m_sprite);
 }
+

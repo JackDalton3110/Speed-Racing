@@ -5,8 +5,9 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 	m_game(&game),
 	m_font(font),
 	m_player(player),
-	m_npc(Node)
-
+	m_npc(Node),
+	m_npc1(Node),
+	m_npc2(Node)
 {
 	box1.setOutlineThickness(1);
 	box1.setOutlineColor(sf::Color::Blue);
@@ -32,6 +33,8 @@ void Gameplay::update(double t, int car_id,Xbox360Controller& controller)
 
 	m_player.update(t, car_id);
 	m_npc.update(t, car_id);
+	m_npc1.update(t, car_id);
+	m_npc2.update(t, car_id);
 
 	if (m_player.boundingBox().intersects(m_npc.boundingBox()))
 	{
@@ -74,4 +77,6 @@ void Gameplay::render(sf::RenderWindow &window)
 
 	m_player.render(window);
 	m_npc.render(window);
+	m_npc1.render(window);
+	m_npc2.render(window);
 }
