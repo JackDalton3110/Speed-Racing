@@ -296,10 +296,6 @@ void Game::render()
 		break;
 	case GameState::gameplay:
 		m_map->render(m_window);
-		for (int i = 0; i<25; i++)
-		{
-			m_window.draw(m_trackCircle[i]); //draws wall sprites
-		}
 		m_gameplay->render(m_window);
 		break;
 	case GameState::sound:

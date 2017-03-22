@@ -150,8 +150,8 @@ void Map::collision()
 /// <param name="window"></param>
 void Map::render(sf::RenderWindow& window)
 {	
-	//window.clear(sf::Color(255,204,104, 255));
-	window.clear(sf::Color::Black);
+	window.clear(sf::Color(255,204,104, 255));
+	//window.clear(sf::Color::Black);
 
 	for (int index = 0; index < 16; index++)
 	{
@@ -162,20 +162,69 @@ void Map::render(sf::RenderWindow& window)
 		{
 			if (m_findTile.x < 305 && m_findTile.y < 392)
 			{
-				window.draw(m_sprites[index]);
+				if (index > 4)
+				{
+					window.draw(m_sprites[index]);
+					window.draw(m_sprites[index-4]);
+					
+				}
+				
+				if (index < 12)
+				{
+					window.draw(m_sprites[index + 4]);
+				}
+
+				if (index != 0 && index != 4 && index != 8 && index != 12)
+				{
+					window.draw(m_sprites[index+1]);
+				}
+
+				if (index != 3 && index != 7 && index != 11 && index != 15)
+				{
+					window.draw(m_sprites[index - 1]);
+				}
+
+				if (index != 0 && index != 4 && index != 8 && index != 12 && index > 4)
+				{
+					window.draw(m_sprites[index - 5]);
+				}
+
+				if (index != 3 && index != 7 && index != 11 && index != 15 && index > 4)
+				{
+					
+					window.draw(m_sprites[index - 3]);
+				}
+
+				if (index != 3 && index != 7 && index != 11 && index != 15 && index < 12)
+				{
+					window.draw(m_sprites[index + 5 ]);
+				}
+
+				if (index != 0 && index != 4 && index != 8 && index != 12 && index < 12)
+				{
+					window.draw(m_sprites[index + 3]);
+				}
+				
+				window.draw(m_sprites[0]);
+
+				/*window.draw(m_sprites[index-5]);
+				window.draw(m_sprites[index-3]);
+				window.draw(m_sprites[index+5]);
+				window.draw(m_sprites[index+3]);*/
+				
 			}
 		}
 	}
 
 
-	//for (int index = 0; index < 16; index++)
-	//{
-	//	
-	//	window.draw(m_sprites[index]);
-	//	//if (m_sprites[index].getPosition().x < m_player->m_postion.x + 305 && m_sprites[index].getPosition().x  > m_player->m_postion.x - 305)
-	//	//	//&& m_sprites[index].getPosition().y < m_player->m_postion.y + 393 && m_sprites[index].getPosition().y  > m_player->m_postion.y - 393)
-	//	//{
-	//	//	window.draw(m_sprites[index]);
-	//	//}
-	//}
+	for (int index = 0; index < 16; index++)
+	{
+		
+		window.draw(m_sprites[index]);
+		//if (m_sprites[index].getPosition().x < m_player->m_postion.x + 305 && m_sprites[index].getPosition().x  > m_player->m_postion.x - 305)
+		//	//&& m_sprites[index].getPosition().y < m_player->m_postion.y + 393 && m_sprites[index].getPosition().y  > m_player->m_postion.y - 393)
+		//{
+		//	window.draw(m_sprites[index]);
+		//}
+	}
 }
