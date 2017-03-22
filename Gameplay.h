@@ -36,7 +36,7 @@ private:
 	float m_acceleration; // the acceleration of player
 	float m_handling; // the handling of player
 
-	bool game_start = false;
+	bool game_start = true;
 	bool game_pause = false;
 	bool m_countdown = false;
 	float restart_countdown = 3.0f;

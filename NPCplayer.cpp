@@ -31,10 +31,10 @@ sf::Vector2f NPCplayer::follow()
 	sf::Vector2f target;
 	target = m_NodeCircle.at(currentNode).getPosition();
 
-	if (Math::distance(m_postion, target) <= 15)
+	if (Math::distance(m_postion, target) <= 50)
 	{
 		currentNode++;
-		if (currentNode >= 24)
+		if (currentNode >= 25)
 		{
 			currentNode = 0;
 		}
@@ -108,7 +108,7 @@ void NPCplayer::update(double t)
 	}
 	else if (static_cast<int>(std::round(dest - currentRotation + 360)) % 360 < 180)
 	{
-		m_degree += 5;
+		m_degree += 10;
 		if (m_degree > 359)
 		{
 			m_degree = 0 - m_degree;
@@ -116,7 +116,7 @@ void NPCplayer::update(double t)
 	}
 	else
 	{
-		m_degree -= 5;
+		m_degree -= 10;
 		if (m_degree < 0)
 		{
 			m_degree = 359 + m_degree;

@@ -1,7 +1,7 @@
 #include "NPCplayer2.h"
 
 NPCplayer2::NPCplayer2(std::vector<sf::CircleShape> &Node) :
-	m_acceleration(100),
+	m_acceleration(150),
 	m_degree(255),
 	m_postion(570, 750),
 	m_dirction(rand() % 5 - 3),
@@ -37,7 +37,7 @@ sf::Vector2f NPCplayer2::follow()
 		currentNode++;
 		if (currentNode >= m_NodeCircle.size())
 		{
-			currentNode = 38;
+			currentNode = 39;
 		}
 	}
 
@@ -96,7 +96,7 @@ void NPCplayer2::update(double t)
 	else if (static_cast<int>(std::round(dest - currentRotation + 360)) % 360 < 180)
 	{
 
-		m_degree += 6;
+		m_degree += 10;
 		if (m_degree > 359)
 		{
 			m_degree = 0 - m_degree;
@@ -104,7 +104,7 @@ void NPCplayer2::update(double t)
 	}
 	else
 	{
-		m_degree -= 5;
+		m_degree -= 10;
 		if (m_degree < 0)
 		{
 			m_degree = 359 + m_degree;

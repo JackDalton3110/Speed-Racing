@@ -35,9 +35,9 @@ sf::Vector2f NPCplayer1::follow()
 	if (Math::distance(m_postion, target) <= 50)
 	{
 		currentNode++;
-		if (currentNode >= 39)
+		if (currentNode >= 40)
 		{
-			currentNode = 25;
+			currentNode = 26;
 		}
 	}
 
@@ -95,11 +95,11 @@ void NPCplayer1::update(double t)
 	}
 	else if (static_cast<int>(std::round(dest - currentRotation + 360)) % 360 < 180)
 	{
-		m_degree += 6;
+		m_degree += 10;
 	}
 	else
 	{
-		m_degree -= 6;
+		m_degree -= 10;
 	}
 
 	if (thor::length(vectorToNode) != 0)
