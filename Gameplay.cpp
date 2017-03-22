@@ -129,6 +129,7 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 		if (!game_pause)
 		{
 
+			
 			m_player.update(t);
 			m_npc.update(t);
 			m_npc1.update(t);

@@ -44,6 +44,7 @@ private:
 
 	sf::Vector2f m_finishLinePos;
 	bool game_start = false;
+
 	bool game_pause = false;
 	bool m_countdown = false;
 	float restart_countdown = 3.0f;
