@@ -69,10 +69,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SFML_SDK)\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SFML_SDK)\include;.\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SFML_SDK)\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SFML_SDK)\include;.\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SFML_SDK)\include;$(IncludePath)</IncludePath>
@@ -85,11 +85,18 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+<<<<<<< HEAD
       <AdditionalIncludeDirectories>H:\Programming\include;$(SFML_SDK)\include;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories).\;.\lib</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories);.\lib</AdditionalLibraryDirectories>
+=======
+      <AdditionalIncludeDirectories>H:\Programming\include;$(SFML_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+>>>>>>> 5903129f1052da86f7c06b60224d2bed61d0a256
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -97,10 +104,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SFML_SDK)\include;%(AdditionalIncludeDirectories);.\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SFML_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalIncludeDirectories);.\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -110,13 +117,21 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+<<<<<<< HEAD
       <AdditionalIncludeDirectories>H:\Programming\include;$(SFML_SDK)\include;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+=======
+      <AdditionalIncludeDirectories>H:\Programming\include;$(SFML_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+>>>>>>> 5903129f1052da86f7c06b60224d2bed61d0a256
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+<<<<<<< HEAD
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories).\;.\lib</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories);.\lib</AdditionalLibraryDirectories>
+=======
+      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+>>>>>>> 5903129f1052da86f7c06b60224d2bed61d0a256
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -126,12 +141,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SFML_SDK)\include;%(AdditionalIncludeDirectories);.\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SFML_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalIncludeDirectories);.\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -155,7 +170,6 @@
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Playagain.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="ResourcePath.cpp" />
     <ClCompile Include="SoundScreen.cpp" />
     <ClCompile Include="Splash.cpp" />
     <ClCompile Include="Upgrade.cpp" />
@@ -172,7 +186,6 @@
     <ClInclude Include="Help.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="Licence.h" />
-    <ClInclude Include="Main.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="NPCplayer.h" />
     <ClInclude Include="NPCplayer1.h" />
@@ -181,13 +194,11 @@
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Playagain.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="ResourcePath.hpp" />
     <ClInclude Include="SoundScreen.h" />
     <ClInclude Include="Splash.h" />
     <ClInclude Include="Upgrade.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="images\360 controller.png" />
     <Image Include="images\arrow.png" />
     <Image Include="images\back.png" />
     <Image Include="images\Bar.png" />
@@ -200,28 +211,8 @@
     <Image Include="images\selectbkgr.png" />
     <Image Include="images\selector.png" />
     <Image Include="images\template.png" />
-    <Image Include="images\Track images\slice_0_0.png" />
-    <Image Include="images\Track images\slice_0_1.png" />
-    <Image Include="images\Track images\slice_0_2.png" />
-    <Image Include="images\Track images\slice_0_3.png" />
-    <Image Include="images\Track images\slice_1_0.png" />
-    <Image Include="images\Track images\slice_1_1.png" />
-    <Image Include="images\Track images\slice_1_2.png" />
-    <Image Include="images\Track images\slice_1_3.png" />
-    <Image Include="images\Track images\slice_2_0.png" />
-    <Image Include="images\Track images\slice_2_1.png" />
-    <Image Include="images\Track images\slice_2_2.png" />
-    <Image Include="images\Track images\slice_2_3.png" />
-    <Image Include="images\Track images\slice_3_0.png" />
-    <Image Include="images\Track images\slice_3_1.png" />
-    <Image Include="images\Track images\slice_3_2.png" />
-    <Image Include="images\Track images\slice_3_3.png" />
     <Image Include="images\whiteCarSprite.png" />
     <Image Include="images\yellowCarSprite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="sounds\song1.wav" />
-    <Media Include="Video\animation4.mov" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

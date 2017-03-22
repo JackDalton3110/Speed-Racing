@@ -1,4 +1,5 @@
 #pragma once
+#ifndef Level_Loader
 #define Level_Loader
 #ifdef Level_Loader
 

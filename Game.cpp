@@ -15,7 +15,7 @@ Game::Game() :
 	
 	GenerateTrack();
 
-	if (!ai_Txt.loadFromFile("images/redCarSprite.png"))
+	if (!ai_Txt.loadFromFile("images/Node.png"))
 	{
 		std::cout << "error loading ai Sprite" << std::endl;
 	}
@@ -113,11 +113,16 @@ void Game::GenerateTrack()
 
 	for (NodeData const &node : m_level.m_node)
 	{
+<<<<<<< HEAD
 		sf::CircleShape circle(nodeRect.width * 1);
+=======
+		sf::CircleShape circle(nodeRect.width * 1.5);
+>>>>>>> 5903129f1052da86f7c06b60224d2bed61d0a256
 		circle.setFillColor(sf::Color::Black);
 		circle.setOrigin(circle.getRadius(), circle.getRadius());
 		circle.setPosition(node.m_position);
 		m_trackCircle.push_back(std::move(circle));
+<<<<<<< HEAD
 	}
 
 	sf::IntRect nodeRect1(2, 129, 33, 23);
@@ -138,6 +143,8 @@ void Game::GenerateTrack()
 		circle2.setOrigin(circle2.getRadius(), circle2.getRadius());
 		circle2.setPosition(node2.m_position);
 		m_trackCircle2.push_back(std::move(circle2));
+=======
+>>>>>>> 5903129f1052da86f7c06b60224d2bed61d0a256
 	}
 }
 
@@ -332,6 +339,13 @@ void Game::render()
 	case GameState::gameplay:
 		m_map->render(m_window);
 		m_gameplay->render(m_window);
+<<<<<<< HEAD
+=======
+		for (int i =0; i <25; i++)
+		{
+			m_window.draw(m_trackCircle[i]); //draws wall sprites
+		}
+>>>>>>> 5903129f1052da86f7c06b60224d2bed61d0a256
 		break;
 	case GameState::sound:
 		m_soundScreen->render(m_window);
