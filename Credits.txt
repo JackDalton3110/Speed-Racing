@@ -1,0 +1,41 @@
+Animation:
+
+Conor O'Toole
+Jack Dalton
+Jamie Murphy
+Zhenze Zhao
+
+Gameplay:
+
+Zhenze Zhao
+Jamie Murphy 
+Jack Dalton
+Conor O'Toole
+
+Programming:
+
+Jamie Murphy
+Jack Dalton
+Conor O'Toole
+Zhenze Zhao
+
+Physics:
+
+Zhenze Zhao
+Conor O'Toole
+Jack Dalton
+Jamie Murphy
+
+HCI:
+
+Jack Dalton
+Jamie Murphy
+Zhenze Zhao
+Conor O'Toole
+
+Software Engineering:
+
+Jamie Murphy
+Zhenze Zhao
+Conor O'Toole
+Jack Dalton

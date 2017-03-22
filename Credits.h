@@ -21,6 +21,14 @@ public:
 	void changeScreen();
 
 private:
+
+	bool endMovie = false;
+	bool closeGame = false;
+	float updateShader;//variables for shaders
+	sf::Shader shader;
+	sf::Texture shaderTxt;
+	sf::Sprite shaderSprite;
+
 	Game *m_game;
 	sf::Time m_cumulativeTime;
 	sf::Text m_credits;
