@@ -46,16 +46,9 @@ void Gameplay::getStatus(float maxspeed, float accelecation, float handling)
 
 void Gameplay::collisionCheck()
 {
-<<<<<<< HEAD
-=======
+
 	m_player.setPlayerStatus(max_speed, m_acceleration, m_handling);
 
-	m_player.update(t, car_id);
-	m_npc.update(t, car_id);
-	m_npc1.update(t, car_id);
-	m_npc2.update(t, car_id);
-
->>>>>>> 31d8b7b0c3cedb4705b6f7b634afef88fa5e4191
 	if (m_player.boundingBox().intersects(m_npc.boundingBox()))
 	{
 		m_player.setLocation();
@@ -81,6 +74,8 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 
 		m_player.update(t, car_id);
 		m_npc.update(t, car_id);
+		m_npc1.update(t, car_id);
+		m_npc2.update(t, car_id);
 
 		collisionCheck();
 	}
@@ -146,6 +141,7 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 		restart_countdown -= t;
 		if (restart_countdown < 0)
 		{
+			restart_countdown = 3.0f;
 			m_countdown = false;
 			game_pause = false;
 		}
@@ -166,7 +162,6 @@ void Gameplay::render(sf::RenderWindow &window)
 
 	m_player.render(window);
 	m_npc.render(window);
-<<<<<<< HEAD
 
 	if (game_pause && !m_countdown)
 	{
@@ -181,8 +176,7 @@ void Gameplay::render(sf::RenderWindow &window)
 	{
 		window.draw(countdown_text);
 	}
-=======
 	m_npc1.render(window);
 	m_npc2.render(window);
->>>>>>> 31d8b7b0c3cedb4705b6f7b634afef88fa5e4191
+
 }
