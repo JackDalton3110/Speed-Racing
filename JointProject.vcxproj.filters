@@ -21,14 +21,10 @@
     <ClCompile Include="DifficultyScreen.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="ResourcePath.cpp" />
     <ClCompile Include="BTMath.cpp" />
     <ClCompile Include="NPCplayer1.cpp" />
     <ClCompile Include="NPCplayer2.cpp" />
-=======
-    <ClCompile Include="BTMath.cpp" />
->>>>>>> 5903129f1052da86f7c06b60224d2bed61d0a256
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Confirm.h" />

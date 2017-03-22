@@ -85,18 +85,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-<<<<<<< HEAD
-      <AdditionalIncludeDirectories>H:\Programming\include;$(SFML_SDK)\include;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories).\;.\lib</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories);.\lib</AdditionalLibraryDirectories>
-=======
       <AdditionalIncludeDirectories>H:\Programming\include;$(SFML_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
->>>>>>> 5903129f1052da86f7c06b60224d2bed61d0a256
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -117,21 +109,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-<<<<<<< HEAD
-      <AdditionalIncludeDirectories>H:\Programming\include;$(SFML_SDK)\include;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-=======
       <AdditionalIncludeDirectories>H:\Programming\include;$(SFML_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
->>>>>>> 5903129f1052da86f7c06b60224d2bed61d0a256
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-<<<<<<< HEAD
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories).\;.\lib</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;%(AdditionalLibraryDirectories);.\lib</AdditionalLibraryDirectories>
-=======
-      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
->>>>>>> 5903129f1052da86f7c06b60224d2bed61d0a256
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

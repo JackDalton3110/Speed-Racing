@@ -1,18 +1,11 @@
 #include "Gameplay.h"
 
-<<<<<<< HEAD
 Gameplay::Gameplay(Game &game, sf::Font font, std::vector<sf::CircleShape> &Node) :
 	m_game(&game),
 	m_font(font),
 	m_npc(Node),
 	m_npc1(Node),
 	m_npc2(Node)
-=======
-Gameplay::Gameplay(Game &game, sf::Font font, std::vector<sf::CircleShape> &Node):
-	m_game(&game),
-	m_font(font),
-	m_npc(Node)
->>>>>>> 5903129f1052da86f7c06b60224d2bed61d0a256
 {
 
 }
@@ -52,9 +45,6 @@ void Gameplay::render(sf::RenderWindow &window)
 {
 	m_player.render(window);
 	m_npc.render(window);
-<<<<<<< HEAD
 	m_npc1.render(window);
 	m_npc2.render(window);
-=======
->>>>>>> 5903129f1052da86f7c06b60224d2bed61d0a256
 }
