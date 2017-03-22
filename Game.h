@@ -87,7 +87,7 @@ public:
 
 protected:
 	LevelData m_level;
-	std::vector<std::unique_ptr<sf::Sprite>>m_TrackNodes;
+	
 
 private:
 	void processEvents();
@@ -120,6 +120,10 @@ private:
 
 	sf::View view; // camera
 
+	std::vector<sf::CircleShape> m_trackCircle;
+	std::vector<sf::CircleShape> m_trackCircle1;
+	std::vector<sf::CircleShape> m_trackCircle2;
+
 	sf::Texture m_Texture1;
 	sf::Texture m_Texture2;
 	sf::Texture m_Texture3;
@@ -130,8 +134,7 @@ private:
 	sf::Sprite m_Sprite2;
 	sf::Sprite m_Sprite4;
 	sf::Sprite m_Sprite5;
-	
-	std::vector<sf::CircleShape> m_trackCircle;
+
 
 };
 

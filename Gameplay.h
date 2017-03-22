@@ -5,6 +5,8 @@
 #include "NPCplayer.h"
 #include "Game.h"
 #include "Controller.h"
+#include "NPCplayer1.h"
+#include "NPCplayer2.h"
 
 
 class Game;
@@ -25,8 +27,10 @@ private:
 	Player & m_player;
 	NPCplayer m_npc;
 
+	NPCplayer1 m_npc1;
+	NPCplayer2 m_npc2;
+	
 	Game *m_game;
-
 	sf::Font m_font;
 
 	float max_speed; // max speed of player

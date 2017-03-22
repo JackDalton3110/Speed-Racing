@@ -19,6 +19,24 @@ void operator >> (const YAML::Node& levelNode, LevelData &level)
 		level.m_node.push_back(track);
 
 	}
+
+	const YAML::Node& trackNode1 = levelNode["Nodes1"].as<YAML::Node>();
+	for (unsigned i = 0; i < trackNode1.size(); ++i)
+	{
+		NodeData track;
+		trackNode1[i] >> track;
+		level.m_node.push_back(track);
+
+	}
+
+	const YAML::Node& trackNode2 = levelNode["Nodes2"].as<YAML::Node>();
+	for (unsigned i = 0; i < trackNode2.size(); ++i)
+	{
+		NodeData track;
+		trackNode2[i] >> track;
+		level.m_node.push_back(track);
+
+	}
 }
 
 LevelLoader::LevelLoader()
@@ -36,7 +54,7 @@ bool LevelLoader::load(int nr, LevelData &level)
 
 	try
 	{
-		YAML::Node baseNode = YAML::LoadFile(ss.str());
+		YAML::Node baseNode = YAML::LoadFile(ss.str());		
 		if (baseNode.IsNull())
 		{
 			std::string message("file: " + ss.str() + " not found");
@@ -58,4 +76,5 @@ bool LevelLoader::load(int nr, LevelData &level)
 	}
 	return true;
 }
+
 

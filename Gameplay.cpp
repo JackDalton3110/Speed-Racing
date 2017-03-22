@@ -5,8 +5,9 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 	m_game(&game),
 	m_font(font),
 	m_player(player),
-	m_npc(Node)
-
+	m_npc(Node),
+	m_npc1(Node),
+	m_npc2(Node)
 {
 	m_textMessage[0].setString("Continue");
 	m_textMessage[1].setString("Exit");
@@ -45,6 +46,16 @@ void Gameplay::getStatus(float maxspeed, float accelecation, float handling)
 
 void Gameplay::collisionCheck()
 {
+<<<<<<< HEAD
+=======
+	m_player.setPlayerStatus(max_speed, m_acceleration, m_handling);
+
+	m_player.update(t, car_id);
+	m_npc.update(t, car_id);
+	m_npc1.update(t, car_id);
+	m_npc2.update(t, car_id);
+
+>>>>>>> 31d8b7b0c3cedb4705b6f7b634afef88fa5e4191
 	if (m_player.boundingBox().intersects(m_npc.boundingBox()))
 	{
 		m_player.setLocation();
@@ -155,6 +166,7 @@ void Gameplay::render(sf::RenderWindow &window)
 
 	m_player.render(window);
 	m_npc.render(window);
+<<<<<<< HEAD
 
 	if (game_pause && !m_countdown)
 	{
@@ -169,4 +181,8 @@ void Gameplay::render(sf::RenderWindow &window)
 	{
 		window.draw(countdown_text);
 	}
+=======
+	m_npc1.render(window);
+	m_npc2.render(window);
+>>>>>>> 31d8b7b0c3cedb4705b6f7b634afef88fa5e4191
 }
