@@ -29,6 +29,7 @@ void Gameplay::getStatus(float maxspeed, float accelecation, float handling)
 
 void Gameplay::update(double t, int car_id,Xbox360Controller& controller)
 {
+
 	m_player.setPlayerStatus(max_speed, m_acceleration, m_handling);
 
 	m_player.update(t, car_id);

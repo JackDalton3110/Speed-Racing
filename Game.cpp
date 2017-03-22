@@ -177,7 +177,7 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 	case GameState::splash:
 		processEvents();//accepts process events to change screen 
 		m_splashscreen->update(time);
-		std::cout << "splash" << std::endl;//update splash screen when game state is set to splash
+		// std::cout << "splash" << std::endl;//update splash screen when game state is set to splash
 		break;
 	case GameState::carSelect:
 		processEvents();
@@ -193,13 +193,13 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		std::cout << "Game is playing" << std::endl;
 		break;
 	case GameState::option:
-		std::cout << "Menu" << std::endl;
+		//std::cout << "Menu" << std::endl;
 		m_option->reset();
 		m_option->update(time, controller);
 		break;
 	case GameState::upgrade:
-		std::cout << "upgrade" << std::endl;
-		m_upgrade->update(time.asSeconds(), controller);
+		//std::cout << "upgrade" << std::endl;
+		m_upgrade->update(time.asSeconds(), controller, time);
 		break;
 	case GameState::gameplay:
 		m_map->update();
@@ -220,7 +220,6 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		default:
 			break;
 		}
-		
 		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID(), m_controller);
 		break;
 	case GameState::Difficulty:

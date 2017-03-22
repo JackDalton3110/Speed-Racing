@@ -43,7 +43,7 @@ private:
 
 	const float MAX_FORCE = 6.0f;
 	const float MAX_SEE_AHEAD=50.0f;
-	float MAX_SPEED = 200.0F;
+	float MAX_SPEED = 100.0F;
 
 	sf::Vector2f m_steering;
 

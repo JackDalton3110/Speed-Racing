@@ -30,9 +30,9 @@ private:
 	int m_car_id;
 	int currentNode = 22;
 
-	const float MAX_FORCE = 8.0f;
+	const float MAX_FORCE = 6.0f;
 	const float MAX_SEE_AHEAD = 50.0f;
-	float MAX_SPEED = 6.0F;
+	float MAX_SPEED = 4.0F;
 
 	sf::Vector2f m_steering;
 
