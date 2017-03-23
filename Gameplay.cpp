@@ -136,6 +136,7 @@ void Gameplay::collisionCheck()
 			m_player.getLapTimer();
 			if (m_player.m_halfway)
 			{
+				m_changeLap = true;
 				time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
 											+ m_game->intToString(m_player.timer_sec) + "::"
 											+ m_game->intToString(m_player.timer_mis));
@@ -195,6 +196,26 @@ void Gameplay::collisionCheck()
 			}
 			m_npc2.m_halfway = false;
 		}
+	}
+}
+
+void Gameplay::changeLap()
+{
+	if (m_changeLap == true)
+	{
+		m_laps = m_laps + 1;
+		if (m_laps + 1)
+		{
+			m_changeLap = false;
+		}
+		m_lapString = std::to_string(m_laps);
+		m_lapstxt.setString(m_lapString);
+		m_lapstxt.setColor(sf::Color::Green);
+		m_lapstxt.setCharacterSize(40);
+		m_lapstxt.setFont(m_font);
+		m_lapstxt.setPosition(m_player.m_postion.x + 30, m_player.m_postion.y);
+		
+		std::cout << "lap 1" << std::endl;
 	}
 }
 
@@ -263,6 +284,7 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 			m_npc2.update(t);
 
 			collisionCheck();
+			changeLap();
 		}
 		else // game pause part
 		{
@@ -332,12 +354,6 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 			m_player.getLapTimer();
 		}
 	}
-	box1.setPosition(m_player.boundingBox().left, m_player.boundingBox().top);
-	box1.setSize(sf::Vector2f(m_player.boundingBox().width, m_player.boundingBox().height));
-
-	box2.setPosition(m_npc.boundingBox().left, m_npc.boundingBox().top);
-	box2.setSize(sf::Vector2f(m_npc.boundingBox().width, m_npc.boundingBox().height));
-
 
 	m_finishLine.setPosition(482, 645);
 	m_finishLine.setSize(sf::Vector2f(m_finishLinePos.x, m_finishLinePos.y));
@@ -441,6 +457,7 @@ void Gameplay::render(sf::RenderWindow &window)
 	m_npc.render(window);
 	m_npc1.render(window);
 	m_npc2.render(window);
+	window.draw(m_lapstxt);
 
 	if (game_pause && !m_countdown)
 	{
@@ -471,3 +488,332 @@ void Gameplay::render(sf::RenderWindow &window)
 		}
 	}
 }
+
+/// The dark lord returns
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 

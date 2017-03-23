@@ -79,6 +79,8 @@ void Playagain::reset()
 		m_reset_check = false;
 		m_button_released = false;
 	}
+
+	
 }
 
 void Playagain::render(sf::RenderWindow &window)
@@ -92,5 +94,4 @@ void Playagain::render(sf::RenderWindow &window)
 		window.draw(m_text[i]);
 	}
 
-	window.display();
 }

@@ -45,8 +45,6 @@ Player::Player() :
 	m_sprite.setPosition(m_postion);
 
 	m_sprite.setOrigin(10, 15);
-	
-
 
 	//This scales the player car down
 	m_sprite.scale(.5, .5);

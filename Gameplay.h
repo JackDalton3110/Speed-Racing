@@ -30,6 +30,9 @@ private:
 	void collisionCheck();
 	void endScreen();
 	void startCount();
+	void changeLap();
+
+
 
 	Player & m_player;
 	NPCplayer m_npc;
@@ -44,7 +47,6 @@ private:
 	float m_acceleration; // the acceleration of player
 	float m_handling; // the handling of player
 
-	sf::FloatRect intersectLine(Xbox360Controller& controller, double t);
 	sf::RectangleShape m_finishLine;
 
 	sf::Vector2f m_finishLinePos;
@@ -67,9 +69,16 @@ private:
 	bool start_ending_count = false;
 	bool game_end = false;
 	int m_rank = 0;
+	bool m_changeLap;
+	int m_laps=1;
 	float ending_countdown = 5.0f;
 	sf::Vector2f board_position;
 	sf::Text time_board[4];
+
+	// outputting laps
+	sf::Text m_lapstxt;
+	std::string m_lapString;
+
 	sf::RectangleShape rank_board[4];
 };
 
