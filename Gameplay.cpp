@@ -294,7 +294,7 @@ void Gameplay::render(sf::RenderWindow &window)
 	window.draw(box2);*/
 	
 	// comment or delete this when we finished
-	window.draw(m_finishLine);
+	/*window.draw(m_finishLine);*/
 
 
 	m_player.render(window);
