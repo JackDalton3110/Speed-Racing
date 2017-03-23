@@ -79,6 +79,8 @@ private:
 
 	sf::Texture m_speed_texture;
 	sf::Sprite m_speed_sprite;
+	sf::Sprite m_Sprite;
+	sf::Texture m_Texture;
 	sf::Texture m_needle_texture;
 	sf::Sprite m_needle_sprite;
 	float needle_degree = 0;
