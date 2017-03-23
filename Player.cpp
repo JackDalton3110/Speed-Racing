@@ -10,14 +10,15 @@ Player::Player() :
 	m_motion(0, 0),
 	m_handbrake(0)
 {
-	if (!m_font.loadFromFile("c:/windows/fonts/comic.ttf"))
+	if (!m_font.loadFromFile("c:/windows/fonts/MotorwerkOblique.ttf"))
 	{
 
 	}
 	for (int i = 0; i < 2; i++)
 	{
 		m_text[i].setFont(m_font);
-		m_text[i].setColor(sf::Color::Yellow);
+		m_text[i].setColor(sf::Color::Red);
+		m_text[i].setCharacterSize(30);
 	}
 
 	if (!m_texture.loadFromFile("images/carSprite.png"))
@@ -55,6 +56,8 @@ Player::Player() :
 	m_lap_timer.setFont(m_font);
 	m_timer.setColor(sf::Color::Black);
 	m_lap_timer.setColor(sf::Color::Black);
+	m_timer.setCharacterSize(30);
+	m_lap_timer.setCharacterSize(30);
 }
 
 Player::~Player()
@@ -248,14 +251,14 @@ void Player::update(double t)
 	m_sprite.setPosition(m_postion);
 
 	view.setCenter(m_postion);
-	m_text[1].setPosition(m_postion.x, m_postion.y + 150);
+	m_text[1].setPosition(m_postion.x + 110, m_postion.y + 150);
 
 	m_timer.setPosition(m_postion.x - 250, m_postion.y - 200);
 	m_text[0].setPosition(m_postion.x - 250, m_postion.y - 170);
 	m_lap_timer.setPosition(m_postion.x - 250, m_postion.y - 140);
 
 	m_sprite.setRotation(m_degree);
-	m_text[1].setString(intToString(m_velocity));
+	m_text[1].setString("Speed: " + intToString(m_velocity));
 	m_text[0].setString("Lap time:");
 }
 

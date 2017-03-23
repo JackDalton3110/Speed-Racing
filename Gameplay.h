@@ -25,12 +25,15 @@ private:
 
 	Player & m_player;
 	NPCplayer m_npc;
-
 	NPCplayer1 m_npc1;
 	NPCplayer2 m_npc2;
 	
+	sf::View gameView;
+	sf::View minimapView;
+
 	Game *m_game;
-	sf::Font m_font;
+
+	sf::Font m_Motor;//font
 
 	float max_speed; // max speed of player
 	float m_acceleration; // the acceleration of player

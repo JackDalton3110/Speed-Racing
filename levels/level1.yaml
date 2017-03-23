@@ -76,7 +76,7 @@ Nodes:
      rotation: 0
 Nodes1:
    - type: node1
-     position: {x: 548, y: 536}
+     position: {x: 541, y: 501}
      rotation: 0
    - type: node1
      position: {x: 859, y: 406}

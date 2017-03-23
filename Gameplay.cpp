@@ -3,7 +3,7 @@
 
 Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::CircleShape> &Node) :
 	m_game(&game),
-	m_font(font),
+	m_Motor(font),
 	m_player(player),
 	m_npc(Node),
 	m_npc1(Node),
@@ -21,12 +21,12 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 		m_selection[i].setFillColor(sf::Color::White);
 
 		m_textMessage[i].setColor(sf::Color::Black);
-		m_textMessage[i].setFont(m_font);
+		m_textMessage[i].setFont(m_Motor);
 		sf::FloatRect textRect = m_textMessage[i].getLocalBounds();
 		m_textMessage[i].setOrigin(textRect.width / 2, textRect.height / 2);
 	}
 
-	countdown_text.setFont(m_font);
+	countdown_text.setFont(m_Motor);
 	countdown_text.setPosition(500, 400);
 	countdown_text.setScale(2, 2);
 	countdown_text.setColor(sf::Color::Black);
@@ -44,6 +44,13 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 		throw std::exception(s.c_str());
 	}
 	m_goSprite.setTexture(m_goTexture);
+
+	// the game view (full window)
+	gameView.setViewport(sf::FloatRect(0, 0, 1, 1));
+
+	// mini-map (upper-right corner)
+	minimapView.setViewport(sf::FloatRect(0.75f, 0, 0.25f, 0.25f));
+	minimapView.zoom(1.5f);
 }
 
 Gameplay::~Gameplay()
@@ -116,8 +123,6 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 	{
 		if (!game_pause)
 		{
-
-			
 			m_player.update(t);
 			m_npc.update(t);
 			m_npc1.update(t);
@@ -247,6 +252,7 @@ void Gameplay::render(sf::RenderWindow &window)
 	m_npc1.render(window);
 	m_npc2.render(window);
 
+
 	if (game_pause && !m_countdown)
 	{
 		for (int i = 0; i < 2; i++)
@@ -266,4 +272,7 @@ void Gameplay::render(sf::RenderWindow &window)
 		window.draw(countdown_text);
 		window.draw(m_signal_sprite);
 	}
+
+	window.setView(gameView);
+	window.setView(minimapView);
 }

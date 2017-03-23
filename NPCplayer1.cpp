@@ -32,7 +32,7 @@ sf::Vector2f NPCplayer1::follow()
 	sf::Vector2f target;
 	target = m_NodeCircle.at(currentNode).getPosition();
 
-	if (Math::distance(m_postion, target) <= 50)
+	if (Math::distance(m_postion, target) <= 35)
 	{
 		currentNode++;
 		if (currentNode >= 40)
