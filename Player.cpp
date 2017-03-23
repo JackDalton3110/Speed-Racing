@@ -57,6 +57,10 @@ Player::Player() :
 	m_lap_timer.setFont(m_font);
 	m_timer.setColor(sf::Color::Black);
 	m_lap_timer.setColor(sf::Color::Black);
+
+	m_lap_timer.setString(intToString(lap_timer[2]) + "::"
+		+ intToString(lap_timer[1]) + "::"
+		+ intToString(lap_timer[0])); // convert minute to string
 }
 
 Player::~Player()
@@ -110,19 +114,10 @@ void Player::timer(double t)
 		timer_min++;
 		timer_sec = 0;
 	}
+
 	m_timer.setString(intToString(timer_min) + "::"
 		+ intToString(timer_sec) + "::"
 		+ intToString(timer_mis)); // convert minute to string
-
-	m_lap_timer.setString(intToString(lap_timer[0]) + "::"
-		+ intToString(lap_timer[1]) + "::"
-		+ intToString(lap_timer[2])); // convert minute to string
-
-	if (m_postion.y > 1444)
-	{
-		m_halfway = true;
-		std::cout << "halfway::" << std::endl;
-	}
 }
 
 void Player::resetHalfWay()
@@ -132,19 +127,16 @@ void Player::resetHalfWay()
 
 void Player::getLapTimer()
 {
-	lap_timer[0] = timer_mis - lap_timer[0];
-	lap_timer[1] = timer_sec - lap_timer[1];
-	lap_timer[2] = timer_min - lap_timer[2];
-	if (lap_timer[0] < 0)
+	if (m_halfway)
 	{
-		lap_timer[1] --; // less 1 second
-		lap_timer[0] += 100; // gain 100 millisecond
-	}
+		m_lap_timer.setString(intToString(lap_timer[2]) + "::"
+			+ intToString(lap_timer[1]) + "::"
+			+ intToString(lap_timer[0])); // convert minute to string
 
-	if (lap_timer[1] < 0)
-	{
-		lap_timer[2]--; // less 1 minute
-		lap_timer[1] += 60; // gain 60 second
+		for (int i = 0; i < 3; i++)
+		{
+			lap_timer[i] = 0;
+		}
 	}
 }
 
@@ -168,7 +160,13 @@ void Player::update(double t)
 
 	controller.update();
 
-		if (controller.Bbutton())
+	if (m_postion.y > 1444)
+	{
+		m_halfway = true;
+		std::cout << "halfway::" << std::endl;
+	}
+
+	if (controller.Bbutton())
 	{
 		m_handbrake = m_motion.x * m_handling;
 		m_motion.x -= m_handbrake * t;
@@ -188,6 +186,21 @@ void Player::update(double t)
 	}
 
 	timer(t);
+
+	lap_timer[0] += t * 100;
+
+	if (lap_timer[0] >= 100) // when millisecond great than 100, second add 1
+	{
+		lap_timer[1]++;
+		lap_timer[0] = 0;
+	}
+
+	if (lap_timer[1] >= 60) // when second over 60, minute add 1
+	{
+		lap_timer[2]++;
+		lap_timer[1] = 0;
+	}
+
 
 	if (controller.RTrigger() >= 5) // right trigger to speed up
 	{

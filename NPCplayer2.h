@@ -18,11 +18,19 @@ public:
 
 	sf::Vector2f m_motion;
 	sf::Vector2f follow();
+	sf::Vector2f m_postion;
+
+	int timer_mis; // millisecond
+	int timer_sec; // second
+	int timer_min; // minute
+
+	bool m_halfway = false;
 
 private:
+	void timer(double t);
+
 	Physics physics;
 
-	float timer;
 	float m_acceleration;
 
 	double m_degree;
@@ -39,8 +47,6 @@ private:
 
 	sf::Texture m_texture; // car texture
 	sf::Sprite m_sprite; // car sprite
-
-	sf::Vector2f m_postion;
 
 	float located_time;
 	sf::Vector2f location_record;

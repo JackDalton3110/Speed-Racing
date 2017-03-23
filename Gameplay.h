@@ -28,6 +28,8 @@ protected:
 
 private:
 	void collisionCheck();
+	void endScreen();
+	void startCount();
 
 	Player & m_player;
 	NPCplayer m_npc;
@@ -42,9 +44,6 @@ private:
 	float m_acceleration; // the acceleration of player
 	float m_handling; // the handling of player
 
-
-	sf::RectangleShape box1;
-	sf::RectangleShape box2;
 	sf::FloatRect intersectLine(Xbox360Controller& controller, double t);
 	sf::RectangleShape m_finishLine;
 
@@ -65,6 +64,13 @@ private:
 	sf::Sprite m_signal_sprite;
 	sf::Sprite m_goSprite;
 
+	bool start_ending_count = false;
+	bool game_end = false;
+	int m_rank = 0;
+	float ending_countdown = 5.0f;
+	sf::Vector2f board_position;
+	sf::Text time_board[4];
+	sf::RectangleShape rank_board[4];
 };
 
 #endif // GAMEPLAY

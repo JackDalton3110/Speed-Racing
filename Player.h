@@ -25,13 +25,18 @@ public:
 	float m_acceleration;
 	void highFriction();
 	void normalFriction();
-	sf::Vector2f getSpritePosition() const;
 	void setPlayerStatus(float maxspeed, float accelecation, float handling, int car_ID);
 	void getLapTimer();
 	void resetHalfWay();
-	bool m_halfway;
 	sf::View view; // camera
 
+	sf::Vector2f getSpritePosition() const;
+
+	bool m_halfway = false;
+
+	int timer_mis; // millisecond
+	int timer_sec; // second
+	int timer_min; // minute
 
 private:
 	void timer(double t);
@@ -44,9 +49,6 @@ private:
 	sf::Text m_text[3]; // text 0 for time, text 1 for motion, text 2 for loop
 	sf::Text m_timer; // text for timer
 	sf::Text m_lap_timer; // text for lap timer
-	int timer_mis; // millisecond
-	int timer_sec; // second
-	int timer_min; // minute
 
 	int lap_timer[3] = {0,0,0}; // 0 for millisecond, 1 for second, 2 for minute
 
