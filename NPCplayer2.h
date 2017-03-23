@@ -19,10 +19,15 @@ public:
 	sf::Vector2f m_motion;
 	sf::Vector2f follow();
 
+	int timer_mis; // millisecond
+	int timer_sec; // second
+	int timer_min; // minute
+
 private:
+	void timer(double t);
+
 	Physics physics;
 
-	float timer;
 	float m_acceleration;
 
 	double m_degree;

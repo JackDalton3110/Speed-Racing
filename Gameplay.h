@@ -22,6 +22,8 @@ public:
 	void getStatus(float maxspeed, float accelecation, float handling);
 private:
 	void collisionCheck();
+	void endScreen();
+	void startCount();
 
 	Player & m_player;
 	NPCplayer m_npc;
@@ -50,6 +52,12 @@ private:
 	sf::Texture m_goTexture;
 	sf::Sprite m_signal_sprite;
 	sf::Sprite m_goSprite;
+
+	bool game_end = false;
+	float end_countdown = 10.0f;
+	sf::Vector2f board_position;
+	sf::Text time_board[4];
+	sf::RectangleShape rank_board[4];
 };
 
 #endif // GAMEPLAY

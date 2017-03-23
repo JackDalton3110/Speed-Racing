@@ -7,7 +7,8 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 	m_player(player),
 	m_npc(Node),
 	m_npc1(Node),
-	m_npc2(Node)
+	m_npc2(Node),
+	board_position(0,0)
 {
 	m_textMessage[0].setString("Continue");
 	m_textMessage[1].setString("Exit");
@@ -26,11 +27,13 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 		m_textMessage[i].setOrigin(textRect.width / 2, textRect.height / 2);
 	}
 
+	/// count down text
 	countdown_text.setFont(m_font);
 	countdown_text.setPosition(500, 400);
 	countdown_text.setScale(2, 2);
 	countdown_text.setColor(sf::Color::Black);
 
+	/// images for countdown signal
 	if (!m_signal_texture.loadFromFile("images/signal.png"))
 	{
 		std::string s("error loading texture from file");
@@ -44,6 +47,21 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 		throw std::exception(s.c_str());
 	}
 	m_goSprite.setTexture(m_goTexture);
+
+	/// text for record timer
+	for (int i = 0; i < 4; i++)
+	{
+		time_board[i].setFont(m_font);
+		time_board[i].setColor(sf::Color::Black);
+		sf::FloatRect textRect = time_board[i].getLocalBounds();
+		time_board[i].setOrigin(textRect.width / 2, textRect.height / 2);
+
+		rank_board[i].setSize(sf::Vector2f(200, 50));
+		rank_board[i].setOrigin(100, 25);
+		rank_board[i].setOutlineThickness(2);
+		rank_board[i].setOutlineColor(sf::Color::Black);
+		rank_board[i].setFillColor(sf::Color::White);
+	}
 }
 
 Gameplay::~Gameplay()
@@ -104,6 +122,50 @@ void Gameplay::collisionCheck()
 	}
 }
 
+void Gameplay::startCount()
+{
+	if (start_count < 0)
+	{
+		game_start = true;
+		start_count = 5.0f;
+	}
+	else if (start_count < 1)
+	{
+		m_signal_sprite = m_goSprite;
+	}
+	else if (start_count < 2)
+	{
+		sf::IntRect signal(75, 0, 25, 60); // get signal of player selection
+		m_signal_sprite.setTextureRect(signal);
+	}
+	else if (start_count < 3)
+	{
+		sf::IntRect signal(50, 0, 25, 60); // get signal of player selection
+		m_signal_sprite.setTextureRect(signal);
+	}
+	else if (start_count < 4)
+	{
+		sf::IntRect signal(25, 0, 25, 60); // get signal of player selection
+		m_signal_sprite.setTextureRect(signal);
+	}
+	else if (start_count < 5)
+	{
+		sf::IntRect signal(0, 0, 25, 60); // get signal of player selection
+		m_signal_sprite.setTextureRect(signal);
+	}
+
+	countdown_text.setString(m_game->intToString(start_count));
+}
+
+void Gameplay::endScreen()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		rank_board[i].setPosition(board_position.x, board_position.y - 200 + 100 * i);
+		time_board[i].setPosition(rank_board[i].getPosition());
+	}
+
+}
 
 void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 {
@@ -112,12 +174,10 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 	m_npc1.setNPC(car_id);
 	m_npc2.setNPC(car_id);
 
-	if (game_start)
+	if (game_start && !game_end) // run the game
 	{
 		if (!game_pause)
 		{
-
-			
 			m_player.update(t);
 			m_npc.update(t);
 			m_npc1.update(t);
@@ -200,43 +260,26 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 		}
 		countdown_text.setString(m_game->intToString(restart_countdown));
 	}
-	else
+	
+	if (!game_start)
 	{
 		start_count -= t;
-		if (start_count < 0)
-		{
-			game_start = true;
-			start_count = 5.0f;
-		}
-		else if (start_count < 1)
-		{
-			m_signal_sprite = m_goSprite;
-		}
-		else if (start_count < 2)
-		{
-			sf::IntRect signal(75, 0, 25, 60); // get signal of player selection
-			m_signal_sprite.setTextureRect(signal);
-		}
-		else if (start_count < 3)
-		{
-			sf::IntRect signal(50, 0, 25, 60); // get signal of player selection
-			m_signal_sprite.setTextureRect(signal);
-		}
-		else if (start_count < 4)
-		{
-			sf::IntRect signal(25, 0, 25, 60); // get signal of player selection
-			m_signal_sprite.setTextureRect(signal);
-		}
-		else if (start_count < 5)
-		{
-			sf::IntRect signal(0, 0, 25, 60); // get signal of player selection
-			m_signal_sprite.setTextureRect(signal);
-		}
-
-		countdown_text.setString(m_game->intToString(start_count));
+		startCount();
 	}
 	countdown_text.setPosition(m_player.boundingBox().left, m_player.boundingBox().top);
 	m_signal_sprite.setPosition(m_player.boundingBox().left - 100, m_player.boundingBox().top - 100);
+
+	if (game_end)
+	{
+		if (controller.Abutton()) // at ending screen presss A button to next
+		{
+			m_game->SetGameState(GameState::playagain);
+		}
+		endScreen();
+	}
+	
+	board_position.x = m_player.boundingBox().left;
+	board_position.y = m_player.boundingBox().top;
 }
 
 void Gameplay::render(sf::RenderWindow &window)
@@ -265,5 +308,14 @@ void Gameplay::render(sf::RenderWindow &window)
 	{
 		window.draw(countdown_text);
 		window.draw(m_signal_sprite);
+	}
+
+	if (game_end)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			window.draw(time_board[i]);
+			window.draw(rank_board[i]);
+		}
 	}
 }
