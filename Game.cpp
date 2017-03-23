@@ -220,10 +220,10 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		default:
 			break;
 		}
-		m_gameplay->reset();
+		m_gameplay->reset(time.asSeconds());
 		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID(), m_controller);
 
-		if (!m_gameplay->gainScrapCheck)
+		if (m_gameplay->gainScrapCheck)
 		{
 			m_upgrade->scrap += m_gameplay->gainScrap();
 			m_gameplay->gainScrapCheck = false;

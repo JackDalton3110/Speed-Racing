@@ -96,7 +96,7 @@ void Gameplay::getStatus(float maxspeed, float accelecation, float handling)
 	m_handling = handling;
 }
 
-void Gameplay::reset()
+void Gameplay::reset(double t)
 {
 	if (reset_check)
 	{
@@ -124,6 +124,11 @@ void Gameplay::reset()
 		m_npc.resetNPC();
 		m_npc1.resetNPC();
 		m_npc2.resetNPC();
+
+		m_player.update(t);
+		m_npc.update(t);
+		m_npc1.update(t);
+		m_npc2.update(t);
 	}
 }
 

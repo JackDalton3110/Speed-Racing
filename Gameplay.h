@@ -19,7 +19,7 @@ public:
 	void update(double t, int car_id, Xbox360Controller& controller);
 	void render(sf::RenderWindow &window);
 	void getStatus(float maxspeed, float accelecation, float handling);
-	void reset();
+	void reset(double t);
 	int gainScrap();
 	bool gainScrapCheck = false;
 

@@ -77,5 +77,11 @@ private:
 	int mark_count = 1;
 	float draw_time = 0.1f;
 
+	sf::Texture m_speed_texture;
+	sf::Sprite m_speed_sprite;
+	sf::Texture m_needle_texture;
+	sf::Sprite m_needle_sprite;
+	float needle_degree = 0;
+
 	std::string intToString(int num); // int to string
 };
