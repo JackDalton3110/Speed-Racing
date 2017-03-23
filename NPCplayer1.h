@@ -4,6 +4,7 @@
 #include "Physics.h"
 #include "Thor/Vectors.hpp"
 
+
 class NPCplayer1
 {
 public:
@@ -14,7 +15,10 @@ public:
 	void render(sf::RenderWindow &window);
 	void setLocation();
 	void setNPC(int car_ID);
+	void resetNPC();
 	sf::FloatRect boundingBox();
+	
+	void DifficultyAdjust(bool easy, bool normal, bool hard);
 
 	sf::Vector2f m_motion;
 	sf::Vector2f follow();
@@ -31,6 +35,10 @@ private:
 
 	Physics physics;
 	
+
+	
+	
+
 	float m_acceleration;
 
 	double m_degree;
@@ -39,7 +47,7 @@ private:
 	int m_car_id;
 	int currentNode = 26;
 
-	const float MAX_FORCE = 6.0f;
+	float MAX_FORCE = 6.0f;
 	const float MAX_SEE_AHEAD = 50.0f;
 	float MAX_SPEED = 150.0F;
 

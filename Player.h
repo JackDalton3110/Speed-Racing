@@ -28,7 +28,9 @@ public:
 	void setPlayerStatus(float maxspeed, float accelecation, float handling, int car_ID);
 	void getLapTimer();
 	void resetHalfWay();
-	void reset();
+	void resetPlayer();
+
+
 	sf::View view; // camera
 
 	sf::Vector2f getSpritePosition() const;
@@ -75,6 +77,14 @@ private:
 	sf::Sprite sprite_draft_mark[100];
 	int mark_count = 1;
 	float draw_time = 0.1f;
+
+	sf::Texture m_speed_texture;
+	sf::Sprite m_speed_sprite;
+	sf::Sprite m_Sprite;
+	sf::Texture m_Texture;
+	sf::Texture m_needle_texture;
+	sf::Sprite m_needle_sprite;
+	float needle_degree = 0;
 
 	std::string intToString(int num); // int to string
 };

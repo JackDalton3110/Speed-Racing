@@ -15,6 +15,7 @@ public:
 	void render(sf::RenderWindow &window);
 	void setLocation();
 	void setNPC(int car_ID);
+	void resetNPC();
 	sf::FloatRect boundingBox();
 
 	sf::Vector2f follow();
@@ -26,6 +27,8 @@ public:
 	int timer_min; // minute
 
 	bool m_halfway = false;
+
+	void DifficultyAdjust(bool easy, bool normal, bool hard);
 
 private:
 	void timer(double t);
