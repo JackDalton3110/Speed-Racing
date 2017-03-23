@@ -36,7 +36,7 @@ private:
 	NPCplayer2 m_npc2;
 	
 	Game *m_game;
-	sf::Font m_font;
+	sf::Font m_Motor;
 
 	float max_speed; // max speed of player
 	float m_acceleration; // the acceleration of player
@@ -47,6 +47,7 @@ private:
 	sf::RectangleShape box2;
 	sf::FloatRect intersectLine(Xbox360Controller& controller, double t);
 	sf::RectangleShape m_finishLine;
+	sf::CircleShape circle;
 
 	sf::Vector2f m_finishLinePos;
 	bool game_start = false;

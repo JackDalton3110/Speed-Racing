@@ -3,10 +3,10 @@
 
 Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::CircleShape> &Node) :
 	m_game(&game),
-	m_font(font),
+	m_Motor(font),
 	m_player(player),
 	m_npc(Node),
-	m_npc1(Node),
+	m_npc1(Node), 
 	m_npc2(Node)
 {
 
@@ -32,12 +32,12 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 		m_selection[i].setFillColor(sf::Color::White);
 
 		m_textMessage[i].setColor(sf::Color::Black);
-		m_textMessage[i].setFont(m_font);
+		m_textMessage[i].setFont(m_Motor);
 		sf::FloatRect textRect = m_textMessage[i].getLocalBounds();
 		m_textMessage[i].setOrigin(textRect.width / 2, textRect.height / 2);
 	}
 
-	countdown_text.setFont(m_font);
+	countdown_text.setFont(m_Motor);
 	countdown_text.setPosition(500, 400);
 	countdown_text.setScale(2, 2);
 	countdown_text.setColor(sf::Color::Black);
@@ -55,7 +55,6 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 		throw std::exception(s.c_str());
 	}
 	m_goSprite.setTexture(m_goTexture);
-
 }
 
 Gameplay::~Gameplay()
@@ -128,8 +127,6 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 	{
 		if (!game_pause)
 		{
-
-
 			m_player.update(t);
 			m_npc.update(t);
 			m_npc1.update(t);
@@ -190,10 +187,6 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 		}
 
 	}
-	/*if (m_player.boundingBox().intersects(intersectLine()))
-	{
-		std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
-	}*/
 
 	//This is collision with the finish line
 
@@ -214,14 +207,6 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 	m_finishLine.setPosition(482, 645);
 	m_finishLine.setSize(sf::Vector2f(m_finishLinePos.x, m_finishLinePos.y));
 	m_finishLine.setRotation(345.0f);
-
-
-//sf::FloatRect Gameplay::intersectLine(Xbox360Controller & controller, double t)
-//{
-//	sf::FloatRect intersectLine(645 + m_finishLine.getSize().y, 482,
-//		482 + m_finishLine.getSize().x, 645);
-//	return intersectLine;
-
 
 		if (controller.StartButton())
 		{
@@ -283,20 +268,11 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 	}
 	countdown_text.setPosition(m_player.boundingBox().left, m_player.boundingBox().top);
 	m_signal_sprite.setPosition(m_player.boundingBox().left - 100, m_player.boundingBox().top - 100);
-
 }
 
 
 void Gameplay::render(sf::RenderWindow &window)
 {
-
-	/*window.draw(box1);
-	window.draw(box2);*/
-	
-	// comment or delete this when we finished
-	/*window.draw(m_finishLine);*/
-
-
 	m_player.render(window);
 	m_npc.render(window);
 	m_npc1.render(window);
@@ -321,4 +297,5 @@ void Gameplay::render(sf::RenderWindow &window)
 		window.draw(countdown_text);
 		window.draw(m_signal_sprite);
 	}
+
 }

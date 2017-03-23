@@ -32,6 +32,7 @@ public:
 	bool m_halfway;
 	sf::View view; // camera
 
+	sf::Sprite m_sprite; // car sprite
 
 private:
 	void timer(double t);
@@ -40,7 +41,7 @@ private:
 	Physics physics;
 	Xbox360Controller controller;
 
-	sf::Font m_font;
+	sf::Font m_Motor;
 	sf::Text m_text[3]; // text 0 for time, text 1 for motion, text 2 for loop
 	sf::Text m_timer; // text for timer
 	sf::Text m_lap_timer; // text for lap timer
@@ -60,14 +61,15 @@ private:
 	float m_handling;
 
 	//sf::View view; // camera
-
 	sf::Texture m_texture; // car texture
-	sf::Sprite m_sprite; // car sprite
+	
 
 	sf::Vector2f location_record;
 	float degree_record;
 	float located_time;
 
+	sf::Texture m_Texture;
+	sf::Sprite m_Sprite;
 	sf::Texture texture_draft_mark;
 	sf::Sprite sprite_draft_mark[100];
 	int mark_count = 1;
