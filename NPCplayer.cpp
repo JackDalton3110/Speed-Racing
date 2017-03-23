@@ -77,17 +77,17 @@ void NPCplayer::DifficultyAdjust(bool easy, bool normal, bool hard)
 {
 	if (easy == true)
 	{
-		MAX_SPEED = 75.0f;
+		MAX_SPEED = 110.0f;
 	}
 
 	if (normal == true)
 	{
-		MAX_SPEED = 150.0f;
+		MAX_SPEED = 135.0f;
 	}
 
 	if (hard == true)
 	{
-		MAX_SPEED = 175.0f;
+		MAX_SPEED = 150.0f;
 	}
 }
 

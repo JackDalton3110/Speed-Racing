@@ -52,11 +52,11 @@ Game::Game() :
 	}
 
 	//Loading final animation
-	if (!m_movie.openFromFile("Video/animation4.mov"))
+	/*if (!m_movie.openFromFile("Video/animation4.mov"))
 	{
 		std::string s("error loading mov file");
 		throw std::exception(s.c_str());
-	}
+	}*/
 
 
 	songs[0].setBuffer(songBuffer[0]);
@@ -239,6 +239,7 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		m_controller.m_previousState = m_controller.m_currentState;
 		break;
 	case GameState::credits:
+		movie = true;
 		m_credits->update(time);
 		break;
 	case GameState::confirm:

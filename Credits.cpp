@@ -4,8 +4,8 @@
 
 Credits::Credits(Game & game, sf::Font font, sfe::Movie movie) : 
 	m_game(&game),
-	m_impact(font),m_movie(movie),
-	m_credits()
+	m_impact(font),
+	m_credits() 
 	
 {
 	std::ifstream creditsFile;
@@ -13,6 +13,12 @@ Credits::Credits(Game & game, sf::Font font, sfe::Movie movie) :
 	m_credits.setPosition(100.0f, 750.0f);
 	m_credits.setFont(m_impact);
 
+	if (!m_movie.openFromFile("Video/animation4.mov"))
+	{
+		std::string s("error loading mov file");
+		throw std::exception(s.c_str());
+	}
+	m_movie.stop();
 	while (!creditsFile.eof() && creditsFile.is_open())
 	{
 		std::getline(creditsFile, textline);
@@ -36,10 +42,10 @@ Credits::Credits(Game & game, sf::Font font, sfe::Movie movie) :
 	shaderSprite.setTexture(shaderTxt);
 	shaderSprite.setPosition(0, 0);
 
-
-
+		
 	m_movie.play();
-	m_movie.scale(1.5f,1.25f);
+	m_movie.scale(1.5f, 1.25f);
+	
 }
 
 Credits::~Credits()
@@ -49,6 +55,11 @@ Credits::~Credits()
 
 void Credits::update(sf::Time deltaTime)
 {
+
+	if (m_movie.getStatus() != sfe::Playing)
+	{
+		m_movie.play();
+	}
 	m_movie.update();
 	m_cumulativeTime += deltaTime;
 	updateShader = m_cumulativeTime.asSeconds();

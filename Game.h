@@ -73,6 +73,7 @@ public:
 	bool B;
 	bool X;
 	bool Y;
+	bool movie = false;
 	void GenerateTrack();
 	int score = 0;
 	sf::Sound songs[3];
