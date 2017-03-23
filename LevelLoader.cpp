@@ -11,7 +11,7 @@ void operator >> (const YAML::Node & trackNode, NodeData& track)
 
 void operator >> (const YAML::Node& levelNode, LevelData &level)
 {
-	const YAML::Node& trackNode = levelNode["Nodes"].as<YAML::Node>();
+	const YAML::Node& trackNode = levelNode["Nodes"].as<YAML::Node>();//loads nodes from yaml file
 	for (unsigned i = 0; i < trackNode.size(); ++i)
 	{
 		NodeData track;
@@ -20,7 +20,7 @@ void operator >> (const YAML::Node& levelNode, LevelData &level)
 
 	}
 
-	const YAML::Node& trackNode1 = levelNode["Nodes1"].as<YAML::Node>();
+	const YAML::Node& trackNode1 = levelNode["Nodes1"].as<YAML::Node>();//Loads Nodes1 from yaml file
 	for (unsigned i = 0; i < trackNode1.size(); ++i)
 	{
 		NodeData track;
@@ -29,7 +29,7 @@ void operator >> (const YAML::Node& levelNode, LevelData &level)
 
 	}
 
-	const YAML::Node& trackNode2 = levelNode["Nodes2"].as<YAML::Node>();
+	const YAML::Node& trackNode2 = levelNode["Nodes2"].as<YAML::Node>();//load Nodes2 from file
 	for (unsigned i = 0; i < trackNode2.size(); ++i)
 	{
 		NodeData track;
@@ -48,7 +48,7 @@ LevelLoader::LevelLoader()
 bool LevelLoader::load(int nr, LevelData &level)
 {
 	std::stringstream ss;
-	ss << "./levels/level";
+	ss << "./levels/level";//load form this file
 	ss << nr;
 	ss << ".yaml";
 

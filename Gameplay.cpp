@@ -10,6 +10,7 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 	m_npc2(Node),
 	board_position(0,0)
 {
+	
 	m_finishLine.setOutlineThickness(1);
 	m_finishLine.setOutlineColor(sf::Color::Blue);
 
@@ -47,6 +48,7 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 	}
 	m_signal_sprite.setTexture(m_signal_texture);
 
+	//face for race start
 	if (!m_goTexture.loadFromFile("images/guesswhatisthis.png"))
 	{
 		std::string s("error loading texture from file");
@@ -77,6 +79,7 @@ Gameplay::~Gameplay()
 
 int Gameplay::gainScrap()
 {
+	//gift scrap to player
 	if (m_rank == 0)
 	{
 		return 3;
@@ -91,6 +94,7 @@ int Gameplay::gainScrap()
 
 void Gameplay::getStatus(float maxspeed, float accelecation, float handling)
 {
+	//set stats
 	max_speed = maxspeed;
 	m_acceleration = accelecation;
 	m_handling = handling;
@@ -98,6 +102,7 @@ void Gameplay::getStatus(float maxspeed, float accelecation, float handling)
 
 void Gameplay::reset(double t)
 {
+	//reset race settings
 	if (reset_check)
 	{
 		reset_check = false;
@@ -134,7 +139,7 @@ void Gameplay::reset(double t)
 
 void Gameplay::collisionCheck()
 {
-
+	//collision checking amongst cars 
 	if (m_player.boundingBox().intersects(m_npc.boundingBox()))
 	{
 		m_player.setLocation();
@@ -177,7 +182,7 @@ void Gameplay::collisionCheck()
 		m_npc2.m_motion.y = temp;
 	}
 
-	
+	//when player crosses finish line
 	if (m_player.m_postion.x >= m_finishLine.getPosition().x && m_player.m_postion.x <= m_finishLine.getPosition().x + 100)
 	{
 		if (m_player.m_postion.y >= m_finishLine.getPosition().y && m_player.m_postion.y <= m_finishLine.getPosition().y + 30)
@@ -205,6 +210,7 @@ void Gameplay::collisionCheck()
 		}
 	}
 
+	//when AI car crosses finish line
 	if (m_npc.m_postion.x >= m_finishLine.getPosition().x && m_npc.m_postion.x <= m_finishLine.getPosition().x + 100)
 	{
 		if (m_npc.m_postion.y >= m_finishLine.getPosition().y && m_npc.m_postion.y <= m_finishLine.getPosition().y + 30)
@@ -271,6 +277,7 @@ void Gameplay::collisionCheck()
 
 void Gameplay::changeLap()
 {
+	//change lap value after crossing finish line
 	if (m_changeLap && m_player.m_laps <= 3)
 	{
 		//actual lap
@@ -328,6 +335,7 @@ void Gameplay::startCount()
 
 void Gameplay::endScreen()
 {
+	//after race is finished
 	for (int i = 0; i < 4; i++)
 	{
 		rank_board[i].setPosition(board_position.x, board_position.y - 100 + 50 * i);
@@ -442,6 +450,7 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 		}
 	}
 
+	//finish line position, size and rotation
 	m_finishLine.setPosition(482, 645);
 	m_finishLine.setSize(sf::Vector2f(m_finishLinePos.x, m_finishLinePos.y));
 	m_finishLine.setRotation(345.0f);
@@ -513,6 +522,7 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 
 void Gameplay::getdifficulty(bool easy, bool normal, bool hard)
 {
+	//setting difficulty for game
 	m_npc2.DifficultyAdjust(easy, normal, hard);
 	m_npc.DifficultyAdjust(easy, normal, hard);
 	m_npc1.DifficultyAdjust(easy, normal, hard);
@@ -520,7 +530,7 @@ void Gameplay::getdifficulty(bool easy, bool normal, bool hard)
 
 void Gameplay::render(sf::RenderWindow &window)
 {
-
+	//render sprites / texts
 	m_npc.render(window);
 	m_npc1.render(window);
 	m_npc2.render(window);

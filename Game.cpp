@@ -2,19 +2,22 @@
 #include "Controller.h"
 
 Game::Game() :
-
+	//set window size and gamestate
 	m_window(sf::VideoMode(1000, 800), "Speed"),
 	m_currentGameState(GameState::licence)
 
 {
+	//loading yaml file
 	int currentLevel = 1;
 	if (!LevelLoader::load(currentLevel, m_level))
 	{
 		return;
 	}
 	
+	//generate node path
 	GenerateTrack();
 
+	//loading text
 	if (!ai_Txt.loadFromFile("images/Node.png"))
 	{
 		std::cout << "error loading ai Sprite" << std::endl;
@@ -51,17 +54,11 @@ Game::Game() :
 		throw std::exception(s.c_str());
 	}
 
-	//Loading final animation
-	/*if (!m_movie.openFromFile("Video/animation4.mov"))
-	{
-		std::string s("error loading mov file");
-		throw std::exception(s.c_str());
-	}*/
-
-
+	//set song buffer
 	songs[0].setBuffer(songBuffer[0]);
 	buttonsound.setBuffer(buttonBuffer);
 
+	//initialising screens
 	m_licence = new Licence(*this, m_HARLOW, m_Motor);
 	m_splashscreen = new Splash(*this, m_HARLOW, m_Motor);
 	m_carSelect = new CarSelect(*this, m_HARLOW, m_Motor);
@@ -111,12 +108,12 @@ void Game::GenerateTrack()
 {
 	sf::IntRect nodeRect(2, 129, 33, 23);
 
-	for (NodeData const &node : m_level.m_node)
+	for (NodeData const &node : m_level.m_node)//load in node data from yaml file
 	{
 		sf::CircleShape circle(nodeRect.width * 0.5);
-		circle.setFillColor(sf::Color::Black);
+		circle.setFillColor(sf::Color::Black);//used to see positioning of nodes (not staying in project)
 		circle.setOrigin(circle.getRadius(), circle.getRadius());
-		circle.setPosition(node.m_position);
+		circle.setPosition(node.m_position);//set position of nodes
 		m_trackCircle.push_back(std::move(circle));
 	}
 
@@ -143,6 +140,7 @@ void Game::GenerateTrack()
 
 void Game::run()
 {
+	//clock for game
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	sf::Time timePerFrame = sf::seconds(1.f / 60.0f);
@@ -157,12 +155,14 @@ void Game::run()
 			update(timePerFrame, m_controller);
 		}
 
+		//render project
 		render();
 	}
 }
 
 void Game::SetGameState(GameState gamestate)
 {
+	//change game state
 	m_currentGameState = gamestate;
 }
 
@@ -184,6 +184,7 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		m_carSelect->reset();
 		for (int i = 0; i < 3; i++)
 		{
+			//get and show values of cars
 			m_carSelect->getCarValues(m_upgrade->whiteCar_values[i], m_upgrade->reaCar_values[i], m_upgrade->yellowCar_values[i], m_upgrade->greenCar_values[i], i);
 		}
 		m_carSelect->update(time, controller);
@@ -202,6 +203,7 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		m_upgrade->update(time.asSeconds(), controller, time);
 		break;
 	case GameState::gameplay:
+		//load whats needed for gameplay screen
 		m_map->update();
 		switch (m_carSelect->getSelection_ID())
 		{
@@ -222,23 +224,15 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		}
 		m_gameplay->reset(time.asSeconds());
 		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID(), m_controller);
-<<<<<<< HEAD
-
+		//set difficulty screen
 		m_gameplay->getdifficulty(m_DifficultyScreen->Easy, m_DifficultyScreen->Medium, m_DifficultyScreen->Hard);
-
-
-=======
-		m_gameplay->getdifficulty(m_DifficultyScreen->Easy, m_DifficultyScreen->Medium, m_DifficultyScreen->Hard);
->>>>>>> difficulty
+		//grant scrap to player
 		if (m_gameplay->gainScrapCheck)
 		{
 			m_upgrade->scrap += m_gameplay->gainScrap();
 			m_gameplay->gainScrapCheck = false;
 		}
-<<<<<<< HEAD
 
-=======
->>>>>>> difficulty
 		break;
 	case GameState::Difficulty:
 		std::cout << "difficulty" << std::endl;
@@ -283,14 +277,17 @@ void Game::processEvents()
 		if (m_controller.m_currentState.Start && m_currentGameState == GameState::splash)//any key accepted to change screen to credits
 		{
 			m_splashscreen->changeScreen();
+			//play music once start button is played
 			songs[0].play();
 		}
 
 		if (m_controller.m_currentState.Back)
 		{
+			//cahnge to confirm screen
 			SetGameState(GameState::confirm);
 		}
 		
+		//play music in these screens
 		if(m_currentGameState==GameState::option|| m_currentGameState==GameState::sound||m_currentGameState==GameState::carSelect||m_currentGameState==GameState::Difficulty || m_currentGameState ==GameState::upgrade)
 		{
 			buttonsound.play();

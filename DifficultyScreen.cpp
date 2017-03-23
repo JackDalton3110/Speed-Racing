@@ -5,6 +5,7 @@ Difficulty::Difficulty(Game &game, sf::Font font, sf::Font font2) :
 	m_motor(font),
 	m_harlow(font2)
 {
+	//loads images and texts
 	message[0].setFont(m_motor);
 	message[0].setCharacterSize(100);
 	message[0].setPosition(150, 50);
@@ -31,11 +32,12 @@ Difficulty::Difficulty(Game &game, sf::Font font, sf::Font font2) :
 
 	for (int i = 0; i < 3; i++)
 	{
+		//set color, size and outline thickness
 		difficulties[i].setOutlineColor(sf::Color(65, 965, 396));
 		difficulties[i].setOutlineThickness(5);
 		difficulties[i].setRadius(10);
 	}
-	difficulties[0].setPosition(200, 600);
+	difficulties[0].setPosition(200, 600);//set button position
 	difficulties[1].setPosition(400, 600);
 	difficulties[2].setPosition(700, 600);
 }
@@ -47,11 +49,13 @@ Difficulty::~Difficulty()
 
 void Difficulty::Update(sf::Time time, Xbox360Controller &controller)
 {
+	//go back
 	if (controller.m_currentState.B)
 	{
 		changeScreen();
 	}
 
+	//move selector right
 	if (controller.m_currentState.DPadRight && !controller.m_previousState.DPadRight)
 	{
 		if (button_ID < 2)
@@ -64,6 +68,7 @@ void Difficulty::Update(sf::Time time, Xbox360Controller &controller)
 		}
 	}
 
+	//move selector left
 	if (controller.m_currentState.DPadLeft && !controller.m_previousState.DPadLeft)
 	{
 		if (button_ID > 0)
@@ -76,6 +81,7 @@ void Difficulty::Update(sf::Time time, Xbox360Controller &controller)
 		}
 	}
 
+	//choosing difficulty
 	if (button_ID == 0)
 	{
 		if (controller.m_currentState.A && !controller.m_previousState.A)
@@ -84,6 +90,7 @@ void Difficulty::Update(sf::Time time, Xbox360Controller &controller)
 			Medium = false;
 			Hard = false;
 		}
+		//change outline colour of circle selected
 		difficulties[0].setOutlineColor(sf::Color::Black);
 		difficulties[1].setOutlineColor(sf::Color(65, 965, 396));
 		difficulties[2].setOutlineColor(sf::Color(65, 965, 396));
@@ -119,6 +126,7 @@ void Difficulty::Update(sf::Time time, Xbox360Controller &controller)
 
 	if (Medium == true)
 	{
+		//set fill colour to green when difficulty is chosen
 		difficulties[1].setFillColor(sf::Color::Green);
 		Easy = false;
 		Hard = false;
@@ -154,11 +162,13 @@ void Difficulty::Update(sf::Time time, Xbox360Controller &controller)
 
 void Difficulty::changeScreen()
 {
+	//change screen to options
 	m_game->SetGameState(GameState::option);
 }
 
 void Difficulty::render(sf::RenderWindow &window)
 {
+	//draw sprites / texts
 	window.clear(sf::Color(215, 215, 215));
 	
 		window.draw(difficulties[0]);

@@ -7,7 +7,7 @@ CarSelect::CarSelect(Game &game, sf::Font font, sf::Font font1) :
 	m_button_released(false),
 	reset_check(false)
 {
-	if (!m_texture[0].loadFromFile("images/whiteCarSprite.png"))
+	if (!m_texture[0].loadFromFile("images/whiteCarSprite.png"))//loading in different textures for screen
 	{
 		std::string s("error loading texture");
 		throw std::exception(s.c_str());
@@ -41,7 +41,7 @@ CarSelect::CarSelect(Game &game, sf::Font font, sf::Font font1) :
 	}
 
 
-	m_Sprite[0].setTexture(m_texture[0]);
+	m_Sprite[0].setTexture(m_texture[0]);//assigning textres to sprites
 	m_Sprite[1].setTexture(m_texture[1]);
 	m_Sprite[2].setTexture(m_texture[2]);
 	m_Sprite[3].setTexture(m_texture[3]);
@@ -99,7 +99,7 @@ CarSelect::CarSelect(Game &game, sf::Font font, sf::Font font1) :
 
 CarSelect::~CarSelect()
 {
-	std::cout << "destroying car select" << std::endl;
+	std::cout << "destroying car select" << std::endl;//destructor class
 }
 
 void CarSelect::reset()
@@ -121,6 +121,7 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 
 	if (controller.m_currentState.DPadDown && !controller.m_previousState.DPadDown)
 	{
+		//moving selector down through menu 
 		if (button_ID<3)
 		{
 			button_ID++;
@@ -133,6 +134,7 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 
 	if (controller.m_currentState.DPadUp && !controller.m_previousState.DPadUp)
 	{
+		//moving selector up menu
 		if (button_ID>0)
 		{
 			button_ID--;
@@ -145,9 +147,9 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 	if (button_ID == 0)
 	{
 
-		if (m_Sprite[0].getPosition().x < 450)//any key accepted to change screen to credits
+		if (m_Sprite[0].getPosition().x < 450)
 		{
-			m_Sprite[0].move(10, 0);
+			m_Sprite[0].move(10, 0);//move car forward to show it's selected
 		}
 		m_Sprite[1].setPosition(325, 200);
 		m_Sprite[2].setPosition(325, 400);
@@ -161,9 +163,9 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 	}
 	else if (button_ID == 1)
 	{
-		if (m_Sprite[1].getPosition().x < 450)//any key accepted to change screen to credits
+		if (m_Sprite[1].getPosition().x < 450)
 		{
-			m_Sprite[1].move(10, 0);
+			m_Sprite[1].move(10, 0);//move sprite forward
 		}
 		m_Sprite[0].setPosition(325, 0);
 		m_Sprite[2].setPosition(325, 400);
@@ -179,12 +181,13 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 	{
 		if (m_Sprite[2].getPosition().x < 450)//any key accepted to change screen to credits
 		{
-			m_Sprite[2].move(10, 0);
+			m_Sprite[2].move(10, 0);//move sprite forward
 		}
 		m_Sprite[0].setPosition(325, 0);
 		m_Sprite[1].setPosition(325, 200);
 		m_Sprite[3].setPosition(325, 600);
 
+		//show cars stats to screen
 		m_textMessage[4].setString(m_game->floatToString(yellowCar_values[0]) + " kph");
 		m_textMessage[5].setString(m_game->floatToString(yellowCar_values[1]) + " sec  to Max Speed");//set Aceeleration
 		m_textMessage[6].setString(m_game->floatToString(yellowCar_values[2]) + "%");//set Handling
@@ -210,7 +213,7 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 
 	if (controller.Abutton() && m_button_released)
 	{
-		carSelected = true;
+		carSelected = true;//select car by pressing A
 	}
 
 	if (!controller.Abutton())
@@ -218,7 +221,7 @@ void CarSelect::update(sf::Time time, Xbox360Controller &controller)
 		m_button_released = true;
 	}
 
-	changeScreen();
+	changeScreen();//change to game screen
 }
 
 int CarSelect::getSelection_ID()
@@ -237,6 +240,7 @@ void CarSelect::changeScreen()
 
 void CarSelect::render(sf::RenderWindow &window)
 {
+	//draws sprite and screen 
 	window.clear(sf::Color(0, 0, 0, 255));
 
 	window.draw(m_Sprite[4]);

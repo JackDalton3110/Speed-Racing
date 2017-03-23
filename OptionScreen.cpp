@@ -7,7 +7,7 @@ Option::Option(Game & game, sf::Font font, sf::Font font1) :
 	m_HARLOW(font1),
 	m_button_released(false)
 {
-
+	//laods images / texts
 	m_textMessage[0].setPosition(830, 100);//set position
 	m_textMessage[0].setString("Start Game");//set text
 	m_textMessage[0].setFont(m_HARLOW);//set font 
@@ -118,9 +118,10 @@ void Option::reset()
 
 void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 {
-
+	//rotate selector sprite
 	m_Sprite[0].rotate(5);
 
+	//move selector down screen
 	if (controller.m_currentState.DPadDown && !controller.m_previousState.DPadDown)
 	{
 		if (button_ID < 3)
@@ -133,7 +134,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		}
 	}
 
-
+	//move selector up screen
 	if (controller.m_currentState.DPadUp && !controller.m_previousState.DPadUp)
 	{
 		if (button_ID > 0)
@@ -146,6 +147,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 		}
 	}
 
+	//move selector in settings menu
 	if (settings == true)
 	{
 		if (controller.m_currentState.DPadDown && !controller.m_previousState.DPadDown)
@@ -175,7 +177,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	}
 
 
-
+	
 	if (!controller.Abutton())
 	{
 		m_button_released = true;
@@ -203,7 +205,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 	if (controller.m_currentState.A && !controller.m_previousState.A && upgrade == true)
 	{
 		m_reset_check = true;
-		changeToUpgrade();
+		changeToUpgrade();//change screen to upgrade
 	}
 
 	//setting to the help screen
@@ -324,6 +326,7 @@ void Option::update(sf::Time deltaTime, Xbox360Controller& controller)
 
 }
 
+//change screens
 void Option::changeScreen()
 {
 	m_game->SetGameState(GameState::carSelect);//change to game
@@ -357,7 +360,7 @@ void Option::changeToHelp()
 
 void Option::render(sf::RenderWindow & Window)
 {
-
+	//draws images/ texts
 	Window.clear(sf::Color(0, 0, 1));//different from standards black
 	Window.draw(m_Sprite[3]);
 

@@ -12,6 +12,7 @@ Help::Help(Game & game, sf::Font font) :
 	
 	
 {
+	//load help image
 	if (!m_texture.loadFromFile("images/360 controller.png"))
 	{
 		std::string s("error loading texture from file");
@@ -29,7 +30,7 @@ Help::Help(Game & game, sf::Font font) :
 	m_line4.setPosition(40, 410);
 	
 	sf::RectangleShape m_line(sf::Vector2f(1000.0f, 1.0f));
-
+	//set position
 	m_line.setPosition(0.0f, 700.0f);
 	m_line.setFillColor(sf::Color::White);
 	m_line.rotate(0);
@@ -43,6 +44,7 @@ Help::~Help()
 
 void Help::update(Xbox360Controller &controller)
 {
+	//return to menu by pressing B
 	if (controller.m_currentState.B)
 	{
 		m_game->SetGameState(GameState::option);
@@ -51,7 +53,7 @@ void Help::update(Xbox360Controller &controller)
 
 void Help::render(sf::RenderWindow& window)
 {
-	
+	//draw sprites and texts
 	window.clear(sf::Color(0, 0, 1));
 	window.draw(m_controllerSprite);
 	window.draw(m_line1);

@@ -7,6 +7,7 @@ Playagain::Playagain(Game &game, sf::Font font) :
 	m_button_released(false),
 	m_reset_check(true)
 {
+	//load images, texts, fonts
 	for (int i = 0; i < 3; i++)
 	{
 		m_text[i].setFont(m_font);
@@ -50,7 +51,7 @@ Playagain::~Playagain()
 
 void Playagain::update(Xbox360Controller& controller)
 {
-
+	//button presses and responses
 	if (controller.Abutton() && m_button_released) // press A button to play again
 	{
 		m_game->SetGameState(GameState::option);
@@ -85,6 +86,7 @@ void Playagain::reset()
 
 void Playagain::render(sf::RenderWindow &window)
 {
+	//draws images, texts
 	window.clear(sf::Color::White);
 
 	window.draw(m_SpriteA);

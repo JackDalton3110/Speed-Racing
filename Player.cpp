@@ -10,6 +10,7 @@ Player::Player() :
 	m_motion(0, 0),
 	m_handbrake(0)
 {
+	//loads image for player car
 	if (!m_font.loadFromFile("c:/windows/fonts/MotorwerkOblique.ttf"))
 	{
 
@@ -46,6 +47,7 @@ Player::Player() :
 		throw std::exception(s.c_str());
 	}
 
+	//assign tetxtures
 	m_sprite.setTexture(m_texture);
 	m_Sprite.setTexture(m_Texture);
 	m_sprite.setPosition(m_postion);
@@ -101,6 +103,7 @@ void Player::highFriction()
 
 void Player::normalFriction()
 {
+	//normal friction of car
 	physics.resetGravity();
 }
 
@@ -173,11 +176,13 @@ void Player::timer(double t)
 
 void Player::resetHalfWay()
 {
+	//halfway bool reset
 	m_halfway = false;
 }
 
 void Player::getLapTimer()
 {
+	//get lap time
 	if (m_halfway)
 	{
 		m_lap_timer.setString(intToString(lap_timer[2]) + "::"
@@ -199,6 +204,7 @@ void Player::nextLap()
 
 void Player::driftMark()
 {
+	//marks left after car
 	sf::FloatRect boundingBox(m_sprite.getGlobalBounds().left + 10, m_sprite.getGlobalBounds().top + 5, m_sprite.getGlobalBounds().width - 15, m_sprite.getGlobalBounds().height - 5);
 	if (!boundingBox.intersects(sprite_draft_mark[mark_count - 1].getGlobalBounds()))
 	{
@@ -351,6 +357,7 @@ void Player::update(double t)
 
 sf::FloatRect Player::boundingBox()
 {
+	//bounding box for collision
 	sf::FloatRect boundingBox(m_sprite.getGlobalBounds().left + 2, m_sprite.getGlobalBounds().top + 2, m_sprite.getGlobalBounds().width - 5, m_sprite.getGlobalBounds().height - 5);
 	return boundingBox;
 }
@@ -362,6 +369,7 @@ void Player::setLocation()
 
 void Player::render(sf::RenderWindow &window)
 {
+	//draw images, texts 
 	window.setView(view);
 	
 

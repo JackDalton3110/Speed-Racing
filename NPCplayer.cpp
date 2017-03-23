@@ -9,15 +9,17 @@ NPCplayer::NPCplayer(std::vector<sf::CircleShape> &Node) :
 	located_time(0.1),
 	m_NodeCircle(Node)
 {
+	//loads image
 	if (!m_texture.loadFromFile("images/carSprite.png"))
 	{
 		std::string s("error loading texture from file");
 		throw std::exception(s.c_str());
 	}
+	//assign to sprite
 	m_sprite.setTexture(m_texture);
-	m_sprite.setOrigin(25, 15);
-	m_sprite.setPosition(m_postion);
-	m_sprite.setScale(0.5f, 0.5f);
+	m_sprite.setOrigin(25, 15);//set origin
+	m_sprite.setPosition(m_postion);//set position
+	m_sprite.setScale(0.5f, 0.5f);//set scale
 	m_sprite.setRotation(m_degree);
 
 }
@@ -44,17 +46,20 @@ void NPCplayer::resetNPC()
 
 void NPCplayer::nextLap()
 {
+	//reset halfway bool, up laps
 	m_halfway = false;
 	m_laps++;
 }
 
 sf::Vector2f NPCplayer::follow()
 {
+	//make npc car follow node path
 	sf::Vector2f target;
 	target = m_NodeCircle.at(currentNode).getPosition();
 
 	if (Math::distance(m_postion, target) <= 50)
 	{
+		//once within certain distancew of node
 		m_acceleration *= 0.3;
 		if (currentNode == 13)
 		{
@@ -81,6 +86,7 @@ sf::Vector2f NPCplayer::follow()
 
 void NPCplayer::DifficultyAdjust(bool easy, bool normal, bool hard)
 {
+	//adjust speed of ai car dependant of difficulty
 	if (easy == true)
 	{
 		MAX_SPEED = 110.0f;
@@ -117,6 +123,7 @@ void NPCplayer::timer(double t)
 
 void NPCplayer::setNPC(int car_ID)
 {
+	//set npc car
 	if (m_car_id == car_ID)
 	{
 		m_car_id = rand() % 4;
@@ -143,7 +150,7 @@ void NPCplayer::update(double t)
 	}
 
 	sf::Vector2f vectorToNode = follow();
-
+	//steering and motion of AI cars
 	auto dest = atan2(-1 * m_motion.y, -1 * m_motion.x) / thor::Pi * 180 + 180;
 
 	auto currentRotation = m_degree;
@@ -155,6 +162,7 @@ void NPCplayer::update(double t)
 	}
 	else if (static_cast<int>(std::round(dest - currentRotation + 360)) % 360 < 180)
 	{
+		//turning and degree of which cars turn at
 		m_degree += 6;
 		if (m_degree > 359)
 		{
@@ -175,6 +183,7 @@ void NPCplayer::update(double t)
 
 	if (thor::length(vectorToNode) != 0)
 	{
+		//distance AI cars to node
 		m_steering += thor::unitVector(vectorToNode);
 
 	}
@@ -198,6 +207,7 @@ void NPCplayer::setLocation()
 
 sf::FloatRect NPCplayer::boundingBox()
 {
+	//bounding box for collision
 	sf::FloatRect boundingBox(m_sprite.getGlobalBounds().left + 2, m_sprite.getGlobalBounds().top + 2, m_sprite.getGlobalBounds().width - 5, m_sprite.getGlobalBounds().height - 5);
 	return boundingBox;
 }

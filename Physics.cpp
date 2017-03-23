@@ -21,6 +21,7 @@ Physics::~Physics()
 
 void Physics::update(double t, sf::Vector2f motion, float acceleration, float degree)
 {
+	//physics used to find acceleration, friction and distance(slowing distance) of car
 	m_radius = degree * pi / 180;
 
 	acceleration /= m_pixelToMeter;
@@ -55,6 +56,7 @@ sf::Vector2f Physics::getMotion()
 /// </summary>
 void Physics::slowDown()
 {
+	//slow car down
 	m_gravity = 30;
 }
 

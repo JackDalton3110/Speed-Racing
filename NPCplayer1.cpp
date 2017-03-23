@@ -9,11 +9,13 @@ NPCplayer1::NPCplayer1(std::vector<sf::CircleShape> &Node) :
 	located_time(0.1),
 	m_NodeCircle(Node)
 {
+	//loads image
 	if (!m_texture.loadFromFile("images/carSprite.png"))
 	{
 		std::string s("error loading texture from file");
 		throw std::exception(s.c_str());
 	}
+	//set stats
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(25, 15);
 	m_sprite.setPosition(m_postion);
@@ -29,6 +31,7 @@ NPCplayer1::~NPCplayer1()
 
 void NPCplayer1::resetNPC()
 {
+	//reset for race starting again 
 	m_halfway = false;
 	m_postion.x = 540;
 	m_postion.y = 734;
@@ -42,12 +45,14 @@ void NPCplayer1::resetNPC()
 
 void NPCplayer1::nextLap()
 {
+	//change halfway to false, up laps
 	m_halfway = false;
 	m_laps++;
 }
 
 sf::Vector2f NPCplayer1::follow()
 {
+	//AI cars follow nodes path
 	sf::Vector2f target;
 	target = m_NodeCircle.at(currentNode).getPosition();
 
@@ -79,6 +84,7 @@ sf::Vector2f NPCplayer1::follow()
 
 void NPCplayer1::setNPC(int car_ID)
 {
+	//sets car colour
 	if (m_car_id == car_ID)
 	{
 		m_car_id = rand() % 4;
@@ -90,6 +96,7 @@ void NPCplayer1::setNPC(int car_ID)
 
 sf::FloatRect NPCplayer1::boundingBox()
 {
+	//bounding box for collision
 	sf::FloatRect boundingBox(m_sprite.getGlobalBounds().left + 2, m_sprite.getGlobalBounds().top + 2, m_sprite.getGlobalBounds().width - 5, m_sprite.getGlobalBounds().height - 5);
 	return boundingBox;
 }
@@ -97,6 +104,7 @@ sf::FloatRect NPCplayer1::boundingBox()
 
 void NPCplayer1::DifficultyAdjust(bool easy, bool normal, bool hard)
 {
+	//change speed through difficulty
 	if (easy == true)
 	{
 		MAX_SPEED = 110.0f;

@@ -7,6 +7,7 @@ Xbox360Controller::Xbox360Controller()
 
 void Xbox360Controller::update()
 {
+	//update button press input
 	m_previousState.A = m_currentState.A;
 	m_previousState.B = m_currentState.B;
 	m_previousState.X = m_currentState.X;
@@ -27,6 +28,7 @@ void Xbox360Controller::update()
 
 	if (isConnected())
 	{
+		//determines whether or not controller is connected
 		m_currentState.A = sf::Joystick::isButtonPressed(sf_Joystick_index, 0);
 		m_currentState.B = sf::Joystick::isButtonPressed(sf_Joystick_index, 1);
 		m_currentState.X = sf::Joystick::isButtonPressed(sf_Joystick_index, 2);

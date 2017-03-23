@@ -11,10 +11,10 @@ Confirm::Confirm(Game &game, sf::Font font):
 	for (int i = 0; i < 3 ;i++)
 	{
 		m_text[i].setFont(m_font);
-		m_text[i].setColor(sf::Color::Black);
+		m_text[i].setColor(sf::Color::Black);//set font to text
 	}
 
-	m_text[0].setString("YES");
+	m_text[0].setString("YES");//write message to screen 
 	m_text[0].setPosition(300, 600);
 
 	m_text[1].setString("NO");
@@ -26,7 +26,7 @@ Confirm::Confirm(Game &game, sf::Font font):
 	sf::FloatRect textRect = m_text[2].getLocalBounds();
 	m_text[2].setOrigin(textRect.width / 2, textRect.height / 2);
 
-	if (!m_texture.loadFromFile("images/selector.png"))
+	if (!m_texture.loadFromFile("images/selector.png"))//load sprite
 	{
 		std::string s("error loading texture from file");
 		throw std::exception(s.c_str());
@@ -96,6 +96,7 @@ void Confirm::reset()
 
 void Confirm::render(sf::RenderWindow &window)
 {
+	//draw sprites/ text messages
 	window.clear(sf::Color::White);
 
 	window.draw(m_Sprite);
