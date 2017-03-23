@@ -20,6 +20,8 @@ public:
 	sf::Vector2f follow();
 	sf::Vector2f m_motion;
 
+	void DifficultyAdjust(bool easy, bool normal, bool hard);
+
 private:
 
 	void timer(double t);

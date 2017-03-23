@@ -221,6 +221,7 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 			break;
 		}
 		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID(), m_controller);
+		m_gameplay->getdifficulty(m_DifficultyScreen->Easy, m_DifficultyScreen->Medium, m_DifficultyScreen->Hard);
 		break;
 	case GameState::Difficulty:
 		std::cout << "difficulty" << std::endl;

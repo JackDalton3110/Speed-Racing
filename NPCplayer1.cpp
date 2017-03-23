@@ -1,7 +1,7 @@
 #include "NPCplayer1.h"
 
 NPCplayer1::NPCplayer1(std::vector<sf::CircleShape> &Node) :
-	m_acceleration(150),
+	m_acceleration(0),
 	m_degree(255),
 	m_postion(540, 734),
 	m_dirction(rand() % 5 - 3),
@@ -19,6 +19,8 @@ NPCplayer1::NPCplayer1(std::vector<sf::CircleShape> &Node) :
 	m_sprite.setOrigin(25, 15);
 	m_sprite.setPosition(m_postion);
 	m_sprite.setScale(0.5f, 0.5f);
+
+	
 
 }
 
@@ -66,6 +68,24 @@ sf::FloatRect NPCplayer1::boundingBox()
 {
 	sf::FloatRect boundingBox(m_sprite.getGlobalBounds().left + 2, m_sprite.getGlobalBounds().top + 2, m_sprite.getGlobalBounds().width - 5, m_sprite.getGlobalBounds().height - 5);
 	return boundingBox;
+}
+
+void NPCplayer1::DifficultyAdjust(bool easy, bool normal, bool hard)
+{
+	if (easy == true)
+	{
+		MAX_SPEED = 75.0f;
+	}
+
+	if (normal == true)
+	{
+		MAX_SPEED = 150.0f;
+	}
+
+	if (hard == true)
+	{
+		MAX_SPEED = 175.0f;
+	}
 }
 
 void NPCplayer1::update(double t)

@@ -8,7 +8,6 @@
 #include "NPCplayer1.h"
 #include "NPCplayer2.h"
 
-
 class Game;
 
 class Gameplay
@@ -20,6 +19,8 @@ public:
 	void update(double t, int car_id, Xbox360Controller& controller);
 	void render(sf::RenderWindow &window);
 	void getStatus(float maxspeed, float accelecation, float handling);
+
+	void getdifficulty(bool easy, bool normal, bool hard);
 
 protected:
 	double timeSinceUpdate;
