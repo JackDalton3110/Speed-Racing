@@ -1,7 +1,7 @@
 #include "Player.h"
 
 Player::Player() :
-	m_acceleration(100),
+	m_acceleration(0),
 	m_degree(255),
 	m_velocity(0),
 	m_postion(520, 681),
@@ -46,6 +46,8 @@ Player::Player() :
 
 	m_sprite.setOrigin(10, 15);
 	
+
+
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
 	view.setCenter(m_postion); // set player's position to camera
@@ -55,6 +57,27 @@ Player::Player() :
 	m_lap_timer.setFont(m_font);
 	m_timer.setColor(sf::Color::Black);
 	m_lap_timer.setColor(sf::Color::Black);
+
+	m_lap_timer.setString(intToString(lap_timer[2]) + "::"
+		+ intToString(lap_timer[1]) + "::"
+		+ intToString(lap_timer[0])); // convert minute to string
+
+	if (!m_speed_texture.loadFromFile("images/speed.png"))
+	{
+		std::string s("error loading texture from file");
+		throw std::exception(s.c_str());
+	}
+	m_speed_sprite.setTexture(m_speed_texture);
+	m_speed_sprite.setOrigin(48, 48);
+	m_speed_sprite.setPosition(m_postion.x + 200, m_postion.y + 130);
+	if (!m_needle_texture.loadFromFile("images/needle.png"))
+	{
+		std::string s("error loading texture from file");
+		throw std::exception(s.c_str());
+	}
+	m_needle_sprite.setTexture(m_needle_texture);
+	m_needle_sprite.setOrigin(36, 8);
+	m_needle_sprite.setPosition(m_speed_sprite.getPosition());
 }
 
 Player::~Player()
@@ -73,6 +96,29 @@ void Player::normalFriction()
 	physics.resetGravity();
 }
 
+void Player::resetPlayer()
+{
+	m_halfway = false;
+	m_postion.x = 520;
+	m_postion.y = 681;
+	m_degree = 255;
+	m_motion.x = 0;
+	m_motion.y = 0;
+
+	timer_mis = 0; 
+	timer_sec = 0; 
+	timer_min = 0;
+
+	for (int i = 0; i < 3; i++)
+	{
+		lap_timer[i] = 0;
+	}
+
+	for (int i = 0; i < 100; i++)
+	{
+		sprite_draft_mark[i].setPosition(-1000, -100);
+	}
+}
 
 void Player::setPlayerStatus(float maxspeed, float accelecation, float handling, int car_ID)
 {
@@ -82,6 +128,8 @@ void Player::setPlayerStatus(float maxspeed, float accelecation, float handling,
 	max_speed = (0.2 * 9.8 * maxspeed) / 100; // get max speed from upgrade
 	m_turning = maxspeed * 0.65;
 	m_handling = handling / 100 + 0.5;
+
+	needle_degree = m_velocity / maxspeed * 270;
 }
 
 void Player::timer(double t)
@@ -108,19 +156,10 @@ void Player::timer(double t)
 		timer_min++;
 		timer_sec = 0;
 	}
+
 	m_timer.setString(intToString(timer_min) + "::"
 		+ intToString(timer_sec) + "::"
 		+ intToString(timer_mis)); // convert minute to string
-
-	m_lap_timer.setString(intToString(lap_timer[0]) + "::"
-		+ intToString(lap_timer[1]) + "::"
-		+ intToString(lap_timer[2])); // convert minute to string
-
-	if (m_postion.y > 1444)
-	{
-		m_halfway = true;
-		std::cout << "halfway::" << std::endl;
-	}
 }
 
 void Player::resetHalfWay()
@@ -130,19 +169,16 @@ void Player::resetHalfWay()
 
 void Player::getLapTimer()
 {
-	lap_timer[0] = timer_mis - lap_timer[0];
-	lap_timer[1] = timer_sec - lap_timer[1];
-	lap_timer[2] = timer_min - lap_timer[2];
-	if (lap_timer[0] < 0)
+	if (m_halfway)
 	{
-		lap_timer[1] --; // less 1 second
-		lap_timer[0] += 100; // gain 100 millisecond
-	}
+		m_lap_timer.setString(intToString(lap_timer[2]) + "::"
+			+ intToString(lap_timer[1]) + "::"
+			+ intToString(lap_timer[0])); // convert minute to string
 
-	if (lap_timer[1] < 0)
-	{
-		lap_timer[2]--; // less 1 minute
-		lap_timer[1] += 60; // gain 60 second
+		for (int i = 0; i < 3; i++)
+		{
+			lap_timer[i] = 0;
+		}
 	}
 }
 
@@ -166,7 +202,13 @@ void Player::update(double t)
 
 	controller.update();
 
-		if (controller.Bbutton())
+	if (m_postion.y > 1444)
+	{
+		m_halfway = true;
+		std::cout << "halfway::" << std::endl;
+	}
+
+	if (controller.Bbutton())
 	{
 		m_handbrake = m_motion.x * m_handling;
 		m_motion.x -= m_handbrake * t;
@@ -186,6 +228,21 @@ void Player::update(double t)
 	}
 
 	timer(t);
+
+	lap_timer[0] += t * 100;
+
+	if (lap_timer[0] >= 100) // when millisecond great than 100, second add 1
+	{
+		lap_timer[1]++;
+		lap_timer[0] = 0;
+	}
+
+	if (lap_timer[1] >= 60) // when second over 60, minute add 1
+	{
+		lap_timer[2]++;
+		lap_timer[1] = 0;
+	}
+
 
 	if (controller.RTrigger() >= 5) // right trigger to speed up
 	{
@@ -259,6 +316,7 @@ void Player::update(double t)
 	m_sprite.setPosition(m_postion);
 
 	view.setCenter(m_postion);
+	
 	m_text[1].setPosition(m_postion.x, m_postion.y + 150);
 
 	m_timer.setPosition(m_postion.x - 250, m_postion.y - 200);
@@ -268,6 +326,10 @@ void Player::update(double t)
 	m_sprite.setRotation(m_degree);
 	m_text[1].setString(intToString(m_velocity));
 	m_text[0].setString("Lap time:");
+
+	m_speed_sprite.setPosition(m_postion.x + 200, m_postion.y + 130);
+	m_needle_sprite.setPosition(m_speed_sprite.getPosition());
+	m_needle_sprite.setRotation(needle_degree);
 }
 
 sf::FloatRect Player::boundingBox()
@@ -284,6 +346,7 @@ void Player::setLocation()
 void Player::render(sf::RenderWindow &window)
 {
 	window.setView(view);
+	
 
 	for (int i = 0; i < 100; i++)
 	{
@@ -298,6 +361,8 @@ void Player::render(sf::RenderWindow &window)
 	}
 	window.draw(m_timer);
 	window.draw(m_lap_timer);
+	window.draw(m_speed_sprite);
+	window.draw(m_needle_sprite);
 }
 
 std::string Player::intToString(int num) {

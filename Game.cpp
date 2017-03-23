@@ -220,8 +220,18 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		default:
 			break;
 		}
+		m_gameplay->reset(time.asSeconds());
 		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID(), m_controller);
+<<<<<<< HEAD
 		m_gameplay->getdifficulty(m_DifficultyScreen->Easy, m_DifficultyScreen->Medium, m_DifficultyScreen->Hard);
+=======
+
+		if (m_gameplay->gainScrapCheck)
+		{
+			m_upgrade->scrap += m_gameplay->gainScrap();
+			m_gameplay->gainScrapCheck = false;
+		}
+>>>>>>> edc578a3cc2cad1608977428c7fdae1d7eff5dd3
 		break;
 	case GameState::Difficulty:
 		std::cout << "difficulty" << std::endl;

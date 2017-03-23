@@ -6,7 +6,6 @@ NPCplayer2::NPCplayer2(std::vector<sf::CircleShape> &Node) :
 	m_postion(570, 750),
 	m_dirction(rand() % 5 - 3),
 	m_car_id(rand() % 4),
-	timer(1.5f),
 	located_time(0.1),
 	m_NodeCircle(Node)
 {
@@ -28,6 +27,17 @@ NPCplayer2::~NPCplayer2()
 
 }
 
+void NPCplayer2::resetNPC()
+{
+	m_halfway = false;
+	m_postion.x = 563;
+	m_postion.y = 700;
+	m_degree = 255;
+	m_motion.x = 0;
+	m_motion.y = 0;
+	m_acceleration = 0;
+}
+
 sf::Vector2f NPCplayer2::follow()
 {
 	sf::Vector2f target;
@@ -35,6 +45,11 @@ sf::Vector2f NPCplayer2::follow()
 
 	if (Math::distance(m_postion, target) <= 50)
 	{
+		if (currentNode == 45)
+		{
+			m_halfway = true;
+		}
+
 		currentNode++;
 		if (currentNode >= m_NodeCircle.size())
 		{
@@ -69,7 +84,8 @@ sf::FloatRect NPCplayer2::boundingBox()
 	return boundingBox;
 }
 
-void NPCplayer2::DifficultyAdjust(bool easy, bool normal, bool hard)
+
+	void NPCplayer2::DifficultyAdjust(bool easy, bool normal, bool hard)
 {
 	if (easy == true)
 	{
@@ -87,8 +103,29 @@ void NPCplayer2::DifficultyAdjust(bool easy, bool normal, bool hard)
 	}
 }
 
+void NPCplayer2::timer(double t)
+{
+	// timer part
+	timer_mis += t * 100;
+
+	if (timer_mis >= 100) // when millisecond great than 100, second add 1
+	{
+		timer_sec++;
+		timer_mis = 0;
+	}
+
+	if (timer_sec >= 60) // when second over 60, minute add 1
+	{
+		timer_min++;
+		timer_sec = 0;
+
+	}
+}
+
 void NPCplayer2::update(double t)
 {
+	timer(t);
+
 	sf::Vector2f vectorToNode = follow();
 
 	located_time -= t;
