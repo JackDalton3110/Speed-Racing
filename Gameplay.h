@@ -39,7 +39,7 @@ private:
 
 	sf::RectangleShape box1;
 	sf::RectangleShape box2;
-	sf::FloatRect intersectLine();
+	sf::FloatRect intersectLine(Xbox360Controller& controller, double t);
 	sf::RectangleShape m_finishLine;
 
 	sf::Vector2f m_finishLinePos;

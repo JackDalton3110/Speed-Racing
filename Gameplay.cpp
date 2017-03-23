@@ -129,7 +129,7 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 		if (!game_pause)
 		{
 
-			
+
 			m_player.update(t);
 			m_npc.update(t);
 			m_npc1.update(t);
@@ -189,7 +189,7 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 
 		}
 
-
+	}
 	/*if (m_player.boundingBox().intersects(intersectLine()))
 	{
 		std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
@@ -214,13 +214,13 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 	m_finishLine.setPosition(482, 645);
 	m_finishLine.setSize(sf::Vector2f(m_finishLinePos.x, m_finishLinePos.y));
 	m_finishLine.setRotation(345.0f);
-}
 
-sf::FloatRect Gameplay::intersectLine()
-{
-	sf::FloatRect intersectLine(645 + m_finishLine.getSize().y, 482,
-		482 + m_finishLine.getSize().x, 645);
-	return intersectLine;
+
+//sf::FloatRect Gameplay::intersectLine(Xbox360Controller & controller, double t)
+//{
+//	sf::FloatRect intersectLine(645 + m_finishLine.getSize().y, 482,
+//		482 + m_finishLine.getSize().x, 645);
+//	return intersectLine;
 
 
 		if (controller.StartButton())
@@ -237,7 +237,7 @@ sf::FloatRect Gameplay::intersectLine()
 				m_countdown = false;
 				game_pause = false;
 			}
-		}
+		
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -285,6 +285,7 @@ sf::FloatRect Gameplay::intersectLine()
 	m_signal_sprite.setPosition(m_player.boundingBox().left - 100, m_player.boundingBox().top - 100);
 
 }
+
 
 void Gameplay::render(sf::RenderWindow &window)
 {
