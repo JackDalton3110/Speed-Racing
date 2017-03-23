@@ -196,7 +196,6 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 	}*/
 
 	//This is collision with the finish line
-
 	if (m_player.m_postion.x >= m_finishLine.getPosition().x && m_player.m_postion.x <= m_finishLine.getPosition().x + 100)
 	{
 		if (m_player.m_postion.y >= m_finishLine.getPosition().y && m_player.m_postion.y <= m_finishLine.getPosition().y + 30)
