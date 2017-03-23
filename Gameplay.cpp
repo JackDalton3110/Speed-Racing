@@ -72,12 +72,6 @@ void Gameplay::getStatus(float maxspeed, float accelecation, float handling)
 
 void Gameplay::collisionCheck()
 {
-	m_player.setPlayerStatus(max_speed, m_acceleration, m_handling);
-
-	m_player.update(t, car_id);
-	m_npc.update(t, car_id);
-	m_npc1.update(t, car_id);
-	m_npc2.update(t, car_id);
 
 	if (m_player.boundingBox().intersects(m_npc.boundingBox()))
 	{
