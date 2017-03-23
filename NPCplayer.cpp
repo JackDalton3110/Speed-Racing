@@ -1,7 +1,7 @@
 #include "NPCplayer.h"
 
 NPCplayer::NPCplayer(std::vector<sf::CircleShape> &Node) :
-	m_acceleration(150),
+	m_acceleration(0),
 	m_degree(255),
 	m_postion(563, 700),
 	m_dirction(rand() % 5 - 3),
@@ -18,7 +18,7 @@ NPCplayer::NPCplayer(std::vector<sf::CircleShape> &Node) :
 	m_sprite.setOrigin(25, 15);
 	m_sprite.setPosition(m_postion);
 	m_sprite.setScale(0.5f, 0.5f);
-
+	m_sprite.setRotation(m_degree);
 }
 
 NPCplayer::~NPCplayer()
@@ -35,6 +35,7 @@ void NPCplayer::resetNPC()
 	m_motion.x = 0;
 	m_motion.y = 0;
 	m_acceleration = 0;
+	currentNode = 0;
 }
 
 sf::Vector2f NPCplayer::follow()
@@ -42,10 +43,10 @@ sf::Vector2f NPCplayer::follow()
 	sf::Vector2f target;
 	target = m_NodeCircle.at(currentNode).getPosition();
 
-
-
 	if (Math::distance(m_postion, target) <= 50)
 	{
+		//m_acceleration *= 0.3;
+
 		if (currentNode == 13)
 		{
 			m_halfway = true;
@@ -132,32 +133,32 @@ void NPCplayer::update(double t)
 			m_degree = 0 - m_degree;
 		}
 	}
-		else
+	else
+	{
+		m_degree -= 10;
+		if (m_degree < 0)
 		{
-			m_degree -= 10;
-			if (m_degree < 0)
-			{
-				m_degree = 359 + m_degree;
-			}
+			m_degree = 359 + m_degree;
 		}
-
-		sf::IntRect car(0, m_car_id * 30, 50, 30);
-		m_sprite.setTextureRect(car);
-
-		if (thor::length(vectorToNode) != 0)
-		{
-			m_steering += thor::unitVector(vectorToNode);
-
-		}
-
-		m_steering = Math::truncate(m_steering, MAX_FORCE);
-		m_motion = Math::truncate(m_motion + m_steering, m_acceleration);
-		m_postion.x += m_motion.x * t;
-		m_postion.y += m_motion.y * t;
-
-		m_sprite.setPosition(m_postion);
-		m_sprite.setRotation(m_degree);
 	}
+
+	sf::IntRect car(0, m_car_id * 30, 50, 30);
+	m_sprite.setTextureRect(car);
+
+	if (thor::length(vectorToNode) != 0)
+	{
+		m_steering += thor::unitVector(vectorToNode);
+
+	}
+
+	m_steering = Math::truncate(m_steering, MAX_FORCE);
+	m_motion = Math::truncate(m_motion + m_steering, m_acceleration);
+	m_postion.x += m_motion.x * t;
+	m_postion.y += m_motion.y * t;
+
+	m_sprite.setPosition(m_postion);
+	m_sprite.setRotation(m_degree);
+}
 
 
 

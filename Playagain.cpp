@@ -53,13 +53,13 @@ void Playagain::update(Xbox360Controller& controller)
 
 	if (controller.Abutton() && m_button_released) // press A button to play again
 	{
-		m_game->SetGameState(GameState::carSelect);
+		m_game->SetGameState(GameState::option);
 		m_reset_check = true;
 	}
 
 	if (controller.Bbutton() && m_button_released) // press B button to Main menu
 	{
-		m_game->SetGameState(GameState::option);
+		m_game->SetGameState(GameState::credits);
 		m_reset_check = true;
 	}
 

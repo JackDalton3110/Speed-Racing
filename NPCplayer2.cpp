@@ -18,7 +18,7 @@ NPCplayer2::NPCplayer2(std::vector<sf::CircleShape> &Node) :
 	m_sprite.setOrigin(25, 15);
 	m_sprite.setPosition(m_postion);
 	m_sprite.setScale(0.5f, 0.5f);
-
+	m_sprite.setRotation(m_degree);
 }
 
 NPCplayer2::~NPCplayer2()
@@ -29,12 +29,13 @@ NPCplayer2::~NPCplayer2()
 void NPCplayer2::resetNPC()
 {
 	m_halfway = false;
-	m_postion.x = 563;
-	m_postion.y = 700;
+	m_postion.x = 570;
+	m_postion.y = 750;
 	m_degree = 255;
 	m_motion.x = 0;
 	m_motion.y = 0;
 	m_acceleration = 0;
+	currentNode = 39;
 }
 
 sf::Vector2f NPCplayer2::follow()
@@ -44,6 +45,8 @@ sf::Vector2f NPCplayer2::follow()
 
 	if (Math::distance(m_postion, target) <= 50)
 	{
+		m_acceleration *= 0.5;
+
 		if (currentNode == 45)
 		{
 			m_halfway = true;

@@ -43,7 +43,7 @@ Player::Player() :
 	m_sprite.setTexture(m_texture);
 
 	m_sprite.setPosition(m_postion);
-
+	m_sprite.setRotation(m_degree);
 	m_sprite.setOrigin(10, 15);
 	
 
