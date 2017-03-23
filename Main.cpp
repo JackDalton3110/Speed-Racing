@@ -19,7 +19,7 @@
 #pragma comment (lib, "sfml-network.lib")
 #pragma comment (lib, "sfeMovie.lib")
 #pragma comment (lib, "thor.lib") 
-#pragma comment (lib, "libyaml-cppmdd.lib")
+#pragma comment(lib,"libyaml-cppmd") // NB –cppmd (not –cppmdd)
 #endif
 
 #include "game.h"

@@ -232,7 +232,6 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 			m_upgrade->scrap += m_gameplay->gainScrap();
 			m_gameplay->gainScrapCheck = false;
 		}
-
 		break;
 	case GameState::Difficulty:
 		std::cout << "difficulty" << std::endl;
@@ -274,6 +273,11 @@ void Game::processEvents()
 	sf::Event event;
 	while (m_window.pollEvent(event))
 	{
+		if (event.type == sf::Event::Closed) 
+		{
+			m_window.close();
+		}
+
 		if (m_controller.m_currentState.Start && m_currentGameState == GameState::splash)//any key accepted to change screen to credits
 		{
 			m_splashscreen->changeScreen();
