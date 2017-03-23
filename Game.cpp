@@ -4,7 +4,7 @@
 Game::Game() :
 
 	m_window(sf::VideoMode(1000, 800), "Speed"),
-	m_currentGameState(GameState::credits)
+	m_currentGameState(GameState::licence)
 
 {
 	int currentLevel = 1;
