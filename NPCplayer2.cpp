@@ -45,6 +45,7 @@ sf::Vector2f NPCplayer2::follow()
 
 	if (Math::distance(m_postion, target) <= 50)
 	{
+		m_acceleration *= 0.65;
 		if (currentNode == 45)
 		{
 			m_halfway = true;
@@ -94,12 +95,12 @@ sf::FloatRect NPCplayer2::boundingBox()
 
 	if (normal == true)
 	{
-		MAX_SPEED = 150.0f;
+		MAX_SPEED = 135.0f;
 	}
 
 	if (hard == true)
 	{
-		MAX_SPEED = 175.0f;
+		MAX_SPEED = 150.0f;
 	}
 }
 

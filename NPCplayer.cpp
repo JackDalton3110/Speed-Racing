@@ -50,6 +50,7 @@ sf::Vector2f NPCplayer::follow()
 
 	if (Math::distance(m_postion, target) <= 50)
 	{
+		m_acceleration *= 0.65;
 		if (currentNode == 13)
 		{
 			m_halfway = true;
@@ -82,12 +83,12 @@ void NPCplayer::DifficultyAdjust(bool easy, bool normal, bool hard)
 
 	if (normal == true)
 	{
-		MAX_SPEED = 150.0f;
+		MAX_SPEED = 135.0f;
 	}
 
 	if (hard == true)
 	{
-		MAX_SPEED = 175.0f;
+		MAX_SPEED = 150.0f;
 	}
 }
 
