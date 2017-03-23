@@ -371,6 +371,15 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 
 	//This is collision with the finish line
 
+	if (m_player.m_postion.x >= m_finishLine.getPosition().x && m_player.m_postion.x <= m_finishLine.getPosition().x + 100)
+	{
+		if (m_player.m_postion.y >= m_finishLine.getPosition().y && m_player.m_postion.y <= m_finishLine.getPosition().y + 30)
+		{
+			std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+			m_player.getLapTimer();
+		}
+	}
+
 	m_finishLine.setPosition(482, 645);
 	m_finishLine.setSize(sf::Vector2f(m_finishLinePos.x, m_finishLinePos.y));
 	m_finishLine.setRotation(345.0f);

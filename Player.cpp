@@ -46,6 +46,8 @@ Player::Player() :
 
 	m_sprite.setOrigin(10, 15);
 	
+
+
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
 	view.setCenter(m_postion); // set player's position to camera
@@ -295,6 +297,7 @@ void Player::update(double t)
 	m_sprite.setPosition(m_postion);
 
 	view.setCenter(m_postion);
+	
 	m_text[1].setPosition(m_postion.x, m_postion.y + 150);
 
 	m_timer.setPosition(m_postion.x - 250, m_postion.y - 200);
@@ -320,6 +323,7 @@ void Player::setLocation()
 void Player::render(sf::RenderWindow &window)
 {
 	window.setView(view);
+	
 
 	for (int i = 0; i < 100; i++)
 	{

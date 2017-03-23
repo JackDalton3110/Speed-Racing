@@ -63,7 +63,7 @@ private:
 	float m_turning;
 	float m_handling;
 
-	//sf::View view; // camera
+	sf::View m_minimap; // camera
 
 	sf::Texture m_texture; // car texture
 	sf::Sprite m_sprite; // car sprite
