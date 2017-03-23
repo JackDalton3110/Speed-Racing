@@ -222,23 +222,14 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		}
 		m_gameplay->reset(time.asSeconds());
 		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID(), m_controller);
-<<<<<<< HEAD
 
 		m_gameplay->getdifficulty(m_DifficultyScreen->Easy, m_DifficultyScreen->Medium, m_DifficultyScreen->Hard);
 
-
-=======
-		m_gameplay->getdifficulty(m_DifficultyScreen->Easy, m_DifficultyScreen->Medium, m_DifficultyScreen->Hard);
->>>>>>> difficulty
 		if (m_gameplay->gainScrapCheck)
 		{
 			m_upgrade->scrap += m_gameplay->gainScrap();
 			m_gameplay->gainScrapCheck = false;
 		}
-<<<<<<< HEAD
-
-=======
->>>>>>> difficulty
 		break;
 	case GameState::Difficulty:
 		std::cout << "difficulty" << std::endl;
@@ -280,6 +271,11 @@ void Game::processEvents()
 	sf::Event event;
 	while (m_window.pollEvent(event))
 	{
+		if (event.type == sf::Event::Closed) 
+		{
+			m_window.close();
+		}
+
 		if (m_controller.m_currentState.Start && m_currentGameState == GameState::splash)//any key accepted to change screen to credits
 		{
 			m_splashscreen->changeScreen();
