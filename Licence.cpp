@@ -14,6 +14,15 @@ Licence::Licence(Game &game, sf::Font font, sf::Font font1) :
 		std::string s("error loading texture from file");
 		throw std::exception(s.c_str());
 	}
+
+	if (!shaderTxt.loadFromFile("images/shaderTxt.png"))
+	{
+		std::string s("error loading shader texture");
+		//throw std::exception(s.c_str);
+	}
+	shaderSprite.setTexture(shaderTxt);
+	shaderSprite.setPosition(0, 0);
+
 	m_Sprite.setTexture(m_Texture);
 	m_Sprite.setPosition(-500, 250);
 	m_Sprite.setScale(0.4, 0.4);
@@ -23,6 +32,15 @@ Licence::Licence(Game &game, sf::Font font, sf::Font font1) :
 	m_textMessage1.setPosition(370.0f, 375.0f);//set position
 	m_textMessage1.setColor(sf::Color(255, 255, 255, 0));//set colour
 	m_textMessage1.setCharacterSize(32);
+	
+	if (!shader.loadFromFile("smoke.frag", sf::Shader::Fragment))
+	{
+		std::string s("error loading shader");
+		//throw std::exception(s.c_str);
+	}
+	shader.setParameter("time", 0);
+	shader.setParameter("mouse",0, 0);
+	shader.setParameter("resolution",1000, 800);
 
 }
 
@@ -35,6 +53,11 @@ Licence::~Licence()
 void Licence::update(sf::Time deltaTime)
 {
 	m_cumulativeTime += deltaTime;
+
+	updateShader = m_cumulativeTime.asSeconds();
+	shader.setParameter("time", updateShader);
+	
+
 	if (m_cumulativeTime.asSeconds() > 4)
 	{
 		m_game->SetGameState(GameState::splash);//load next gamestate after 4 seconds
@@ -62,6 +85,7 @@ void Licence::update(sf::Time deltaTime)
 void Licence::render(sf::RenderWindow &window)
 {
 	window.clear(sf::Color(0, 0, 0));//set background colour
+	window.draw(shaderSprite, &shader);
 	window.draw(m_Sprite);
 	window.draw(m_textMessage);
 	window.draw(m_textMessage1);//draw text

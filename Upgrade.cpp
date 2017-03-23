@@ -161,6 +161,24 @@ Upgrade::Upgrade(Game &game, sf::Font font, sf::Font font1) :
 	m_sprite_scrap[1].setScale(0.5f, 0.5f);
 
 	m_sprite_scrap[2].setTexture(m_texture_scrap);
+
+	if (!shader.loadFromFile("upgrade.frag", sf::Shader::Fragment))
+	{
+		std::string s("error loading shader");
+		//throw std::exception(s.c_str);
+	}
+	shader.setParameter("time", 0);
+	shader.setParameter("resolution", 1000, 800);
+	shader.setParameter("mouse", 3, 3);
+
+	if (!shaderTxt.loadFromFile("images/shaderTxt.png"))
+	{
+		std::string s("error loading shader texture");
+		//throw std::exception(s.c_str);
+	}
+	shaderSprite.setTexture(shaderTxt);
+	shaderSprite.setPosition(0, 0);
+
 }
 
 Upgrade::~Upgrade()
@@ -168,8 +186,15 @@ Upgrade::~Upgrade()
 	std::cout << "destroying upgrade menu" << std::endl;
 }
 
-void Upgrade::update(double t, Xbox360Controller &controller)
+void Upgrade::update(double t, Xbox360Controller &controller, sf::Time dt)
 {
+
+	m_cumulativeTime += dt;
+	updateShader = m_cumulativeTime.asSeconds();
+
+	shader.setParameter("time", updateShader);
+
+	
 
 	if (!controller.Abutton() && !controller.Bbutton()) // button release check
 	{
@@ -471,7 +496,7 @@ void Upgrade::backOut()
 void Upgrade::render(sf::RenderWindow &window)
 {
 	window.clear(sf::Color(0, 0, 0, 255));
-
+	window.draw(shaderSprite, &shader);
 	window.draw(m_sprite_scrap[0]);
 	window.draw(m_textMessage[10]);
 

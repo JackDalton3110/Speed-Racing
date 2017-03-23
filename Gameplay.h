@@ -20,6 +20,12 @@ public:
 	void update(double t, int car_id, Xbox360Controller& controller);
 	void render(sf::RenderWindow &window);
 	void getStatus(float maxspeed, float accelecation, float handling);
+
+protected:
+	double timeSinceUpdate;
+	int timerDown;
+
+
 private:
 	void collisionCheck();
 	void endScreen();
@@ -27,7 +33,7 @@ private:
 
 	Player & m_player;
 	NPCplayer m_npc;
-
+	void timer(double t);
 	NPCplayer1 m_npc1;
 	NPCplayer2 m_npc2;
 	

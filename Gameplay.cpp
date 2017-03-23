@@ -420,7 +420,7 @@ void Gameplay::render(sf::RenderWindow &window)
 	
 	// comment or delete this when we finished
 	//window.draw(m_finishLine);
-
+	/*window.draw(m_finishLine);*/
 
 	m_player.render(window);
 	m_npc.render(window);

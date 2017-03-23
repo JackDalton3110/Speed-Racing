@@ -13,7 +13,7 @@ class Upgrade
 public:
 	Upgrade(Game& game, sf::Font font, sf::Font font1);
 	~Upgrade();
-	void update(double t, Xbox360Controller& controller);
+	void update(double t, Xbox360Controller& controller, sf::Time dt);
 	void render(sf::RenderWindow &window);
 
 	float whiteCar_values[3] = { 200, 4.2f, 50 };
@@ -32,7 +32,7 @@ private:
 	void changeScreen();
 	int button_ID = 0;
 	int setting_ID = 0;
-
+	sf::Time m_cumulativeTime;
 	Game *m_game;
 	sf::Text m_textMessage[14];//text
 	sf::Font m_Motor;//font
@@ -67,6 +67,13 @@ private:
 	sf::Vector2f scrap_mover_positoin;
 	sf::Vector2f scrap_dirction;
 	sf::Vector2f scrap_size;
+	float updateShader;//variables for shaders
+	sf::Shader shader;
+	sf::Texture shaderTxt;
+	sf::Sprite shaderSprite;
+
+	std::string intToString(float num); // int to string
+
 };
 
 #endif

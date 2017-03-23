@@ -39,7 +39,7 @@ private:
 	int m_car_id;
 	int currentNode = 26;
 
-	const float MAX_FORCE = 8.0f;
+	const float MAX_FORCE = 6.0f;
 	const float MAX_SEE_AHEAD = 50.0f;
 	float MAX_SPEED = 150.0F;
 

@@ -28,6 +28,7 @@ public:
 	void setPlayerStatus(float maxspeed, float accelecation, float handling, int car_ID);
 	void getLapTimer();
 	void resetHalfWay();
+	sf::View view; // camera
 
 	sf::Vector2f getSpritePosition() const;
 
@@ -60,7 +61,7 @@ private:
 	float m_turning;
 	float m_handling;
 
-	sf::View view; // camera
+	//sf::View view; // camera
 
 	sf::Texture m_texture; // car texture
 	sf::Sprite m_sprite; // car sprite

@@ -19,6 +19,10 @@ public:
 
 private:
 	Game *m_game;
+	float updateShader;
+	sf::Shader shader;
+	sf::Texture shaderTxt;
+	sf::Sprite shaderSprite;
 	sf::Time m_cumulativeTime;
 	sf::Font m_HARLOW;
 	sf::Font m_Motor;
