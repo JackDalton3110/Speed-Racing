@@ -13,7 +13,7 @@ public:
 	Player();
 	~Player();
 
-	void update(double t, int car_ID);
+	void update(double t);
 	void render(sf::RenderWindow &window);
 	
 	sf::FloatRect boundingBox();
@@ -26,12 +26,15 @@ public:
 	void highFriction();
 	void normalFriction();
 	sf::Vector2f getSpritePosition() const;
-	void setPlayerStatus(float maxspeed, float accelecation, float handling);
+	void setPlayerStatus(float maxspeed, float accelecation, float handling, int car_ID);
 	void getLapTimer();
+	void resetHalfWay();
+	bool m_halfway;
 
 
 private:
 	void timer(double t);
+	void driftMark();
 
 	Physics physics;
 	Xbox360Controller controller;
@@ -46,7 +49,6 @@ private:
 
 	int lap_timer[3] = {0,0,0}; // 0 for millisecond, 1 for second, 2 for minute
 
-	;
 	float m_degree;
 	float m_velocity;
 
@@ -58,13 +60,17 @@ private:
 
 	sf::View view; // camera
 
-	
-
 	sf::Texture m_texture; // car texture
 	sf::Sprite m_sprite; // car sprite
 
 	sf::Vector2f location_record;
+	float degree_record;
 	float located_time;
+
+	sf::Texture texture_draft_mark;
+	sf::Sprite sprite_draft_mark[100];
+	int mark_count = 1;
+	float draw_time = 0.1f;
 
 	std::string intToString(int num); // int to string
 };

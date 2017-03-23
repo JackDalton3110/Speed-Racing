@@ -1,21 +1,21 @@
 Nodes:
    - type: node
-     position: {x: 555,y: 493}
+     position: {x: 570,y: 509}
      rotation: 0
    - type: node
-     position: {x: 771, y: 452}
+     position: {x: 795, y: 466}
      rotation: 0
    - type: node
-     position: {x: 854, y: 394}
+     position: {x: 853, y: 322}
      rotation: 0
    - type: node
      position: {x: 816, y: 251}
      rotation: 0
    - type: node
-     position: {x: 776, y: 137}
+     position: {x: 610, y: 89}
      rotation: 0
    - type: node
-     position: {x: 651, y: 66}
+     position: {x: 558, y: 215}
      rotation: 0
    - type: node
      position: {x: 490, y: 368}
@@ -30,7 +30,7 @@ Nodes:
      position: {x: 142, y: 1298}
      rotation: 0
    - type: node
-     position: {x: 208, y: 1314}
+     position: {x: 189, y: 1311}
      rotation: 0
    - type: node
      position: {x: 359, y: 1005}
@@ -48,16 +48,19 @@ Nodes:
      position: {x: 543, y: 1512}
      rotation: 0
    - type: node
-     position: {x: 661, y: 1478}
+     position: {x: 608, y: 1509}
      rotation: 0
    - type: node
-     position: {x: 1155, y: 507}
+     position: {x: 892, y: 1012}
+     rotation: 0
+   - type: node
+     position: {x: 1157, y: 503}
      rotation: 0
    - type: node
      position: {x: 1119, y: 415}
      rotation: 0
    - type: node
-     position: {x: 1005, y: 443}
+     position: {x: 1062, y: 408}
      rotation: 0
    - type: node
      position: {x: 819, y: 848}

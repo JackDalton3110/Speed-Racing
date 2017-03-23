@@ -26,13 +26,25 @@ Player::Player() :
 		throw std::exception(s.c_str());
 	}
 
+	if (!texture_draft_mark.loadFromFile("images/DriftMark.png"))
+	{
+		std::string s("error loading texture from file");
+		throw std::exception(s.c_str());
+	}
+
+	for (int i = 0; i < 100; i++)
+	{
+		sprite_draft_mark[i].setTexture(texture_draft_mark);
+		sprite_draft_mark[i].setScale(0.5, 0.5);
+		sprite_draft_mark[i].setPosition(-1000, -100);
+		sprite_draft_mark[i].setOrigin(11, 15);
+	}
+
 	m_sprite.setTexture(m_texture);
 
 	m_sprite.setPosition(m_postion);
 
 	m_sprite.setOrigin(10, 15);
-
-
 	
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
@@ -62,8 +74,11 @@ void Player::normalFriction()
 }
 
 
-void Player::setPlayerStatus(float maxspeed, float accelecation, float handling)
+void Player::setPlayerStatus(float maxspeed, float accelecation, float handling, int car_ID)
 {
+	sf::IntRect car(0, car_ID * 30, 50, 30); // get rect of player selection
+	m_sprite.setTextureRect(car);
+
 	max_speed = (0.2 * 9.8 * maxspeed) / 100; // get max speed from upgrade
 	m_turning = maxspeed * 0.65;
 	m_handling = handling / 100 + 0.5;
@@ -100,6 +115,17 @@ void Player::timer(double t)
 	m_lap_timer.setString(intToString(lap_timer[0]) + "::"
 		+ intToString(lap_timer[1]) + "::"
 		+ intToString(lap_timer[2])); // convert minute to string
+
+	if (m_postion.y > 1444)
+	{
+		m_halfway = true;
+		std::cout << "halfway::" << std::endl;
+	}
+}
+
+void Player::resetHalfWay()
+{
+	m_halfway = false;
 }
 
 void Player::getLapTimer()
@@ -120,23 +146,46 @@ void Player::getLapTimer()
 	}
 }
 
-void Player::update(double t, int car_ID)
+void Player::driftMark()
+{
+	sf::FloatRect boundingBox(m_sprite.getGlobalBounds().left + 10, m_sprite.getGlobalBounds().top + 5, m_sprite.getGlobalBounds().width - 15, m_sprite.getGlobalBounds().height - 5);
+	if (!boundingBox.intersects(sprite_draft_mark[mark_count - 1].getGlobalBounds()))
+	{
+		sprite_draft_mark[mark_count].setPosition(m_postion);
+		sprite_draft_mark[mark_count].setRotation(degree_record);
+		mark_count++;
+		if (mark_count >= 100)
+		{
+			mark_count = 1;
+		}
+	}
+}
+
+void Player::update(double t)
 {
 
 	controller.update();
+
+		if (controller.Bbutton())
+	{
+		m_handbrake = m_motion.x * m_handling;
+		m_motion.x -= m_handbrake * t;
+
+		m_handbrake = m_motion.y  * m_handling;
+		m_motion.y -= m_handbrake * t;
+
+		driftMark();
+	}
 
 	located_time -= t;
 	if (located_time <= 0)
 	{
 		location_record = m_postion;
+		degree_record = m_degree;
 		located_time = 0.1;
 	}
 
 	timer(t);
-
-	sf::IntRect car(0, car_ID * 30, 50 , 30); // get rect of player selection
-
-	m_sprite.setTextureRect(car);
 
 	if (controller.RTrigger() >= 5) // right trigger to speed up
 	{
@@ -159,15 +208,6 @@ void Player::update(double t, int car_ID)
 	else if (controller.LTrigger() > -5 && controller.LTrigger() <= 0)
 	{
 		m_acceleration = 0;
-	}
-
-	if (controller.Bbutton())
-	{
-		m_handbrake = m_motion.x * m_handling;
-		m_motion.x -= m_handbrake * t;
-
-		m_handbrake = m_motion.y  * m_handling;
-		m_motion.y -= m_handbrake * t;
 	}
 
 	if (controller.LeftThumbSticks().x <= -20 ||
@@ -245,7 +285,13 @@ void Player::render(sf::RenderWindow &window)
 {
 	window.setView(view);
 
-	window.draw(m_sprite);
+	for (int i = 0; i < 100; i++)
+	{
+		window.draw(sprite_draft_mark[i]);
+	}
+
+	window.draw(m_sprite); // draw player car
+
 	for (int i = 0; i < 3; i++)
 	{
 		window.draw(m_text[i]);

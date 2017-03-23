@@ -67,13 +67,13 @@ private:
 	sf::Vector2f scrap_mover_positoin;
 	sf::Vector2f scrap_dirction;
 	sf::Vector2f scrap_size;
-
 	float updateShader;//variables for shaders
 	sf::Shader shader;
 	sf::Texture shaderTxt;
 	sf::Sprite shaderSprite;
 
 	std::string intToString(float num); // int to string
+
 };
 
 #endif
