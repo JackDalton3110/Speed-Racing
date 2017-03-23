@@ -1,7 +1,7 @@
 #include "NPCplayer2.h"
 
 NPCplayer2::NPCplayer2(std::vector<sf::CircleShape> &Node) :
-	m_acceleration(150),
+	m_acceleration(0),
 	m_degree(255),
 	m_postion(570, 750),
 	m_dirction(rand() % 5 - 3),
@@ -19,6 +19,7 @@ NPCplayer2::NPCplayer2(std::vector<sf::CircleShape> &Node) :
 	m_sprite.setPosition(m_postion);
 	m_sprite.setScale(0.5f, 0.5f);
 	m_sprite.setRotation(m_degree);
+
 }
 
 NPCplayer2::~NPCplayer2()
@@ -86,6 +87,25 @@ sf::FloatRect NPCplayer2::boundingBox()
 	return boundingBox;
 }
 
+
+	void NPCplayer2::DifficultyAdjust(bool easy, bool normal, bool hard)
+{
+	if (easy == true)
+	{
+		MAX_SPEED = 75.0f;
+	}
+
+	if (normal == true)
+	{
+		MAX_SPEED = 150.0f;
+	}
+
+	if (hard == true)
+	{
+		MAX_SPEED = 175.0f;
+	}
+}
+
 void NPCplayer2::timer(double t)
 {
 	// timer part
@@ -101,6 +121,7 @@ void NPCplayer2::timer(double t)
 	{
 		timer_min++;
 		timer_sec = 0;
+
 	}
 }
 

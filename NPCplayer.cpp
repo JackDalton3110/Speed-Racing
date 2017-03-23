@@ -19,7 +19,10 @@ NPCplayer::NPCplayer(std::vector<sf::CircleShape> &Node) :
 	m_sprite.setPosition(m_postion);
 	m_sprite.setScale(0.5f, 0.5f);
 	m_sprite.setRotation(m_degree);
+
 }
+
+
 
 NPCplayer::~NPCplayer()
 {
@@ -53,6 +56,7 @@ sf::Vector2f NPCplayer::follow()
 		}
 
 		currentNode++;
+		m_acceleration *= 0.8;
 		if (currentNode >= 25)
 		{
 			currentNode = 0;
@@ -66,6 +70,24 @@ sf::Vector2f NPCplayer::follow()
 	else
 	{
 		return sf::Vector2f();
+	}
+}
+
+void NPCplayer::DifficultyAdjust(bool easy, bool normal, bool hard)
+{
+	if (easy == true)
+	{
+		MAX_SPEED = 75.0f;
+	}
+
+	if (normal == true)
+	{
+		MAX_SPEED = 150.0f;
+	}
+
+	if (hard == true)
+	{
+		MAX_SPEED = 175.0f;
 	}
 }
 

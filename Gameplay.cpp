@@ -473,6 +473,12 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 	board_position = m_player.m_postion;
 }
 
+void Gameplay::getdifficulty(bool easy, bool normal, bool hard)
+{
+	m_npc2.DifficultyAdjust(easy, normal, hard);
+	m_npc.DifficultyAdjust(easy, normal, hard);
+	m_npc1.DifficultyAdjust(easy, normal, hard);
+}
 
 void Gameplay::render(sf::RenderWindow &window)
 {

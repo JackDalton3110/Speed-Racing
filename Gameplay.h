@@ -23,6 +23,8 @@ public:
 	int gainScrap();
 	bool gainScrapCheck = false;
 
+	void getdifficulty(bool easy, bool normal, bool hard);
+
 protected:
 	double timeSinceUpdate;
 	int timerDown;

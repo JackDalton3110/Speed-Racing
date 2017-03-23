@@ -28,6 +28,8 @@ public:
 
 	bool m_halfway = false;
 
+	void DifficultyAdjust(bool easy, bool normal, bool hard);
+
 private:
 	void timer(double t);
 

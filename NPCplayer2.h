@@ -2,19 +2,27 @@
 #include <SFML\Graphics.hpp>
 #include "BTMath.h" 
 #include "Physics.h"
+
 #include "Thor/Vectors.hpp"
+
+
 
 class NPCplayer2
 {
 public:
 	NPCplayer2(std::vector<sf::CircleShape> &Node);
 	~NPCplayer2();
-
+	
 	void update(double t);
 	void render(sf::RenderWindow &window);
 	void setLocation();
 	void setNPC(int car_ID);
+
+	void DifficultyAdjust(bool easy, bool normal, bool hard);
+
+
 	void resetNPC();
+
 	sf::FloatRect boundingBox();
 
 	sf::Vector2f m_motion;
@@ -32,7 +40,9 @@ private:
 
 	Physics physics;
 
+
 	float m_acceleration;
+
 
 	double m_degree;
 
@@ -40,7 +50,7 @@ private:
 	int m_car_id;
 	int currentNode = 39;
 
-	const float MAX_FORCE = 6.0f;
+	float MAX_FORCE = 6.0f;
 	const float MAX_SEE_AHEAD = 50.0f;
 	float MAX_SPEED = 150.0F;
 
