@@ -53,7 +53,7 @@ void Playagain::update(Xbox360Controller& controller)
 
 	if (controller.Abutton() && m_button_released) // press A button to play again
 	{
-		m_game->SetGameState(GameState::none);
+		m_game->SetGameState(GameState::carSelect);
 		m_reset_check = true;
 	}
 
@@ -91,6 +91,4 @@ void Playagain::render(sf::RenderWindow &window)
 	{
 		window.draw(m_text[i]);
 	}
-
-	window.display();
 }

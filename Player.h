@@ -28,6 +28,8 @@ public:
 	void setPlayerStatus(float maxspeed, float accelecation, float handling, int car_ID);
 	void getLapTimer();
 	void resetHalfWay();
+	void resetPlayer();
+
 	sf::View view; // camera
 
 	sf::Vector2f getSpritePosition() const;

@@ -61,8 +61,8 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 		time_board[i].setColor(sf::Color::Black);
 		time_board[i].setString("NOT FINISH");
 
-		rank_board[i].setSize(sf::Vector2f(200, 50));
-		rank_board[i].setOrigin(100, 25);
+		rank_board[i].setSize(sf::Vector2f(300, 50));
+		rank_board[i].setOrigin(150, 25);
 		rank_board[i].setOutlineThickness(2);
 		rank_board[i].setOutlineColor(sf::Color::Black);
 		rank_board[i].setFillColor(sf::Color::White);
@@ -75,11 +75,56 @@ Gameplay::~Gameplay()
 
 }
 
+int Gameplay::gainScrap()
+{
+	if (m_rank == 0)
+	{
+		return 3;
+	}
+	else if (m_rank > 0)
+	{
+		return 1;
+	}
+
+	return 0;
+}
+
 void Gameplay::getStatus(float maxspeed, float accelecation, float handling)
 {
 	max_speed = maxspeed;
 	m_acceleration = accelecation;
 	m_handling = handling;
+}
+
+void Gameplay::reset()
+{
+	if (reset_check)
+	{
+		reset_check = false;
+
+		m_signal_sprite.setTexture(m_signal_texture);
+		game_start = false;
+		game_pause = false;
+		m_countdown = false;
+		restart_countdown = 3.0f;
+		start_count = 5.0f;
+		button_ID = 0;
+		start_ending_count = false;
+		game_end = false;
+		m_rank = -1;
+		ending_countdown = 5.0f;
+		gainScrapCheck = false;
+
+		for (int i = 0; i < 4; i++)
+		{
+			time_board[i].setString("NOT FINISH");
+		}
+
+		m_player.resetPlayer();
+		m_npc.resetNPC();
+		m_npc1.resetNPC();
+		m_npc2.resetNPC();
+	}
 }
 
 void Gameplay::collisionCheck()
@@ -136,11 +181,12 @@ void Gameplay::collisionCheck()
 			m_player.getLapTimer();
 			if (m_player.m_halfway)
 			{
+				m_rank++;
 				time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
 											+ m_game->intToString(m_player.timer_sec) + "::"
-											+ m_game->intToString(m_player.timer_mis));
+											+ m_game->intToString(m_player.timer_mis) + "  Player");
 				start_ending_count = true; // start count down
-				m_rank++;
+				gainScrapCheck = true;
 			}
 			m_player.resetHalfWay();
 		}
@@ -153,11 +199,11 @@ void Gameplay::collisionCheck()
 			std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
 			if (m_npc.m_halfway)
 			{
+				m_rank++;
 				time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
 					+ m_game->intToString(m_player.timer_sec) + "::"
-					+ m_game->intToString(m_player.timer_mis));
+					+ m_game->intToString(m_player.timer_mis) + "  bot 1");
 				start_ending_count = true; // start count down
-				m_rank++;
 			}
 			m_npc.m_halfway = false;
 		}
@@ -170,11 +216,11 @@ void Gameplay::collisionCheck()
 			std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
 			if (m_npc1.m_halfway)
 			{
+				m_rank++;
 				time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
 					+ m_game->intToString(m_player.timer_sec) + "::"
-					+ m_game->intToString(m_player.timer_mis));
+					+ m_game->intToString(m_player.timer_mis) + "  bot 2");
 				start_ending_count = true; // start count down
-				m_rank++;
 			}
 			m_npc1.m_halfway = false;
 		}
@@ -187,11 +233,11 @@ void Gameplay::collisionCheck()
 			std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
 			if (m_npc2.m_halfway)
 			{
+				m_rank++;
 				time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
 					+ m_game->intToString(m_player.timer_sec) + "::"
-					+ m_game->intToString(m_player.timer_mis));
+					+ m_game->intToString(m_player.timer_mis) + +"  bot 3");
 				start_ending_count = true; // start count down
-				m_rank++;
 			}
 			m_npc2.m_halfway = false;
 		}
@@ -306,6 +352,7 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 				if (controller.Abutton())
 				{
 					m_game->SetGameState(GameState::option);
+					reset_check = true;
 				}
 				break;
 			default:
@@ -404,6 +451,7 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 		if (controller.Abutton()) // at ending screen presss A button to next
 		{
 			m_game->SetGameState(GameState::playagain);
+			reset_check = true;
 		}
 		endScreen();
 	}

@@ -1,7 +1,7 @@
 #include "Player.h"
 
 Player::Player() :
-	m_acceleration(100),
+	m_acceleration(0),
 	m_degree(255),
 	m_velocity(0),
 	m_postion(520, 681),
@@ -77,6 +77,29 @@ void Player::normalFriction()
 	physics.resetGravity();
 }
 
+void Player::resetPlayer()
+{
+	m_halfway = false;
+	m_postion.x = 520;
+	m_postion.y = 681;
+	m_degree = 255;
+	m_motion.x = 0;
+	m_motion.y = 0;
+
+	timer_mis = 0; 
+	timer_sec = 0; 
+	timer_min = 0;
+
+	for (int i = 0; i < 3; i++)
+	{
+		lap_timer[i] = 0;
+	}
+
+	for (int i = 0; i < 100; i++)
+	{
+		sprite_draft_mark[i].setPosition(-1000, -100);
+	}
+}
 
 void Player::setPlayerStatus(float maxspeed, float accelecation, float handling, int car_ID)
 {

@@ -8,7 +8,6 @@
 #include "NPCplayer1.h"
 #include "NPCplayer2.h"
 
-
 class Game;
 
 class Gameplay
@@ -20,12 +19,13 @@ public:
 	void update(double t, int car_id, Xbox360Controller& controller);
 	void render(sf::RenderWindow &window);
 	void getStatus(float maxspeed, float accelecation, float handling);
+	void reset();
+	int gainScrap();
+	bool gainScrapCheck = false;
 
 protected:
 	double timeSinceUpdate;
 	int timerDown;
-
-
 private:
 	void collisionCheck();
 	void endScreen();
@@ -33,7 +33,6 @@ private:
 
 	Player & m_player;
 	NPCplayer m_npc;
-	void timer(double t);
 	NPCplayer1 m_npc1;
 	NPCplayer2 m_npc2;
 	
@@ -44,10 +43,10 @@ private:
 	float m_acceleration; // the acceleration of player
 	float m_handling; // the handling of player
 
-	sf::FloatRect intersectLine(Xbox360Controller& controller, double t);
 	sf::RectangleShape m_finishLine;
 
 	sf::Vector2f m_finishLinePos;
+
 	bool game_start = false;
 
 	bool game_pause = false;
@@ -66,11 +65,13 @@ private:
 
 	bool start_ending_count = false;
 	bool game_end = false;
-	int m_rank = 0;
+	int m_rank = -1;
 	float ending_countdown = 5.0f;
 	sf::Vector2f board_position;
 	sf::Text time_board[4];
 	sf::RectangleShape rank_board[4];
+
+	bool reset_check = false;
 };
 
 #endif // GAMEPLAY

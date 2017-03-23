@@ -14,6 +14,7 @@ public:
 	void render(sf::RenderWindow &window);
 	void setLocation();
 	void setNPC(int car_ID);
+	void resetNPC();
 	sf::FloatRect boundingBox();
 
 	sf::Vector2f m_motion;

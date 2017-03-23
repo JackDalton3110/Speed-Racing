@@ -26,6 +26,17 @@ NPCplayer::~NPCplayer()
 
 }
 
+void NPCplayer::resetNPC()
+{
+	m_halfway = false;
+	m_postion.x = 563;
+	m_postion.y = 700;
+	m_degree = 255;
+	m_motion.x = 0;
+	m_motion.y = 0;
+	m_acceleration = 0;
+}
+
 sf::Vector2f NPCplayer::follow()
 {
 	sf::Vector2f target;
