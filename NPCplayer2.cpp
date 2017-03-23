@@ -18,7 +18,7 @@ NPCplayer2::NPCplayer2(std::vector<sf::CircleShape> &Node) :
 	m_sprite.setOrigin(25, 15);
 	m_sprite.setPosition(m_postion);
 	m_sprite.setScale(0.5f, 0.5f);
-
+	m_sprite.setRotation(m_degree);
 
 }
 
@@ -30,12 +30,20 @@ NPCplayer2::~NPCplayer2()
 void NPCplayer2::resetNPC()
 {
 	m_halfway = false;
-	m_postion.x = 563;
-	m_postion.y = 700;
+	m_postion.x = 570;
+	m_postion.y = 750;
 	m_degree = 255;
 	m_motion.x = 0;
 	m_motion.y = 0;
 	m_acceleration = 0;
+	currentNode = 39;
+	m_laps = 1;
+}
+
+void NPCplayer2::nextLap()
+{
+	m_halfway = false;
+	m_laps++;
 }
 
 sf::Vector2f NPCplayer2::follow()
@@ -45,7 +53,8 @@ sf::Vector2f NPCplayer2::follow()
 
 	if (Math::distance(m_postion, target) <= 50)
 	{
-		m_acceleration *= 0.65;
+
+		m_acceleration *= 0.3;
 		if (currentNode == 45)
 		{
 			m_halfway = true;
@@ -90,7 +99,7 @@ sf::FloatRect NPCplayer2::boundingBox()
 {
 	if (easy == true)
 	{
-		MAX_SPEED = 75.0f;
+		MAX_SPEED = 110.0f;
 	}
 
 	if (normal == true)
@@ -153,7 +162,7 @@ void NPCplayer2::update(double t)
 	else if (static_cast<int>(std::round(dest - currentRotation + 360)) % 360 < 180)
 	{
 
-		m_degree += 10;
+		m_degree += 6;
 		if (m_degree > 359)
 		{
 			m_degree = 0 - m_degree;
@@ -161,7 +170,7 @@ void NPCplayer2::update(double t)
 	}
 	else
 	{
-		m_degree -= 10;
+		m_degree -= 6;
 		if (m_degree < 0)
 		{
 			m_degree = 359 + m_degree;

@@ -52,11 +52,11 @@ Game::Game() :
 	}
 
 	//Loading final animation
-	if (!m_movie.openFromFile("Video/animation4.mov"))
+	/*if (!m_movie.openFromFile("Video/animation4.mov"))
 	{
 		std::string s("error loading mov file");
 		throw std::exception(s.c_str());
-	}
+	}*/
 
 
 	songs[0].setBuffer(songBuffer[0]);
@@ -222,16 +222,23 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		}
 		m_gameplay->reset(time.asSeconds());
 		m_gameplay->update(time.asSeconds(), m_carSelect->getSelection_ID(), m_controller);
+<<<<<<< HEAD
 
 		m_gameplay->getdifficulty(m_DifficultyScreen->Easy, m_DifficultyScreen->Medium, m_DifficultyScreen->Hard);
 
 
+=======
+		m_gameplay->getdifficulty(m_DifficultyScreen->Easy, m_DifficultyScreen->Medium, m_DifficultyScreen->Hard);
+>>>>>>> difficulty
 		if (m_gameplay->gainScrapCheck)
 		{
 			m_upgrade->scrap += m_gameplay->gainScrap();
 			m_gameplay->gainScrapCheck = false;
 		}
+<<<<<<< HEAD
 
+=======
+>>>>>>> difficulty
 		break;
 	case GameState::Difficulty:
 		std::cout << "difficulty" << std::endl;
@@ -243,6 +250,7 @@ void Game::update(sf::Time time, Xbox360Controller &controller)
 		m_controller.m_previousState = m_controller.m_currentState;
 		break;
 	case GameState::credits:
+		movie = true;
 		m_credits->update(time);
 		break;
 	case GameState::confirm:

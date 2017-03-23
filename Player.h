@@ -29,6 +29,7 @@ public:
 	void getLapTimer();
 	void resetHalfWay();
 	void resetPlayer();
+	void nextLap();
 
 	sf::View view; // camera
 
@@ -39,6 +40,8 @@ public:
 	int timer_mis; // millisecond
 	int timer_sec; // second
 	int timer_min; // minute
+
+	int m_laps = 1; // player's lap
 
 private:
 	void timer(double t);
@@ -79,9 +82,13 @@ private:
 
 	sf::Texture m_speed_texture;
 	sf::Sprite m_speed_sprite;
+	sf::Sprite m_Sprite;
+	sf::Texture m_Texture;
 	sf::Texture m_needle_texture;
 	sf::Sprite m_needle_sprite;
 	float needle_degree = 0;
+
+	sf::Text m_lap_text;
 
 	std::string intToString(int num); // int to string
 };

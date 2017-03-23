@@ -363,7 +363,8 @@ void Upgrade::update(double t, Xbox360Controller &controller, sf::Time dt)
 		m_textMessage[10].setPosition(100, 60);
 		m_textMessage[10].setString(m_game->floatToString(scrap));
 
-		whiteCar_values[0] = 150 + whiteCar_status[0] * 15;
+
+		whiteCar_values[0] = 118 + whiteCar_status[0] * 15;
 		whiteCar_values[1] = 4.2 - whiteCar_status[1] * 0.4;
 		whiteCar_values[2] = 50 + whiteCar_status[2] * 5;
 
@@ -387,7 +388,8 @@ void Upgrade::update(double t, Xbox360Controller &controller, sf::Time dt)
 		m_textMessage[10].setPosition(100, 260);
 		m_textMessage[10].setString(m_game->floatToString(scrap));
 
-		reaCar_values[0] = 130 + redCar_status[0] * 18;
+
+		reaCar_values[0] = 115 + redCar_status[0] * 18;
 		reaCar_values[1] = 3.9 - redCar_status[1] * 0.35;
 		reaCar_values[2] = 55 + redCar_status[2] * 4;
 
@@ -410,7 +412,7 @@ void Upgrade::update(double t, Xbox360Controller &controller, sf::Time dt)
 		m_textMessage[10].setPosition(100, 460);
 		m_textMessage[10].setString(m_game->floatToString(scrap));
 
-		yellowCar_values[0] = 140 + yellowCar_status[0] * 12;
+		yellowCar_values[0] = 112 + yellowCar_status[0] * 12;
 		yellowCar_values[1] = 4.5 - yellowCar_status[1] * 0.5;
 		yellowCar_values[2] = 25 + yellowCar_status[2] * 10;
 
@@ -433,7 +435,8 @@ void Upgrade::update(double t, Xbox360Controller &controller, sf::Time dt)
 		m_textMessage[10].setPosition(100, 660);
 		m_textMessage[10].setString(m_game->floatToString(scrap));
 
-		greenCar_values[0] = 138 + greenCar_status[0] * 15;
+
+		greenCar_values[0] = 118 + greenCar_status[0] * 15;
 		greenCar_values[1] = 4.0 - greenCar_status[1] * 0.4;
 		greenCar_values[2] = 30 + greenCar_status[2] * 8;
 

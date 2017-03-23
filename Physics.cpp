@@ -55,7 +55,7 @@ sf::Vector2f Physics::getMotion()
 /// </summary>
 void Physics::slowDown()
 {
-	m_gravity = 40;
+	m_gravity = 30;
 }
 
 /// <summary>
