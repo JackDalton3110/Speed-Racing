@@ -208,14 +208,23 @@ void Gameplay::changeLap()
 		{
 			m_changeLap = false;
 		}
+		
+		//actual lap
 		m_lapString = std::to_string(m_laps);
 		m_lapstxt.setString(m_lapString);
-		m_lapstxt.setColor(sf::Color::Green);
+		m_lapstxt.setColor(sf::Color::Black);
 		m_lapstxt.setCharacterSize(40);
 		m_lapstxt.setFont(m_font);
-		m_lapstxt.setPosition(m_player.m_postion.x + 30, m_player.m_postion.y);
+		m_lapstxt.setPosition(m_player.m_postion.x + 150, m_player.m_postion.y - 45);
+
+		//lap label
+		m_labelString = "lap:";
+		m_lapLabel.setString(m_labelString);
+		m_lapLabel.setColor(sf::Color::Black);
+		m_lapLabel.setCharacterSize(40);
+		m_lapLabel.setFont(m_font);
+		m_lapLabel.setPosition(m_player.m_postion.x + 70, m_player.m_postion.y - 45);
 		
-		std::cout << "lap 1" << std::endl;
 	}
 }
 
@@ -458,6 +467,7 @@ void Gameplay::render(sf::RenderWindow &window)
 	m_npc1.render(window);
 	m_npc2.render(window);
 	window.draw(m_lapstxt);
+	window.draw(m_lapLabel);
 
 	if (game_pause && !m_countdown)
 	{

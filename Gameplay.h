@@ -76,6 +76,8 @@ private:
 	sf::Text time_board[4];
 
 	// outputting laps
+	sf::Text m_lapLabel;
+	std::string m_labelString;
 	sf::Text m_lapstxt;
 	std::string m_lapString;
 
