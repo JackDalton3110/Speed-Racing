@@ -37,6 +37,13 @@ void NPCplayer1::resetNPC()
 	m_motion.y = 0;
 	m_acceleration = 0;
 	currentNode = 26;
+	m_laps = 1;
+}
+
+void NPCplayer1::nextLap()
+{
+	m_halfway = false;
+	m_laps++;
 }
 
 sf::Vector2f NPCplayer1::follow()
@@ -46,7 +53,7 @@ sf::Vector2f NPCplayer1::follow()
 
 	if (Math::distance(m_postion, target) <= 50)
 	{
-		m_acceleration *= 0.5;
+		m_acceleration *= 0.3;
 
 		if (currentNode == 33)
 		{
@@ -92,7 +99,7 @@ void NPCplayer1::DifficultyAdjust(bool easy, bool normal, bool hard)
 {
 	if (easy == true)
 	{
-		MAX_SPEED = 75.0f;
+		MAX_SPEED = 100.0f;
 	}
 
 	if (normal == true)

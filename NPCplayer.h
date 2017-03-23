@@ -16,6 +16,10 @@ public:
 	void setLocation();
 	void setNPC(int car_ID);
 	void resetNPC();
+
+	void nextLap();
+	int m_laps = 1;
+
 	sf::FloatRect boundingBox();
 
 	sf::Vector2f follow();
@@ -25,6 +29,7 @@ public:
 	int timer_mis; // millisecond
 	int timer_sec; // second
 	int timer_min; // minute
+
 
 	bool m_halfway = false;
 

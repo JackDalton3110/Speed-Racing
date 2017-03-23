@@ -16,6 +16,10 @@ public:
 	void setLocation();
 	void setNPC(int car_ID);
 	void resetNPC();
+
+	void nextLap();
+	int m_laps = 1;
+
 	sf::FloatRect boundingBox();
 	
 	void DifficultyAdjust(bool easy, bool normal, bool hard);
@@ -34,10 +38,6 @@ private:
 	void timer(double t);
 
 	Physics physics;
-	
-
-	
-	
 
 	float m_acceleration;
 

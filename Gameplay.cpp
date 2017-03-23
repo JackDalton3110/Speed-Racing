@@ -186,12 +186,20 @@ void Gameplay::collisionCheck()
 			m_player.getLapTimer();
 			if (m_player.m_halfway)
 			{
-				m_rank++;
-				time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
-											+ m_game->intToString(m_player.timer_sec) + "::"
-											+ m_game->intToString(m_player.timer_mis) + "  Player");
-				start_ending_count = true; // start count down
-				gainScrapCheck = true;
+				m_player.nextLap();
+				if (m_player.m_laps > 3)
+				{
+					m_rank++;
+					time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
+						+ m_game->intToString(m_player.timer_sec) + "::"
+						+ m_game->intToString(m_player.timer_mis) + "  Player");
+					start_ending_count = true; // start count down
+					gainScrapCheck = true;
+				}
+				else
+				{
+					m_changeLap = true;
+				}
 			}
 			m_player.resetHalfWay();
 		}
@@ -204,11 +212,15 @@ void Gameplay::collisionCheck()
 			std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
 			if (m_npc.m_halfway)
 			{
-				m_rank++;
-				time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
-					+ m_game->intToString(m_player.timer_sec) + "::"
-					+ m_game->intToString(m_player.timer_mis) + "  bot 1");
-				start_ending_count = true; // start count down
+				m_npc.nextLap();
+				if (m_npc.m_laps > 3)
+				{
+					m_rank++;
+					time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
+						+ m_game->intToString(m_player.timer_sec) + "::"
+						+ m_game->intToString(m_player.timer_mis) + "  bot 1");
+					start_ending_count = true; // start count down
+				}
 			}
 			m_npc.m_halfway = false;
 		}
@@ -221,11 +233,15 @@ void Gameplay::collisionCheck()
 			std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
 			if (m_npc1.m_halfway)
 			{
-				m_rank++;
-				time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
-					+ m_game->intToString(m_player.timer_sec) + "::"
-					+ m_game->intToString(m_player.timer_mis) + "  bot 2");
-				start_ending_count = true; // start count down
+				m_npc1.nextLap();
+				if (m_npc1.m_laps > 3)
+				{
+					m_rank++;
+					time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
+						+ m_game->intToString(m_player.timer_sec) + "::"
+						+ m_game->intToString(m_player.timer_mis) + "  bot 2");
+					start_ending_count = true; // start count down
+				}
 			}
 			m_npc1.m_halfway = false;
 		}
@@ -238,14 +254,40 @@ void Gameplay::collisionCheck()
 			std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
 			if (m_npc2.m_halfway)
 			{
-				m_rank++;
-				time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
-					+ m_game->intToString(m_player.timer_sec) + "::"
-					+ m_game->intToString(m_player.timer_mis) + +"  bot 3");
-				start_ending_count = true; // start count down
+				m_npc2.nextLap();
+				if (m_npc2.m_laps > 3)
+				{
+					m_rank++;
+					time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
+						+ m_game->intToString(m_player.timer_sec) + "::"
+						+ m_game->intToString(m_player.timer_mis) + +"  bot 3");
+					start_ending_count = true; // start count down
+				}
 			}
 			m_npc2.m_halfway = false;
 		}
+	}
+}
+
+void Gameplay::changeLap()
+{
+	if (m_changeLap && m_player.m_laps <= 3)
+	{
+		//actual lap
+		m_lapString = std::to_string(m_player.m_laps);
+		m_lapstxt.setString(m_lapString);
+		m_lapstxt.setColor(sf::Color::Black);
+		m_lapstxt.setCharacterSize(40);
+		m_lapstxt.setFont(m_font);
+		m_lapstxt.setPosition(m_player.m_postion.x + 150, m_player.m_postion.y - 45);
+
+		//lap label
+		m_labelString = "lap:";
+		m_lapLabel.setString(m_labelString);
+		m_lapLabel.setColor(sf::Color::Black);
+		m_lapLabel.setCharacterSize(40);
+		m_lapLabel.setFont(m_font);
+		m_lapLabel.setPosition(m_player.m_postion.x + 70, m_player.m_postion.y - 45);
 	}
 }
 
@@ -304,6 +346,16 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 	m_npc1.setNPC(car_id);
 	m_npc2.setNPC(car_id);
 
+	if (m_changeLap)
+	{
+		a_countdown -= t;
+		if (a_countdown < 0)
+		{
+			m_changeLap = false;
+			a_countdown = 3.0f;
+		}
+	}
+
 	if (game_start && !game_end) // run the game
 	{
 		if (!game_pause)
@@ -314,6 +366,7 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 			m_npc2.update(t);
 
 			collisionCheck();
+			changeLap();
 		}
 		else // game pause part
 		{
@@ -468,17 +521,16 @@ void Gameplay::getdifficulty(bool easy, bool normal, bool hard)
 void Gameplay::render(sf::RenderWindow &window)
 {
 
-	/*window.draw(box1);
-	window.draw(box2);*/
-	
-	// comment or delete this when we finished
-	//window.draw(m_finishLine);
-	/*window.draw(m_finishLine);*/
-
 	m_npc.render(window);
 	m_npc1.render(window);
 	m_npc2.render(window);
 	m_player.render(window);
+
+	if (m_changeLap)
+	{
+		window.draw(m_lapstxt);
+		window.draw(m_lapLabel);
+	}
 
 	if (game_pause && !m_countdown)
 	{

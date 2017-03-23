@@ -37,6 +37,13 @@ void NPCplayer2::resetNPC()
 	m_motion.y = 0;
 	m_acceleration = 0;
 	currentNode = 39;
+	m_laps = 1;
+}
+
+void NPCplayer2::nextLap()
+{
+	m_halfway = false;
+	m_laps++;
 }
 
 sf::Vector2f NPCplayer2::follow()
@@ -46,7 +53,7 @@ sf::Vector2f NPCplayer2::follow()
 
 	if (Math::distance(m_postion, target) <= 50)
 	{
-		m_acceleration *= 0.5;
+		m_acceleration *= 0.3;
 
 		if (currentNode == 45)
 		{
