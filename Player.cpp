@@ -10,14 +10,14 @@ Player::Player() :
 	m_motion(0, 0),
 	m_handbrake(0)
 {
-	if (!m_font.loadFromFile("c:/windows/fonts/comic.ttf"))
+	if (!m_font.loadFromFile("c:/windows/fonts/MotorwerkOblique.ttf"))
 	{
 
 	}
 	for (int i = 0; i < 2; i++)
 	{
 		m_text[i].setFont(m_font);
-		m_text[i].setColor(sf::Color::Yellow);
+		m_text[i].setColor(sf::Color::Red);
 	}
 
 	if (!m_texture.loadFromFile("images/carSprite.png"))
@@ -40,13 +40,17 @@ Player::Player() :
 		sprite_draft_mark[i].setOrigin(11, 15);
 	}
 
-	m_sprite.setTexture(m_texture);
+	if (!m_Texture.loadFromFile("images/mini.png"))
+	{
+		std::string s("error loading texture from file");
+		throw std::exception(s.c_str());
+	}
 
+	m_sprite.setTexture(m_texture);
+	m_Sprite.setTexture(m_Texture);
 	m_sprite.setPosition(m_postion);
 	m_sprite.setRotation(m_degree);
 	m_sprite.setOrigin(10, 15);
-	
-
 
 	//This scales the player car down
 	m_sprite.scale(.5, .5);
@@ -78,6 +82,10 @@ Player::Player() :
 	m_needle_sprite.setTexture(m_needle_texture);
 	m_needle_sprite.setOrigin(36, 8);
 	m_needle_sprite.setPosition(m_speed_sprite.getPosition());
+
+	m_lap_text.setFont(m_font);
+	m_lap_text.setColor(sf::Color::Black);
+
 }
 
 Player::~Player()
@@ -104,6 +112,7 @@ void Player::resetPlayer()
 	m_degree = 255;
 	m_motion.x = 0;
 	m_motion.y = 0;
+	m_laps = 1;
 
 	timer_mis = 0; 
 	timer_sec = 0; 
@@ -180,6 +189,12 @@ void Player::getLapTimer()
 			lap_timer[i] = 0;
 		}
 	}
+}
+
+void Player::nextLap()
+{
+	m_halfway = false;
+	m_laps++;
 }
 
 void Player::driftMark()
@@ -317,16 +332,18 @@ void Player::update(double t)
 
 	view.setCenter(m_postion);
 	
-	m_text[1].setPosition(m_postion.x, m_postion.y + 150);
+	m_text[1].setPosition(m_postion.x + 100, m_postion.y + 160);
 
 	m_timer.setPosition(m_postion.x - 250, m_postion.y - 200);
 	m_text[0].setPosition(m_postion.x - 250, m_postion.y - 170);
 	m_lap_timer.setPosition(m_postion.x - 250, m_postion.y - 140);
+	m_lap_text.setPosition(m_postion.x - 250, m_postion.y - 110);
 
 	m_sprite.setRotation(m_degree);
-	m_text[1].setString(intToString(m_velocity));
+	m_text[1].setString("Speed: " + intToString(m_velocity));
 	m_text[0].setString("Lap time:");
-
+	m_lap_text.setString(intToString(m_laps) + " /3 laps");
+	m_Sprite.setPosition(m_postion.x + 180, m_postion.y - 180);
 	m_speed_sprite.setPosition(m_postion.x + 200, m_postion.y + 130);
 	m_needle_sprite.setPosition(m_speed_sprite.getPosition());
 	m_needle_sprite.setRotation(needle_degree);
@@ -363,6 +380,8 @@ void Player::render(sf::RenderWindow &window)
 	window.draw(m_lap_timer);
 	window.draw(m_speed_sprite);
 	window.draw(m_needle_sprite);
+	window.draw(m_Sprite);
+	window.draw(m_lap_text);
 }
 
 std::string Player::intToString(int num) {

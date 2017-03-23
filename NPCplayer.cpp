@@ -39,6 +39,13 @@ void NPCplayer::resetNPC()
 	m_motion.y = 0;
 	m_acceleration = 0;
 	currentNode = 0;
+	m_laps = 1;
+}
+
+void NPCplayer::nextLap()
+{
+	m_halfway = false;
+	m_laps++;
 }
 
 sf::Vector2f NPCplayer::follow()
@@ -48,7 +55,7 @@ sf::Vector2f NPCplayer::follow()
 
 	if (Math::distance(m_postion, target) <= 50)
 	{
-		//m_acceleration *= 0.3;
+		m_acceleration *= 0.3;
 
 		if (currentNode == 13)
 		{
@@ -149,7 +156,7 @@ void NPCplayer::update(double t)
 	}
 	else if (static_cast<int>(std::round(dest - currentRotation + 360)) % 360 < 180)
 	{
-		m_degree += 10;
+		m_degree += 6;
 		if (m_degree > 359)
 		{
 			m_degree = 0 - m_degree;
@@ -157,7 +164,7 @@ void NPCplayer::update(double t)
 	}
 	else
 	{
-		m_degree -= 10;
+		m_degree -= 6;
 		if (m_degree < 0)
 		{
 			m_degree = 359 + m_degree;

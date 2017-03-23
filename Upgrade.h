@@ -20,6 +20,7 @@ public:
 	float reaCar_values[3] = { 115, 3.9f, 55 };
 	float yellowCar_values[3] = { 112, 4.5f, 25 };
 	float greenCar_values[3] = { 110, 4.0f, 30 };
+
 	// array 0 for max speed, 1 for aceeleration, 2 for handling
 
 	int scrap = 5;

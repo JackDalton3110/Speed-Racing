@@ -25,13 +25,11 @@ public:
 
 	void getdifficulty(bool easy, bool normal, bool hard);
 
-protected:
-	double timeSinceUpdate;
-	int timerDown;
 private:
 	void collisionCheck();
 	void endScreen();
 	void startCount();
+	void changeLap();
 
 	Player & m_player;
 	NPCplayer m_npc;
@@ -67,10 +65,21 @@ private:
 
 	bool start_ending_count = false;
 	bool game_end = false;
+
 	int m_rank = -1;
+	bool m_changeLap;
+	float a_countdown = 3.0f;
+
 	float ending_countdown = 5.0f;
 	sf::Vector2f board_position;
 	sf::Text time_board[4];
+
+	// outputting laps
+	sf::Text m_lapLabel;
+	std::string m_labelString;
+	sf::Text m_lapstxt;
+	std::string m_lapString;
+
 	sf::RectangleShape rank_board[4];
 
 	bool reset_check = false;

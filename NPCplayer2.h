@@ -20,8 +20,10 @@ public:
 
 	void DifficultyAdjust(bool easy, bool normal, bool hard);
 
-
 	void resetNPC();
+
+	void nextLap();
+	int m_laps = 1;
 
 	sf::FloatRect boundingBox();
 

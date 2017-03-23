@@ -20,7 +20,6 @@ public:
 private:
 	Game *m_game;
 
-
 	sf::Font m_font;
 	sf::Text m_text[3];
 
