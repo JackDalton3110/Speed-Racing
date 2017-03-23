@@ -38,7 +38,12 @@ private:
 	float m_acceleration; // the acceleration of player
 	float m_handling; // the handling of player
 
-	bool game_start = true;
+	sf::FloatRect intersectLine(Xbox360Controller& controller, double t);
+	sf::RectangleShape m_finishLine;
+
+	sf::Vector2f m_finishLinePos;
+	bool game_start = false;
+
 	bool game_pause = false;
 	bool m_countdown = false;
 	float restart_countdown = 3.0f;
@@ -53,8 +58,10 @@ private:
 	sf::Sprite m_signal_sprite;
 	sf::Sprite m_goSprite;
 
+	bool start_ending_count = false;
 	bool game_end = false;
-	float end_countdown = 10.0f;
+	int m_rank = 0;
+	float ending_countdown = 5.0f;
 	sf::Vector2f board_position;
 	sf::Text time_board[4];
 	sf::RectangleShape rank_board[4];

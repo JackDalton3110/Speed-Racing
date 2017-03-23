@@ -33,6 +33,11 @@ sf::Vector2f NPCplayer2::follow()
 
 	if (Math::distance(m_postion, target) <= 50)
 	{
+		if (currentNode >= 45)
+		{
+			m_halfway = true;
+		}
+
 		currentNode++;
 		if (currentNode >= m_NodeCircle.size())
 		{

@@ -118,15 +118,23 @@ void Player::timer(double t)
 		+ intToString(timer_mis)); // convert minute to string
 }
 
+void Player::resetHalfWay()
+{
+	m_halfway = false;
+}
+
 void Player::getLapTimer()
 {
-	m_lap_timer.setString(intToString(lap_timer[2]) + "::"
-		+ intToString(lap_timer[1]) + "::"
-		+ intToString(lap_timer[0])); // convert minute to string
-
-	for (int i = 0; i < 3; i++)
+	if (m_halfway)
 	{
-		lap_timer[i] = 0;
+		m_lap_timer.setString(intToString(lap_timer[2]) + "::"
+			+ intToString(lap_timer[1]) + "::"
+			+ intToString(lap_timer[0])); // convert minute to string
+
+		for (int i = 0; i < 3; i++)
+		{
+			lap_timer[i] = 0;
+		}
 	}
 }
 
@@ -150,7 +158,13 @@ void Player::update(double t)
 
 	controller.update();
 
-		if (controller.Bbutton())
+	if (m_postion.y > 1444)
+	{
+		m_halfway = true;
+		std::cout << "halfway::" << std::endl;
+	}
+
+	if (controller.Bbutton())
 	{
 		m_handbrake = m_motion.x * m_handling;
 		m_motion.x -= m_handbrake * t;

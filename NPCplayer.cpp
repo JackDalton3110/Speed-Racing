@@ -31,8 +31,14 @@ sf::Vector2f NPCplayer::follow()
 	sf::Vector2f target;
 	target = m_NodeCircle.at(currentNode).getPosition();
 
+
 	if (Math::distance(m_postion, target) <= 50)
 	{
+		if (currentNode >= 13)
+		{
+			m_halfway = true;
+		}
+
 		currentNode++;
 		if (currentNode >= 25)
 		{

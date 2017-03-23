@@ -10,6 +10,12 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 	m_npc2(Node),
 	board_position(0,0)
 {
+	m_finishLine.setOutlineThickness(1);
+	m_finishLine.setOutlineColor(sf::Color::Blue);
+
+	//Setting the position for the finish line collision box
+	m_finishLinePos.x = 100;
+	m_finishLinePos.y = 12;
 	m_textMessage[0].setString("Continue");
 	m_textMessage[1].setString("Exit");
 
@@ -53,8 +59,7 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 	{
 		time_board[i].setFont(m_font);
 		time_board[i].setColor(sf::Color::Black);
-		sf::FloatRect textRect = time_board[i].getLocalBounds();
-		time_board[i].setOrigin(textRect.width / 2, textRect.height / 2);
+		time_board[i].setString("NOT FINISH");
 
 		rank_board[i].setSize(sf::Vector2f(200, 50));
 		rank_board[i].setOrigin(100, 25);
@@ -62,6 +67,7 @@ Gameplay::Gameplay(Game &game, sf::Font font, Player & player, std::vector<sf::C
 		rank_board[i].setOutlineColor(sf::Color::Black);
 		rank_board[i].setFillColor(sf::Color::White);
 	}
+
 }
 
 Gameplay::~Gameplay()
@@ -120,6 +126,76 @@ void Gameplay::collisionCheck()
 		m_player.m_motion.y = temp;
 		m_npc2.m_motion.y = temp;
 	}
+
+	
+	if (m_player.m_postion.x >= m_finishLine.getPosition().x && m_player.m_postion.x <= m_finishLine.getPosition().x + 100)
+	{
+		if (m_player.m_postion.y >= m_finishLine.getPosition().y && m_player.m_postion.y <= m_finishLine.getPosition().y + 30)
+		{
+			std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+			m_player.getLapTimer();
+			if (m_player.m_halfway)
+			{
+				time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
+											+ m_game->intToString(m_player.timer_sec) + "::"
+											+ m_game->intToString(m_player.timer_mis));
+				start_ending_count = true; // start count down
+				m_rank++;
+			}
+			m_player.resetHalfWay();
+		}
+	}
+
+	if (m_npc.m_postion.x >= m_finishLine.getPosition().x && m_npc.m_postion.x <= m_finishLine.getPosition().x + 100)
+	{
+		if (m_npc.m_postion.y >= m_finishLine.getPosition().y && m_npc.m_postion.y <= m_finishLine.getPosition().y + 30)
+		{
+			std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+			if (m_npc.m_halfway)
+			{
+				time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
+					+ m_game->intToString(m_player.timer_sec) + "::"
+					+ m_game->intToString(m_player.timer_mis));
+				start_ending_count = true; // start count down
+				m_rank++;
+			}
+			m_npc.m_halfway = false;
+		}
+	}
+
+	if (m_npc1.m_postion.x >= m_finishLine.getPosition().x && m_npc1.m_postion.x <= m_finishLine.getPosition().x + 100)
+	{
+		if (m_npc1.m_postion.y >= m_finishLine.getPosition().y && m_npc1.m_postion.y <= m_finishLine.getPosition().y + 30)
+		{
+			std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+			if (m_npc1.m_halfway)
+			{
+				time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
+					+ m_game->intToString(m_player.timer_sec) + "::"
+					+ m_game->intToString(m_player.timer_mis));
+				start_ending_count = true; // start count down
+				m_rank++;
+			}
+			m_npc1.m_halfway = false;
+		}
+	}
+
+	if (m_npc2.m_postion.x >= m_finishLine.getPosition().x && m_npc2.m_postion.x <= m_finishLine.getPosition().x + 100)
+	{
+		if (m_npc2.m_postion.y >= m_finishLine.getPosition().y && m_npc2.m_postion.y <= m_finishLine.getPosition().y + 30)
+		{
+			std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+			if (m_npc2.m_halfway)
+			{
+				time_board[m_rank].setString(m_game->intToString(m_player.timer_min) + "::"
+					+ m_game->intToString(m_player.timer_sec) + "::"
+					+ m_game->intToString(m_player.timer_mis));
+				start_ending_count = true; // start count down
+				m_rank++;
+			}
+			m_npc2.m_halfway = false;
+		}
+	}
 }
 
 void Gameplay::startCount()
@@ -161,8 +237,11 @@ void Gameplay::endScreen()
 {
 	for (int i = 0; i < 4; i++)
 	{
-		rank_board[i].setPosition(board_position.x, board_position.y - 200 + 100 * i);
+		rank_board[i].setPosition(board_position.x, board_position.y - 100 + 50 * i);
 		time_board[i].setPosition(rank_board[i].getPosition());
+
+		sf::FloatRect textRect = time_board[i].getLocalBounds();
+		time_board[i].setOrigin(textRect.width / 2, textRect.height / 2);
 	}
 
 }
@@ -237,21 +316,41 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 
 		}
 
-		if (controller.StartButton())
+	}
+	/*if (m_player.boundingBox().intersects(intersectLine()))
+	{
+		std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+	}*/
+
+	//This is collision with the finish line
+
+	m_finishLine.setPosition(482, 645);
+	m_finishLine.setSize(sf::Vector2f(m_finishLinePos.x, m_finishLinePos.y));
+	m_finishLine.setRotation(345.0f);
+
+
+//sf::FloatRect Gameplay::intersectLine(Xbox360Controller & controller, double t)
+//{
+//	sf::FloatRect intersectLine(645 + m_finishLine.getSize().y, 482,
+//		482 + m_finishLine.getSize().x, 645);
+//	return intersectLine;
+
+
+	if (controller.StartButton())
+	{
+		game_pause = true;
+	}
+
+	if (m_countdown) // restart count down
+	{
+		restart_countdown -= t;
+		if (restart_countdown < 0)
 		{
-			game_pause = true;
+			restart_countdown = 3.0f;
+			m_countdown = false;
+			game_pause = false;
 		}
 
-		if (m_countdown) // restart count down
-		{
-			restart_countdown -= t;
-			if (restart_countdown < 0)
-			{
-				restart_countdown = 3.0f;
-				m_countdown = false;
-				game_pause = false;
-			}
-		}
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -260,15 +359,46 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 		}
 		countdown_text.setString(m_game->intToString(restart_countdown));
 	}
+
 	
+	/// <summary>
+	/// ending count down 
+	/// after 10s to ending screen
+	/// </summary>
+	/// <param name="t"></param>
+	/// <param name="car_id"></param>
+	/// <param name="controller"></param>
+	if (start_ending_count)
+	{
+		ending_countdown -= t;
+		if (ending_countdown <= 0)
+		{
+			game_end = true;
+			start_ending_count = false;
+		}
+		countdown_text.setString(m_game->intToString(ending_countdown));
+	}
+	
+	/// <summary>
+	/// start count down
+	/// </summary>
+	/// <param name="t"></param>
+	/// <param name="car_id"></param>
+	/// <param name="controller"></param>
 	if (!game_start)
 	{
 		start_count -= t;
 		startCount();
 	}
-	countdown_text.setPosition(m_player.boundingBox().left, m_player.boundingBox().top);
+	countdown_text.setPosition(m_player.m_postion);
 	m_signal_sprite.setPosition(m_player.boundingBox().left - 100, m_player.boundingBox().top - 100);
 
+	/// <summary>
+	/// ending screen
+	/// </summary>
+	/// <param name="t"></param>
+	/// <param name="car_id"></param>
+	/// <param name="controller"></param>
 	if (game_end)
 	{
 		if (controller.Abutton()) // at ending screen presss A button to next
@@ -278,12 +408,19 @@ void Gameplay::update(double t, int car_id, Xbox360Controller& controller)
 		endScreen();
 	}
 	
-	board_position.x = m_player.boundingBox().left;
-	board_position.y = m_player.boundingBox().top;
+	board_position = m_player.m_postion;
 }
+
 
 void Gameplay::render(sf::RenderWindow &window)
 {
+
+	/*window.draw(box1);
+	window.draw(box2);*/
+	
+	// comment or delete this when we finished
+	//window.draw(m_finishLine);
+
 
 	m_player.render(window);
 	m_npc.render(window);
@@ -299,7 +436,7 @@ void Gameplay::render(sf::RenderWindow &window)
 		}
 	}
 
-	if (m_countdown)
+	if (m_countdown || start_ending_count)
 	{
 		window.draw(countdown_text);
 	}
@@ -314,8 +451,8 @@ void Gameplay::render(sf::RenderWindow &window)
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			window.draw(time_board[i]);
 			window.draw(rank_board[i]);
+			window.draw(time_board[i]);
 		}
 	}
 }
