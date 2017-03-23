@@ -25,14 +25,20 @@ public:
 	float m_acceleration;
 	void highFriction();
 	void normalFriction();
-	sf::Vector2f getSpritePosition() const;
 	void setPlayerStatus(float maxspeed, float accelecation, float handling, int car_ID);
 	void getLapTimer();
 	void resetHalfWay();
-	bool m_halfway;
+	void resetPlayer();
+
 	sf::View view; // camera
 
-	sf::Sprite m_sprite; // car sprite
+	sf::Vector2f getSpritePosition() const;
+
+	bool m_halfway = false;
+
+	int timer_mis; // millisecond
+	int timer_sec; // second
+	int timer_min; // minute
 
 private:
 	void timer(double t);
@@ -45,9 +51,6 @@ private:
 	sf::Text m_text[3]; // text 0 for time, text 1 for motion, text 2 for loop
 	sf::Text m_timer; // text for timer
 	sf::Text m_lap_timer; // text for lap timer
-	int timer_mis; // millisecond
-	int timer_sec; // second
-	int timer_min; // minute
 
 	int lap_timer[3] = {0,0,0}; // 0 for millisecond, 1 for second, 2 for minute
 
@@ -60,10 +63,8 @@ private:
 	float m_turning;
 	float m_handling;
 
-	//sf::View view; // camera
 	sf::Texture m_texture; // car texture
 	
-
 	sf::Vector2f location_record;
 	float degree_record;
 	float located_time;
@@ -74,6 +75,12 @@ private:
 	sf::Sprite sprite_draft_mark[100];
 	int mark_count = 1;
 	float draw_time = 0.1f;
+
+	sf::Texture m_speed_texture;
+	sf::Sprite m_speed_sprite;
+	sf::Texture m_needle_texture;
+	sf::Sprite m_needle_sprite;
+	float needle_degree = 0;
 
 	std::string intToString(int num); // int to string
 };

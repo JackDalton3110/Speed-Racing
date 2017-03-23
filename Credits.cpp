@@ -69,7 +69,7 @@ void Credits::update(sf::Time deltaTime)
 
 void Credits::changeScreen()
 {
-	m_game->SetGameState(GameState::credits);
+	m_game->SetGameState(GameState::option);
 }
 
 void Credits::render(sf::RenderWindow &window)
