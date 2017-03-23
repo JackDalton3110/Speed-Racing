@@ -21,6 +21,10 @@ public:
 
 private:
 	Game *m_game;
+	float updateShader;
+	sf::Shader shader;
+	sf::Texture shaderTxt;
+	sf::Sprite shaderSprite;
 	bool drawTime = false;//draw text when true  
 	bool credits = false;//bool for changing screen
 	sf::Time m_cumulativeTime;//time

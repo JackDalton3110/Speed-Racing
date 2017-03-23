@@ -20,8 +20,6 @@ public:
 	sf::Vector2f follow();
 	sf::Vector2f m_motion;
 
-
-
 private:
 
 	void timer(double t);

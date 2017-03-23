@@ -194,9 +194,13 @@
     <Image Include="images\redCarSprite.png" />
     <Image Include="images\selectbkgr.png" />
     <Image Include="images\selector.png" />
+    <Image Include="images\shaderTxt.png" />
     <Image Include="images\template.png" />
     <Image Include="images\whiteCarSprite.png" />
     <Image Include="images\yellowCarSprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="shader.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
