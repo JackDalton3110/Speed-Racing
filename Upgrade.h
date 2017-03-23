@@ -16,10 +16,10 @@ public:
 	void update(double t, Xbox360Controller& controller, sf::Time dt);
 	void render(sf::RenderWindow &window);
 
-	float whiteCar_values[3] = { 200, 4.2f, 50 };
-	float reaCar_values[3] = { 180, 3.9f, 55 };
-	float yellowCar_values[3] = { 190, 4.5f, 25 };
-	float greenCar_values[3] = { 188, 4.0f, 30 };
+	float whiteCar_values[3] = { 110, 4.2f, 50 };
+	float reaCar_values[3] = { 100, 3.9f, 55 };
+	float yellowCar_values[3] = { 105, 4.5f, 25 };
+	float greenCar_values[3] = { 108, 4.0f, 30 };
 	// array 0 for max speed, 1 for aceeleration, 2 for handling
 
 	int scrap = 5;

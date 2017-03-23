@@ -155,7 +155,7 @@ void NPCplayer2::update(double t)
 	else if (static_cast<int>(std::round(dest - currentRotation + 360)) % 360 < 180)
 	{
 
-		m_degree += 10;
+		m_degree += 6;
 		if (m_degree > 359)
 		{
 			m_degree = 0 - m_degree;
@@ -163,7 +163,7 @@ void NPCplayer2::update(double t)
 	}
 	else
 	{
-		m_degree -= 10;
+		m_degree -= 6;
 		if (m_degree < 0)
 		{
 			m_degree = 359 + m_degree;
